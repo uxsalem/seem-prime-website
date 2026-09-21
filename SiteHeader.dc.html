@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<header data-sp-hdr="{{ solidFlag }}" style="{{ hdrStyle }}">
+  <div style="max-width:1400px;margin:0 auto;padding:0 clamp(16px,3vw,32px);height:clamp(64px,7vw,80px);display:flex;align-items:center;gap:clamp(16px,3vw,44px)">
+    <a href="index.dc.html" aria-label="SEEM PRIME" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+      <span>{{ markSmall }}</span>
+      <span style="font-family:'Sora',sans-serif;font-weight:600;font-size:13px;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap;color:currentColor">SEEM PRIME</span>
+    </a>
+    <nav aria-label="{{ t.navLabel }}" data-hdrnav="" style="display:none;margin-inline-start:auto;align-items:center;gap:clamp(14px,2vw,30px)">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="5">
+        <a href="{{ l.href }}" aria-current="{{ l.current }}" style="{{ l.style }}">{{ l.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="display:flex;align-items:center;gap:8px;margin-inline-start:auto">
+      <button type="button" onClick="{{ onTheme }}" aria-label="{{ themeLabel }}" style="all:unset;box-sizing:border-box;cursor:pointer;width:44px;height:44px;border-radius:999px;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;opacity:.7" style-hover="opacity:1">
+        <span aria-hidden="true" style="{{ themeGlyph }}"></span>
+      </button>
+      <button type="button" onClick="{{ onLang }}" aria-label="{{ t.switchLabel }}" style="all:unset;box-sizing:border-box;cursor:pointer;height:44px;padding:0 16px;border-radius:999px;border:1px solid currentColor;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;display:flex;align-items:center;opacity:.7" style-hover="opacity:1">{{ t.switch }}</button>
+      <a href="contact.dc.html" data-hdrcta="" style="{{ ctaStyle }}">{{ t.cta }}</a>
+    </div>
+  </div>
+</header>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;ar&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;theme&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;&quot;,&quot;about&quot;,&quot;model&quot;,&quot;strategy&quot;,&quot;ecosystem&quot;,&quot;roadmap&quot;],&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;overHero&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;onLang&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onTheme&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}">
+const MARK = [{"d":"M47.79 29.91 C46.25 29.31 44.58 28.99 42.84 28.99 L39.99 28.99 L39.99 29.00 L25.86 29.00 L25.86 36.86 L39.99 36.86 L39.99 36.86 L42.84 36.86 C46.14 36.79 48.82 39.46 48.82 42.77 C48.82 46.07 46.14 48.62 42.84 48.62 L39.99 48.62 L39.99 56.54 L42.84 56.54 C44.58 56.54 46.25 56.22 47.79 55.63 C52.95 53.64 56.61 48.63 56.61 42.77 C56.61 36.90 52.95 31.89 47.79 29.91","fill":"var(--ink)"},{"d":"M17.04 23.02 C17.04 19.71 19.71 17.16 23.02 17.16 L25.86 17.16 L25.86 9.24 L23.02 9.24 C21.27 9.24 19.60 9.57 18.06 10.16 C12.90 12.15 9.24 17.16 9.24 23.02 C9.24 28.88 12.90 33.89 18.06 35.88 C19.60 36.47 21.27 36.86 23.02 36.86 L25.86 36.86 L25.86 29.00 L23.02 29.00 C19.71 29.00 17.04 26.32 17.04 23.02","fill":"var(--ink)"},{"d":"M120.00 0.01 L117.69 0.01 L2.32 0.01 L0.01 0.01 L0.01 2.32 L0.01 117.69 L0.01 120.00 L2.32 120.00 L117.69 120.00 L120.00 120.00 L120.00 117.69 L120.00 2.32 Z M117.69 117.69 L2.32 117.69 L2.32 2.32 L117.69 2.32 Z","fill":"var(--ink)"},{"d":"M71.33 48.62 L110.90 48.62 L110.90 56.54 L63.47 56.54 Z M71.33 28.99 L110.90 28.99 L110.90 36.86 L71.33 36.86 L63.47 36.86 L63.47 28.99 Z M110.90 9.24 L110.90 17.16 L71.33 17.16 L63.47 9.24 Z","fill":"var(--ink)"},{"d":"M17.08 102.88 L56.54 102.88 L56.54 110.80 L9.24 110.80 Z M17.08 83.25 L56.54 83.25 L56.54 91.11 L17.08 91.11 L9.24 91.11 L9.24 83.25 Z M56.54 63.50 L56.54 71.42 L17.08 71.42 L9.24 63.50 Z","fill":"var(--ink)"},{"d":"M63.47 63.47 L87.21 87.12 L110.90 63.47 L110.90 110.77 L102.97 110.77 L102.97 82.50 L87.21 98.29 L63.47 74.47 Z","fill":"var(--ink)"},{"d":"M17.22 48.62 L17.16 48.62 L17.11 48.62 L9.24 56.54 L17.16 56.54 L25.86 56.54 L25.86 48.62 Z","fill":"var(--ink)"},{"d":"M48.69 9.24 L39.99 9.24 L39.99 17.16 L48.63 17.16 L48.69 17.16 L48.75 17.16 L56.61 9.24 Z","fill":"var(--ink)"},{"d":"M110.90 36.86 L63.47 36.86 L63.47 28.99 L110.90 28.99 Z","fill":"var(--ink)"},{"d":"M56.61 91.05 L9.17 91.05 L9.17 83.18 L56.61 83.18 Z","fill":"var(--ink)"},{"d":"M71.39 102.90 L71.39 102.84 L71.39 102.79 L63.47 94.92 L63.47 102.84 L63.47 110.77 L71.39 110.77 Z","fill":"#ee5622"}];
+const NAV = {
+  ar: { navLabel:'التنقل الرئيسي', about:'من نحن', model:'نموذج الأعمال', strategy:'الاستراتيجية', ecosystem:'منظومتنا', roadmap:'خارطة الطريق',
+        cta:'تواصل معنا', switch:'EN', switchLabel:'Switch to English', dark:'التبديل إلى الوضع الداكن', light:'التبديل إلى الوضع المضيء' },
+  en: { navLabel:'Main navigation', about:'About', model:'Business model', strategy:'Strategy', ecosystem:'Ecosystem', roadmap:'Roadmap',
+        cta:'Contact us', switch:'عربي', switchLabel:'التبديل إلى العربية', dark:'Switch to dark mode', light:'Switch to light mode' }
+};
+
+class Component extends DCLogic {
+  state = { scrolled: false };
+
+  componentDidMount() {
+    this._on = () => {
+      const y = window.scrollY || window.pageYOffset || 0;
+      const s = y > 40;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this._on, { passive: true });
+    this._on();
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this._on); }
+
+  renderVals() {
+    const lang = this.props.lang === 'en' ? 'en' : 'ar';
+    const t = NAV[lang];
+    const theme = this.props.theme === 'dark' ? 'dark' : 'light';
+    const active = this.props.active || '';
+    // A page with a photographic hero starts transparent over it; every other page's bar is
+    // solid from the first pixel, because there is nothing behind it to be glass over.
+    const solid = this.props.overHero ? this.state.scrolled : true;
+    const link = (key, href) => {
+      const on = active === key;
+      return {
+        key, href, label: t[key], current: on ? 'page' : null,
+        style: 'position:relative;font-size:14px;font-weight:500;color:inherit;text-decoration:none;' +
+          'padding-block:6px;opacity:' + (on ? '1' : '.82') +
+          ';border-block-end:2px solid ' + (on ? '#dc4b1c' : 'transparent')
+      };
+    };
+    return {
+      t, solidFlag: solid ? '1' : '0',
+      hdrStyle: 'position:fixed;inset-block-start:0;inset-inline:0;z-index:60;backdrop-filter:blur(14px);' +
+        'transition:background .24s cubic-bezier(.2,.7,.3,1),border-color .24s,color .24s;' +
+        'background:' + (solid ? 'var(--hdr)' : 'transparent') +
+        ';border-block-end:1px solid ' + (solid ? 'var(--line)' : 'transparent') +
+        ';color:' + (solid ? 'var(--ink)' : '#ffffff'),
+      links: [
+        link('about', 'about.dc.html'), link('model', 'model.dc.html'),
+        link('strategy', 'strategy.dc.html'), link('ecosystem', 'ecosystem.dc.html'),
+        link('roadmap', 'roadmap.dc.html')
+      ],
+      ctaStyle: 'display:none;height:44px;padding:0 22px;border-radius:999px;align-items:center;font-size:14px;' +
+        'font-weight:500;text-decoration:none;transition:transform .18s cubic-bezier(.2,.7,.3,1),background .18s;' +
+        'background:' + (solid ? '#062621' : '#ffffff') + ';color:' + (solid ? '#ffffff' : '#041815'),
+      themeLabel: theme === 'light' ? t.dark : t.light,
+      themeGlyph: 'display:block;width:16px;height:16px;border-radius:50%;border:1.5px solid currentColor;background:' +
+        (theme === 'light' ? 'linear-gradient(90deg,currentColor 50%,transparent 50%)'
+                           : 'linear-gradient(90deg,transparent 50%,currentColor 50%)'),
+      onLang: this.props.onLang,
+      onTheme: this.props.onTheme,
+      markSmall: React.createElement('svg', { viewBox: '0 0 120 120', width: 30, height: 30, 'aria-hidden': 'true', style: { display: 'block', flex: '0 0 auto' } },
+        MARK.map((p, i) => React.createElement('path', { key: i, d: p.d, fill: 'currentColor', fillRule: 'evenodd' })))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

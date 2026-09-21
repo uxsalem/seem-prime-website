@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>منظومتنا | SEEM PRIME</title>
+<style>
+@font-face{font-family:'Sora';font-weight:300;font-display:swap;src:url("./ds/fonts/sora-300.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:400;font-display:swap;src:url("./ds/fonts/sora-400.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:600;font-display:swap;src:url("./ds/fonts/sora-600.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:700;font-display:swap;src:url("./ds/fonts/sora-700.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:300;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-300.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-600.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+:root{
+--page:#f7f8f9;--card:#ffffff;--sunken:#f0f2f3;--tint:#f1f7f5;
+--ink:#041815;--body:#2c3634;--muted:#677471;
+--line:rgba(4,24,21,.10);--line2:rgba(4,24,21,.16);--line3:rgba(4,24,21,.28);
+--sh:0 18px 40px rgba(4,24,21,.08);
+--hdr:rgba(255,255,255,.86);--focus:#197069;--link:#12514e;
+}
+html[data-theme="dark"]{
+--page:#041815;--card:rgba(255,255,255,.06);--sunken:#062621;--tint:#0c3e3d;
+--ink:#ffffff;--body:rgba(255,255,255,.86);--muted:rgba(255,255,255,.62);
+--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.18);--line3:rgba(255,255,255,.34);
+--sh:none;--hdr:rgba(4,24,21,.88);--focus:#8fc4bb;--link:#ffffff;
+}
+body{margin:0;background:var(--page);transition:background .24s cubic-bezier(.2,.7,.3,1)}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:#dc4b1c;text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--focus) !important;outline-offset:2px !important}
+[data-sc]{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms),transform .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms)}
+[data-sc="x"]{transform:translateX(16px)}
+[data-sc][data-in]{opacity:1;transform:none}
+[data-stagger]{--d:calc(var(--i,0) * 70ms)}
+@media (min-width:900px){[data-hdrnav]{display:flex !important}}
+@media (min-width:620px){[data-hdrcta]{display:inline-flex !important}}
+[dir="rtl"] [data-lbl]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif !important;letter-spacing:normal !important;text-transform:none !important}
+@media (prefers-reduced-motion: reduce){[data-sc]{opacity:1;transform:none;transition:none}}
+[data-eco]{display:grid;gap:clamp(24px,4vw,56px);grid-template-columns:minmax(0,1fr);align-items:center}
+@media (min-width:1000px){[data-eco]{grid-template-columns:1fr 1fr}[data-eco][data-flip="1"]>[data-art]{order:-1}}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="{{ rootStyle }}">
+
+<span data-prog="" aria-hidden="true" style="position:fixed;inset-block-start:0;inset-inline-start:0;z-index:70;height:2px;width:0;background:#dc4b1c"></span>
+
+<dc-import name="SiteHeader" lang="{{ lang }}" theme="{{ theme }}" active="ecosystem" on-lang="{{ toggleLang }}" on-theme="{{ toggleTheme }}" hint-size="100%,80px"></dc-import>
+
+<section aria-labelledby="pg-h" data-screen-label="Page masthead" style="position:relative;overflow:clip;background:#062621;color:#ffffff">
+  <span aria-hidden="true" style="position:absolute;inset-block-start:0;inset-inline:0;height:9px;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 28px);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"></span>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,86px)">
+    <nav aria-label="{{ t.crumbLabel }}" data-lbl="" style="display:flex;align-items:center;gap:10px;margin-block-end:clamp(22px,3vw,32px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.62)">
+      <a href="index.dc.html" style="color:rgba(255,255,255,.74);text-decoration:none">{{ t.home }}</a>
+      <span aria-hidden="true">/</span>
+      <span style="color:#ffffff">{{ t.navEcosystem }}</span>
+    </nav>
+    <h1 id="pg-h" data-sc="" style="{{ pgH1Style }}">{{ t.ecosystemH }}</h1>
+    <p data-sc="" style="margin:clamp(18px,2.4vw,28px) 0 0;max-width:52ch;font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.82)">{{ t.ecosystemLead }}</p>
+    <div data-sc="" style="display:flex;flex-wrap:wrap;gap:clamp(14px,2.4vw,34px);margin-block-start:clamp(30px,4vw,48px);padding-block-start:22px;border-block-start:1px solid rgba(255,255,255,.18)">
+      <sc-for list="{{ index }}" as="x" hint-placeholder-count="4">
+        <span style="display:flex;align-items:baseline;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(255,255,255,.62)">
+          <span style="color:#dc4b1c">{{ x.no }}</span>
+          <span style="font-family:'Sora',sans-serif;font-size:14px;color:#ffffff">{{ x.name }}</span>
+        </span>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-label="{{ t.ecosystemH }}" data-screen-label="Platforms" style="background:var(--page)">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:clamp(44px,6vw,86px)">
+    <sc-for list="{{ platforms }}" as="p" hint-placeholder-count="4">
+      <article data-eco="" data-flip="{{ p.flip }}">
+        <div data-art="" data-sc="x" style="position:relative;aspect-ratio:16/10;overflow:clip;background:var(--sunken);border:1px solid var(--line)">
+          <image-slot id="{{ p.slot }}" shape="rect" fit="cover" reframe="" placeholder="{{ p.ph }}" style="width:100%;height:100%"></image-slot>
+          <span aria-hidden="true" style="position:absolute;inset-block-end:0;inset-inline-start:0;width:64px;height:3px;background:#dc4b1c"></span>
+        </div>
+        <div data-sc="" style="display:flex;flex-direction:column;gap:14px">
+          <span aria-hidden="true" style="{{ p.numStyle }}">{{ p.no }}</span>
+          <span data-lbl="" style="{{ p.sectorStyle }}">{{ p.sector }}</span>
+          <h2 style="{{ p.nameStyle }}">{{ p.name }}</h2>
+          <p style="margin:0;max-width:48ch;font-weight:300;font-size:clamp(15px,1.6vw,17px);line-height:1.62;color:var(--body)">{{ p.body }}</p>
+          <a href="contact.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;width:fit-content">{{ t.ecoLink }}<span aria-hidden="true">{{ arrow }}</span></a>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<section aria-label="{{ t.partnersLine }}" data-screen-label="Partners" style="background:var(--sunken);border-block:1px solid var(--line)">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,5vw,60px) clamp(16px,3vw,32px);display:flex;flex-direction:column;gap:24px">
+    <span data-sc="" data-lbl="" style="{{ partnerLineStyle }}">{{ t.partnersLine }}</span>
+    <div style="display:flex;flex-wrap:wrap;gap:16px">
+      <sc-for list="{{ logos }}" as="l" hint-placeholder-count="5">
+        <div data-sc="" data-stagger="" style="--i:{{ l.i }};flex:1 1 150px;height:88px;background:var(--card);border:1px solid var(--line)">
+          <image-slot id="{{ l.slot }}" shape="rect" fit="contain" placeholder="{{ t.logoPh }}" style="width:100%;height:100%"></image-slot>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<dc-import name="SiteCta" lang="{{ lang }}" page="ecosystem" hint-size="100%,520px"></dc-import>
+
+<dc-import name="SiteFooter" lang="{{ lang }}" hint-size="100%,420px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#dc4b1c&quot;,&quot;#057078&quot;,&quot;#8a6a3b&quot;],&quot;default&quot;:&quot;#dc4b1c&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accent&quot;}}">
+const AR = {
+  home:'الرئيسية', crumbLabel:'مسار التنقل', navEcosystem:'منظومتنا',
+  eyeEco:'منصات المحفظة', ecosystemH:'منظومة أعمالنا',
+  ecosystemLead:'منصات متكاملة تصنع قيمة اقتصادية مستدامة.',
+  platforms:[
+    ['تصنيع الأغذية الفاخرة','JAZ Choklat','من اختيار المكوّن حتى اكتمال التجربة.'],
+    ['التجارة والتوصيل في الميل الأخير','eat.plus','أنظمة تشغيل حديثة وحلول متكاملة.'],
+    ['سوق التجارب السياحية','ZL.TOURS','تجارب داخل المملكة وإقليميًا.'],
+    ['منصة عقارية وضيافة','HOMERA','إدارة وتشغيل العقارات وحلول الضيافة.']
+  ],
+  platformPh:['صورة من مصنع جاز','صورة من منصة eat.plus','صورة من تجربة ZL.TOURS','صورة من مشاريع HOMERA'],
+  ecoLink:'تواصل بشأن هذه المنصة',
+  partnersLine:'شراكات استراتيجية تصنع منظومتنا', logoPh:'ضع شعار الشريك',
+  nextLabel:'الخطوة التالية', nextH:'هل تبحث عن شراكة أو استثمار؟', cta:'تواصل معنا'
+};
+const EN = {
+  home:'Home', crumbLabel:'Breadcrumb', navEcosystem:'Ecosystem',
+  eyeEco:'Our portfolio platforms', ecosystemH:'Our business ecosystem',
+  ecosystemLead:'Integrated platforms creating sustainable economic value.',
+  platforms:[
+    ['Premium food manufacturing','JAZ Choklat','From ingredient to finished experience.'],
+    ['Last-mile commerce','eat.plus','Modern operating systems, integrated.'],
+    ['Tourism marketplace','ZL.TOURS','Experiences across the Kingdom and region.'],
+    ['Real estate & hospitality','HOMERA','Property operations and hospitality.']
+  ],
+  platformPh:['A photo from the JAZ facility','A photo from the eat.plus platform','A photo from a ZL.TOURS experience','A photo from a HOMERA property'],
+  ecoLink:'Enquire about this platform',
+  partnersLine:'Strategic partnerships that build our ecosystem', logoPh:'Drop a partner logo',
+  nextLabel:'Next', nextH:'Looking to partner or invest?', cta:'Contact us'
+};
+
+class Component extends DCLogic {
+  state = { lang: 'ar', theme: 'light' };
+
+  // one shared reading-progress hairline across every page of the site
+  progressPass() {
+    const bar = document.querySelector('[data-prog]');
+    if (!bar) return;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.width = (Math.min(1, (window.scrollY || 0) / max) * 100).toFixed(2) + '%';
+  }
+  revealPass() {
+    const h = window.innerHeight || 800;
+    document.querySelectorAll('[data-sc]:not([data-in])').forEach(n => {
+      const r = n.getBoundingClientRect();
+      if (r.top < h * 0.94) n.setAttribute('data-in', '1');
+    });
+  }
+  componentDidMount() {
+    try {
+      const l = window.localStorage.getItem('seemprime-lang');
+      if (l === 'en' || l === 'ar') this.setState({ lang: l });
+      const th = window.localStorage.getItem('seemprime-theme');
+      const initial = (th === 'light' || th === 'dark') ? th : 'light';
+      this.applyTheme(initial);
+      this.setState({ theme: initial });
+    } catch (e) { this.applyTheme('light'); }
+    this._on = () => {
+      this.progressPass();
+      const now = Date.now();
+      const wait = 60 - (now - (this._last || 0));
+      if (wait > 0) { clearTimeout(this._trail); this._trail = setTimeout(() => { this._last = 0; this._on(); }, wait + 10); return; }
+      this._last = now;
+      this.revealPass();
+    };
+    window.addEventListener('scroll', this._on, { passive: true });
+    window.addEventListener('resize', this._on, { passive: true });
+    this.revealPass();
+    this.progressPass();
+    this._poll = setInterval(() => this.revealPass(), 500);
+  }
+  componentDidUpdate() { this.revealPass(); }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._on);
+    window.removeEventListener('resize', this._on);
+    clearInterval(this._poll); clearTimeout(this._trail);
+  }
+  applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }
+  renderVals() {
+    const ar = this.state.lang === 'ar';
+    const t = ar ? AR : EN;
+    const bodyFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'IBM Plex Sans',system-ui,sans-serif";
+    const dispFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'Sora',system-ui,sans-serif";
+    const lbl = ';font-size:11px;font-weight:500;letter-spacing:' + (ar ? 'normal' : '.18em') +
+      ';text-transform:' + (ar ? 'none' : 'uppercase') + ';color:';
+    return {
+      t, lang: this.state.lang, theme: this.state.theme, dir: ar ? 'rtl' : 'ltr', arrow: ar ? '←' : '→',
+      rootStyle: 'background:var(--page);color:var(--body);font-family:' + bodyFont +
+        ';font-size:16px;line-height:' + (ar ? '1.75' : '1.62') + ';-webkit-font-smoothing:antialiased',
+      toggleLang: () => {
+        const lang = ar ? 'en' : 'ar';
+        try { window.localStorage.setItem('seemprime-lang', lang); } catch (e) {}
+        this.setState({ lang });
+      },
+      toggleTheme: () => {
+        const theme = this.state.theme === 'light' ? 'dark' : 'light';
+        try { window.localStorage.setItem('seemprime-theme', theme); } catch (e) {}
+        this.applyTheme(theme);
+        this.setState({ theme });
+      },
+      pgH1Style: 'margin:0;max-width:22ch;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(30px,4.6vw,66px);line-height:' + (ar ? '1.26' : '1.04') +
+        ';letter-spacing:' + (ar ? '0' : '-.025em') + ';color:#ffffff;text-wrap:pretty',
+      eyeOnBrand: 'font-family:' + dispFont + lbl + 'rgba(255,255,255,.78)',
+      partnerLineStyle: 'font-family:' + dispFont + lbl + 'var(--body)' + ';text-align:center',
+      index: t.platforms.map(([, name], i) => ({ i, name, no: '0' + (i + 1) })),
+      platforms: t.platforms.map(([sector, name, body], i) => ({
+        i, sector, name, body, no: '0' + (i + 1), flip: i % 2 === 1 ? '1' : '0',
+        slot: 'sp-eco-' + i, ph: t.platformPh[i],
+        numStyle: "font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(40px,5vw,64px);line-height:1;" +
+          'color:transparent;-webkit-text-stroke:1px var(--line3);letter-spacing:-.02em',
+        sectorStyle: 'font-family:' + dispFont + lbl + 'var(--muted)',
+        nameStyle: 'margin:0;font-family:' + dispFont + ';font-weight:600;font-size:clamp(22px,2.8vw,32px);' +
+          'line-height:' + (ar ? '1.32' : '1.18') + ';letter-spacing:' + (ar ? '0' : '-.01em') + ';color:var(--ink)'
+      })),
+      logos: [0, 1, 2, 3, 4].map(i => ({ i, slot: 'sp-logo-' + i }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

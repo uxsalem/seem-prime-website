@@ -1,0 +1,114 @@
+/* SEEM PRIME — colour system.
+   Sampled from the Corporate Identity & Strategic Framework imagery:
+   deep forest green architecture, silver/glass planes, a hairline ember accent,
+   bronze + teal from the ZL.TOURS portfolio mark. */
+:root{
+  /* Deep Green — the brand core */
+  --green-950:#041815;
+  --green-900:#062621;
+  --green-800:#0c3e3d;
+  --green-700:#12514e;
+  --green-600:#197069;
+  --green-500:#2c8f84;
+  --green-400:#57a79c;
+  --green-300:#8fc4bb;
+  --green-200:#c3ded8;
+  --green-100:#e2efeb;
+  --green-050:#f1f7f5;
+
+  /* Silver / Glass — neutrals carry a faint green cast */
+  --silver-000:#ffffff;
+  --silver-050:#f7f8f9;
+  --silver-100:#f0f2f3;
+  --silver-200:#e4eeef;
+  --silver-300:#d2dad9;
+  --silver-400:#b4bfbd;
+  --silver-500:#8c9997;
+  --silver-600:#677471;
+  --silver-700:#4b5654;
+  --silver-800:#2c3634;
+  --silver-900:#151d1b;
+
+  /* Ember — hairline accent only, never a primary surface */
+  --ember-600:#b93b13;
+  --ember-500:#dc4b1c;
+  --ember-200:#f5c8b8;
+  --ember-100:#fbe2d9;
+
+  /* Teal — secondary accent (ZL.TOURS glass) */
+  --teal-600:#04585e;
+  --teal-500:#057078;
+  --teal-100:#d7ecee;
+
+  /* Bronze — value / premium accent (portfolio marks, awards, figures) */
+  --bronze-600:#6d5228;
+  --bronze-500:#8a6a3b;
+  --bronze-300:#c4a878;
+  --bronze-100:#efe6d5;
+
+  /* ── Semantic: surfaces ── */
+  --surface-page:var(--silver-050);
+  --surface-card:var(--silver-000);
+  --surface-sunken:var(--silver-100);
+  --surface-tint:var(--green-050);
+  --surface-glass:rgba(255,255,255,.62);
+  --surface-glass-dark:rgba(6,38,33,.55);
+  --surface-brand:var(--green-900);
+  --surface-brand-deep:var(--green-950);
+  --surface-brand-mid:var(--green-800);
+  --surface-on-brand:rgba(255,255,255,.06);
+  --surface-on-brand-raised:rgba(255,255,255,.10);
+
+  /* ── Semantic: text ── */
+  --text-strong:var(--green-950);
+  --text-body:var(--silver-800);
+  --text-muted:var(--silver-600);
+  --text-accent:var(--green-700);
+  --text-on-brand:#ffffff;
+  --text-on-brand-muted:rgba(255,255,255,.74);
+  --text-link:var(--green-700);
+  --text-link-hover:var(--green-950);
+
+  /* ── Semantic: lines ── */
+  --border-hairline:rgba(4,24,21,.10);
+  --border-default:rgba(4,24,21,.16);
+  --border-strong:rgba(4,24,21,.28);
+  --border-on-brand:rgba(255,255,255,.16);
+  --border-on-brand-strong:rgba(255,255,255,.32);
+  --rule-accent:var(--ember-500);
+  --focus-ring:var(--green-600);
+
+  /* ── Semantic: status ── */
+  --status-positive:var(--green-600);
+  --status-positive-bg:var(--green-100);
+  --status-caution:var(--bronze-500);
+  --status-caution-bg:var(--bronze-100);
+  --status-critical:var(--ember-600);
+  --status-critical-bg:var(--ember-100);
+  --status-info:var(--teal-500);
+  --status-info-bg:var(--teal-100);
+
+  /* ── Signature gradients (protection washes, never decorative colour blends) ── */
+  --wash-green:linear-gradient(160deg,#0c3e3d 0%,#062621 58%,#041815 100%); /* @kind color */
+  --wash-silver:linear-gradient(155deg,#ffffff 0%,#f0f2f3 52%,#dfe5e5 100%); /* @kind color */
+  --wash-protect-bottom:linear-gradient(to top,rgba(4,24,21,.88) 0%,rgba(4,24,21,.55) 42%,rgba(4,24,21,0) 100%); /* @kind color */
+  --wash-protect-left:linear-gradient(to right,rgba(4,24,21,.90) 0%,rgba(4,24,21,.45) 48%,rgba(4,24,21,0) 100%); /* @kind color */
+  --wash-glass-edge:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,0) 40%); /* @kind color */
+}
+/* Inverse scope: place on any dark-green section to flip text + line semantics. */
+[data-theme="brand"]{
+  --surface-page:var(--green-900);
+  --surface-card:rgba(255,255,255,.06);
+  --surface-sunken:var(--green-950);
+  --surface-tint:var(--green-800);
+  --text-strong:#ffffff;
+  --text-body:rgba(255,255,255,.86);
+  --text-muted:rgba(255,255,255,.62);
+  --text-accent:var(--green-300);
+  --text-link:#ffffff;
+  --text-link-hover:var(--green-300);
+  --border-hairline:rgba(255,255,255,.12);
+  --border-default:rgba(255,255,255,.18);
+  --border-strong:rgba(255,255,255,.34);
+  --focus-ring:var(--green-300);
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>نموذج الأعمال | SEEM PRIME</title>
+<style>
+@font-face{font-family:'Sora';font-weight:300;font-display:swap;src:url("./ds/fonts/sora-300.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:400;font-display:swap;src:url("./ds/fonts/sora-400.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:600;font-display:swap;src:url("./ds/fonts/sora-600.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:700;font-display:swap;src:url("./ds/fonts/sora-700.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:300;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-300.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-600.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+:root{
+--page:#f7f8f9;--card:#ffffff;--sunken:#f0f2f3;--tint:#f1f7f5;
+--ink:#041815;--body:#2c3634;--muted:#677471;
+--line:rgba(4,24,21,.10);--line2:rgba(4,24,21,.16);--line3:rgba(4,24,21,.28);
+--sh:0 18px 40px rgba(4,24,21,.08);
+--hdr:rgba(255,255,255,.86);--focus:#197069;--link:#12514e;
+}
+html[data-theme="dark"]{
+--page:#041815;--card:rgba(255,255,255,.06);--sunken:#062621;--tint:#0c3e3d;
+--ink:#ffffff;--body:rgba(255,255,255,.86);--muted:rgba(255,255,255,.62);
+--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.18);--line3:rgba(255,255,255,.34);
+--sh:none;--hdr:rgba(4,24,21,.88);--focus:#8fc4bb;--link:#ffffff;
+}
+body{margin:0;background:var(--page);transition:background .24s cubic-bezier(.2,.7,.3,1)}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:#dc4b1c;text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--focus) !important;outline-offset:2px !important}
+[data-sc]{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms),transform .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms)}
+[data-sc="x"]{transform:translateX(16px)}
+[data-sc][data-in]{opacity:1;transform:none}
+[data-stagger]{--d:calc(var(--i,0) * 70ms)}
+@media (min-width:900px){[data-hdrnav]{display:flex !important}}
+@media (min-width:620px){[data-hdrcta]{display:inline-flex !important}}
+[dir="rtl"] [data-lbl]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif !important;letter-spacing:normal !important;text-transform:none !important}
+@media (prefers-reduced-motion: reduce){[data-sc]{opacity:1;transform:none;transition:none}}
+[data-split]{display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:1000px){[data-split]{grid-template-columns:1.12fr .88fr;align-items:start}}
+[data-glist]>li:first-child{border-block-start:0 !important;padding-block-start:0 !important}
+[data-mpin]{position:relative}
+[data-vrow][data-in] [data-vseg]{transform:scaleX(1) !important}
+@media (min-width:820px){[data-vrow]{grid-template-columns:auto minmax(0,.62fr) minmax(0,1fr) auto !important}[data-vrow]>p{grid-column:2}[data-vtrack]{grid-column:3 !important}[data-vrow]>[data-lbl]{grid-column:4 !important}}
+@media (prefers-reduced-motion: reduce){[data-vseg]{transform:scaleX(1) !important;transition:none}}
+@media (min-width:960px){[data-mstage]{grid-template-columns:1.16fr .84fr !important}[data-mpin]{height:340vh}[data-mstick]{position:sticky;inset-block-start:clamp(84px,11vh,116px)}}
+</style>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="{{ rootStyle }}">
+
+<span data-prog="" aria-hidden="true" style="position:fixed;inset-block-start:0;inset-inline-start:0;z-index:70;height:2px;width:0;background:#dc4b1c"></span>
+
+<dc-import name="SiteHeader" lang="{{ lang }}" theme="{{ theme }}" active="model" on-lang="{{ toggleLang }}" on-theme="{{ toggleTheme }}" hint-size="100%,80px"></dc-import>
+
+<section aria-labelledby="pg-h" data-screen-label="Page masthead" style="position:relative;overflow:clip;background:#062621;color:#ffffff">
+  <span aria-hidden="true" style="position:absolute;inset-block-start:0;inset-inline:0;height:9px;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 28px);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"></span>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,86px)">
+    <nav aria-label="{{ t.crumbLabel }}" data-lbl="" style="display:flex;align-items:center;gap:10px;margin-block-end:clamp(22px,3vw,32px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.62)">
+      <a href="index.dc.html" style="color:rgba(255,255,255,.74);text-decoration:none">{{ t.home }}</a>
+      <span aria-hidden="true">/</span>
+      <span style="color:#ffffff">{{ t.navModel }}</span>
+    </nav>
+    <h1 id="pg-h" data-sc="" style="{{ pgH1Style }}">{{ t.modelH2 }}</h1>
+    <p data-sc="" style="margin:clamp(18px,2.4vw,28px) 0 0;max-width:52ch;font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.82)">{{ t.modelLead }}</p>
+  </div>
+</section>
+
+<section aria-labelledby="md-h" data-screen-label="Value chain" style="background:var(--page)">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)">
+    <h2 id="md-h" data-sc="" style="{{ h2Style }}">{{ t.chainH }}</h2>
+    <div data-mpin="" style="margin-block-start:clamp(32px,4vw,52px)">
+    <div data-mstick="">
+    <div data-mstage="" style="display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch">
+      <div data-sc="" style="position:relative;overflow:clip;min-height:min(clamp(400px,44vw,560px),calc(100vh - 200px));background:#041815">
+        <sc-for list="{{ plates }}" as="p" hint-placeholder-count="4">
+          <span data-splate="{{ p.i }}" aria-hidden="true" style="{{ p.style }}"></span>
+        </sc-for>
+        <span aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,21,.86) 0%,rgba(4,24,21,.4) 46%,rgba(4,24,21,.12) 100%)"></span>
+        <span aria-hidden="true" style="position:absolute;inset-block:0;inset-inline-end:0;width:3px;background:#dc4b1c"></span>
+        <div style="position:absolute;inset-inline:0;inset-block-end:0;margin:clamp(14px,2vw,26px);padding:clamp(20px,2.4vw,30px);border-radius:clamp(22px,3vw,32px);background:rgba(6,38,33,.55);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.24)">
+          <span data-lbl="" style="{{ active.tagStyle }}">{{ active.tag }}</span>
+          <h3 style="{{ active.verbStyle }}">{{ active.verb }}</h3>
+          <ul data-glist="" style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+            <sc-for list="{{ active.items }}" as="it" hint-placeholder-count="3">
+              <li style="padding:10px 0;border-block-start:1px solid rgba(255,255,255,.16);font-size:clamp(13px,1.5vw,15px);line-height:1.5;color:rgba(255,255,255,.88)">{{ it }}</li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+      <div data-sc="x" style="position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);box-shadow:var(--sh)">
+        <span aria-hidden="true" style="position:absolute;inset-block:0;inset-inline-start:0;width:1px;background:var(--line2)"></span>
+        <span data-sthumb="" aria-hidden="true" style="{{ stageThumb }}"></span>
+        <sc-for list="{{ modelRows }}" as="m" hint-placeholder-count="4">
+          <button type="button" data-srow="{{ m.i }}" onClick="{{ m.select }}" aria-pressed="{{ m.pressed }}" style="{{ m.row }}">
+            <span style="{{ m.idxStyle }}">{{ m.no }}</span>
+            <span style="{{ m.verbStyle }}">{{ m.title }}</span>
+            <span data-schev="" aria-hidden="true" style="{{ m.chevStyle }}">{{ arrow }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="vp-h" data-screen-label="Value proposition" style="background:var(--tint)">
+  <div style="max-width:1240px;margin:0 auto;padding:clamp(56px,8vw,104px) clamp(16px,3vw,32px)">
+    <div data-split="" style="margin-block-end:clamp(34px,4.6vw,62px)">
+      <div>
+        <h2 id="vp-h" data-sc="" style="{{ h2Style }}">{{ t.valueH }}</h2>
+      </div>
+      <p data-sc="" style="align-self:end;margin:0;max-width:44ch;font-weight:300;font-size:clamp(16px,1.7vw,18px);line-height:1.62;color:var(--body)">{{ t.valueLead }}</p>
+    </div>
+    <div style="border-block-start:1px solid var(--line2)">
+      <sc-for list="{{ valueProp }}" as="v" hint-placeholder-count="4">
+        <div data-vrow="" data-sc="" data-stagger="" style="{{ v.row }}">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#8a6a3b">{{ v.no }}</span>
+          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;min-width:0">
+            <strong style="{{ v.titleStyle }}">{{ v.title }}</strong>
+            <span style="font-size:clamp(14px,1.5vw,16px);line-height:1.5;color:var(--muted)">{{ v.body }}</span>
+          </p>
+          <span data-vtrack="" aria-hidden="true" style="{{ v.track }}">
+            <sc-for list="{{ v.segments }}" as="g" hint-placeholder-count="4">
+              <span data-vseg="" style="{{ g.style }}"></span>
+            </sc-for>
+          </span>
+          <span data-lbl="" style="{{ v.pctStyle }}">{{ v.pct }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div data-sc="" style="{{ outcomeStyle }}">
+      <span aria-hidden="true" style="position:absolute;inset-block:0;inset-inline-start:0;width:3px;background:#dc4b1c"></span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:#c4a878">{{ outcome.no }}</span>
+      <strong style="{{ outcome.titleStyle }}">{{ outcome.title }}</strong>
+      <span style="font-size:clamp(14px,1.6vw,17px);line-height:1.5;color:rgba(255,255,255,.76)">{{ outcome.body }}</span>
+      <span aria-hidden="true" style="display:flex;gap:4px;flex:1 1 180px;min-width:120px;height:6px">
+        <sc-for list="{{ outcome.segments }}" as="g" hint-placeholder-count="4">
+          <span style="{{ g.style }}"></span>
+        </sc-for>
+      </span>
+      <span data-lbl="" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;white-space:nowrap;color:#c4a878">{{ outcome.pct }}</span>
+    </div>
+  </div>
+</section>
+
+<dc-import name="SiteCta" lang="{{ lang }}" page="model" hint-size="100%,520px"></dc-import>
+
+<dc-import name="SiteFooter" lang="{{ lang }}" hint-size="100%,420px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#dc4b1c&quot;,&quot;#057078&quot;,&quot;#8a6a3b&quot;],&quot;default&quot;:&quot;#dc4b1c&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accent&quot;}}">
+const AR = {
+  home:'الرئيسية', crumbLabel:'مسار التنقل', navModel:'نموذج الأعمال',
+  modelH2:'منظومة واحدة، أربع مراحل لصناعة القيمة',
+  modelLead:'كل منصة تمرّ بالمراحل الأربع ذاتها، ثم تعود بعوائدها إلى المنظومة.',
+  eyeChain:'سلسلة القيمة', chainH:'كيف تنتقل المنصة من التطوير إلى العائد',
+  modelTag:'العائد',
+  model:[
+    ['نطوّر', ['منصات الأعمال','المشروعات الجديدة','نماذج الأعمال']],
+    ['نشغّل', ['إدارة المنصات','الخدمات المشتركة','تحسين الأداء']],
+    ['نستثمر', ['الاستثمارات في الملكية','المشاريع المشتركة','الاستحواذات الاستراتيجية']],
+    ['نحقق الإيرادات', ['عوائد الاستثمار','رسوم الإدارة والتشغيل','إيرادات المنصات','الخدمات الاستشارية']]
+  ],
+  eyeValue:'لماذا سيم برايم', valueH:'القيمة المضافة', partsLabel:'مكوّنات', completeLabel:'المنظومة مكتملة',
+  valueLead:'نجمع بين الخبرة الاستثمارية، والتميز التشغيلي، والشراكات الاستراتيجية لبناء وتوسيع منصات أعمال عالية الأثر.',
+  valueProp:[
+    ['الخبرة الاستثمارية','الفرص الواعدة'],
+    ['التميز التشغيلي','أداء عالٍ وقابلية توسع'],
+    ['الشراكات الاستراتيجية','نمو ووصول للأسواق'],
+    ['منصات قابلة للتوسع','منصات متكاملة'],
+    ['قيمة اقتصادية مستدامة','قيمة دائمة']
+  ],
+  nextLabel:'الخطوة التالية', nextH:'شاهد المراحل الأربع وهي تعمل', nextCta:'منصات المحفظة'
+};
+const EN = {
+  home:'Home', crumbLabel:'Breadcrumb', navModel:'Business model',
+  modelH2:'One ecosystem, four stages of value',
+  modelLead:'Every platform moves through the same four stages, then returns its yield to the ecosystem.',
+  eyeChain:'The value chain', chainH:'How a platform travels from build to return',
+  modelTag:'The return',
+  model:[
+    ['Develop', ['Business platforms','New ventures','Business models']],
+    ['Operate', ['Platform management','Shared services','Performance optimization']],
+    ['Invest', ['Equity investments','Joint ventures','Strategic acquisitions']],
+    ['Monetize', ['Investment returns','Management fees','Platform revenues','Advisory services']]
+  ],
+  eyeValue:'Why SEEM PRIME', valueH:'Value proposition', partsLabel:'combined', completeLabel:'Complete',
+  valueLead:'We combine investment expertise, operational excellence and strategic partnerships to develop, operate and scale high-impact business platforms.',
+  valueProp:[
+    ['Investment expertise','High-potential opportunities'],
+    ['Operational excellence','Performance at scale'],
+    ['Strategic partnerships','Growth and market access'],
+    ['Scalable platforms','Integrated by design'],
+    ['Sustainable economic value','Lasting stakeholder value']
+  ],
+  nextLabel:'Next', nextH:'See the four stages at work', nextCta:'Portfolio platforms'
+};
+const STAGE_PLATES = [
+  './ds/img/white-green-planes.png',
+  './ds/img/architecture-green-fins.png',
+  './ds/img/diagonal-glass-planes.png',
+  './ds/img/blade-split-green-white.png'
+];
+
+class Component extends DCLogic {
+  state = { lang: 'ar', theme: 'light', stage: 0 };
+
+  // one shared reading-progress hairline across every page of the site
+  progressPass() {
+    const bar = document.querySelector('[data-prog]');
+    if (!bar) return;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.width = (Math.min(1, (window.scrollY || 0) / max) * 100).toFixed(2) + '%';
+  }
+  revealPass() {
+    const h = window.innerHeight || 800;
+    document.querySelectorAll('[data-sc]:not([data-in])').forEach(n => {
+      const r = n.getBoundingClientRect();
+      if (r.top < h * 0.94) n.setAttribute('data-in', '1');
+    });
+  }
+  // A click sets the stage and briefly locks out the scroll driver so the two never fight.
+  pickStage(i) {
+    this._lock = Date.now() + 1400;
+    if (i !== this.state.stage) this.setState({ stage: i });
+  }
+  // While the block is pinned, its own scroll travel drives the stage; the travel is measured
+  // from the sticky child (height − stickyHeight − offset), never from the viewport.
+  updateStage() {
+    if (this._lock && Date.now() < this._lock) return;
+    const el = document.querySelector('[data-mpin]');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight || 800;
+    const stick = el.firstElementChild;
+    let travel = 0;
+    if (stick && getComputedStyle(stick).position === 'sticky') {
+      const off = parseFloat(getComputedStyle(stick).insetBlockStart) || 0;
+      travel = r.height - stick.offsetHeight - off;
+    }
+    const p = travel > vh * 0.4 ? (-r.top) / travel : (vh * 0.72 - r.top) / (r.height + vh * 0.3);
+    if (!Number.isFinite(p)) return;
+    const idx = Math.max(0, Math.min(3, Math.floor(p * 4 + 0.0002)));
+    if (idx !== this.state.stage) this.setState({ stage: idx });
+  }
+  componentDidMount() {
+    try {
+      const l = window.localStorage.getItem('seemprime-lang');
+      if (l === 'en' || l === 'ar') this.setState({ lang: l });
+      const th = window.localStorage.getItem('seemprime-theme');
+      const initial = (th === 'light' || th === 'dark') ? th : 'light';
+      this.applyTheme(initial);
+      this.setState({ theme: initial });
+    } catch (e) { this.applyTheme('light'); }
+    this._on = () => {
+      this.progressPass();
+      const now = Date.now();
+      const wait = 60 - (now - (this._last || 0));
+      if (wait > 0) { clearTimeout(this._trail); this._trail = setTimeout(() => { this._last = 0; this._on(); }, wait + 10); return; }
+      this._last = now;
+      this.revealPass();
+      this.updateStage();
+    };
+    window.addEventListener('scroll', this._on, { passive: true });
+    window.addEventListener('resize', this._on, { passive: true });
+    this.revealPass();
+    this.paintState();
+    this._poll = setInterval(() => this.revealPass(), 500);
+  }
+  paintState() {
+    const stage = this.state.stage;
+    document.querySelectorAll('[data-srow]').forEach(r => {
+      const on = +r.getAttribute('data-srow') === stage;
+      r.style.background = on ? 'var(--tint)' : 'transparent';
+      const chev = r.querySelector('[data-schev]');
+      if (chev) chev.style.opacity = on ? '1' : '0';
+      const idx = r.children[0], verb = r.children[1];
+      if (idx) idx.style.color = on ? 'var(--ink)' : 'var(--muted)';
+      if (verb) verb.style.color = on ? 'var(--ink)' : 'var(--body)';
+    });
+    document.querySelectorAll('[data-splate]').forEach(p => {
+      p.style.opacity = (+p.getAttribute('data-splate') === stage) ? '1' : '0';
+    });
+    const thumb = document.querySelector('[data-sthumb]');
+    if (thumb) thumb.style.transform = 'translateY(' + (stage * 100) + '%)';
+  }
+  componentDidUpdate() { this.revealPass(); this.paintState(); }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._on);
+    window.removeEventListener('resize', this._on);
+    clearInterval(this._poll); clearTimeout(this._trail);
+  }
+  applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }
+  renderVals() {
+    const ar = this.state.lang === 'ar';
+    const t = ar ? AR : EN;
+    const stage = this.state.stage;
+    const accent = this.props.accent || '#dc4b1c';
+    const bodyFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'IBM Plex Sans',system-ui,sans-serif";
+    const dispFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'Sora',system-ui,sans-serif";
+    const lbl = ';font-size:11px;font-weight:500;letter-spacing:' + (ar ? 'normal' : '.18em') +
+      ';text-transform:' + (ar ? 'none' : 'uppercase') + ';color:';
+    const row = t.model[stage];
+    return {
+      t, lang: this.state.lang, theme: this.state.theme, dir: ar ? 'rtl' : 'ltr', arrow: ar ? '←' : '→',
+      rootStyle: 'background:var(--page);color:var(--body);font-family:' + bodyFont +
+        ';font-size:16px;line-height:' + (ar ? '1.75' : '1.62') + ';-webkit-font-smoothing:antialiased',
+      toggleLang: () => {
+        const lang = ar ? 'en' : 'ar';
+        try { window.localStorage.setItem('seemprime-lang', lang); } catch (e) {}
+        this.setState({ lang });
+      },
+      toggleTheme: () => {
+        const theme = this.state.theme === 'light' ? 'dark' : 'light';
+        try { window.localStorage.setItem('seemprime-theme', theme); } catch (e) {}
+        this.applyTheme(theme);
+        this.setState({ theme });
+      },
+      pgH1Style: 'margin:0;max-width:22ch;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(30px,4.6vw,66px);line-height:' + (ar ? '1.26' : '1.04') +
+        ';letter-spacing:' + (ar ? '0' : '-.025em') + ';color:#ffffff;text-wrap:pretty',
+      h2Style: 'margin:0;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(26px,3.6vw,52px);line-height:' + (ar ? '1.3' : '1.08') +
+        ';letter-spacing:' + (ar ? '0' : '-.02em') + ';color:var(--ink);text-wrap:pretty',
+      eyeStyle: 'margin:0 0 16px;display:flex;align-items:center;gap:14px;font-family:' + dispFont + lbl + 'var(--body)',
+      eyeOnBrand: 'font-family:' + dispFont + lbl + 'rgba(255,255,255,.78)',
+      // the four plates are stacked and crossfaded, so the stage change reads as one surface
+      plates: STAGE_PLATES.map((url, i) => ({
+        i,
+        style: 'position:absolute;inset:0;background-image:url("' + url + '");background-size:cover;' +
+          'background-position:center;opacity:' + (i === stage ? '1' : '0') +
+          ';transition:opacity .52s cubic-bezier(.2,.7,.3,1)'
+      })),
+      active: {
+        verb: row[0], items: row[1],
+        tag: stage === 3 ? t.modelTag : '',
+        tagStyle: stage === 3
+          ? "display:block;margin-block-end:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:" +
+            (ar ? 'normal' : '.1em') + ';text-transform:' + (ar ? 'none' : 'uppercase') + ';color:#c4a878'
+          : 'display:none',
+        verbStyle: 'margin:0 0 clamp(14px,1.8vw,20px);font-family:' + dispFont + ';font-weight:600;' +
+          'font-size:clamp(24px,3.2vw,40px);line-height:' + (ar ? '1.3' : '1.06') +
+          ';letter-spacing:' + (ar ? '0' : '-.02em') + ';color:#ffffff'
+      },
+      stageThumb: 'position:absolute;inset-inline-start:0;inset-block-start:0;width:3px;height:25%;background:' +
+        accent + ';transform:translateY(' + (stage * 100) + '%);transition:transform .42s cubic-bezier(.2,.7,.3,1)',
+      modelRows: t.model.map(([title], i) => {
+        const on = i === stage;
+        return {
+          i, title, no: '0' + (i + 1), pressed: on ? 'true' : 'false',
+          select: () => this.pickStage(i),
+          row: 'all:unset;box-sizing:border-box;cursor:pointer;display:grid;' +
+            'grid-template-columns:auto minmax(0,1fr) auto;align-items:center;' +
+            'gap:clamp(12px,1.6vw,20px);padding:clamp(18px,2.2vw,26px) clamp(18px,2.4vw,30px);' +
+            'border-block-end:1px solid var(--line);background:' + (on ? 'var(--tint)' : 'transparent') +
+            ';transition:background .24s cubic-bezier(.2,.7,.3,1)',
+          idxStyle: "font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:" +
+            (on ? 'var(--ink)' : 'var(--muted)'),
+          verbStyle: 'font-family:' + dispFont + ';font-weight:600;font-size:clamp(18px,2.1vw,25px);' +
+            'line-height:' + (ar ? '1.35' : '1.12') + ';letter-spacing:' + (ar ? '0' : '-.015em') +
+            ';text-align:start;color:' + (on ? 'var(--ink)' : 'var(--body)'),
+          chevStyle: 'font-size:15px;color:' + accent + ';opacity:' + (on ? '1' : '0') + ';transition:opacity .24s'
+        };
+      }),
+      // The percentages were invented, so they said nothing. The honest structure is a COUNT:
+      // four capabilities assemble into one outcome. Each row's track is the same four
+      // segments, filled up to and including that row's own part — so by 04 the set is whole
+      // and the 05 panel shows the assembled bar. Nothing here is a made-up quantity.
+      valueProp: t.valueProp.slice(0, 4).map(([title, body], i) => ({
+        title, body, i, no: '0' + (i + 1), pct: '0' + (i + 1) + ' / 04 ' + t.partsLabel,
+        row: '--i:' + i + ';display:grid;grid-template-columns:auto minmax(0,1fr);' +
+          'gap:6px clamp(12px,1.8vw,20px);align-items:center;padding-block:clamp(15px,1.9vw,22px);' +
+          'border-block-end:1px solid var(--line)',
+        titleStyle: 'font-family:' + dispFont + ';font-weight:600;font-size:clamp(16px,1.9vw,21px);color:var(--ink)',
+        track: 'grid-column:2;display:flex;gap:4px;height:6px',
+        segments: [0, 1, 2, 3].map(k => ({
+          k,
+          style: 'flex:1 1 0;border-radius:999px;transform-origin:' + (ar ? 'right' : 'left') + ' center;' +
+            'transition:transform .5s cubic-bezier(.16,.84,.44,1) ' + (140 + k * 110) + 'ms;background:' +
+            (k <= i ? (k === i ? '#062621' : '#0c3e3d') : 'var(--line)') +
+            ';transform:scaleX(' + (k <= i ? '0' : '1') + ')'
+        })),
+        pctStyle: "grid-column:2;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;" +
+          'color:var(--muted);text-align:' + (ar ? 'left' : 'right')
+      })),
+      outcome: (() => {
+        const [title, body] = t.valueProp[4];
+        return {
+          no: '05', title, body, pct: t.completeLabel,
+          segments: [0, 1, 2, 3].map(k => ({
+            k, style: 'flex:1 1 0;border-radius:999px;background:' + (k === 3 ? accent : 'rgba(255,255,255,.55)')
+          })),
+          titleStyle: 'font-family:' + dispFont + ';font-weight:600;font-size:clamp(18px,2.2vw,26px);color:#ffffff'
+        };
+      })(),
+      outcomeStyle: 'position:relative;overflow:clip;margin-block-start:clamp(14px,2vw,22px);display:flex;' +
+        'flex-wrap:wrap;align-items:baseline;gap:8px clamp(14px,2vw,22px);' +
+        'padding:clamp(20px,2.6vw,30px) clamp(24px,3.4vw,40px);border-radius:14px;background:#062621;' +
+        'box-shadow:0 18px 44px rgba(4,24,21,.16)'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>تواصل معنا | SEEM PRIME</title>
+<style>
+@font-face{font-family:'Sora';font-weight:300;font-display:swap;src:url("./ds/fonts/sora-300.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:400;font-display:swap;src:url("./ds/fonts/sora-400.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:600;font-display:swap;src:url("./ds/fonts/sora-600.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:700;font-display:swap;src:url("./ds/fonts/sora-700.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:300;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-300.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-600.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+:root{
+--page:#f7f8f9;--card:#ffffff;--sunken:#f0f2f3;--tint:#f1f7f5;
+--ink:#041815;--body:#2c3634;--muted:#677471;
+--line:rgba(4,24,21,.10);--line2:rgba(4,24,21,.16);--line3:rgba(4,24,21,.28);
+--sh:0 18px 40px rgba(4,24,21,.08);
+--hdr:rgba(255,255,255,.86);--focus:#197069;--link:#12514e;
+}
+html[data-theme="dark"]{
+--page:#041815;--card:rgba(255,255,255,.06);--sunken:#062621;--tint:#0c3e3d;
+--ink:#ffffff;--body:rgba(255,255,255,.86);--muted:rgba(255,255,255,.62);
+--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.18);--line3:rgba(255,255,255,.34);
+--sh:none;--hdr:rgba(4,24,21,.88);--focus:#8fc4bb;--link:#ffffff;
+}
+body{margin:0;background:var(--page);transition:background .24s cubic-bezier(.2,.7,.3,1)}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:#dc4b1c;text-underline-offset:4px}
+::placeholder{color:var(--muted);opacity:1}
+:focus-visible{outline:2px solid var(--focus) !important;outline-offset:2px !important}
+[data-sc]{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms),transform .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms)}
+[data-sc="x"]{transform:translateX(16px)}
+[data-sc][data-in]{opacity:1;transform:none}
+[data-stagger]{--d:calc(var(--i,0) * 70ms)}
+@media (min-width:900px){[data-hdrnav]{display:flex !important}}
+@media (min-width:620px){[data-hdrcta]{display:inline-flex !important}}
+[dir="rtl"] [data-lbl]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif !important;letter-spacing:normal !important;text-transform:none !important}
+@media (prefers-reduced-motion: reduce){[data-sc]{opacity:1;transform:none;transition:none}}
+[data-split]{display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:minmax(0,1fr)}
+[data-cols="2"]{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:700px){[data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){[data-split]{grid-template-columns:.82fr 1.18fr;align-items:start}}
+[data-rail]{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block-end:6px}
+[data-rail]::-webkit-scrollbar{display:none}
+[data-rail]>*{scroll-snap-align:start}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="{{ rootStyle }}">
+
+<span data-prog="" aria-hidden="true" style="position:fixed;inset-block-start:0;inset-inline-start:0;z-index:70;height:2px;width:0;background:#dc4b1c"></span>
+
+<dc-import name="SiteHeader" lang="{{ lang }}" theme="{{ theme }}" active="" on-lang="{{ toggleLang }}" on-theme="{{ toggleTheme }}" hint-size="100%,80px"></dc-import>
+
+<section aria-labelledby="pg-h" data-screen-label="Page masthead" style="position:relative;overflow:clip;background:#062621;color:#ffffff">
+  <span aria-hidden="true" style="position:absolute;inset-block-start:0;inset-inline:0;height:9px;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 28px);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"></span>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,86px)">
+    <nav aria-label="{{ t.crumbLabel }}" data-lbl="" style="display:flex;align-items:center;gap:10px;margin-block-end:clamp(22px,3vw,32px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.62)">
+      <a href="index.dc.html" style="color:rgba(255,255,255,.74);text-decoration:none">{{ t.home }}</a>
+      <span aria-hidden="true">/</span>
+      <span style="color:#ffffff">{{ t.contactH }}</span>
+    </nav>
+    <h1 id="pg-h" data-sc="" style="{{ pgH1Style }}">{{ t.contactH }}</h1>
+    <p data-sc="" style="margin:clamp(18px,2.4vw,28px) 0 0;max-width:52ch;font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.82)">{{ t.contactBody }}</p>
+  </div>
+</section>
+
+<section aria-labelledby="fm-h" data-screen-label="Contact form" style="background:var(--page)">
+  <div data-split="" style="max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)">
+    <div>
+      <h2 id="fm-h" data-sc="" style="{{ h2Style }}">{{ t.officeH }}</h2>
+      <div data-sc="" style="display:flex;flex-direction:column;gap:18px;margin-block-start:clamp(26px,3.4vw,40px);padding-block-start:24px;border-block-start:1px solid var(--line2)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span data-lbl="" style="{{ capStyle }}">{{ t.officeLabel }}</span>
+          <span style="font-size:15px;line-height:1.5;color:var(--ink)">{{ t.address }}</span>
+        </div>
+        <a href="mailto:info@seem.sa" style="font-size:15px">info@seem.sa</a>
+        <a href="tel:+966536800016" style="font-family:'IBM Plex Mono',monospace;font-size:15px"><span dir="ltr">+966 53 680 0016</span></a>
+      </div>
+      <div data-sc="" style="display:flex;flex-direction:column;gap:12px;margin-block-start:clamp(26px,3.4vw,40px);padding-block-start:24px;border-block-start:1px solid var(--line2)">
+        <span data-lbl="" style="{{ capStyle }}">{{ t.hoursLabel }}</span>
+        <sc-for list="{{ hours }}" as="h" hint-placeholder-count="2">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;max-width:34ch">
+            <span style="font-size:15px;color:var(--body)">{{ h.day }}</span>
+            <span style="{{ h.timeStyle }}">{{ h.time }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <form data-sc="x" onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:16px;padding:clamp(22px,3vw,36px);box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh)">
+      <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <div data-cols="2">
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:var(--body)">{{ t.fName }}</span>
+          <input name="full_name" required style="{{ inputStyle }}">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:var(--body)">{{ t.fEmail }}</span>
+          <input name="email" type="email" required dir="ltr" style="{{ inputStyle }}">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:var(--body)">{{ t.fPhone }}</span>
+          <input name="phone" type="tel" dir="ltr" style="{{ inputStyle }}">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;font-weight:500;color:var(--body)">{{ t.fType }}</span>
+          <select name="inquiry" style="{{ inputStyle }}">
+            <option>{{ t.optPartner }}</option>
+            <option>{{ t.optInvest }}</option>
+            <option>{{ t.optMedia }}</option>
+            <option>{{ t.optOther }}</option>
+          </select>
+        </label>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:13px;font-weight:500;color:var(--body)">{{ t.fMsg }}</span>
+        <textarea name="message" rows="5" required style="box-sizing:border-box;width:100%;padding:12px 14px;background:var(--page);border:1px solid var(--line2);border-radius:8px;font-family:inherit;font-size:15px;line-height:1.6;color:var(--ink);resize:vertical"></textarea>
+      </label>
+      <button type="submit" style="all:unset;box-sizing:border-box;cursor:pointer;height:58px;padding:0 36px;border-radius:999px;background:#062621;color:#ffffff;font-family:inherit;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:12px;width:fit-content;box-shadow:0 12px 30px rgba(4,24,21,.22);transition:background .2s,transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="background:#041815;transform:translateY(-3px);box-shadow:0 18px 38px rgba(4,24,21,.3)" style-active="transform:scale(.985)">{{ btnLabel }}<span aria-hidden="true" style="font-size:17px">{{ arrow }}</span></button>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <p role="status" style="margin:0;padding:14px 16px;background:#e2efeb;border:1px solid rgba(4,24,21,.12);border-radius:8px;font-size:14px;color:#062621">{{ t.okMsg }}</p>
+      </sc-if>
+      <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+        <p role="alert" style="margin:0;padding:14px 16px;background:#fbe2d9;border:1px solid rgba(185,59,19,.28);border-radius:8px;font-size:14px;color:#b93b13">{{ t.errMsg }}</p>
+      </sc-if>
+    </form>
+  </div>
+</section>
+
+<section aria-labelledby="vo-h" data-screen-label="Testimonials" style="background:var(--sunken)">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-block-end:clamp(28px,3.4vw,40px)">
+      <div>
+        <h2 id="vo-h" data-sc="" style="{{ h2Style }}">{{ t.voicesH }}</h2>
+        <p data-sc="" style="margin:18px 0 0;max-width:52ch;font-weight:300;font-size:16px;line-height:1.62;color:var(--muted)">{{ t.voicesLead }}</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button type="button" onClick="{{ voicePrev }}" aria-label="{{ t.railPrev }}" style="{{ railBtn }}">{{ prevGlyph }}</button>
+        <button type="button" onClick="{{ voiceNext }}" aria-label="{{ t.railNext }}" style="{{ railBtn }}">{{ nextGlyph }}</button>
+      </div>
+    </div>
+    <div data-rail="" data-voicerail="">
+      <sc-for list="{{ voices }}" as="v" hint-placeholder-count="3">
+        <figure data-sc="" data-stagger="" style="--i:{{ v.i }};flex:0 0 clamp(280px,32vw,400px);margin:0;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:clip;box-shadow:var(--sh)">
+          <div style="position:relative;aspect-ratio:4/3;overflow:clip;border-block-end:1px solid var(--line);background:var(--sunken)">
+            <image-slot id="{{ v.slot }}" shape="rect" fit="cover" reframe="" placeholder="{{ t.personPh }}" style="width:100%;height:100%"></image-slot>
+          </div>
+          <blockquote style="margin:0;padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column;gap:16px;flex:1 1 auto">
+            <p style="margin:0;flex:1 1 auto;font-weight:300;font-size:clamp(15px,1.7vw,17px);line-height:1.62;color:var(--body)">{{ t.quotePh }}</p>
+            <span aria-hidden="true" style="width:28px;height:3px;background:#dc4b1c"></span>
+            <figcaption style="display:flex;flex-direction:column;gap:4px">
+              <span style="font-family:'Sora',sans-serif;font-weight:600;font-size:15px;color:var(--ink)">{{ v.name }}</span>
+              <span data-lbl="" style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)">{{ v.role }}</span>
+            </figcaption>
+          </blockquote>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<dc-import name="SiteFooter" lang="{{ lang }}" hint-size="100%,420px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#dc4b1c&quot;,&quot;#057078&quot;,&quot;#8a6a3b&quot;],&quot;default&quot;:&quot;#dc4b1c&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accent&quot;}}">
+const AR = {
+  home:'الرئيسية', crumbLabel:'مسار التنقل',
+  eyeContact:'ابدأ الحوار', contactH:'تواصل معنا',
+  contactBody:'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية، ووسائل الإعلام. أرسل لنا رسالتك وسيتواصل معك فريقنا.',
+  eyeOffice:'أين تجدنا', officeH:'المكتب الرئيسي في جدة',
+  officeLabel:'المكتب الرئيسي', address:'حي الخالدية — جدة، المملكة العربية السعودية',
+  hoursLabel:'ساعات العمل',
+  hours:[['الأحد — الخميس','09:00 — 18:00'],['الجمعة — السبت','مغلق']],
+  fName:'الاسم الكامل *', fEmail:'البريد الإلكتروني *', fPhone:'رقم الجوال', fType:'جهة التواصل', fMsg:'الرسالة *',
+  optPartner:'شراكة', optInvest:'استثمار', optMedia:'إعلام وصحافة', optOther:'أخرى',
+  send:'أرسل الرسالة', sending:'جارٍ الإرسال…',
+  okMsg:'تم إرسال رسالتك. سنتواصل معك قريبًا.',
+  errMsg:'تعذّر الإرسال — تأكد من تعبئة الاسم والبريد والرسالة ثم أعد المحاولة.',
+  voicesEye:'شهادات', voicesH:'ما يقوله شركاؤنا',
+  voicesLead:'مساحة مخصصة لشهادات الشركاء والمستثمرين — تُستبدل بالنصوص والصور الفعلية عند توفّرها.',
+  quotePh:'أضف نص الشهادة هنا.', personPh:'ضع صورة الشخص',
+  voices:[['الاسم','مستثمر'],['الاسم','شريك استراتيجي'],['الاسم','جهة حكومية']],
+  railPrev:'السابق', railNext:'التالي'
+};
+const EN = {
+  home:'Home', crumbLabel:'Breadcrumb',
+  eyeContact:'Get in touch', contactH:'Contact us',
+  contactBody:'We welcome investors, partners, government entities and the media. Send us your message and our team will be in touch.',
+  eyeOffice:'Where to find us', officeH:'Head office in Jeddah',
+  officeLabel:'Head office', address:'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
+  hoursLabel:'Office hours',
+  hours:[['Sunday — Thursday','09:00 — 18:00'],['Friday — Saturday','Closed']],
+  fName:'Full name *', fEmail:'Email *', fPhone:'Phone', fType:'Inquiry type', fMsg:'Message *',
+  optPartner:'Partnership', optInvest:'Investment', optMedia:'Media & press', optOther:'Other',
+  send:'Send message', sending:'Sending…',
+  okMsg:'Your message has been sent. We will be in touch shortly.',
+  errMsg:'We could not send that — please check your name, email and message, then try again.',
+  voicesEye:'Testimonials', voicesH:'What our partners say',
+  voicesLead:'Space reserved for partner and investor testimonials — replaced with real quotes and portraits once supplied.',
+  quotePh:'Add the testimonial text here.', personPh:'Drop the person\u2019s photo',
+  voices:[['Name','Investor'],['Name','Strategic partner'],['Name','Government entity']],
+  railPrev:'Previous', railNext:'Next'
+};
+
+class Component extends DCLogic {
+  state = { lang: 'ar', theme: 'light', sending: false, sent: false, error: false };
+
+  // one shared reading-progress hairline across every page of the site
+  progressPass() {
+    const bar = document.querySelector('[data-prog]');
+    if (!bar) return;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.width = (Math.min(1, (window.scrollY || 0) / max) * 100).toFixed(2) + '%';
+  }
+  revealPass() {
+    const h = window.innerHeight || 800;
+    document.querySelectorAll('[data-sc]:not([data-in])').forEach(n => {
+      const r = n.getBoundingClientRect();
+      if (r.top < h * 0.94) n.setAttribute('data-in', '1');
+    });
+  }
+  scrollRail(sel, dir) {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    const card = el.firstElementChild;
+    const step = (card ? card.getBoundingClientRect().width : 280) + 16;
+    el.scrollBy({ left: step * dir * (this.state.lang === 'ar' ? -1 : 1), behavior: 'smooth' });
+  }
+  submit(e) {
+    e.preventDefault();
+    const f = e.target;
+    if (f.website.value) return;
+    if (!f.full_name.value.trim() || !f.email.value.trim() || !f.message.value.trim()) {
+      this.setState({ error: true, sent: false });
+      return;
+    }
+    this.setState({ sending: true, error: false });
+    setTimeout(() => { this.setState({ sending: false, sent: true }); f.reset(); }, 900);
+  }
+  componentDidMount() {
+    try {
+      const l = window.localStorage.getItem('seemprime-lang');
+      if (l === 'en' || l === 'ar') this.setState({ lang: l });
+      const th = window.localStorage.getItem('seemprime-theme');
+      const initial = (th === 'light' || th === 'dark') ? th : 'light';
+      this.applyTheme(initial);
+      this.setState({ theme: initial });
+    } catch (e) { this.applyTheme('light'); }
+    this._on = () => {
+      this.progressPass();
+      const now = Date.now();
+      const wait = 60 - (now - (this._last || 0));
+      if (wait > 0) { clearTimeout(this._trail); this._trail = setTimeout(() => { this._last = 0; this._on(); }, wait + 10); return; }
+      this._last = now;
+      this.revealPass();
+    };
+    window.addEventListener('scroll', this._on, { passive: true });
+    window.addEventListener('resize', this._on, { passive: true });
+    this.revealPass();
+    this.progressPass();
+    this._poll = setInterval(() => this.revealPass(), 500);
+  }
+  componentDidUpdate() { this.revealPass(); }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._on);
+    window.removeEventListener('resize', this._on);
+    clearInterval(this._poll); clearTimeout(this._trail);
+  }
+  applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }
+  renderVals() {
+    const ar = this.state.lang === 'ar';
+    const t = ar ? AR : EN;
+    const bodyFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'IBM Plex Sans',system-ui,sans-serif";
+    const dispFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'Sora',system-ui,sans-serif";
+    const lbl = ';font-size:11px;font-weight:500;letter-spacing:' + (ar ? 'normal' : '.18em') +
+      ';text-transform:' + (ar ? 'none' : 'uppercase') + ';color:';
+    return {
+      t, lang: this.state.lang, theme: this.state.theme, dir: ar ? 'rtl' : 'ltr', arrow: ar ? '←' : '→',
+      prevGlyph: ar ? '→' : '←', nextGlyph: ar ? '←' : '→',
+      rootStyle: 'background:var(--page);color:var(--body);font-family:' + bodyFont +
+        ';font-size:16px;line-height:' + (ar ? '1.75' : '1.62') + ';-webkit-font-smoothing:antialiased',
+      toggleLang: () => {
+        const lang = ar ? 'en' : 'ar';
+        try { window.localStorage.setItem('seemprime-lang', lang); } catch (e) {}
+        this.setState({ lang });
+      },
+      toggleTheme: () => {
+        const theme = this.state.theme === 'light' ? 'dark' : 'light';
+        try { window.localStorage.setItem('seemprime-theme', theme); } catch (e) {}
+        this.applyTheme(theme);
+        this.setState({ theme });
+      },
+      pgH1Style: 'margin:0;max-width:22ch;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(30px,4.6vw,66px);line-height:' + (ar ? '1.26' : '1.04') +
+        ';letter-spacing:' + (ar ? '0' : '-.025em') + ';color:#ffffff;text-wrap:pretty',
+      h2Style: 'margin:0;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(26px,3.6vw,52px);line-height:' + (ar ? '1.3' : '1.08') +
+        ';letter-spacing:' + (ar ? '0' : '-.02em') + ';color:var(--ink);text-wrap:pretty',
+      eyeStyle: 'margin:0 0 16px;display:flex;align-items:center;gap:14px;font-family:' + dispFont + lbl + 'var(--body)',
+      eyeOnBrand: 'font-family:' + dispFont + lbl + 'rgba(255,255,255,.78)',
+      capStyle: "font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:" +
+        (ar ? 'normal' : '.1em') + ';text-transform:' + (ar ? 'none' : 'uppercase') + ';color:var(--muted)',
+      inputStyle: 'box-sizing:border-box;width:100%;height:48px;padding:0 14px;background:var(--page);' +
+        'border:1px solid var(--line2);border-radius:8px;font-family:inherit;font-size:15px;color:var(--ink)',
+      hours: t.hours.map(([day, time], i) => ({
+        i, day, time,
+        timeStyle: /\d/.test(time)
+          ? "font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--muted);direction:ltr"
+          : 'font-family:' + bodyFont + ';font-size:14px;color:var(--muted)'
+      })),
+      voices: t.voices.map(([name, role], i) => ({ i, name, role, slot: 'sp-voice-' + i })),
+      railBtn: 'all:unset;box-sizing:border-box;cursor:pointer;width:44px;height:44px;border-radius:999px;' +
+        'border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:16px;' +
+        'color:var(--ink);background:var(--card);transition:border-color .18s,transform .18s',
+      voicePrev: () => this.scrollRail('[data-voicerail]', -1),
+      voiceNext: () => this.scrollRail('[data-voicerail]', 1),
+      submit: (e) => this.submit(e),
+      sent: this.state.sent, error: this.state.error,
+      btnLabel: this.state.sending ? t.sending : t.send
+    };
+  }
+}
+
+</script>
+</body>
+</html>

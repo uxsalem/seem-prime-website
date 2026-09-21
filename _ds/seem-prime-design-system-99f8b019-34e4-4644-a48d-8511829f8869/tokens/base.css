@@ -1,0 +1,27 @@
+/* SEEM PRIME — base layer. Minimal element defaults only; everything else
+   is composed from tokens in components. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font:var(--type-body);letter-spacing:var(--tracking-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,h5,h6{margin:0;color:var(--text-strong);font-family:var(--font-display);letter-spacing:var(--tracking-heading);text-wrap:balance}
+h1{font:var(--type-heading-1)}
+h2{font:var(--type-heading-2)}
+h3{font:var(--type-heading-3)}
+h4{font:var(--type-heading-4)}
+p{margin:0 0 var(--space-4);text-wrap:pretty}
+p:last-child{margin-bottom:0}
+a{color:var(--text-link);text-decoration:none;border-bottom:1px solid var(--border-default);transition:color var(--dur-fast) var(--ease-standard),border-color var(--dur-fast) var(--ease-standard)}
+a:hover{color:var(--text-link-hover);border-bottom-color:var(--rule-accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+strong{font-weight:var(--weight-semibold);color:var(--text-strong)}
+small{font:var(--type-caption)}
+code,kbd,samp{font-family:var(--font-mono);font-size:.92em}
+img,svg,video{display:block;max-width:100%}
+hr{height:1px;border:0;background:var(--border-hairline);margin:var(--space-8) 0}
+ul,ol{margin:0 0 var(--space-4);padding-inline-start:var(--space-6)}
+li{margin-bottom:var(--space-2)}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:start;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--border-hairline)}
+th{font:var(--type-label);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-muted)}
+::selection{background:var(--green-200);color:var(--green-950)}
+[dir="rtl"] body,[lang="ar"]{font-family:var(--font-arabic)}

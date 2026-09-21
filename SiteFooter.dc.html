@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+[data-fcols]{grid-template-columns:minmax(0,1fr)}
+@media (min-width:700px){[data-fcols]{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){[data-fcols]{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</helmet>
+<footer data-screen-label="Footer" style="position:relative;overflow:clip;background:#041815;color:#ffffff">
+  <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,3vw,32px) 0">
+    <div data-fcols="" style="display:grid;gap:clamp(28px,4vw,48px);padding-block-end:clamp(36px,5vw,56px)">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;gap:12px;color:#ffffff">{{ mark }}<span style="font-family:'Sora',sans-serif;font-weight:600;font-size:13px;letter-spacing:.34em;text-transform:uppercase">SEEM PRIME</span></div>
+        <p style="margin:0;max-width:34ch;font-weight:300;font-size:14px;line-height:1.62;color:rgba(255,255,255,.74)">{{ t.footerText }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span data-lbl="" style="{{ capStyle }}">{{ t.fCompany }}</span>
+        <sc-for list="{{ links }}" as="l" hint-placeholder-count="6">
+          <a href="{{ l.href }}" style="font-size:14px;color:#ffffff;text-decoration:none;opacity:.82" style-hover="opacity:1">{{ l.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span data-lbl="" style="{{ capStyle }}">{{ t.fContact }}</span>
+        <span style="max-width:26ch;font-size:14px;line-height:1.6;color:rgba(255,255,255,.74)">{{ t.address }}</span>
+        <a href="mailto:info@seem.sa" style="font-size:14px;color:#ffffff;text-decoration:none;opacity:.82" style-hover="opacity:1">info@seem.sa</a>
+        <a href="tel:+966536800016" style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#ffffff;text-decoration:none;opacity:.82" style-hover="opacity:1"><span dir="ltr">+966 53 680 0016</span></a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span data-lbl="" style="{{ capStyle }}">{{ t.nlLabel }}</span>
+        <p style="margin:0;max-width:30ch;font-size:14px;line-height:1.6;color:rgba(255,255,255,.74)">{{ t.nlBody }}</p>
+        <form onSubmit="{{ subscribe }}" style="display:flex;flex-wrap:wrap;gap:8px">
+          <input name="nl_email" type="email" required placeholder="{{ t.nlPlaceholder }}" aria-label="{{ t.nlPlaceholder }}" style="box-sizing:border-box;flex:1 1 150px;min-width:0;height:46px;padding:0 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:999px;font-family:inherit;font-size:14px;color:#ffffff">
+          <button type="submit" style="all:unset;box-sizing:border-box;cursor:pointer;height:46px;padding:0 22px;border-radius:999px;background:#ffffff;color:#041815;font-family:inherit;font-size:14px;font-weight:500;display:flex;align-items:center;transition:transform .18s cubic-bezier(.2,.7,.3,1)" style-hover="transform:translateY(-2px)" style-active="transform:scale(.985)">{{ t.nlBtn }}</button>
+        </form>
+        <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+          <span role="status" style="font-size:13px;color:#8fc4bb">{{ t.nlOk }}</span>
+        </sc-if>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;border-block-start:1px solid rgba(255,255,255,.18)">
+      <span style="font-size:13px;color:rgba(255,255,255,.62)">{{ copyright }}</span>
+      <span style="font-size:13px;color:rgba(255,255,255,.62)">{{ taglineLine }}</span>
+    </div>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;ar&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const MARK = [{"d":"M47.79 29.91 C46.25 29.31 44.58 28.99 42.84 28.99 L39.99 28.99 L39.99 29.00 L25.86 29.00 L25.86 36.86 L39.99 36.86 L39.99 36.86 L42.84 36.86 C46.14 36.79 48.82 39.46 48.82 42.77 C48.82 46.07 46.14 48.62 42.84 48.62 L39.99 48.62 L39.99 56.54 L42.84 56.54 C44.58 56.54 46.25 56.22 47.79 55.63 C52.95 53.64 56.61 48.63 56.61 42.77 C56.61 36.90 52.95 31.89 47.79 29.91","fill":"var(--ink)"},{"d":"M17.04 23.02 C17.04 19.71 19.71 17.16 23.02 17.16 L25.86 17.16 L25.86 9.24 L23.02 9.24 C21.27 9.24 19.60 9.57 18.06 10.16 C12.90 12.15 9.24 17.16 9.24 23.02 C9.24 28.88 12.90 33.89 18.06 35.88 C19.60 36.47 21.27 36.86 23.02 36.86 L25.86 36.86 L25.86 29.00 L23.02 29.00 C19.71 29.00 17.04 26.32 17.04 23.02","fill":"var(--ink)"},{"d":"M120.00 0.01 L117.69 0.01 L2.32 0.01 L0.01 0.01 L0.01 2.32 L0.01 117.69 L0.01 120.00 L2.32 120.00 L117.69 120.00 L120.00 120.00 L120.00 117.69 L120.00 2.32 Z M117.69 117.69 L2.32 117.69 L2.32 2.32 L117.69 2.32 Z","fill":"var(--ink)"},{"d":"M71.33 48.62 L110.90 48.62 L110.90 56.54 L63.47 56.54 Z M71.33 28.99 L110.90 28.99 L110.90 36.86 L71.33 36.86 L63.47 36.86 L63.47 28.99 Z M110.90 9.24 L110.90 17.16 L71.33 17.16 L63.47 9.24 Z","fill":"var(--ink)"},{"d":"M17.08 102.88 L56.54 102.88 L56.54 110.80 L9.24 110.80 Z M17.08 83.25 L56.54 83.25 L56.54 91.11 L17.08 91.11 L9.24 91.11 L9.24 83.25 Z M56.54 63.50 L56.54 71.42 L17.08 71.42 L9.24 63.50 Z","fill":"var(--ink)"},{"d":"M63.47 63.47 L87.21 87.12 L110.90 63.47 L110.90 110.77 L102.97 110.77 L102.97 82.50 L87.21 98.29 L63.47 74.47 Z","fill":"var(--ink)"},{"d":"M17.22 48.62 L17.16 48.62 L17.11 48.62 L9.24 56.54 L17.16 56.54 L25.86 56.54 L25.86 48.62 Z","fill":"var(--ink)"},{"d":"M48.69 9.24 L39.99 9.24 L39.99 17.16 L48.63 17.16 L48.69 17.16 L48.75 17.16 L56.61 9.24 Z","fill":"var(--ink)"},{"d":"M110.90 36.86 L63.47 36.86 L63.47 28.99 L110.90 28.99 Z","fill":"var(--ink)"},{"d":"M56.61 91.05 L9.17 91.05 L9.17 83.18 L56.61 83.18 Z","fill":"var(--ink)"},{"d":"M71.39 102.90 L71.39 102.84 L71.39 102.79 L63.47 94.92 L63.47 102.84 L63.47 110.77 L71.39 110.77 Z","fill":"#ee5622"}];
+const FT = {
+  ar: {
+    footerText:'شركة استثمارية وتشغيلية استراتيجية تبني وتشغّل منصات أعمال قابلة للتوسع.',
+    fCompany:'الشركة', fContact:'التواصل',
+    address:'حي الخالدية — جدة، المملكة العربية السعودية',
+    nlLabel:'النشرة البريدية', nlBody:'تحديثات دورية عن منصاتنا واستثماراتنا.',
+    nlPlaceholder:'بريدك الإلكتروني', nlBtn:'اشترك', nlOk:'تم الاشتراك. شكراً لك.',
+    rights:'سيم برايم. جميع الحقوق محفوظة.',
+    tagline:['تمكين الأعمال','تسريع النمو','بناء المنظومات الاقتصادية'],
+    links:[['من نحن','about.dc.html'],['نموذج الأعمال','model.dc.html'],['الاستراتيجية','strategy.dc.html'],['منظومتنا','ecosystem.dc.html'],['خارطة الطريق','roadmap.dc.html'],['تواصل معنا','contact.dc.html']]
+  },
+  en: {
+    footerText:'A strategic investment and operating company building and operating scalable business platforms.',
+    fCompany:'Company', fContact:'Contact',
+    address:'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
+    nlLabel:'Newsletter', nlBody:'Periodic updates on our platforms and investments.',
+    nlPlaceholder:'Your email address', nlBtn:'Subscribe', nlOk:'Subscribed. Thank you.',
+    rights:'SEEM PRIME. All rights reserved.',
+    tagline:['Empowering businesses','Accelerating growth','Building economic ecosystems'],
+    links:[['About','about.dc.html'],['Business model','model.dc.html'],['Strategy','strategy.dc.html'],['Ecosystem','ecosystem.dc.html'],['Roadmap','roadmap.dc.html'],['Contact us','contact.dc.html']]
+  }
+};
+
+class Component extends DCLogic {
+  state = { subscribed: false };
+  renderVals() {
+    const lang = this.props.lang === 'en' ? 'en' : 'ar';
+    const t = FT[lang];
+    return {
+      t,
+      capStyle: "font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:" +
+        (lang === 'ar' ? 'normal' : '.1em') + ';text-transform:' + (lang === 'ar' ? 'none' : 'uppercase') +
+        ';color:rgba(255,255,255,.62)',
+      links: t.links.map(([label, href], i) => ({ i, label, href })),
+      subscribe: (e) => { e.preventDefault(); this.setState({ subscribed: true }); e.target.reset(); },
+      subscribed: this.state.subscribed,
+      copyright: '© ' + new Date().getFullYear() + ' ' + t.rights,
+      taglineLine: t.tagline.join(' · '),
+      mark: React.createElement('svg', { viewBox: '0 0 120 120', width: 40, height: 40, 'aria-hidden': 'true', style: { display: 'block', flex: '0 0 auto' } },
+        MARK.map((p, i) => React.createElement('path', { key: i, d: p.d, fill: 'currentColor', fillRule: 'evenodd' })))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

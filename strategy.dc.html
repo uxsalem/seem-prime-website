@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>الاستراتيجية | SEEM PRIME</title>
+<style>
+@font-face{font-family:'Sora';font-weight:300;font-display:swap;src:url("./ds/fonts/sora-300.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:400;font-display:swap;src:url("./ds/fonts/sora-400.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:600;font-display:swap;src:url("./ds/fonts/sora-600.woff2") format("woff2")}
+@font-face{font-family:'Sora';font-weight:700;font-display:swap;src:url("./ds/fonts/sora-700.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:300;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-300.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-600.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-400.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url("./ds/fonts/ibm-plex-mono-500.woff2") format("woff2")}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:400;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-400-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'IBM Plex Sans Arabic';font-weight:600;font-display:swap;src:url("./ds/fonts/ibm-plex-sans-arabic-600-arabic.woff2") format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFC}
+:root{
+--page:#f7f8f9;--card:#ffffff;--sunken:#f0f2f3;--tint:#f1f7f5;
+--ink:#041815;--body:#2c3634;--muted:#677471;
+--line:rgba(4,24,21,.10);--line2:rgba(4,24,21,.16);--line3:rgba(4,24,21,.28);
+--sh:0 18px 40px rgba(4,24,21,.08);
+--hdr:rgba(255,255,255,.86);--focus:#197069;--link:#12514e;
+}
+html[data-theme="dark"]{
+--page:#041815;--card:rgba(255,255,255,.06);--sunken:#062621;--tint:#0c3e3d;
+--ink:#ffffff;--body:rgba(255,255,255,.86);--muted:rgba(255,255,255,.62);
+--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.18);--line3:rgba(255,255,255,.34);
+--sh:none;--hdr:rgba(4,24,21,.88);--focus:#8fc4bb;--link:#ffffff;
+}
+body{margin:0;background:var(--page);transition:background .24s cubic-bezier(.2,.7,.3,1)}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:#dc4b1c;text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--focus) !important;outline-offset:2px !important}
+[data-sc]{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms),transform .6s cubic-bezier(.16,.84,.44,1) var(--d,0ms)}
+[data-sc="x"]{transform:translateX(16px)}
+[data-sc][data-in]{opacity:1;transform:none}
+[data-stagger]{--d:calc(var(--i,0) * 70ms)}
+@media (min-width:900px){[data-hdrnav]{display:flex !important}}
+@media (min-width:620px){[data-hdrcta]{display:inline-flex !important}}
+[dir="rtl"] [data-lbl]{font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif !important;letter-spacing:normal !important;text-transform:none !important}
+@media (prefers-reduced-motion: reduce){[data-sc]{opacity:1;transform:none;transition:none}}
+[data-split]{display:grid;gap:clamp(32px,5vw,80px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:1000px){[data-split]{grid-template-columns:1.12fr .88fr;align-items:start}}
+[data-vmpin]{position:relative}
+[data-vmword]{opacity:1}
+[data-vmbar]{transform:scaleX(0)}
+[data-vmtext]+[data-vmtext]{margin-block-start:clamp(40px,8vw,72px);padding-block-start:clamp(40px,8vw,72px);border-block-start:1px solid rgba(255,255,255,.16)}
+@media (min-width:900px) and (prefers-reduced-motion: no-preference){[data-vmpin]{height:280vh}[data-vmstick]{position:sticky;inset-block-start:0;height:100vh;display:flex;align-items:center;overflow:clip}[data-vmstage]{display:grid}[data-vmtext]{grid-area:1/1}[data-vmtext]+[data-vmtext]{margin-block-start:0;padding-block-start:0;border-block-start:0}}
+[data-rail]{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block-end:6px}
+[data-rail]::-webkit-scrollbar{display:none}
+[data-rail]>*{scroll-snap-align:start}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="{{ rootStyle }}">
+
+<span data-prog="" aria-hidden="true" style="position:fixed;inset-block-start:0;inset-inline-start:0;z-index:70;height:2px;width:0;background:#dc4b1c"></span>
+
+<dc-import name="SiteHeader" lang="{{ lang }}" theme="{{ theme }}" active="strategy" on-lang="{{ toggleLang }}" on-theme="{{ toggleTheme }}" hint-size="100%,80px"></dc-import>
+
+<section aria-labelledby="pg-h" data-screen-label="Page masthead" style="position:relative;overflow:clip;background:#062621;color:#ffffff">
+  <span aria-hidden="true" style="position:absolute;inset-block-start:0;inset-inline:0;height:9px;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 28px);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"></span>
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,86px)">
+    <nav aria-label="{{ t.crumbLabel }}" data-lbl="" style="display:flex;align-items:center;gap:10px;margin-block-end:clamp(22px,3vw,32px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.62)">
+      <a href="index.dc.html" style="color:rgba(255,255,255,.74);text-decoration:none">{{ t.home }}</a>
+      <span aria-hidden="true">/</span>
+      <span style="color:#ffffff">{{ t.navStrategy }}</span>
+    </nav>
+    <h1 id="pg-h" data-sc="" style="{{ pgH1Style }}">{{ t.pageH }}</h1>
+    <p data-sc="" style="margin:clamp(18px,2.4vw,28px) 0 0;max-width:54ch;font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.82)">{{ t.pageLead }}</p>
+  </div>
+</section>
+
+<section aria-labelledby="st-h" data-screen-label="Vision and mission" style="background:#062621;color:#ffffff;border-block-start:1px solid rgba(255,255,255,.16)">
+  <div data-vmpin="">
+    <div data-vmstick="">
+      <div style="width:100%;max-width:1280px;margin:0 auto;padding:clamp(24px,4.5vh,72px) clamp(16px,3vw,32px)">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-block-end:clamp(16px,3vh,44px)">
+          <h2 id="st-h" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">{{ t.strategyH }}</h2>
+          <span style="display:flex;gap:8px">
+            <sc-for list="{{ ticks }}" as="k" hint-placeholder-count="5">
+              <span aria-hidden="true" style="{{ k.style }}"></span>
+            </sc-for>
+          </span>
+        </div>
+        <div data-vmstage="">
+          <sc-for list="{{ statements }}" as="s" hint-placeholder-count="2">
+            <div data-vmtext="{{ s.i }}" style="{{ s.block }}">
+              <div style="display:flex;align-items:center;gap:14px;margin-block-end:clamp(20px,2.6vw,32px)">
+                <span style="{{ s.noStyle }}">{{ s.no }}</span>
+                <span aria-hidden="true" style="width:34px;height:1px;background:rgba(255,255,255,.4)"></span>
+                <span data-lbl="" style="{{ s.labelStyle }}">{{ s.label }}</span>
+              </div>
+              <p style="{{ s.textStyle }}">
+                <sc-for list="{{ s.words }}" as="w" hint-placeholder-count="24">
+                  <span data-vmword="" style="{{ w.style }}">{{ w.text }}</span>
+                </sc-for>
+              </p>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-block-start:clamp(18px,3vh,52px);height:1px;background:rgba(255,255,255,.16)">
+          <span data-vmbar="" aria-hidden="true" style="display:block;height:1px;background:#dc4b1c;transform-origin:{{ barOrigin }}"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="pl-h" data-screen-label="Strategic pillars" style="background:var(--page)">
+  <div data-split="" style="max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)">
+    <div>
+      <h2 id="pl-h" data-sc="" style="{{ h2Style }}">{{ t.pillarsH }}</h2>
+      <div data-sc="" style="margin-block-start:clamp(28px,4vw,48px);max-width:620px">
+        <span aria-hidden="true" style="display:block;height:3px;background:var(--line3)"></span>
+        <div role="group" aria-label="{{ t.pillarsH }}" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(6px,1.2vw,16px);height:clamp(210px,29vh,330px)">
+          <sc-for list="{{ colonnade }}" as="c" hint-placeholder-count="5">
+            <button type="button" data-ccol="{{ c.i }}" onClick="{{ c.select }}" aria-pressed="{{ c.pressed }}" aria-label="{{ c.label }}" style="{{ c.col }}">
+              <span data-ccap="" aria-hidden="true" style="{{ c.capital }}"></span>
+              <sc-for list="{{ c.segments }}" as="g" hint-placeholder-count="7">
+                <span data-cseg="" aria-hidden="true" style="{{ g.style }}"></span>
+              </sc-for>
+            </button>
+          </sc-for>
+        </div>
+        <span aria-hidden="true" style="display:block;height:1px;background:var(--line3)"></span>
+        <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(6px,1.2vw,16px);margin-block-start:10px">
+          <sc-for list="{{ colonnade }}" as="c" hint-placeholder-count="5">
+            <span data-ctick="{{ c.i }}" style="{{ c.tick }}">{{ c.no }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="border-block-start:1px solid var(--line2)">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="5">
+        <div data-sc="" data-stagger="" style="--i:{{ p.i }};border-block-end:1px solid var(--line)">
+          <button type="button" onClick="{{ p.toggle }}" aria-expanded="{{ p.expanded }}" style="all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:flex;align-items:center;gap:16px;padding:20px 0;position:relative">
+            <sc-if value="{{ p.isOpen }}" hint-placeholder-val="{{ true }}">
+              <span aria-hidden="true" style="position:absolute;inset-block:0;inset-inline-start:0;width:3px;background:#dc4b1c"></span>
+            </sc-if>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);padding-inline-start:14px">{{ p.no }}</span>
+            <span style="flex:1 1 auto;font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(16px,1.9vw,20px);line-height:1.35;color:var(--ink);text-align:start">{{ p.text }}</span>
+            <sc-if value="{{ p.isOpen }}" hint-placeholder-val="{{ true }}">
+              <span aria-hidden="true" style="display:block;width:9px;height:9px;border-inline-end:1.5px solid var(--ink);border-block-end:1.5px solid var(--ink);transform:rotate(-135deg)"></span>
+            </sc-if>
+            <sc-if value="{{ p.isShut }}" hint-placeholder-val="{{ false }}">
+              <span aria-hidden="true" style="display:block;width:9px;height:9px;border-inline-end:1.5px solid var(--muted);border-block-end:1.5px solid var(--muted);transform:rotate(45deg)"></span>
+            </sc-if>
+          </button>
+          <sc-if value="{{ p.isOpen }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;padding:0 0 22px 0;padding-inline-start:40px;max-width:56ch;font-size:15px;line-height:1.62;color:var(--body)">{{ p.note }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="sec-h" data-screen-label="Sectors" style="background:var(--sunken)">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-block-end:clamp(28px,3.4vw,40px)">
+      <div>
+        <h2 id="sec-h" data-sc="" style="{{ h2Style }}">{{ t.sectorsH }}</h2>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button type="button" onClick="{{ railPrev }}" aria-label="{{ t.railPrev }}" style="{{ railBtn }}">{{ prevGlyph }}</button>
+        <button type="button" onClick="{{ railNext }}" aria-label="{{ t.railNext }}" style="{{ railBtn }}">{{ nextGlyph }}</button>
+      </div>
+    </div>
+    <div data-rail="" data-sectorrail="">
+      <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="8">
+        <div data-sc="" data-stagger="" style="--i:{{ s.i }};flex:0 0 clamp(230px,25vw,300px);display:flex;flex-direction:column;gap:16px;padding:clamp(16px,1.8vw,20px);box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh)">
+          <div style="position:relative;aspect-ratio:16/10;overflow:clip;background:var(--sunken);border:1px solid var(--line)">
+            <image-slot id="{{ s.slot }}" shape="rect" fit="cover" reframe="" placeholder="{{ s.ph }}" style="width:100%;height:100%"></image-slot>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <span data-lbl="" style="font-family:'Sora',sans-serif;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)">{{ s.text }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted)">{{ s.no }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<dc-import name="SiteCta" lang="{{ lang }}" page="strategy" hint-size="100%,520px"></dc-import>
+
+<dc-import name="SiteFooter" lang="{{ lang }}" hint-size="100%,420px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#dc4b1c&quot;,&quot;#057078&quot;,&quot;#8a6a3b&quot;],&quot;default&quot;:&quot;#dc4b1c&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Accent&quot;}}">
+const AR = {
+  home:'الرئيسية', crumbLabel:'مسار التنقل', navStrategy:'الاستراتيجية',
+  pageH:'من الاستراتيجية إلى الأثر المستدام',
+  pageLead:'الرؤية والرسالة والركائز الخمس التي تحدّد أين نعمل وكيف ننفّذ.',
+  strategyH:'الرؤية والرسالة', visionLabel:'الرؤية', missionLabel:'الرسالة',
+  vision:'أن تكون سيم برايم المنصة الاقتصادية الرائدة في بناء وتشغيل منظومات الأعمال المتكاملة التي تعظّم القيمة الاقتصادية، وتسرّع النمو، وتخلق فرصًا مستدامة في المملكة العربية السعودية والمنطقة.',
+  mission:'نطوّر ونشغّل ونستثمر في منصات الأعمال المتخصصة من خلال توظيف التقنية، وبناء الشراكات الاستراتيجية، وربط سلاسل القيمة الاقتصادية؛ لتمكين الشركات ورواد الأعمال والمستثمرين من النمو وتحقيق أثر اقتصادي مستدام.',
+  eyePillars:'كيف نعمل', pillarsH:'الركائز الاستراتيجية',
+  pillars:[
+    ['تطوير المنصات الاقتصادية','نؤسس ونشغّل كيانات متخصصة، طبقةً فوق طبقة، حتى تقوم بذاتها.'],
+    ['الاستثمار في القطاعات الواعدة','ندخل مبكراً حيث يتقدّم الطلب، ونضاعف حصتنا مع نمو القطاع.'],
+    ['بناء الشراكات الاستراتيجية','نلتقي مع الشريك في منتصف الطريق: خبرته وسوقنا، والمنفعة متبادلة.'],
+    ['التميز التشغيلي','مؤشرات ومراجعات دورية تشدّ الأداء نحو مركزه لا نحو أطرافه.'],
+    ['التحول الرقمي والابتكار','نمرّر التقنية والبيانات عبر المنظومة كلها، لا في منصة واحدة.']
+  ],
+  sectorsH:'القطاعات الاستراتيجية',
+  sectors:['الصناعة','التقنية','الأغذية','اللوجستيات','السياحة','العقار','الخدمات المالية','الترفيه'],
+  sectorPh:'ضع صورة من قطاع ', railPrev:'السابق', railNext:'التالي'
+};
+const EN = {
+  home:'Home', crumbLabel:'Breadcrumb', navStrategy:'Strategy',
+  pageH:'From strategy to sustainable impact',
+  pageLead:'The vision, the mission, and the five pillars that set where we operate and how we execute.',
+  strategyH:'Vision & mission', visionLabel:'Vision', missionLabel:'Mission',
+  vision:'To be the leading platform for building and operating integrated economic ecosystems that maximize value, accelerate growth, and create sustainable opportunities across Saudi Arabia and the wider region.',
+  mission:'We develop, operate and invest in specialized business platforms by leveraging technology, forging strategic partnerships and connecting economic value chains — to empower businesses, entrepreneurs and investors to grow and achieve sustainable economic impact.',
+  eyePillars:'How we operate', pillarsH:'Strategic pillars',
+  pillars:[
+    ['Develop economic platforms','We found and operate specialised entities, layer by layer, until each stands on its own.'],
+    ['Invest in high-growth sectors','We enter early where demand is moving, and raise our share as the sector grows.'],
+    ['Build strategic partnerships','We meet partners halfway: their expertise, our market, benefit both ways.'],
+    ['Deliver operational excellence','Indicators and standing reviews pull performance toward its centre, not its edges.'],
+    ['Drive digital transformation','We run technology and data through the whole ecosystem, not one platform.']
+  ],
+  sectorsH:'Strategic focus sectors',
+  sectors:['Industry','Technology','Food','Logistics','Tourism','Real estate','Financial services','Entertainment'],
+  sectorPh:'Drop a photo from ', railPrev:'Previous', railNext:'Next'
+};
+
+class Component extends DCLogic {
+  state = { lang: 'ar', theme: 'light', openPillar: 0, vm: 0 };
+
+  // one shared reading-progress hairline across every page of the site
+  progressPass() {
+    const bar = document.querySelector('[data-prog]');
+    if (!bar) return;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.width = (Math.min(1, (window.scrollY || 0) / max) * 100).toFixed(2) + '%';
+  }
+  revealPass() {
+    const h = window.innerHeight || 800;
+    document.querySelectorAll('[data-sc]:not([data-in])').forEach(n => {
+      const r = n.getBoundingClientRect();
+      if (r.top < h * 0.94) n.setAttribute('data-in', '1');
+    });
+  }
+  // Style holes inside sc-for do not re-resolve on state change, so every interactive visual
+  // state is written straight to the DOM from one pass, after mount and after every render.
+  paintState() {
+    const openP = this.state.openPillar;
+    const acc = this.props.accent || '#dc4b1c';
+    document.querySelectorAll('[data-ccol]').forEach(col => {
+      const on = +col.getAttribute('data-ccol') === openP;
+      const cap = col.querySelector('[data-ccap]');
+      if (cap) cap.style.background = on ? acc : 'transparent';
+      col.querySelectorAll('[data-cseg]').forEach(s => {
+        s.style.background = on ? '#062621' : 'transparent';
+        s.style.borderColor = on ? 'transparent' : 'var(--line2)';
+      });
+    });
+    document.querySelectorAll('[data-ctick]').forEach(el => {
+      el.style.color = (+el.getAttribute('data-ctick') === openP) ? acc : 'var(--muted)';
+    });
+    const vmPinned = window.matchMedia('(min-width: 900px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('[data-vmtext]').forEach(n => {
+      n.style.opacity = (!vmPinned || +n.getAttribute('data-vmtext') === this.state.vm) ? '1' : '0';
+    });
+  }
+  // Words ignite in sequence across the pinned travel; below the pin breakpoint they are
+  // simply lit, so nothing depends on scrolling to become readable.
+  updateVm() {
+    const pin = document.querySelector('[data-vmpin]');
+    if (!pin) return;
+    const bar = pin.querySelector('[data-vmbar]');
+    const vh = window.innerHeight || 800;
+    const r = pin.getBoundingClientRect();
+    const pinned = window.matchMedia('(min-width: 900px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const travel = r.height - vh;
+    const blocks = pin.querySelectorAll('[data-vmtext]');
+    if (!pinned || travel < 160) {
+      pin.querySelectorAll('[data-vmword]').forEach(el => { el.style.opacity = '1'; });
+      if (bar) bar.style.transform = 'scaleX(1)';
+      return;
+    }
+    const p = Math.max(0, Math.min(1, (-r.top) / travel));
+    const idx = p < 0.5 ? 0 : 1;
+    const local = idx === 0 ? p / 0.5 : (p - 0.5) / 0.5;
+    blocks.forEach(node => {
+      const own = +node.getAttribute('data-vmtext');
+      const words = node.querySelectorAll('[data-vmword]');
+      const n = words.length || 1;
+      words.forEach((el, i) => {
+        const tt = own === idx ? Math.max(0, Math.min(1, local * (n + 7) - i)) : (own < idx ? 1 : 0);
+        el.style.opacity = (0.18 + 0.82 * tt).toFixed(3);
+      });
+    });
+    if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    if (idx !== this.state.vm) this.setState({ vm: idx });
+  }
+  scrollRail(sel, dir) {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    const card = el.firstElementChild;
+    const step = (card ? card.getBoundingClientRect().width : 280) + 16;
+    el.scrollBy({ left: step * dir * (this.state.lang === 'ar' ? -1 : 1), behavior: 'smooth' });
+  }
+  componentDidMount() {
+    try {
+      const l = window.localStorage.getItem('seemprime-lang');
+      if (l === 'en' || l === 'ar') this.setState({ lang: l });
+      const th = window.localStorage.getItem('seemprime-theme');
+      const initial = (th === 'light' || th === 'dark') ? th : 'light';
+      this.applyTheme(initial);
+      this.setState({ theme: initial });
+    } catch (e) { this.applyTheme('light'); }
+    this._on = () => {
+      this.progressPass();
+      const now = Date.now();
+      const wait = 60 - (now - (this._last || 0));
+      if (wait > 0) { clearTimeout(this._trail); this._trail = setTimeout(() => { this._last = 0; this._on(); }, wait + 10); return; }
+      this._last = now;
+      this.revealPass();
+      this.updateVm();
+    };
+    window.addEventListener('scroll', this._on, { passive: true });
+    window.addEventListener('resize', this._on, { passive: true });
+    this.revealPass();
+    this.paintState();
+    this.updateVm();
+    this._poll = setInterval(() => this.revealPass(), 500);
+  }
+  componentDidUpdate() { this.revealPass(); this.paintState(); }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._on);
+    window.removeEventListener('resize', this._on);
+    clearInterval(this._poll); clearTimeout(this._trail);
+  }
+  applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }
+  renderVals() {
+    const ar = this.state.lang === 'ar';
+    const t = ar ? AR : EN;
+    const accent = this.props.accent || '#dc4b1c';
+    const bodyFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'IBM Plex Sans',system-ui,sans-serif";
+    const dispFont = ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'Sora',system-ui,sans-serif";
+    const lbl = ';font-size:11px;font-weight:500;letter-spacing:' + (ar ? 'normal' : '.18em') +
+      ';text-transform:' + (ar ? 'none' : 'uppercase') + ';color:';
+    return {
+      t, lang: this.state.lang, theme: this.state.theme, dir: ar ? 'rtl' : 'ltr',
+      prevGlyph: ar ? '→' : '←', nextGlyph: ar ? '←' : '→',
+      barOrigin: ar ? 'right center' : 'left center',
+      rootStyle: 'background:var(--page);color:var(--body);font-family:' + bodyFont +
+        ';font-size:16px;line-height:' + (ar ? '1.75' : '1.62') + ';-webkit-font-smoothing:antialiased',
+      toggleLang: () => {
+        const lang = ar ? 'en' : 'ar';
+        try { window.localStorage.setItem('seemprime-lang', lang); } catch (e) {}
+        this.setState({ lang });
+      },
+      toggleTheme: () => {
+        const theme = this.state.theme === 'light' ? 'dark' : 'light';
+        try { window.localStorage.setItem('seemprime-theme', theme); } catch (e) {}
+        this.applyTheme(theme);
+        this.setState({ theme });
+      },
+      pgH1Style: 'margin:0;max-width:22ch;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(30px,4.6vw,66px);line-height:' + (ar ? '1.26' : '1.04') +
+        ';letter-spacing:' + (ar ? '0' : '-.025em') + ';color:#ffffff;text-wrap:pretty',
+      h2Style: 'margin:0;font-family:' + dispFont + ';font-weight:' + (ar ? '600' : '300') +
+        ';font-size:clamp(26px,3.6vw,52px);line-height:' + (ar ? '1.3' : '1.08') +
+        ';letter-spacing:' + (ar ? '0' : '-.02em') + ';color:var(--ink);text-wrap:pretty',
+      eyeStyle: 'margin:0 0 16px;display:flex;align-items:center;gap:14px;font-family:' + dispFont + lbl + 'var(--body)',
+      eyeOnBrand: 'font-family:' + dispFont + lbl + 'rgba(255,255,255,.78)',
+      eyeOnBrandRow: 'margin:0;display:flex;align-items:center;gap:14px;font-family:' + dispFont + lbl + 'rgba(255,255,255,.74)',
+      ticks: [0, 1, 2, 3, 4].map(i => ({
+        i, style: 'width:' + (i === 0 ? '26px' : '13px') + ';height:1px;background:' +
+          (i === 0 ? accent : 'rgba(255,255,255,.32)')
+      })),
+      statements: [
+        { i: 0, no: '01', label: t.visionLabel, text: t.vision },
+        { i: 1, no: '02', label: t.missionLabel, text: t.mission }
+      ].map(s => ({
+        i: s.i, no: s.no, label: s.label,
+        words: s.text.split(/\s+/).filter(Boolean).map((text, i) => ({
+          i, text, style: 'display:inline-block;margin-inline-end:.26em'
+        })),
+        block: 'opacity:' + (s.i === this.state.vm ? '1' : '0') +
+          ';transition:opacity .45s cubic-bezier(.2,.7,.3,1)',
+        noStyle: "font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;color:" +
+          (s.i === 0 ? accent : 'rgba(255,255,255,.6)'),
+        labelStyle: 'font-family:' + dispFont + lbl + 'rgba(255,255,255,.7)',
+        textStyle: 'margin:0;max-width:min(100%,1040px);font-family:' + bodyFont +
+          ';font-weight:' + (ar ? '400' : '300') + ';font-size:clamp(26px,4.6vw,64px);line-height:' +
+          (ar ? '1.42' : '1.1') + ';letter-spacing:' + (ar ? '0' : '-.03em') + ';color:#ffffff;text-wrap:pretty'
+      })),
+      // Five pillars carrying one discipline is a colonnade: five equal columns on one ground
+      // line under one beam. The selected column fills bottom-up, segment by segment, which is
+      // literally pillar 01's copy — and it shares the accordion's state, so the two stay in sync.
+      colonnade: t.pillars.map(([text], i) => {
+        const on = this.state.openPillar === i;
+        return {
+          i, no: '0' + (i + 1), label: text, pressed: on ? 'true' : 'false',
+          select: () => this.setState({ openPillar: on ? -1 : i }),
+          col: 'all:unset;box-sizing:border-box;cursor:pointer;min-width:0;height:100%;' +
+            'display:flex;flex-direction:column-reverse;gap:3px;padding-block-end:0',
+          capital: 'flex:0 0 auto;height:3px;margin-block-end:3px;order:1',
+          segments: [0, 1, 2, 3, 4, 5, 6].map(k => ({ k, style: 'flex:1 1 0;border:1px solid var(--line2)' })),
+          tick: "font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-align:center;color:var(--muted)"
+        };
+      }),
+      pillars: t.pillars.map(([text, note], i) => {
+        const open = this.state.openPillar === i;
+        return {
+          i, text, note, no: '0' + (i + 1),
+          expanded: open ? 'true' : 'false', isOpen: open, isShut: !open,
+          toggle: () => this.setState({ openPillar: open ? -1 : i })
+        };
+      }),
+      sectorCount: '0' + t.sectors.length,
+      sectors: t.sectors.map((text, i) => ({ text, i, no: '0' + (i + 1), slot: 'sp-sector-' + i, ph: t.sectorPh + text })),
+      railBtn: 'all:unset;box-sizing:border-box;cursor:pointer;width:44px;height:44px;border-radius:999px;' +
+        'border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:16px;' +
+        'color:var(--ink);background:var(--card);transition:border-color .18s,transform .18s',
+      railPrev: () => this.scrollRail('[data-sectorrail]', -1),
+      railNext: () => this.scrollRail('[data-sectorrail]', 1)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

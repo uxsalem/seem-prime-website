@@ -1,0 +1,33 @@
+/* SEEM PRIME — spacing & layout. 4px base, doubling at the top end for
+   the framework's generous editorial whitespace. */
+:root{
+  --space-0:0px;
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-7:32px;
+  --space-8:40px;
+  --space-9:48px;
+  --space-10:64px;
+  --space-11:80px;
+  --space-12:96px;
+  --space-13:128px;
+  --space-14:160px;
+
+  --gutter:24px; /* @kind spacing */
+  --gutter-lg:32px; /* @kind spacing */
+  --section-y:96px; /* @kind spacing */
+  --section-y-sm:56px; /* @kind spacing */
+  --container:1200px; /* @kind spacing */
+  --container-wide:1400px; /* @kind spacing */
+  --container-prose:68ch; /* @kind spacing */
+
+  --control-h-sm:34px; /* @kind spacing */
+  --control-h:44px; /* @kind spacing */
+  --control-h-lg:54px; /* @kind spacing */
+  --hairline:1px; /* @kind spacing */
+  --rule-accent-w:3px; /* @kind spacing */
+}
