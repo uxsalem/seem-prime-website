@@ -83,32 +83,33 @@ export function useCue(cueRef: RefObject<HTMLSpanElement | null>) {
 }
 
 type ParallaxRefs = {
-  heroPlateRef: RefObject<HTMLSpanElement | null>
-  bannerPlateRef: RefObject<HTMLSpanElement | null>
+  heroCopyRef: RefObject<HTMLDivElement | null>
   driftRef: RefObject<HTMLSpanElement | null>
 }
 
-/** Returns the per-frame pass the home page's scroll driver calls. */
-export function useHomeParallax({ heroPlateRef, bannerPlateRef, driftRef }: ParallaxRefs) {
+/**
+ * Returns the per-frame pass the home page's scroll driver calls. The photographic plates are
+ * not in here — `Plate` drifts each of those against its own section, on one shared loop.
+ */
+export function useHomeParallax({ heroCopyRef, driftRef }: ParallaxRefs) {
   return useCallback(() => {
     const y = window.scrollY || 0
     const vh = window.innerHeight
 
-    // The hero plate drifts slower than the page, so the opening has depth.
-    const hero = heroPlateRef.current
-    if (hero) hero.style.transform = 'translate3d(0,' + (y * 0.16).toFixed(1) + 'px,0) scale(1.08)'
+    // The headline lets go of the reader before the hero does: it climbs a little faster than
+    // the page and dissolves by the time the section is half gone. Everything below this is
+    // section state rather than motion, so it still runs when motion is turned down.
+    const copy = heroCopyRef.current
+    if (copy && !reduceMotion()) {
+      const past = Math.max(0, Math.min(1, y / (vh * 0.62)))
+      copy.style.transform = 'translate3d(0,' + (past * -64).toFixed(1) + 'px,0)'
+      copy.style.opacity = (1 - past * 0.92).toFixed(3)
+    }
 
     const drift = driftRef.current
     if (drift) {
       const rect = drift.getBoundingClientRect()
       drift.style.transform = 'translate3d(0,' + ((vh / 2 - rect.top) * -0.05).toFixed(1) + 'px,0)'
-    }
-
-    const banner = bannerPlateRef.current
-    if (banner?.parentElement) {
-      const rect = banner.parentElement.getBoundingClientRect()
-      banner.style.transform =
-        'translate3d(0,' + ((vh - rect.top) * -0.06).toFixed(1) + 'px,0) scale(1.12)'
     }
 
     // Cards drift on opposing lanes and their ember rule draws in as they arrive.
@@ -163,5 +164,5 @@ export function useHomeParallax({ heroPlateRef, bannerPlateRef, driftRef }: Para
       const drawn = Math.max(0, Math.min(1, (vh * 0.85 - rect.top) / (rect.height + vh * 0.25)))
       fill.style.width = (drawn * 100).toFixed(1) + '%'
     }
-  }, [heroPlateRef, bannerPlateRef, driftRef])
+  }, [heroCopyRef, driftRef])
 }

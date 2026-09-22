@@ -1,5 +1,3 @@
-import { plates } from '@/lib/routes'
-
 export type ModelCopy = typeof AR
 
 const AR = {
@@ -59,11 +57,3 @@ const EN: ModelCopy = {
 }
 
 export const MODEL = { ar: AR, en: EN }
-
-/** One plate per stage, stacked and crossfaded so the change reads as a single surface. */
-export const STAGE_PLATES = [
-  plates.whiteGreenPlanes,
-  plates.greenFins,
-  plates.diagonalPlanes,
-  plates.bladeSplit,
-]

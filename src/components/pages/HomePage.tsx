@@ -2,13 +2,16 @@
 
 import Link from 'next/link'
 import { useCallback, useRef, useState } from 'react'
+import { ImageSlot } from '@/components/ImageSlot'
 import { PageShell } from '@/components/PageShell'
+import { Plate } from '@/components/Plate'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { HOME } from '@/lib/content/home'
 import { css, cssWith, vars } from '@/lib/css'
 import { useScrollDriver } from '@/lib/hooks'
-import { plates, routes } from '@/lib/routes'
+import { homeBanner, homeHero, platformFrames } from '@/lib/media'
+import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { ACCENT, bodyFont, capStyle, dispFont, homeH2Core, lbl, ordinal } from '@/lib/typography'
 import { useCue, useHomeParallax, useMarquee } from './home-motion'
@@ -37,14 +40,13 @@ export function HomePage() {
   const marqueeRef = useRef<HTMLDivElement>(null)
   const marqueeWrapRef = useRef<HTMLDivElement>(null)
   const cueRef = useRef<HTMLSpanElement>(null)
-  const heroPlateRef = useRef<HTMLSpanElement>(null)
-  const bannerPlateRef = useRef<HTMLSpanElement>(null)
+  const heroCopyRef = useRef<HTMLDivElement>(null)
   const driftRef = useRef<HTMLSpanElement>(null)
 
   useMarquee(marqueeRef, marqueeWrapRef)
   useCue(cueRef)
 
-  const parallax = useHomeParallax({ heroPlateRef, bannerPlateRef, driftRef })
+  const parallax = useHomeParallax({ heroCopyRef, driftRef })
 
   // The four SEEM letters advance with the reader instead of waiting for a click.
   const advanceSeem = useCallback(() => {
@@ -85,23 +87,10 @@ export function HomePage() {
             'overflow:clip;background:#062621',
         )}
       >
-        <span
-          ref={heroPlateRef}
-          aria-hidden="true"
-          style={css(
-            'position:absolute;inset:-8% 0;background-image:url("' +
-              plates.glassCapsule +
-              '");background-size:cover;background-position:center;transform:scale(1.08);will-change:transform',
-          )}
-        />
-        <span
-          aria-hidden="true"
-          style={css(
-            'position:absolute;inset:0;background:linear-gradient(to ' +
-              (ar ? 'left' : 'right') +
-              ',rgba(4,24,21,.92) 0%,rgba(4,24,21,.6) 46%,rgba(4,24,21,.28) 100%)',
-          )}
-        />
+        {/* Riyadh at first light, from the foot of a green-glass curve — the brand's own palette,
+            photographed. It drifts on scroll and breathes on a 38s cycle; the scrim keeps the
+            headline's contrast without flattening the sky. */}
+        <Plate frame={homeHero} scrim="hero" depth={150} priority />
         <span
           aria-hidden="true"
           style={css('position:absolute;inset-block:0;inset-inline-end:0;width:3px;background:#dc4b1c')}
@@ -115,13 +104,13 @@ export function HomePage() {
           )}
         />
         <div
+          ref={heroCopyRef}
           style={css(
-            'position:relative;width:100%;max-width:1200px;margin:0 auto;' +
+            'position:relative;width:100%;max-width:1200px;margin:0 auto;will-change:transform,opacity;' +
               'padding:clamp(120px,16vh,180px) clamp(16px,3vw,32px) clamp(40px,6vw,72px)',
           )}
         >
           <h1
-            data-sc=""
             style={css(
               'margin:0;max-width:22ch;font-family:' +
                 disp +
@@ -136,9 +125,17 @@ export function HomePage() {
                 ';color:#ffffff',
             )}
           >
-            <span style={css('display:block')}>{t.h1a}</span>
-            <span style={css('display:block')}>{t.h1b}</span>
-            <span style={css('display:block;position:relative')}>
+            <span data-sc="rise" data-stagger="" style={cssWith('display:block', vars({ '--i': 0 }))}>
+              {t.h1a}
+            </span>
+            <span data-sc="rise" data-stagger="" style={cssWith('display:block', vars({ '--i': 1 }))}>
+              {t.h1b}
+            </span>
+            <span
+              data-sc="rise"
+              data-stagger=""
+              style={cssWith('display:block;position:relative', vars({ '--i': 2 }))}
+            >
               {t.h1c}
               <span
                 aria-hidden="true"
@@ -166,7 +163,8 @@ export function HomePage() {
           >
             <Link
               href={routes.contact}
-              className="sp-lift"
+              className="sp-lift sp-sheen"
+              data-solid=""
               style={css(
                 'box-sizing:border-box;display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 32px;' +
                   'border-radius:999px;background:#ffffff;color:#041815;font-size:15px;font-weight:500;' +
@@ -177,7 +175,7 @@ export function HomePage() {
             </Link>
             <Link
               href={routes.ecosystem}
-              className="sp-ghost"
+              className="sp-ghost sp-sheen"
               style={css(
                 'box-sizing:border-box;display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 32px;' +
                   'border-radius:999px;border:1px solid rgba(255,255,255,.34);color:#ffffff;font-size:15px;' +
@@ -636,11 +634,12 @@ export function HomePage() {
                 data-eco-card=""
                 data-sc="up"
                 data-stagger=""
-                className="sp-eco-card"
+                data-spot=""
+                className="sp-eco-card sp-zoom"
                 href={routes.ecosystem}
                 style={cssWith(
-                  'position:relative;overflow:clip;display:flex;flex-direction:column;gap:12px;' +
-                    'padding:clamp(22px,2.6vw,30px);box-sizing:border-box;background:var(--card);' +
+                  'position:relative;overflow:clip;display:flex;flex-direction:column;' +
+                    'box-sizing:border-box;background:var(--card);' +
                     'border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh);text-decoration:none;' +
                     'transition:transform .22s cubic-bezier(.2,.7,.3,1),box-shadow .22s,border-color .22s',
                   vars({ '--i': i }),
@@ -650,48 +649,75 @@ export function HomePage() {
                   data-ecorule=""
                   aria-hidden="true"
                   style={css(
-                    'position:absolute;inset-block-start:0;inset-inline-start:0;width:52px;height:3px;' +
+                    'position:absolute;z-index:2;inset-block-start:0;inset-inline-start:0;width:52px;height:3px;' +
                       'background:#dc4b1c;transform:scaleX(0);transform-origin:' +
                       ruleOrigin,
                   )}
                 />
+                {/* The sector, shown before it is named. The frame unveils as the card arrives. */}
                 <span
-                  data-econum=""
-                  aria-hidden="true"
+                  data-sc="mask"
                   style={css(
-                    "font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(32px,4vw,48px);" +
-                      'line-height:1;color:transparent;-webkit-text-stroke:1px var(--line3);letter-spacing:-.02em',
+                    'position:relative;display:block;aspect-ratio:16/10;overflow:clip;background:var(--sunken)',
                   )}
                 >
-                  {ordinal(i)}
+                  <ImageSlot frame={platformFrames[i]} alt="" placeholder={name} />
+                  <span
+                    aria-hidden="true"
+                    style={css(
+                      'position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,21,.72) 0%,' +
+                        'rgba(4,24,21,.16) 52%,transparent 100%)',
+                    )}
+                  />
+                  <span
+                    data-econum=""
+                    aria-hidden="true"
+                    style={css(
+                      'position:absolute;inset-block-end:10px;inset-inline-start:clamp(16px,2vw,22px);' +
+                        "font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(32px,4vw,48px);" +
+                        'line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.8);' +
+                        'letter-spacing:-.02em',
+                    )}
+                  >
+                    {ordinal(i)}
+                  </span>
                 </span>
                 <span
-                  data-lbl=""
                   style={css(
-                    "font-family:'Sora',sans-serif;font-size:11px;font-weight:500;letter-spacing:.18em;" +
-                      'text-transform:uppercase;color:var(--muted)',
+                    'display:flex;flex:1 1 auto;flex-direction:column;gap:12px;' +
+                      'padding:clamp(20px,2.4vw,26px) clamp(20px,2.4vw,26px) clamp(18px,2.2vw,24px)',
                   )}
                 >
-                  {sector}
-                </span>
-                <strong
-                  style={css(
-                    "font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(18px,2.1vw,23px);" +
-                      'line-height:1.2;color:var(--ink)',
-                  )}
-                >
-                  {name}
-                </strong>
-                <span style={css('font-size:14px;line-height:1.6;color:var(--muted)')}>{blurb}</span>
-                <span
-                  data-eco-arrow=""
-                  aria-hidden="true"
-                  style={css(
-                    'margin-block-start:auto;padding-block-start:14px;font-size:16px;color:#dc4b1c;opacity:0;' +
-                      'transform:translateX(-6px);transition:opacity .22s,transform .22s cubic-bezier(.2,.7,.3,1)',
-                  )}
-                >
-                  {arrow}
+                  {/* Two lines of room, so a long sector never pushes one platform's name
+                      out of line with the other three. */}
+                  <span
+                    data-lbl=""
+                    style={css(
+                      "font-family:'Sora',sans-serif;font-size:11px;font-weight:500;letter-spacing:.18em;" +
+                        'line-height:1.5;min-block-size:3em;text-transform:uppercase;color:var(--muted)',
+                    )}
+                  >
+                    {sector}
+                  </span>
+                  <strong
+                    style={css(
+                      "font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(18px,2.1vw,23px);" +
+                        'line-height:1.2;color:var(--ink)',
+                    )}
+                  >
+                    {name}
+                  </strong>
+                  <span style={css('font-size:14px;line-height:1.6;color:var(--muted)')}>{blurb}</span>
+                  <span
+                    data-eco-arrow=""
+                    aria-hidden="true"
+                    style={css(
+                      'margin-block-start:auto;padding-block-start:14px;font-size:16px;color:#dc4b1c;opacity:0;' +
+                        'transform:translateX(-6px);transition:opacity .22s,transform .22s cubic-bezier(.2,.7,.3,1)',
+                    )}
+                  >
+                    {arrow}
+                  </span>
                 </span>
               </Link>
             ))}
@@ -837,29 +863,15 @@ export function HomePage() {
             'align-items:center;background:#041815',
         )}
       >
-        <span
-          ref={bannerPlateRef}
-          aria-hidden="true"
-          style={css(
-            'position:absolute;inset:-10% 0;background-image:url("' +
-              plates.bladeSplit +
-              '");background-size:cover;background-position:center;will-change:transform',
-          )}
-        />
-        <span
-          aria-hidden="true"
-          style={css(
-            'position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,21,.92) 0%,' +
-              'rgba(4,24,21,.66) 48%,rgba(4,24,21,.3) 100%)',
-          )}
-        />
+        {/* A new downtown at golden hour: the 2030 the statement is arguing for, not a texture. */}
+        <Plate frame={homeBanner} scrim="banner" depth={120} />
         <div
           style={css(
             'position:relative;width:100%;max-width:1200px;margin:0 auto;' +
               'padding:clamp(48px,7vw,92px) clamp(16px,3vw,32px);text-align:center',
           )}
         >
-          <h2 id="bn-h" data-sc="" style={css(bannerH)}>
+          <h2 id="bn-h" data-sc="rise" style={css(bannerH)}>
             {t.bannerH}
           </h2>
           <p
@@ -874,7 +886,8 @@ export function HomePage() {
           <Link
             data-sc=""
             href={routes.contact}
-            className="sp-lift"
+            className="sp-lift sp-sheen"
+            data-solid=""
             style={css(
               'box-sizing:border-box;display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 32px;' +
                 'border-radius:999px;background:#ffffff;color:#041815;font-size:15px;font-weight:500;' +

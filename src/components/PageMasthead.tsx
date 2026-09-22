@@ -2,14 +2,21 @@
 
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { Plate } from '@/components/Plate'
 import { css } from '@/lib/css'
+import type { Framed } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { pgH1Style } from '@/lib/typography'
 
 /**
- * The masthead every inner page opens with: a hairline rule, a breadcrumb back to the home
- * page, the page title and its lead. Anything a page adds below the lead comes in as children.
+ * The masthead every inner page opens with: a photographic plate, a hairline rule, a
+ * breadcrumb back to the home page, the page title and its lead. Anything a page adds below
+ * the lead comes in as children.
+ *
+ * The plate is scrimmed hard enough that it reads as texture under the type rather than as a
+ * view of its own — the page's own photography, further down, is where the reader is meant to
+ * look. Each page picks a different one; see `pagePlates` in `src/lib/media.ts`.
  */
 export function PageMasthead({
   crumbLabel,
@@ -18,6 +25,7 @@ export function PageMasthead({
   title,
   lead,
   leadWidth = '52ch',
+  plate,
   children,
 }: {
   crumbLabel: string
@@ -26,6 +34,7 @@ export function PageMasthead({
   title: string
   lead: string
   leadWidth?: string
+  plate?: Framed
   children?: ReactNode
 }) {
   const { ar } = useSite()
@@ -35,6 +44,7 @@ export function PageMasthead({
       aria-labelledby="pg-h"
       style={css('position:relative;overflow:clip;background:#062621;color:#ffffff')}
     >
+      {plate ? <Plate frame={plate} scrim="masthead" depth={90} priority /> : null}
       <span
         aria-hidden="true"
         style={css(
@@ -45,7 +55,7 @@ export function PageMasthead({
       />
       <div
         style={css(
-          'max-width:1200px;margin:0 auto;' +
+          'position:relative;max-width:1200px;margin:0 auto;' +
             'padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,86px)',
         )}
       >
@@ -64,7 +74,7 @@ export function PageMasthead({
           <span style={css('color:#ffffff')}>{current}</span>
         </nav>
 
-        <h1 id="pg-h" data-sc="" style={css(pgH1Style(ar))}>
+        <h1 id="pg-h" data-sc="rise" style={css(pgH1Style(ar))}>
           {title}
         </h1>
         <p

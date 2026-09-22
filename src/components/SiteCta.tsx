@@ -1,22 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { Plate } from '@/components/Plate'
 import { css } from '@/lib/css'
-import { reduceMotion } from '@/lib/hooks'
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF, plates, routes } from '@/lib/routes'
+import { pagePlates } from '@/lib/media'
+import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { dispFont } from '@/lib/typography'
 
 export type CtaPage = 'about' | 'model' | 'strategy' | 'ecosystem' | 'roadmap'
-
-const PLATES: Record<CtaPage, string> = {
-  model: plates.diagonalPlanes,
-  ecosystem: plates.bladeSplit,
-  roadmap: plates.greenFins,
-  about: plates.glassCapsule,
-  strategy: plates.whiteGreenPlanes,
-}
 
 const CTA = {
   ar: {
@@ -62,23 +54,6 @@ const CTA = {
 export function SiteCta({ page }: { page: CtaPage }) {
   const { lang, ar, arrow } = useSite()
   const t = CTA[lang]
-  const plateRef = useRef<HTMLSpanElement>(null)
-
-  // The plate drifts against the page so the closing band has the same depth as the hero.
-  useEffect(() => {
-    if (reduceMotion()) return
-    const onScroll = () => {
-      const plate = plateRef.current
-      const section = plate?.parentElement
-      if (!plate || !section) return
-      const rect = section.getBoundingClientRect()
-      plate.style.transform =
-        'translate3d(0,' + ((window.innerHeight - rect.top) * -0.055).toFixed(1) + 'px,0) scale(1.12)'
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   const disp = dispFont(ar)
   const [secondLabel, secondHref] = t.second[page]
@@ -91,22 +66,7 @@ export function SiteCta({ page }: { page: CtaPage }) {
           'min-height:clamp(420px,56vh,600px);background:#041815;color:#ffffff',
       )}
     >
-      <span
-        ref={plateRef}
-        aria-hidden="true"
-        style={css(
-          'position:absolute;inset:-10% 0;background-image:url("' +
-            PLATES[page] +
-            '");background-size:cover;background-position:center;will-change:transform',
-        )}
-      />
-      <span
-        aria-hidden="true"
-        style={css(
-          'position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,21,.94) 0%,' +
-            'rgba(4,24,21,.72) 46%,rgba(4,24,21,.4) 100%)',
-        )}
-      />
+      <Plate frame={pagePlates[page].cta} scrim="banner" depth={110} />
       <span
         aria-hidden="true"
         style={css(
@@ -128,6 +88,7 @@ export function SiteCta({ page }: { page: CtaPage }) {
       >
         <h2
           id="cta-h"
+          data-sc="rise"
           style={css(
             'margin:0;max-width:24ch;font-family:' +
               disp +
@@ -143,6 +104,7 @@ export function SiteCta({ page }: { page: CtaPage }) {
           {t.lines[page]}
         </h2>
         <p
+          data-sc=""
           style={css(
             'margin:clamp(16px,2.2vw,24px) 0 clamp(30px,4vw,44px);max-width:56ch;font-weight:300;' +
               'font-size:clamp(16px,1.7vw,19px);line-height:1.62;color:rgba(255,255,255,.84)',
@@ -151,10 +113,11 @@ export function SiteCta({ page }: { page: CtaPage }) {
           {t.body}
         </p>
 
-        <div style={css('display:flex;flex-wrap:wrap;align-items:center;gap:14px')}>
+        <div data-sc="" style={css('display:flex;flex-wrap:wrap;align-items:center;gap:14px')}>
           <Link
             href={routes.contact}
-            className="sp-lift"
+            className="sp-lift sp-sheen"
+            data-solid=""
             style={css(
               'box-sizing:border-box;display:inline-flex;align-items:center;gap:12px;height:58px;padding:0 36px;' +
                 'border-radius:999px;background:#ffffff;color:#041815;font-family:inherit;font-size:16px;' +
@@ -183,6 +146,7 @@ export function SiteCta({ page }: { page: CtaPage }) {
         </div>
 
         <div
+          data-sc=""
           style={css(
             'display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,34px);margin-block-start:clamp(32px,4.4vw,52px);' +
               'padding-block-start:22px;border-block-start:1px solid rgba(255,255,255,.2);' +

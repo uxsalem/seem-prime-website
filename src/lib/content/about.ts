@@ -1,3 +1,6 @@
+import type { Framed } from '@/lib/media'
+import { photos } from '@/lib/media'
+
 export type AboutCopy = typeof AR
 
 const AR = {
@@ -89,9 +92,9 @@ const EN: AboutCopy = {
 
 export const ABOUT = { ar: AR, en: EN }
 
-/** Artwork supplied so far. Remaining frames keep their placeholder caption. */
-export const GALLERY_IMAGES: (string | undefined)[] = [
-  '/ds/img/about-manufacturing.webp',
-  undefined,
-  undefined,
+/** One photograph per gallery frame, in the order the copy above lists them. */
+export const GALLERY_FRAMES: Framed[] = [
+  { photo: photos.manufacturing, focus: '44% 52%' },
+  { photo: photos.plant },
+  { photo: photos.hospitality, focus: '40% 52%' },
 ]

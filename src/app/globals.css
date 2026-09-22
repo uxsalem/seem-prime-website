@@ -221,7 +221,10 @@ a:hover {
 
 @media (min-width: 1000px) {
   [data-eco] { grid-template-columns: 1fr 1fr; }
-  [data-eco][data-flip='1'] > [data-art] { order: -1; }
+  /* The art is first in the source, so alternating means sending it second, not first —
+     `order:-1` (which the original build carried) left every platform's photograph on the
+     same side. */
+  [data-eco][data-flip='1'] > [data-art] { order: 2; }
 }
 
 /* --- Business model ------------------------------------------------------- */
@@ -343,3 +346,172 @@ a:hover {
 
 .sp-nudge:hover { transform: translateY(-2px); }
 .sp-nudge:active { transform: scale(0.985); }
+
+/* --- Photography -----------------------------------------------------------
+   The plates behind the heroes, mastheads, banners and closing bands. `Plate`
+   supplies the blur-up, the scrim and the parallax; what is left here is the
+   slow breath the photograph itself takes, and the film grain over it.
+   -------------------------------------------------------------------------- */
+
+@keyframes sp-kenburns {
+  0%   { transform: scale(1.04) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.13) translate3d(-1.4%, -1.1%, 0); }
+  100% { transform: scale(1.04) translate3d(0, 0, 0); }
+}
+
+/* 38s is long enough that the movement is felt rather than watched. */
+.sp-kb { animation: sp-kenburns 38s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+
+.sp-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-size: 180px 180px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* --- Reveal variants -------------------------------------------------------
+   Both of these are scoped under `[data-page]` so they outrank the home page's
+   own `[data-sc]` overrides above, whichever page they land on.
+   -------------------------------------------------------------------------- */
+
+/* A frame that unveils: the photograph is already there, the frame opens over it. */
+[data-page] [data-sc='mask'] {
+  opacity: 1;
+  clip-path: inset(0 0 100% 0);
+  transform: none;
+  transition: clip-path 1s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms);
+}
+[data-page] [data-sc='mask'][data-in] { clip-path: inset(0 0 0 0); }
+
+/* The picture inside settles out of its own crop as the frame opens. */
+[data-page] [data-sc='mask'] [data-imgwrap] {
+  transform: scale(1.12);
+  transition: transform 1.4s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms);
+}
+[data-page] [data-sc='mask'][data-in] [data-imgwrap] { transform: none; }
+
+/* A line of display type arriving: up, in, and out of focus into focus. */
+[data-page] [data-sc='rise'] {
+  opacity: 0;
+  transform: translateY(0.4em);
+  filter: blur(10px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms),
+    transform 0.9s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms),
+    filter 0.8s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms);
+}
+[data-page] [data-sc='rise'][data-in] { opacity: 1; transform: none; filter: none; }
+
+/* --- Pointer states --------------------------------------------------------
+   Placed after the reveal rules so a hover always wins the element it shares.
+   -------------------------------------------------------------------------- */
+
+/* A picture that leans in under the pointer. The zoom rides on `[data-img]` alone, so it
+   composes with the frame's reveal (`[data-imgwrap]`) and its crop (`[data-imgcrop]`). */
+[data-page] .sp-zoom [data-img] { transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1); }
+[data-page] .sp-zoom:hover [data-img],
+[data-page] .sp-zoom:focus-visible [data-img] { transform: scale(1.06); }
+/* A card is the hover target, but the link inside it is what takes focus. */
+[data-page] .sp-zoom:has(:focus-visible) [data-img] { transform: scale(1.06); }
+
+/* An ember glow that follows the cursor across a card. `--mx`/`--my` come from `useSpotlight`. */
+[data-spot]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(220, 75, 28, 0.13),
+    transparent 62%
+  );
+}
+[data-spot]:hover::after { opacity: 1; }
+
+/* A single highlight travelling across a solid pill, once, on hover.
+   The band is anchored physically and travelled with a physical `translateX`, so the two have
+   to be mirrored together: a logical `inset-inline-start` with a physical translate would park
+   the band off the trailing edge in Arabic and never sweep the pill at all. */
+@keyframes sp-sheen-run {
+  0% { opacity: 0; transform: translateX(-160%) skewX(-18deg); }
+  14% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(420%) skewX(-18deg); }
+}
+
+/* Arabic reads the other way, so the highlight enters from the right and leaves to the left. */
+@keyframes sp-sheen-run-rtl {
+  0% { opacity: 0; transform: translateX(160%) skewX(-18deg); }
+  14% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-420%) skewX(-18deg); }
+}
+
+.sp-sheen { position: relative; overflow: hidden; isolation: isolate; }
+.sp-sheen::after {
+  content: '';
+  position: absolute;
+  inset-block: -50%;
+  left: 0;
+  width: 38%;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+}
+.sp-sheen:hover::after { animation: sp-sheen-run 0.9s cubic-bezier(0.3, 0.7, 0.3, 1); }
+
+[dir='rtl'] .sp-sheen::after { left: auto; right: 0; }
+[dir='rtl'] .sp-sheen:hover::after { animation-name: sp-sheen-run-rtl; }
+/* The pill is white, so its sheen has to be the ink instead. */
+.sp-sheen[data-solid]::after {
+  background: linear-gradient(90deg, transparent, rgba(4, 24, 21, 0.18), transparent);
+}
+
+/* Header navigation: an ember rule drawing in from the reading edge. */
+.sp-nav::after {
+  content: '';
+  position: absolute;
+  inset-block-end: -2px;
+  inset-inline: 0;
+  height: 2px;
+  background: #dc4b1c;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+[dir='rtl'] .sp-nav::after { transform-origin: right center; }
+.sp-nav:hover::after { transform: scaleX(1); }
+
+/* The brand mark takes a breath when the wordmark is pointed at. */
+.sp-mark svg { transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1); }
+.sp-mark:hover svg { transform: scale(1.09); }
+
+/* A card that rises out of the page rather than just shading. */
+.sp-raise {
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
+    border-color 0.3s;
+}
+.sp-raise:hover { transform: translateY(-5px); box-shadow: var(--sh2); border-color: var(--line3); }
+
+/* --- Reduced motion --------------------------------------------------------
+   Everything above resolves to its settled state; nothing loops.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-kb { animation: none; }
+  [data-page] [data-sc='mask'] { clip-path: none; transition: none; }
+  [data-page] [data-sc='mask'] [data-imgwrap] { transform: none; transition: none; }
+  [data-page] [data-sc='rise'] { opacity: 1; transform: none; filter: none; transition: none; }
+  [data-page] .sp-zoom:hover [data-img] { transform: none; }
+  .sp-sheen:hover::after,
+  [dir='rtl'] .sp-sheen:hover::after { animation: none; }
+  [data-spot]::after { display: none; }
+  .sp-mark:hover svg { transform: none; }
+  .sp-kb, [data-page] [data-sc='mask'], [data-page] [data-sc='rise'] { will-change: auto; }
+}

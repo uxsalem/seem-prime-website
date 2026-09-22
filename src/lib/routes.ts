@@ -11,7 +11,12 @@ export const routes = {
 
 export type RouteKey = keyof typeof routes
 
-/** Brand plates, shared by the hero, the statement banner and the closing CTA. */
+/**
+ * The abstract brand plates the build shipped with. The heroes, mastheads, banners and closing
+ * bands are photographic now — see `src/lib/media.ts` — but these are kept named and on disk,
+ * because a graphic plate is still the right answer for a surface that must not compete with
+ * the type over it.
+ */
 export const plates = {
   glassCapsule: '/ds/img/glass-capsule-green.png',
   greenFins: '/ds/img/architecture-green-fins.png',

@@ -6,8 +6,9 @@ import { PageShell } from '@/components/PageShell'
 import { SiteCta } from '@/components/SiteCta'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
-import { ABOUT, GALLERY_IMAGES } from '@/lib/content/about'
+import { ABOUT, GALLERY_FRAMES } from '@/lib/content/about'
 import { css, cssWith, vars } from '@/lib/css'
+import { pagePlates } from '@/lib/media'
 import { useSite } from '@/lib/site'
 import { ACCENT, capStyle, dispFont, h2Style, ordinal } from '@/lib/typography'
 
@@ -45,6 +46,7 @@ export function AboutPage() {
         title={t.positioning}
         lead={t.aboutLead}
         leadWidth="56ch"
+        plate={pagePlates.about.masthead}
       />
 
       {/* --- Story --- */}
@@ -336,13 +338,20 @@ export function AboutPage() {
                 )}
               >
                 <div
+                  data-sc="mask"
+                  className="sp-zoom"
                   style={css(
                     'position:relative;flex:1 1 auto;min-height:' +
                       GALLERY_HEIGHTS[i] +
                       ';overflow:clip;background:var(--card);border:1px solid var(--line)',
                   )}
                 >
-                  <ImageSlot src={GALLERY_IMAGES[i]} alt={title} placeholder={placeholder} />
+                  <ImageSlot
+                    frame={GALLERY_FRAMES[i]}
+                    alt={title}
+                    placeholder={placeholder}
+                    size={i === 0 ? 'full' : 'sm'}
+                  />
                   <span
                     aria-hidden="true"
                     style={css(

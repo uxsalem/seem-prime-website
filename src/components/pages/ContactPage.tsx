@@ -9,6 +9,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { CONTACT } from '@/lib/content/contact'
 import { css, cssWith, vars } from '@/lib/css'
+import { pagePlates } from '@/lib/media'
 import { scrollRail } from '@/lib/hooks'
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from '@/lib/routes'
 import { useSite } from '@/lib/site'
@@ -71,6 +72,7 @@ export function ContactPage() {
         current={t.contactH}
         title={t.contactH}
         lead={t.contactBody}
+        plate={pagePlates.contact.masthead}
       />
 
       {/* --- Contact form --- */}
