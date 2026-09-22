@@ -61,7 +61,10 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
 
   const hdrStyle =
     'position:fixed;inset-block-start:0;inset-inline:0;z-index:60;backdrop-filter:blur(14px);' +
-    'transition:background .24s cubic-bezier(.2,.7,.3,1),border-color .24s,color .24s;' +
+    'transition:background .24s cubic-bezier(.2,.7,.3,1),border-color .24s,color .24s,' +
+    'box-shadow .3s cubic-bezier(.2,.7,.3,1);box-shadow:' +
+    (scrolled ? '0 10px 30px rgba(4,24,21,.08)' : 'none') +
+    ';' +
     'background:' +
     (solid ? 'var(--hdr)' : 'transparent') +
     ';border-block-end:1px solid ' +
@@ -87,13 +90,16 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
     <header style={css(hdrStyle)}>
       <div
         style={css(
-          'max-width:1400px;margin:0 auto;padding:0 clamp(16px,3vw,32px);height:clamp(64px,7vw,80px);' +
-            'display:flex;align-items:center;gap:clamp(16px,3vw,44px)',
+          'max-width:1400px;margin:0 auto;padding:0 clamp(16px,3vw,32px);height:' +
+            (scrolled ? 'clamp(56px,6vw,66px)' : 'clamp(64px,7vw,80px)') +
+            ';display:flex;align-items:center;gap:clamp(16px,3vw,44px);' +
+            'transition:height .3s cubic-bezier(.2,.7,.3,1)',
         )}
       >
         <Link
           href={routes.home}
           aria-label="SEEM PRIME"
+          className="sp-mark"
           style={css('display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit')}
         >
           <Mark size={30} />
@@ -119,9 +125,10 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
                 key={key}
                 href={routes[key]}
                 aria-current={on ? 'page' : undefined}
+                className={on ? undefined : 'sp-nav'}
                 style={css(
                   'position:relative;font-size:14px;font-weight:500;color:inherit;text-decoration:none;' +
-                    'padding-block:6px;opacity:' +
+                    'padding-block:6px;transition:opacity .2s;opacity:' +
                     (on ? '1' : '.82') +
                     ';border-block-end:2px solid ' +
                     (on ? '#dc4b1c' : 'transparent'),
@@ -155,7 +162,14 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
           >
             {t.switch}
           </button>
-          <Link href={routes.contact} data-hdrcta="" style={css(ctaStyle)}>
+          {/* Over the hero the pill is white, so its sheen has to be the ink rather than more white. */}
+          <Link
+            href={routes.contact}
+            data-hdrcta=""
+            data-solid={solid ? undefined : ''}
+            className="sp-nudge sp-sheen"
+            style={css(ctaStyle)}
+          >
             {t.cta}
           </Link>
         </div>

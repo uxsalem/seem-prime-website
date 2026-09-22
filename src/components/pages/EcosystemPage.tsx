@@ -9,6 +9,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { ECOSYSTEM } from '@/lib/content/ecosystem'
 import { css, cssWith, vars } from '@/lib/css'
+import { pagePlates, platformFrames } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { dispFont, lbl, ordinal } from '@/lib/typography'
@@ -32,6 +33,7 @@ export function EcosystemPage() {
         current={t.navEcosystem}
         title={t.ecosystemH}
         lead={t.ecosystemLead}
+        plate={pagePlates.ecosystem.masthead}
       >
         <div
           data-sc=""
@@ -67,13 +69,20 @@ export function EcosystemPage() {
             <article key={name} data-eco="" data-flip={i % 2 === 1 ? '1' : '0'}>
               <div
                 data-art=""
-                data-sc="x"
+                data-sc="mask"
+                className="sp-zoom"
                 style={css(
                   'position:relative;aspect-ratio:16/10;overflow:clip;background:var(--sunken);' +
                     'border:1px solid var(--line)',
                 )}
               >
-                <ImageSlot placeholder={t.platformPh[i]} />
+                <ImageSlot frame={platformFrames[i]} alt={name} placeholder={t.platformPh[i]} size="full" />
+                <span
+                  aria-hidden="true"
+                  style={css(
+                    'position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,21,.3),transparent 46%)',
+                  )}
+                />
                 <span
                   aria-hidden="true"
                   style={css(

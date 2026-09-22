@@ -6,9 +6,11 @@ import { PageShell } from '@/components/PageShell'
 import { SiteCta } from '@/components/SiteCta'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
-import { MODEL, STAGE_PLATES } from '@/lib/content/model'
+import { Plate } from '@/components/Plate'
+import { MODEL } from '@/lib/content/model'
 import { css, cssWith, vars } from '@/lib/css'
 import { useScrollDriver } from '@/lib/hooks'
+import { pagePlates, stageFrames } from '@/lib/media'
 import { useSite } from '@/lib/site'
 import { ACCENT, capStyle, dispFont, h2Style, ordinal } from '@/lib/typography'
 
@@ -71,6 +73,7 @@ export function ModelPage() {
         current={t.navModel}
         title={t.modelH2}
         lead={t.modelLead}
+        plate={pagePlates.model.masthead}
       />
 
       {/* --- Value chain --- */}
@@ -95,26 +98,18 @@ export function ModelPage() {
                       'min-height:min(clamp(400px,44vw,560px),calc(100vh - 200px));background:#041815',
                   )}
                 >
-                  {STAGE_PLATES.map((url, i) => (
-                    <span
-                      key={url}
-                      aria-hidden="true"
-                      style={css(
-                        'position:absolute;inset:0;background-image:url("' +
-                          url +
-                          '");background-size:cover;background-position:center;opacity:' +
-                          (i === stage ? '1' : '0') +
-                          ';transition:opacity .52s cubic-bezier(.2,.7,.3,1)',
-                      )}
+                  {/* Develop, operate, invest, monetize — one photograph per stage, stacked and
+                      crossfaded so the change reads as a single surface turning over. */}
+                  {stageFrames.map((frame, i) => (
+                    <Plate
+                      key={frame.photo.src}
+                      frame={frame}
+                      scrim="stage"
+                      depth={70}
+                      show={i === stage}
+                      still
                     />
                   ))}
-                  <span
-                    aria-hidden="true"
-                    style={css(
-                      'position:absolute;inset:0;background:linear-gradient(to top,rgba(4,24,21,.86) 0%,' +
-                        'rgba(4,24,21,.4) 46%,rgba(4,24,21,.12) 100%)',
-                    )}
-                  />
                   <span
                     aria-hidden="true"
                     style={css(

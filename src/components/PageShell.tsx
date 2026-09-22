@@ -4,13 +4,15 @@ import { useCallback, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { css } from '@/lib/css'
 import { progressWidth, runCounter, useReveal, useScrollDriver } from '@/lib/hooks'
+import { useSpotlight } from '@/lib/motion'
 import { useSite } from '@/lib/site'
 import { rootStyle } from '@/lib/typography'
 
 /**
  * The frame every page shares: reading direction, the body type scale, the ember
- * reading-progress hairline, and the scroll pass that reveals `[data-sc]` blocks as they
- * arrive. `data-page` scopes the few global rules that differ between pages.
+ * reading-progress hairline, the scroll pass that reveals `[data-sc]` blocks as they arrive,
+ * and the one delegated pointer listener that lights `[data-spot]` cards under the cursor.
+ * `data-page` scopes the few global rules that differ between pages.
  *
  * Pages with their own scroll-driven work add a second `useScrollDriver` of their own; both
  * listeners are passive and share the same 60ms settle throttle.
@@ -44,6 +46,8 @@ export function PageShell({
     },
     onSettle: () => reveal.current(),
   })
+
+  useSpotlight()
 
   return (
     <div dir={dir} lang={lang} data-page={page} style={css(rootStyle(ar))}>

@@ -7,6 +7,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { ROADMAP } from '@/lib/content/roadmap'
 import { css, cssWith, vars } from '@/lib/css'
+import { pagePlates } from '@/lib/media'
 import { useSite } from '@/lib/site'
 import { ACCENT, h2Style, ordinal } from '@/lib/typography'
 
@@ -27,6 +28,7 @@ export function RoadmapPage() {
         current={t.navRoadmap}
         title={t.roadmapH}
         lead={t.roadLead}
+        plate={pagePlates.roadmap.masthead}
       />
 
       {/* --- Phases --- */}

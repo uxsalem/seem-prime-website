@@ -10,6 +10,7 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { STRATEGY } from '@/lib/content/strategy'
 import { css, cssWith, vars } from '@/lib/css'
 import { scrollRail, useMediaQuery, useScrollDriver } from '@/lib/hooks'
+import { pagePlates, sectorFrames } from '@/lib/media'
 import { useSite } from '@/lib/site'
 import { ACCENT, bodyFont, dispFont, h2Style, lbl, ordinal } from '@/lib/typography'
 
@@ -96,6 +97,7 @@ export function StrategyPage() {
         title={t.pageH}
         lead={t.pageLead}
         leadWidth="54ch"
+        plate={pagePlates.strategy.masthead}
       />
 
       {/* --- Vision and mission --- */}
@@ -423,6 +425,7 @@ export function StrategyPage() {
                 key={text}
                 data-sc=""
                 data-stagger=""
+                className="sp-raise"
                 style={cssWith(
                   'flex:0 0 clamp(230px,25vw,300px);display:flex;flex-direction:column;gap:16px;' +
                     'padding:clamp(16px,1.8vw,20px);box-sizing:border-box;background:var(--card);' +
@@ -431,12 +434,21 @@ export function StrategyPage() {
                 )}
               >
                 <div
+                  data-sc="mask"
+                  className="sp-zoom"
                   style={css(
                     'position:relative;aspect-ratio:16/10;overflow:clip;background:var(--sunken);' +
                       'border:1px solid var(--line)',
                   )}
                 >
-                  <ImageSlot placeholder={t.sectorPh + text} />
+                  <ImageSlot frame={sectorFrames[i]} alt={text} placeholder={t.sectorPh + text} />
+                  <span
+                    aria-hidden="true"
+                    style={css(
+                      'position:absolute;inset:0;background:linear-gradient(to top,rgba(6,38,33,.58),' +
+                        'rgba(6,38,33,.08) 62%)',
+                    )}
+                  />
                 </div>
                 <div style={css('display:flex;align-items:center;justify-content:space-between;gap:12px')}>
                   <span
