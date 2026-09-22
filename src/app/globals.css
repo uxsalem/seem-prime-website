@@ -1,0 +1,345 @@
+/* ============================================================================
+   SEEM PRIME — global stylesheet
+   Fonts, design tokens, the scroll-reveal system, the layout grids each page
+   declares by attribute, and the hover/active states that inline styles cannot
+   express. Everything else is authored as inline declaration strings alongside
+   the markup, exactly as in the original build.
+   ========================================================================== */
+
+/* --- Fonts ---------------------------------------------------------------- */
+
+@font-face { font-family: 'Sora'; font-weight: 300; font-display: swap; src: url('/ds/fonts/sora-300.woff2') format('woff2'); }
+@font-face { font-family: 'Sora'; font-weight: 400; font-display: swap; src: url('/ds/fonts/sora-400.woff2') format('woff2'); }
+@font-face { font-family: 'Sora'; font-weight: 600; font-display: swap; src: url('/ds/fonts/sora-600.woff2') format('woff2'); }
+@font-face { font-family: 'Sora'; font-weight: 700; font-display: swap; src: url('/ds/fonts/sora-700.woff2') format('woff2'); }
+
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 300; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-300.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 400; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-400.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 500; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-500.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Sans'; font-weight: 600; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-600.woff2') format('woff2'); }
+
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url('/ds/fonts/ibm-plex-mono-400.woff2') format('woff2'); }
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 500; font-display: swap; src: url('/ds/fonts/ibm-plex-mono-500.woff2') format('woff2'); }
+
+/* Latin and Arabic are split by unicode-range so a Latin-only page never pulls the Arabic cut. */
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 400; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-arabic-400.woff2') format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 400; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-arabic-400-arabic.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFC; }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 600; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-arabic-600.woff2') format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Arabic'; font-weight: 600; font-display: swap; src: url('/ds/fonts/ibm-plex-sans-arabic-600-arabic.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFC; }
+
+/* --- Tokens --------------------------------------------------------------- */
+
+:root {
+  --page: #f7f8f9;
+  --card: #ffffff;
+  --sunken: #f0f2f3;
+  --tint: #f1f7f5;
+  --ink: #041815;
+  --body: #2c3634;
+  --muted: #677471;
+  --line: rgba(4, 24, 21, 0.1);
+  --line2: rgba(4, 24, 21, 0.16);
+  --line3: rgba(4, 24, 21, 0.28);
+  --sh: 0 18px 40px rgba(4, 24, 21, 0.08);
+  --sh2: 0 28px 64px rgba(4, 24, 21, 0.16);
+  --hdr: rgba(255, 255, 255, 0.86);
+  --focus: #197069;
+  --link: #12514e;
+}
+
+html[data-theme='dark'] {
+  --page: #041815;
+  --card: rgba(255, 255, 255, 0.06);
+  --sunken: #062621;
+  --tint: #0c3e3d;
+  --ink: #ffffff;
+  --body: rgba(255, 255, 255, 0.86);
+  --muted: rgba(255, 255, 255, 0.62);
+  --line: rgba(255, 255, 255, 0.12);
+  --line2: rgba(255, 255, 255, 0.18);
+  --line3: rgba(255, 255, 255, 0.34);
+  --sh: none;
+  --sh2: none;
+  --hdr: rgba(4, 24, 21, 0.88);
+  --focus: #8fc4bb;
+  --link: #ffffff;
+}
+
+/* --- Base ----------------------------------------------------------------- */
+
+body {
+  margin: 0;
+  background: var(--page);
+  transition: background 0.24s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: #dc4b1c;
+  text-underline-offset: 4px;
+}
+
+::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* --- Scroll reveal -------------------------------------------------------- */
+
+[data-sc] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms),
+    transform 0.6s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms);
+}
+
+[data-sc='x'] { transform: translateX(16px); }
+[data-sc][data-in] { opacity: 1; transform: none; }
+[data-stagger] { --d: calc(var(--i, 0) * 70ms); }
+
+/* The home page reveals a touch further and a touch slower than the inner pages. */
+[data-page='home'] [data-sc] {
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms),
+    transform 0.7s cubic-bezier(0.16, 0.84, 0.44, 1) var(--d, 0ms);
+}
+[data-page='home'] [data-sc='x'] { transform: translateX(18px); }
+[data-page='home'] [data-sc='up'] { transform: translateY(38px) scale(0.985); }
+[data-page='home'] [data-sc][data-in] { opacity: 1; transform: none; }
+[data-page='home'] [data-stagger] { --d: calc(var(--i, 0) * 80ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-sc] { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- Header --------------------------------------------------------------- */
+
+@media (min-width: 900px) { [data-hdrnav] { display: flex !important; } }
+@media (min-width: 620px) { [data-hdrcta] { display: inline-flex !important; } }
+
+/* Arabic labels drop the tracked, uppercased Latin treatment. */
+[dir='rtl'] [data-lbl] {
+  font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+/* --- Layout grids --------------------------------------------------------- */
+
+[data-split] {
+  display: grid;
+  gap: clamp(32px, 5vw, 80px);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-cols='2'],
+[data-cols='4'],
+[data-cols='5'] {
+  display: grid;
+  gap: clamp(18px, 2.4vw, 28px);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+[data-seem] {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Footer columns, the about page's value grid and photo gallery. */
+[data-fcols] { grid-template-columns: minmax(0, 1fr); }
+[data-vgrid6] { display: grid; gap: 1px; grid-template-columns: minmax(0, 1fr); }
+[data-gal] { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+
+@media (min-width: 640px) {
+  [data-vgrid6] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 700px) {
+  [data-cols='2'],
+  [data-cols='4'],
+  [data-cols='5'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-seem] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-fcols] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  [data-gal] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: 'a b' 'a c';
+  }
+}
+
+@media (min-width: 1000px) {
+  [data-split] { grid-template-columns: 1.12fr 0.88fr; align-items: start; }
+  [data-cols='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  [data-cols='5'] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  [data-seem] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  [data-fcols] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  [data-vgrid6] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* The contact page runs a narrower first column than the shared split. */
+@media (min-width: 1000px) {
+  [data-page='contact'] [data-split] { grid-template-columns: 0.82fr 1.18fr; }
+  [data-page='contact'] [data-cols='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+[data-page='contact'] [data-cols='2'] { gap: 16px; }
+
+/* --- Home ----------------------------------------------------------------- */
+
+[data-mq] { display: flex; width: max-content; will-change: transform; }
+
+[data-eco-card] {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.22s,
+    border-color 0.22s;
+}
+[data-eco-card]:hover [data-eco-arrow] { opacity: 1; transform: none; }
+[data-ecorule] { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1); }
+[data-stakebar] { transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1); }
+
+/* --- Ecosystem ------------------------------------------------------------ */
+
+[data-eco] {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+
+@media (min-width: 1000px) {
+  [data-eco] { grid-template-columns: 1fr 1fr; }
+  [data-eco][data-flip='1'] > [data-art] { order: -1; }
+}
+
+/* --- Business model ------------------------------------------------------- */
+
+[data-glist] > li:first-child {
+  border-block-start: 0 !important;
+  padding-block-start: 0 !important;
+}
+
+[data-mpin] { position: relative; }
+[data-vrow][data-in] [data-vseg] { transform: scaleX(1) !important; }
+
+@media (min-width: 820px) {
+  [data-vrow] {
+    grid-template-columns: auto minmax(0, 0.62fr) minmax(0, 1fr) auto !important;
+  }
+  [data-vrow] > p { grid-column: 2; }
+  [data-vtrack] { grid-column: 3 !important; }
+  [data-vrow] > [data-lbl] { grid-column: 4 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-vseg] { transform: scaleX(1) !important; transition: none; }
+}
+
+@media (min-width: 960px) {
+  [data-mstage] { grid-template-columns: 1.16fr 0.84fr !important; }
+  [data-mpin] { height: 340vh; }
+  [data-mstick] { position: sticky; inset-block-start: clamp(84px, 11vh, 116px); }
+}
+
+/* --- Strategy ------------------------------------------------------------- */
+
+[data-vmpin] { position: relative; }
+[data-vmword] { opacity: 1; }
+[data-vmbar] { transform: scaleX(0); }
+
+[data-vmtext] + [data-vmtext] {
+  margin-block-start: clamp(40px, 8vw, 72px);
+  padding-block-start: clamp(40px, 8vw, 72px);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  [data-vmpin] { height: 280vh; }
+  [data-vmstick] {
+    position: sticky;
+    inset-block-start: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: clip;
+  }
+  [data-vmstage] { display: grid; }
+  [data-vmtext] { grid-area: 1 / 1; }
+  [data-vmtext] + [data-vmtext] {
+    margin-block-start: 0;
+    padding-block-start: 0;
+    border-block-start: 0;
+  }
+}
+
+/* --- Snap rails ----------------------------------------------------------- */
+
+[data-rail] {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-block-end: 6px;
+}
+[data-rail]::-webkit-scrollbar { display: none; }
+[data-rail] > * { scroll-snap-align: start; }
+
+/* --- Interactive states ---------------------------------------------------
+   Pseudo-classes an inline `style` attribute cannot carry. Shape and colour
+   still come from the element's own inline declarations; these only describe
+   what changes on hover or press.
+   -------------------------------------------------------------------------- */
+
+/* Solid pill on a dark surface. `--lift-sh` lets each call site keep its own shadow. */
+.sp-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--lift-sh, 0 18px 38px rgba(4, 24, 21, 0.4));
+  text-decoration: none;
+}
+.sp-lift:active { transform: scale(0.985); }
+
+/* Outlined pill on a dark surface. */
+.sp-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: translateY(-3px);
+  text-decoration: none;
+}
+
+/* Anything that sits dimmed until pointed at — header controls, footer links. */
+.sp-op:hover { opacity: 1; }
+
+/* Portfolio card on the home page. `!important` beats the inline lane transform. */
+.sp-eco-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--sh2);
+  border-color: var(--line3);
+  text-decoration: none;
+}
+
+/* A value cell on the about page lifts to green-800. */
+.sp-value-cell:hover { background: #0c3e3d; }
+
+/* Contact form submit and the newsletter subscribe button. */
+.sp-submit:hover {
+  background: #041815;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(4, 24, 21, 0.3);
+}
+.sp-submit:active { transform: scale(0.985); }
+
+.sp-nudge:hover { transform: translateY(-2px); }
+.sp-nudge:active { transform: scale(0.985); }
