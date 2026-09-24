@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { css } from '@/lib/css'
-import type { Framed } from '@/lib/media'
+import { srcSet, type Framed } from '@/lib/media'
 import { usePlateParallax } from '@/lib/motion'
 import { useSite } from '@/lib/site'
 
@@ -19,7 +19,7 @@ import { useSite } from '@/lib/site'
  */
 
 /** How much brand green the copy needs between itself and the photograph. */
-export type Scrim = 'hero' | 'masthead' | 'banner' | 'stage' | 'none'
+export type Scrim = 'hero' | 'masthead' | 'cinema' | 'banner' | 'close' | 'stage' | 'horizon' | 'none'
 
 const GREEN = '4,24,21'
 
@@ -38,6 +38,19 @@ function scrimLayers(scrim: Scrim, ar: boolean): string[] {
         `linear-gradient(to top,rgba(${GREEN},.92) 0%,rgba(${GREEN},.76) 42%,rgba(${GREEN},.54) 100%)`,
         `linear-gradient(to ${start},rgba(${GREEN},.5),transparent 66%)`,
       ]
+    // A page opening: the photograph is the subject, the title sits on its foot.
+    case 'cinema':
+      return [
+        `linear-gradient(to bottom,rgba(${GREEN},.56) 0%,transparent 24%)`,
+        `linear-gradient(to top,rgba(${GREEN},.92) 0%,rgba(${GREEN},.62) 30%,rgba(${GREEN},.14) 62%,transparent 80%)`,
+        `linear-gradient(to ${start},rgba(${GREEN},.46) 0%,transparent 62%)`,
+      ]
+    // A closing band: the call to action sits low and to the reading edge.
+    case 'close':
+      return [
+        `linear-gradient(to top,rgba(${GREEN},.94) 0%,rgba(${GREEN},.7) 36%,rgba(${GREEN},.3) 100%)`,
+        `linear-gradient(to ${start},rgba(${GREEN},.5) 0%,transparent 64%)`,
+      ]
     // Centred copy over the full width, so the weight has to be even.
     case 'banner':
       return [
@@ -46,6 +59,12 @@ function scrimLayers(scrim: Scrim, ar: boolean): string[] {
     // Stacked and crossfaded behind the business-model stage; the panel over it is already dark.
     case 'stage':
       return [`linear-gradient(to top,rgba(${GREEN},.88),rgba(${GREEN},.52))`]
+    // A title up top and figures along the foot, with the horizon left clear between them.
+    case 'horizon':
+      return [
+        `linear-gradient(to bottom,rgba(${GREEN},.72) 0%,rgba(${GREEN},.18) 30%,transparent 46%)`,
+        `linear-gradient(to top,rgba(${GREEN},.96) 0%,rgba(${GREEN},.82) 26%,rgba(${GREEN},.2) 52%,transparent 66%)`,
+      ]
     default:
       return []
   }
@@ -59,6 +78,8 @@ export function Plate({
   /** Stacked plates crossfade rather than swap; the hidden ones sit at 0. */
   show = true,
   still = false,
+  /** Turn the photograph horizontally — for a picture whose direction has to follow the reading. */
+  mirror = false,
 }: {
   frame: Framed
   scrim?: Scrim
@@ -66,6 +87,7 @@ export function Plate({
   priority?: boolean
   show?: boolean
   still?: boolean
+  mirror?: boolean
 }) {
   const { ar } = useSite()
   const plateRef = useRef<HTMLSpanElement>(null)
@@ -89,6 +111,7 @@ export function Plate({
         ref={plateRef}
         style={css('position:absolute;inset:-10% 0;overflow:clip;will-change:transform')}
       >
+        <span style={css('position:absolute;inset:0' + (mirror ? ';transform:scaleX(-1)' : ''))}>
         <span
           style={css(
             'position:absolute;inset:-6%;background-image:url("' +
@@ -101,6 +124,8 @@ export function Plate({
         {/* eslint-disable-next-line @next/next/no-img-element -- a fluid plate has no intrinsic box to hand next/image */}
         <img
           src={photo.src}
+          srcSet={srcSet(photo)}
+          sizes="100vw"
           alt=""
           className={still ? undefined : 'sp-kb'}
           loading={priority ? 'eager' : 'lazy'}
@@ -118,6 +143,7 @@ export function Plate({
               ';transition:opacity 1s cubic-bezier(.2,.7,.3,1)',
           )}
         />
+        </span>
       </span>
 
       {scrimLayers(scrim, ar).map((layer) => (

@@ -72,10 +72,10 @@ export function SiteFooter() {
   }
 
   return (
-    <footer style={css('position:relative;overflow:clip;background:#041815;color:#ffffff')}>
+    <footer data-tone="dark" style={css('position:relative;overflow:clip;background:#041815;color:#ffffff')}>
       <div
         style={css(
-          'position:relative;max-width:1200px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,3vw,32px) 0',
+          'position:relative;max-width:1400px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(16px,3vw,32px) 0',
         )}
       >
         <div
@@ -174,6 +174,19 @@ export function SiteFooter() {
               </span>
             ) : null}
           </div>
+        </div>
+
+        {/* The wordmark as the framework sets it — spaced caps — at the scale of the page. */}
+        <div
+          aria-hidden="true"
+          dir="ltr"
+          style={css(
+            "margin:clamp(8px,2vw,24px) 0 clamp(18px,3vw,36px);font-family:'Sora',sans-serif;font-weight:600;" +
+              'font-size:clamp(26px,8.6vw,146px);line-height:.9;letter-spacing:.34em;white-space:nowrap;' +
+              'text-align:center;margin-inline-end:-.34em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.14);user-select:none',
+          )}
+        >
+          SEEM PRIME
         </div>
 
         <div

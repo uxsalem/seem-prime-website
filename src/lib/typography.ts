@@ -7,6 +7,13 @@
 
 export const ACCENT = '#dc4b1c'
 
+/**
+ * Bronze-300 from the identity's value palette. The golden-hour set lights every sector the same
+ * warm way, and this is its colour in type: small indices and figures on the dark ground, where
+ * ember would be too loud and white too flat.
+ */
+export const BRONZE = '#c4a878'
+
 export const bodyFont = (ar: boolean) =>
   ar ? "'IBM Plex Sans Arabic',system-ui,sans-serif" : "'IBM Plex Sans',system-ui,sans-serif"
 
@@ -34,11 +41,11 @@ export const pgH1Style = (ar: boolean) =>
   dispFont(ar) +
   ';font-weight:' +
   (ar ? '600' : '300') +
-  ';font-size:clamp(30px,4.6vw,66px);line-height:' +
-  (ar ? '1.26' : '1.04') +
+  ';font-size:clamp(34px,5.4vw,84px);line-height:' +
+  (ar ? '1.24' : '1.02') +
   ';letter-spacing:' +
-  (ar ? '0' : '-.025em') +
-  ';color:#ffffff;text-wrap:pretty'
+  (ar ? '0' : '-.03em') +
+  ';color:#ffffff;text-wrap:balance'
 
 /** Section H2, on the page surface or on a brand-green one. */
 export const h2Style = (ar: boolean, color = 'var(--ink)') =>
@@ -54,21 +61,6 @@ export const h2Style = (ar: boolean, color = 'var(--ink)') =>
   color +
   ';text-wrap:pretty'
 
-/**
- * The home page runs its H2 a size larger than the inner pages. Returned without a margin or a
- * colour so call sites can lead with their own (the statement banner centres itself).
- */
-export const homeH2Core = (ar: boolean) =>
-  'font-family:' +
-  dispFont(ar) +
-  ';font-weight:' +
-  (ar ? '600' : '300') +
-  ';font-size:clamp(26px,3.8vw,54px);line-height:' +
-  (ar ? '1.3' : '1.06') +
-  ';letter-spacing:' +
-  (ar ? '0' : '-.02em') +
-  ';text-wrap:pretty'
-
 /** Mono caption over a light surface. */
 export const capStyle = (ar: boolean, color = 'var(--muted)') =>
   "font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:" +
@@ -80,3 +72,42 @@ export const capStyle = (ar: boolean, color = 'var(--muted)') =>
 
 /** Two-digit ordinal: `01`, `02`, … */
 export const ordinal = (i: number) => '0' + (i + 1)
+
+/**
+ * Display type at any size: the family, the weight and the leading that belong together.
+ * Latin runs Sora light and tight, the way the framework sets its big type; Arabic runs Plex
+ * Arabic semibold with room between lines for its ascenders.
+ */
+export const display = (ar: boolean, size: string, latinWeight = 300) =>
+  'font-family:' +
+  dispFont(ar) +
+  ';font-weight:' +
+  (ar ? 600 : latinWeight) +
+  ';font-size:' +
+  size +
+  ';line-height:' +
+  (ar ? '1.28' : '1.02') +
+  ';letter-spacing:' +
+  (ar ? '0' : '-.03em')
+
+/**
+ * The kicker over a section title: a short ember rule, then the label. Latin sets it in tracked
+ * caps; Arabic drops the caps and the tracking and takes a size up, because Arabic has no
+ * capitals to lean on.
+ */
+export const kicker = (ar: boolean, color: string) =>
+  'display:inline-flex;align-items:center;gap:14px;margin:0;font-family:' +
+  (ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Sora',sans-serif") +
+  ';font-size:' +
+  (ar ? '14px' : '11px') +
+  ';font-weight:' +
+  (ar ? '600' : '500') +
+  ';letter-spacing:' +
+  (ar ? 'normal' : '.24em') +
+  ';text-transform:' +
+  (ar ? 'none' : 'uppercase') +
+  ';color:' +
+  color
+
+/** The rule a kicker leads with. */
+export const KICKER_RULE = 'display:block;flex:0 0 auto;width:28px;height:2px;background:' + ACCENT

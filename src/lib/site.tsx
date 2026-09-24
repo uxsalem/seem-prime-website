@@ -8,6 +8,8 @@ export type Theme = 'light' | 'dark'
 
 export const LANG_KEY = 'seemprime-lang'
 export const THEME_KEY = 'seemprime-theme'
+/** Session flag: the home page's opening aperture has already played in this tab. */
+export const INTRO_KEY = 'seemprime-intro'
 
 type SiteValue = {
   lang: Lang
@@ -99,5 +101,10 @@ export function useSite(): SiteValue {
 /**
  * Runs before first paint so a stored dark theme never flashes light. Kept deliberately tiny
  * and dependency-free; it mirrors `applyTheme` above.
+ *
+ * It also decides, before anything paints, whether the home page opens on its aperture: only
+ * when the tab lands on the home page, once per tab, never under reduced motion. Deciding here
+ * rather than after hydration is what lets the opening run in CSS from the first frame instead
+ * of flashing the finished hero first.
  */
-export const THEME_BOOTSTRAP = `(function(){try{var t=localStorage.getItem('${THEME_KEY}');if(t!=='light'&&t!=='dark')t='light';document.documentElement.setAttribute('data-theme',t);document.documentElement.style.colorScheme=t;var l=localStorage.getItem('${LANG_KEY}');if(l==='en'||l==='ar'){document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr'}}catch(e){document.documentElement.setAttribute('data-theme','light')}})()`
+export const THEME_BOOTSTRAP = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('${THEME_KEY}');if(t!=='light'&&t!=='dark')t='light';d.setAttribute('data-theme',t);d.style.colorScheme=t;var l=localStorage.getItem('${LANG_KEY}');if(l==='en'||l==='ar'){d.lang=l;d.dir=l==='ar'?'rtl':'ltr'}}catch(e){d.setAttribute('data-theme','light')}try{if(location.pathname==='/'&&!sessionStorage.getItem('${INTRO_KEY}')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)d.setAttribute('data-intro','play')}catch(e){}})()`
