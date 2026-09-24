@@ -103,6 +103,7 @@ export function StrategyPage() {
       {/* --- Vision and mission --- */}
       <section
         aria-labelledby="st-h"
+        data-tone="dark"
         style={css('background:#062621;color:#ffffff;border-block-start:1px solid rgba(255,255,255,.16)')}
       >
         <div ref={pinRef} data-vmpin="">

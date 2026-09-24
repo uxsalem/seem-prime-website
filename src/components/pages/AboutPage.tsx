@@ -179,7 +179,7 @@ export function AboutPage() {
       </section>
 
       {/* --- Corporate values --- */}
-      <section aria-labelledby="vl-h" style={css('background:#062621;color:#ffffff')}>
+      <section aria-labelledby="vl-h" data-tone="dark" style={css('background:#062621;color:#ffffff')}>
         <div
           style={css('max-width:1400px;margin:0 auto;padding:clamp(56px,8vw,110px) clamp(16px,3vw,32px)')}
         >

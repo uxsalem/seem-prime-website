@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { css } from '@/lib/css'
-import type { Framed } from '@/lib/media'
+import { srcSet, type Framed } from '@/lib/media'
 import { useSite } from '@/lib/site'
 
 /**
@@ -24,14 +24,29 @@ export function ImageSlot({
   alt,
   placeholder,
   fit = 'cover',
-  /** `sm` is the ~880px cut — right for cards, rails and gallery tiles. */
+  /**
+   * `sm` is the ~880px cut — right for cards, rails and gallery tiles. `md` is the 1280px cut for
+   * larger windows, falling back to the full file where a photograph has no middle cut.
+   */
   size = 'sm',
+  /**
+   * Fetch now rather than when the frame nears the viewport. For frames that travel in sideways
+   * on a pinned track, where the browser's lazy-load margin would start them too late.
+   */
+  eager = false,
+  /**
+   * The frame's rendered width, as a `sizes` value. When given, the browser picks from every cut
+   * the photograph has and `size` only names the fallback.
+   */
+  sizes,
 }: {
   frame?: Framed
   alt?: string
   placeholder: string
   fit?: 'cover' | 'contain'
-  size?: 'sm' | 'full'
+  size?: 'sm' | 'md' | 'full'
+  eager?: boolean
+  sizes?: string
 }) {
   const { lang } = useSite()
   const [loaded, setLoaded] = useState(false)
@@ -77,9 +92,11 @@ export function ImageSlot({
         {/* eslint-disable-next-line @next/next/no-img-element -- fluid frames, no intrinsic size to hand next/image */}
         <img
           data-img=""
-          src={size === 'full' ? photo.src : photo.sm}
+          src={size === 'full' ? photo.src : size === 'md' ? (photo.md ?? photo.src) : photo.sm}
+          srcSet={sizes ? srcSet(photo) : undefined}
+          sizes={sizes}
           alt={alt ?? photo.alt[lang]}
-          loading="lazy"
+          loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           onLoad={() => setLoaded(true)}
           ref={(node) => {

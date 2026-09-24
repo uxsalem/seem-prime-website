@@ -95,6 +95,6 @@ export const ABOUT = { ar: AR, en: EN }
 /** One photograph per gallery frame, in the order the copy above lists them. */
 export const GALLERY_FRAMES: Framed[] = [
   { photo: photos.manufacturing, focus: '44% 52%' },
-  { photo: photos.plant },
-  { photo: photos.hospitality, focus: '40% 52%' },
+  { photo: photos.logistics, focus: '62% 58%' },
+  { photo: photos.leisure, focus: '40% 52%' },
 ]

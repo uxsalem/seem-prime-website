@@ -10,13 +10,14 @@ import { useSite } from '@/lib/site'
 import { pgH1Style } from '@/lib/typography'
 
 /**
- * The masthead every inner page opens with: a photographic plate, a hairline rule, a
- * breadcrumb back to the home page, the page title and its lead. Anything a page adds below
- * the lead comes in as children.
+ * The masthead every inner page opens with: a full-height photograph, a breadcrumb back to the
+ * home page, the page title and its lead, set on the foot of the frame. Anything a page adds
+ * below the lead comes in as children.
  *
- * The plate is scrimmed hard enough that it reads as texture under the type rather than as a
- * view of its own — the page's own photography, further down, is where the reader is meant to
- * look. Each page picks a different one; see `pagePlates` in `src/lib/media.ts`.
+ * The photograph is the page's opening shot, not texture under the type: the scrim only weights
+ * the top for the bar and the foot for the title, and the frame opens as the page arrives — an
+ * inset window widening to the edges, the picture settling out of a slight push. Each page picks
+ * a different photograph; see `pagePlates` in `src/lib/media.ts`.
  */
 export function PageMasthead({
   crumbLabel,
@@ -42,21 +43,21 @@ export function PageMasthead({
   return (
     <section
       aria-labelledby="pg-h"
-      style={css('position:relative;overflow:clip;background:#062621;color:#ffffff')}
+      data-tone="dark"
+      style={css(
+        'position:relative;overflow:clip;display:flex;align-items:flex-end;' +
+          'min-height:clamp(560px,86svh,940px);background:#041815;color:#ffffff',
+      )}
     >
-      {plate ? <Plate frame={plate} scrim="masthead" depth={90} priority /> : null}
-      <span
-        aria-hidden="true"
-        style={css(
-          'position:absolute;inset-block-start:0;inset-inline:0;height:9px;' +
-            'background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 28px);' +
-            'mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)',
-        )}
-      />
+      {plate ? (
+        <span data-masthead-plate="" style={css('position:absolute;inset:0')}>
+          <Plate frame={plate} scrim="cinema" depth={120} priority />
+        </span>
+      ) : null}
       <div
         style={css(
-          'position:relative;max-width:1200px;margin:0 auto;' +
-            'padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,86px)',
+          'position:relative;box-sizing:border-box;width:100%;max-width:1400px;margin:0 auto;' +
+            'padding:clamp(120px,17vh,190px) clamp(16px,3vw,32px) clamp(48px,7vw,92px)',
         )}
       >
         <nav

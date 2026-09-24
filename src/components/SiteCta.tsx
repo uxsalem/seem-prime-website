@@ -61,20 +61,13 @@ export function SiteCta({ page }: { page: CtaPage }) {
   return (
     <section
       aria-labelledby="cta-h"
+      data-tone="dark"
       style={css(
-        'position:relative;overflow:clip;display:flex;align-items:center;' +
-          'min-height:clamp(420px,56vh,600px);background:#041815;color:#ffffff',
+        'position:relative;overflow:clip;display:flex;align-items:flex-end;' +
+          'min-height:clamp(520px,78vh,820px);background:#041815;color:#ffffff',
       )}
     >
-      <Plate frame={pagePlates[page].cta} scrim="banner" depth={110} />
-      <span
-        aria-hidden="true"
-        style={css(
-          'position:absolute;inset-block-start:0;inset-inline:0;height:9px;' +
-            'background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.24) 0 1px,transparent 1px 28px);' +
-            'mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)',
-        )}
-      />
+      <Plate frame={pagePlates[page].cta} scrim="close" depth={130} />
       <span
         aria-hidden="true"
         style={css('position:absolute;inset-block:0;inset-inline-end:0;width:3px;background:#dc4b1c')}
@@ -82,20 +75,20 @@ export function SiteCta({ page }: { page: CtaPage }) {
 
       <div
         style={css(
-          'position:relative;width:100%;max-width:1200px;margin:0 auto;' +
-            'padding:clamp(52px,7vw,92px) clamp(16px,3vw,32px)',
+          'position:relative;width:100%;max-width:1400px;margin:0 auto;' +
+            'padding:clamp(96px,12vw,160px) clamp(16px,3vw,32px) clamp(52px,7vw,92px)',
         )}
       >
         <h2
           id="cta-h"
           data-sc="rise"
           style={css(
-            'margin:0;max-width:24ch;font-family:' +
+            'margin:0;max-width:20ch;font-family:' +
               disp +
               ';font-weight:' +
               (ar ? '600' : '300') +
-              ';font-size:clamp(28px,4.2vw,58px);line-height:' +
-              (ar ? '1.28' : '1.04') +
+              ';font-size:clamp(32px,4.8vw,72px);line-height:' +
+              (ar ? '1.26' : '1.02') +
               ';letter-spacing:' +
               (ar ? '0' : '-.025em') +
               ';color:#ffffff;text-wrap:pretty',

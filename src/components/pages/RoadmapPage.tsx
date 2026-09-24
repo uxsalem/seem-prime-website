@@ -88,7 +88,7 @@ export function RoadmapPage() {
       </section>
 
       {/* --- 2030 targets --- */}
-      <section aria-labelledby="kp-h" style={css('background:#062621;color:#ffffff')}>
+      <section aria-labelledby="kp-h" data-tone="dark" style={css('background:#062621;color:#ffffff')}>
         <div
           style={css('max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)')}
         >

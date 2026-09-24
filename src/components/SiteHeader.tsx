@@ -47,38 +47,57 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
   const { lang, theme, toggleLang, toggleTheme } = useSite()
   const t = NAV[lang]
   const [scrolled, setScrolled] = useState(false)
+  const [tone, setTone] = useState<'light' | 'dark'>('light')
 
   useEffect(() => {
-    const onScroll = () => setScrolled((window.scrollY || 0) > 40)
+    // The bar takes the tone of whatever it is passing over: any section marked
+    // `data-tone="dark"` under its middle line turns it to dark glass, so a cinematic section
+    // is never capped by a white bar.
+    const onScroll = () => {
+      setScrolled((window.scrollY || 0) > 40)
+      let dark = false
+      document.querySelectorAll<HTMLElement>('[data-tone="dark"]').forEach((el) => {
+        const r = el.getBoundingClientRect()
+        if (r.top <= 36 && r.bottom > 36) dark = true
+      })
+      setTone(dark ? 'dark' : 'light')
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   // A page with a photographic hero starts transparent over it; every other page's bar is solid
   // from the first pixel, because there is nothing behind it to be glass over.
   const solid = overHero ? scrolled : true
+  const dark = tone === 'dark'
+  const onDark = !solid || dark
 
   const hdrStyle =
-    'position:fixed;inset-block-start:0;inset-inline:0;z-index:60;backdrop-filter:blur(14px);' +
-    'transition:background .24s cubic-bezier(.2,.7,.3,1),border-color .24s,color .24s,' +
+    'position:fixed;inset-block-start:0;inset-inline:0;z-index:60;backdrop-filter:' +
+    (solid ? 'blur(14px) saturate(1.2)' : 'none') +
+    ';transition:background .32s cubic-bezier(.2,.7,.3,1),border-color .32s,color .32s,' +
     'box-shadow .3s cubic-bezier(.2,.7,.3,1);box-shadow:' +
-    (scrolled ? '0 10px 30px rgba(4,24,21,.08)' : 'none') +
+    (scrolled && !dark ? '0 10px 30px rgba(4,24,21,.08)' : 'none') +
     ';' +
     'background:' +
-    (solid ? 'var(--hdr)' : 'transparent') +
+    (!solid ? 'transparent' : dark ? 'rgba(4,24,21,.72)' : 'var(--hdr)') +
     ';border-block-end:1px solid ' +
-    (solid ? 'var(--line)' : 'transparent') +
+    (!solid ? 'transparent' : dark ? 'rgba(255,255,255,.1)' : 'var(--line)') +
     ';color:' +
-    (solid ? 'var(--ink)' : '#ffffff')
+    (onDark ? '#ffffff' : 'var(--ink)')
 
   const ctaStyle =
     'display:none;height:44px;padding:0 22px;border-radius:999px;align-items:center;font-size:14px;' +
     'font-weight:500;text-decoration:none;transition:transform .18s cubic-bezier(.2,.7,.3,1),background .18s;' +
     'background:' +
-    (solid ? '#062621' : '#ffffff') +
+    (onDark ? '#ffffff' : '#062621') +
     ';color:' +
-    (solid ? '#ffffff' : '#041815')
+    (onDark ? '#041815' : '#ffffff')
 
   const themeGlyph =
     'display:block;width:16px;height:16px;border-radius:50%;border:1.5px solid currentColor;background:' +
@@ -87,7 +106,7 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
       : 'linear-gradient(90deg,transparent 50%,currentColor 50%)')
 
   return (
-    <header style={css(hdrStyle)}>
+    <header data-hdr="" style={css(hdrStyle)}>
       <div
         style={css(
           'max-width:1400px;margin:0 auto;padding:0 clamp(16px,3vw,32px);height:' +
@@ -162,11 +181,11 @@ export function SiteHeader({ active = '', overHero = false }: { active?: NavKey 
           >
             {t.switch}
           </button>
-          {/* Over the hero the pill is white, so its sheen has to be the ink rather than more white. */}
+          {/* Over a dark surface the pill is white, so its sheen has to be the ink rather than more white. */}
           <Link
             href={routes.contact}
             data-hdrcta=""
-            data-solid={solid ? undefined : ''}
+            data-solid={onDark ? '' : undefined}
             className="sp-nudge sp-sheen"
             style={css(ctaStyle)}
           >
