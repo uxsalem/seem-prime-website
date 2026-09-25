@@ -19,7 +19,7 @@ import { useSite } from '@/lib/site'
  */
 
 /** How much brand green the copy needs between itself and the photograph. */
-export type Scrim = 'hero' | 'masthead' | 'cinema' | 'banner' | 'close' | 'stage' | 'horizon' | 'none'
+export type Scrim = 'hero' | 'masthead' | 'cinema' | 'banner' | 'close' | 'stage' | 'horizon' | 'creed' | 'none'
 
 const GREEN = '4,24,21'
 
@@ -59,6 +59,13 @@ function scrimLayers(scrim: Scrim, ar: boolean): string[] {
     // Stacked and crossfaded behind the business-model stage; the panel over it is already dark.
     case 'stage':
       return [`linear-gradient(to top,rgba(${GREEN},.88),rgba(${GREEN},.52))`]
+    // A band the section opens under: the picture holds at the top, then gives way entirely to
+    // the green the long copy below it is set on.
+    case 'creed':
+      return [
+        `linear-gradient(to bottom,rgba(${GREEN},.46) 0%,rgba(${GREEN},.3) 26%,rgba(${GREEN},.78) 62%,rgb(${GREEN}) 100%)`,
+        `linear-gradient(to ${start},rgba(${GREEN},.52) 0%,transparent 64%)`,
+      ]
     // A title up top and figures along the foot, with the horizon left clear between them.
     case 'horizon':
       return [
