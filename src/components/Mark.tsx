@@ -2,8 +2,12 @@
  * The SEEM GROUP square mark. Every path paints in `currentColor` so the mark inherits the
  * surface it sits on; the ember tick in the original artwork is carried by the accent rules
  * around it rather than baked into the glyph.
+ *
+ * The paths on a 120-unit square, in the artwork's own order: the S is 0, 1, 6 and 7, the frame
+ * is 2, the upper E is 3 and 8, the lower E is 4 and 9, and the M is 5 and 10. The about page
+ * draws the mark part by part from this list.
  */
-const PATHS = [
+export const MARK_PATHS = [
   'M47.79 29.91 C46.25 29.31 44.58 28.99 42.84 28.99 L39.99 28.99 L39.99 29.00 L25.86 29.00 L25.86 36.86 L39.99 36.86 L39.99 36.86 L42.84 36.86 C46.14 36.79 48.82 39.46 48.82 42.77 C48.82 46.07 46.14 48.62 42.84 48.62 L39.99 48.62 L39.99 56.54 L42.84 56.54 C44.58 56.54 46.25 56.22 47.79 55.63 C52.95 53.64 56.61 48.63 56.61 42.77 C56.61 36.90 52.95 31.89 47.79 29.91',
   'M17.04 23.02 C17.04 19.71 19.71 17.16 23.02 17.16 L25.86 17.16 L25.86 9.24 L23.02 9.24 C21.27 9.24 19.60 9.57 18.06 10.16 C12.90 12.15 9.24 17.16 9.24 23.02 C9.24 28.88 12.90 33.89 18.06 35.88 C19.60 36.47 21.27 36.86 23.02 36.86 L25.86 36.86 L25.86 29.00 L23.02 29.00 C19.71 29.00 17.04 26.32 17.04 23.02',
   'M120.00 0.01 L117.69 0.01 L2.32 0.01 L0.01 0.01 L0.01 2.32 L0.01 117.69 L0.01 120.00 L2.32 120.00 L117.69 120.00 L120.00 120.00 L120.00 117.69 L120.00 2.32 Z M117.69 117.69 L2.32 117.69 L2.32 2.32 L117.69 2.32 Z',
@@ -26,7 +30,7 @@ export function Mark({ size = 30 }: { size?: number }) {
       aria-hidden="true"
       style={{ display: 'block', flex: '0 0 auto' }}
     >
-      {PATHS.map((d, i) => (
+      {MARK_PATHS.map((d, i) => (
         <path key={i} d={d} fill="currentColor" fillRule="evenodd" />
       ))}
     </svg>

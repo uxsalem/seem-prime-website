@@ -121,6 +121,19 @@ export const photos = {
       en: 'A laptop of code before the Riyadh skyline at golden hour, cloud and data icons in the air above it',
     },
   },
+  /**
+   * A city from a lit terrace: towers, the roads and the water running off to the sun. No one
+   * sector in it, which is the point — the about page assembles it out of four others.
+   */
+  city: {
+    ...set('skyline-golden-hour', 1672),
+    lqip: 'data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAACQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOiyAADiCRlgAAAAP7k7ZRg4O9iN79JFdpf/9jdLYk1O/UFgl06yCm0hL2VzfmPIBtNKCG3hlcFLHU7bQzwAR8R3wb90F4ImzMstBtYAAAA',
+    focus: '54% 46%',
+    alt: {
+      ar: 'مدينة عند الغروب من شرفة مضاءة: أبراج زجاجية، وطرق تمتد نحو الماء والشمس',
+      en: 'A city at golden hour from a lit terrace — glass towers, and roads running off toward the water and the sun',
+    },
+  },
 
   // --- Entertainment, cut from one contact sheet: six evenings, one sector --------------------
 
@@ -289,12 +302,12 @@ export const stageFrames: Framed[] = [
 /**
  * The masthead plate each inner page opens on, and the plate its closing band lands on. They
  * are deliberately never the same photograph twice on one page: the reader should feel they
- * have travelled somewhere between the title and the call to action.
+ * have travelled somewhere between the title and the call to action. The about page closes on
+ * a drawing of its own instead of a plate, so it only names its opening.
  */
 export const pagePlates = {
   about: {
     masthead: { photo: photos.coast, focus: '30% 50%' },
-    cta: { photo: photos.residence, focus: '64% 50%' },
   },
   model: {
     masthead: { photo: photos.industry, focus: '62% 50%' },
@@ -316,7 +329,7 @@ export const pagePlates = {
     masthead: { photo: photos.residence, focus: '56% 50%' },
     cta: { photo: photos.facade, focus: '20% 50%' },
   },
-} as const satisfies Record<string, { masthead: Framed; cta: Framed }>
+} as const satisfies Record<string, { masthead: Framed; cta?: Framed }>
 
 /**
  * The home page's closing moments. The horizon is the coast again — the page ends on the view
@@ -324,3 +337,21 @@ export const pagePlates = {
  */
 export const homeHorizon: Framed = { photo: photos.coast, focus: '100% 40%' }
 export const homeClosing: Framed = { photo: photos.technology, focus: '64% 46%' }
+
+/**
+ * The about page's four strands — capital, technology, operations, strategic partnerships — in
+ * the order its sentence names them. Each is a window of its own until the four meet as one
+ * square and become `aboutWhole`. Partnership is the table: the place a partner sits down.
+ */
+export const aboutStrands: Framed[] = [
+  { photo: photos.payments, focus: '60% 50%' },
+  { photo: photos.technology, focus: '30% 58%' },
+  { photo: photos.logistics, focus: '46% 62%' },
+  { photo: photos.dining, focus: '34% 64%' },
+]
+
+/** What the four strands assemble into: one city, no single sector in charge of it. */
+export const aboutWhole: Framed = { photo: photos.city, focus: '54% 46%' }
+
+/** The values open under green glass — the identity's own material — before the type takes over. */
+export const aboutCreed: Framed = { photo: photos.facade, focus: '40% 58%' }

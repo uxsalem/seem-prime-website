@@ -8,7 +8,7 @@ import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { dispFont } from '@/lib/typography'
 
-export type CtaPage = 'about' | 'model' | 'strategy' | 'ecosystem' | 'roadmap'
+export type CtaPage = 'model' | 'strategy' | 'ecosystem' | 'roadmap'
 
 const CTA = {
   ar: {
@@ -16,14 +16,12 @@ const CTA = {
     body: 'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية. أخبرنا بما تبحث عنه وسيتواصل معك فريقنا مباشرة.',
     city: 'جدة، المملكة العربية السعودية',
     lines: {
-      about: 'ابنِ مع من يبني المنظومة',
       model: 'ضع منصتك داخل نموذج يعمل',
       strategy: 'شاركنا في المرحلة القادمة',
       ecosystem: 'هل تبحث عن شراكة أو استثمار؟',
       roadmap: 'كن جزءاً من الطريق حتى 2030',
     },
     second: {
-      about: ['منظومتنا', routes.ecosystem],
       model: ['منصات المحفظة', routes.ecosystem],
       strategy: ['نموذج الأعمال', routes.model],
       ecosystem: ['نموذج الأعمال', routes.model],
@@ -35,14 +33,12 @@ const CTA = {
     body: 'We welcome investors, partners and government entities. Tell us what you are looking for and our team will come back to you directly.',
     city: 'Jeddah, Saudi Arabia',
     lines: {
-      about: 'Build with the people building the ecosystem',
       model: 'Put your platform inside a model that works',
       strategy: 'Join us for the next phase',
       ecosystem: 'Looking to partner or invest?',
       roadmap: 'Be part of the road to 2030',
     },
     second: {
-      about: ['Our ecosystem', routes.ecosystem],
       model: ['Portfolio platforms', routes.ecosystem],
       strategy: ['Business model', routes.model],
       ecosystem: ['Business model', routes.model],
