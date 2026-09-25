@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import { css } from '@/lib/css'
 import { progressWidth, runCounter, useReveal, useScrollDriver } from '@/lib/hooks'
@@ -39,6 +39,29 @@ export function PageShell({
   )
 
   const reveal = useReveal(onReveal)
+
+  // The server renders Arabic, so a stored English preference re-renders the page after hydration,
+  // and the fonts swap in after that; both move every section below the fold. A page opened on a
+  // chapter's address (`/strategy#roadmap`) is taken back to it once they settle — unless the
+  // reader has already started moving.
+  const moved = useRef(false)
+  useEffect(() => {
+    const mark = () => {
+      moved.current = true
+    }
+    const events = ['wheel', 'touchstart', 'pointerdown', 'keydown'] as const
+    events.forEach((type) => window.addEventListener(type, mark, { passive: true }))
+    return () => events.forEach((type) => window.removeEventListener(type, mark))
+  }, [])
+  useEffect(() => {
+    const realign = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1))
+      if (!id || moved.current) return
+      document.getElementById(id)?.scrollIntoView({ block: 'start' })
+    }
+    realign()
+    document.fonts?.ready.then(realign).catch(() => {})
+  }, [lang])
 
   useScrollDriver({
     onFrame: () => {

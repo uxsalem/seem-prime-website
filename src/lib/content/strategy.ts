@@ -1,3 +1,16 @@
+/**
+ * Strategy page copy. Arabic is the primary language; English is the parallel cut, not a gloss.
+ *
+ * The strategy, the business model and the roadmap used to be three pages. They are one now,
+ * told in the three beats of the framework's own promise line — from strategy, to execution, to
+ * sustainable impact — so the vision, the pillars and the sectors come first, the model that
+ * turns them into value next, and the road to 2030 last.
+ *
+ * Almost all of it is the approved framework copy. The value proposition's English statements
+ * are the framework's; their Arabic, and the handful of other new strings, are marked
+ * `// draft` for the client to confirm before launch.
+ */
+
 export type StrategyCopy = typeof AR
 
 const AR = {
@@ -5,15 +18,35 @@ const AR = {
   crumbLabel: 'مسار التنقل',
   navStrategy: 'الاستراتيجية',
   pageH: 'من الاستراتيجية إلى الأثر المستدام',
-  pageLead: 'الرؤية والرسالة والركائز الخمس التي تحدّد أين نعمل وكيف ننفّذ.',
-  strategyH: 'الرؤية والرسالة',
+  pageLead:
+    'الرؤية والركائز التي تحدّد أين نعمل، والنموذج الذي نحوّلها به إلى قيمة، والطريق حتى 2030.', // draft
+  contentsLabel: 'فصول الصفحة', // draft
+  /** The promise line's three beats, each with the chapters it holds: [act, chapters]. */
+  acts: [
+    ['الاستراتيجية', ['الرؤية والرسالة', 'الركائز والقطاعات']], // draft
+    ['التنفيذ', ['نموذج الأعمال', 'القيمة المضافة']],
+    ['الأثر المستدام', ['خارطة الطريق', 'أهداف 2030']], // draft
+  ] as [string, string[]][],
+
+  // --- 01 · Vision & mission ------------------------------------------------------------------
+
+  focusH: 'الرؤية والرسالة',
   visionLabel: 'الرؤية',
   missionLabel: 'الرسالة',
   vision:
     'أن تكون سيم برايم المنصة الاقتصادية الرائدة في بناء وتشغيل منظومات الأعمال المتكاملة التي تعظّم القيمة الاقتصادية، وتسرّع النمو، وتخلق فرصًا مستدامة في المملكة العربية السعودية والمنطقة.',
   mission:
     'نطوّر ونشغّل ونستثمر في منصات الأعمال المتخصصة من خلال توظيف التقنية، وبناء الشراكات الاستراتيجية، وربط سلاسل القيمة الاقتصادية؛ لتمكين الشركات ورواد الأعمال والمستثمرين من النمو وتحقيق أثر اقتصادي مستدام.',
-  pillarsH: 'الركائز الاستراتيجية',
+  /** What each statement brings into focus: the horizon, then the work in hand. */
+  focusFar: 'الأفق', // draft
+  focusNear: 'ما بين أيدينا', // draft
+  metre: 'م',
+
+  // --- 02 · Pillars & sectors -----------------------------------------------------------------
+
+  pillarsH: 'خمس ركائز، وثمانية قطاعات، ومنظومة واحدة', // draft
+  pillarsLead: 'خمس ركائز تحدّد كيف ننفّذ، على ثمانية قطاعات تحدّد أين نعمل.', // draft
+  pillarsLabel: 'الركائز الاستراتيجية',
   pillars: [
     ['تطوير المنصات الاقتصادية', 'نؤسس ونشغّل كيانات متخصصة، طبقةً فوق طبقة، حتى تقوم بذاتها.'],
     ['الاستثمار في القطاعات الواعدة', 'ندخل مبكراً حيث يتقدّم الطلب، ونضاعف حصتنا مع نمو القطاع.'],
@@ -21,11 +54,70 @@ const AR = {
     ['التميز التشغيلي', 'مؤشرات ومراجعات دورية تشدّ الأداء نحو مركزه لا نحو أطرافه.'],
     ['التحول الرقمي والابتكار', 'نمرّر التقنية والبيانات عبر المنظومة كلها، لا في منصة واحدة.'],
   ],
-  sectorsH: 'القطاعات الاستراتيجية',
+  sectorsLabel: 'القطاعات الاستراتيجية',
   sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه'],
-  sectorPh: 'ضع صورة من قطاع ',
-  railPrev: 'السابق',
-  railNext: 'التالي',
+
+  // --- 03 · Business model --------------------------------------------------------------------
+
+  modelH: 'منظومة واحدة، أربع مراحل لصناعة القيمة',
+  modelLead: 'كل منصة تمرّ بالمراحل الأربع ذاتها، ثم تعود بعوائدها إلى المنظومة.',
+  /** [verb, what the stage holds]. */
+  model: [
+    ['نطوّر', ['منصات الأعمال', 'المشروعات الجديدة', 'نماذج الأعمال']],
+    ['نشغّل', ['إدارة المنصات', 'الخدمات المشتركة', 'تحسين الأداء']],
+    ['نستثمر', ['الاستثمارات في الملكية', 'المشاريع المشتركة', 'الاستحواذات الاستراتيجية']],
+    ['نحقق الإيرادات', ['عوائد الاستثمار', 'رسوم الإدارة والتشغيل', 'إيرادات المنصات', 'الخدمات الاستشارية']],
+  ] as [string, string[]][],
+  returnTag: 'العائد',
+  returnLine: 'تعود العوائد إلى المنظومة، فتبدأ الدورة من جديد.', // draft
+  stageLabel: 'المرحلة', // draft
+
+  // --- 04 · Value proposition -----------------------------------------------------------------
+
+  valueLabel: 'القيمة المضافة',
+  valueH: 'ما نضيفه إلى كل منصة', // draft
+  valueLead:
+    'نجمع بين الخبرة الاستثمارية، والتميز التشغيلي، والشراكات الاستراتيجية لبناء وتوسيع منصات أعمال عالية الأثر.',
+  /** [capability, what it means]. The first four add up to the fifth. */
+  valueProp: [
+    ['الخبرة الاستثمارية', 'نحدّد الفرص الواعدة، ونطوّرها، ونستثمر فيها.'], // draft
+    ['التميز التشغيلي', 'نحوّل الرؤية الاستراتيجية إلى أعمال عالية الأداء وقابلة للتوسع.'], // draft
+    ['الشراكات الاستراتيجية', 'نبني شراكات طويلة الأمد تعزّز النمو والابتكار والوصول إلى الأسواق.'], // draft
+    ['منصات أعمال قابلة للتوسع', 'نطوّر منصات متكاملة مصمَّمة للنمو المستدام والتوسع على المدى الطويل.'], // draft
+    ['قيمة اقتصادية مستدامة', 'نصنع قيمة دائمة لجميع أصحاب المصلحة عبر أثر اقتصادي طويل الأمد.'], // draft
+  ],
+
+  // --- 05 · Roadmap and the 2030 targets ------------------------------------------------------
+
+  roadH: 'خارطة الطريق حتى 2030',
+  roadLead: 'أربع مراحل من التأسيس إلى الريادة، وخمسة أهداف قابلة للقياس.',
+  phaseLabel: 'المرحلة', // draft
+  /** [years, phase]. */
+  roadmap: [
+    ['2025', 'التأسيس'],
+    ['2026-2028', 'التوسع داخل المملكة'],
+    ['2029', 'التوسع الإقليمي'],
+    ['2030', 'الريادة في بناء المنظومات الاقتصادية'],
+  ],
+  kpiH: 'الأهداف الاستراتيجية بحلول 2030',
+  kpiNote: 'الحجم الذي نبني نحوه — موزّعاً على منصات المنظومة وقطاعاتها.',
+  /** [figure, what it counts, its unit]. */
+  kpis: [
+    ['40', 'منصة أعمال', ''],
+    ['1', 'محفظة استثمارية', 'مليار ريال'],
+    ['200', 'فرصة عمل', ''],
+    ['50', 'شراكة استراتيجية', ''],
+    ['10%', 'نمو سنوي', ''],
+  ],
+
+  // --- The close ------------------------------------------------------------------------------
+
+  closeH: 'كن جزءاً من الطريق حتى 2030',
+  closeBody:
+    'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية. أخبرنا بما تبحث عنه وسيتواصل معك فريقنا مباشرة.',
+  cta: 'تواصل معنا',
+  second: 'منظومتنا',
+  address: 'حي الخالدية — جدة، المملكة العربية السعودية',
 }
 
 const EN: StrategyCopy = {
@@ -33,51 +125,94 @@ const EN: StrategyCopy = {
   crumbLabel: 'Breadcrumb',
   navStrategy: 'Strategy',
   pageH: 'From strategy to sustainable impact',
-  pageLead: 'The vision, the mission, and the five pillars that set where we operate and how we execute.',
-  strategyH: 'Vision & mission',
+  pageLead:
+    'The vision and pillars that set where we operate, the model that turns them into value, and the road to 2030.', // draft
+  contentsLabel: 'On this page', // draft
+  acts: [
+    ['Strategy', ['Vision & mission', 'Pillars & sectors']], // draft
+    ['Execution', ['Business model', 'Value proposition']],
+    ['Sustainable impact', ['Roadmap', '2030 targets']], // draft
+  ],
+
+  focusH: 'Vision & mission',
   visionLabel: 'Vision',
   missionLabel: 'Mission',
   vision:
     'To be the leading platform for building and operating integrated economic ecosystems that maximize value, accelerate growth, and create sustainable opportunities across Saudi Arabia and the wider region.',
   mission:
     'We develop, operate and invest in specialized business platforms by leveraging technology, forging strategic partnerships and connecting economic value chains — to empower businesses, entrepreneurs and investors to grow and achieve sustainable economic impact.',
-  pillarsH: 'Strategic pillars',
+  focusFar: 'The horizon', // draft
+  focusNear: 'The work in hand', // draft
+  metre: 'm',
+
+  pillarsH: 'Five pillars, eight sectors, one ecosystem', // draft
+  pillarsLead: 'Five pillars set how we execute; eight sectors set where we operate.', // draft
+  pillarsLabel: 'Strategic pillars',
   pillars: [
-    [
-      'Develop economic platforms',
-      'We found and operate specialised entities, layer by layer, until each stands on its own.',
-    ],
-    [
-      'Invest in high-growth sectors',
-      'We enter early where demand is moving, and raise our share as the sector grows.',
-    ],
-    [
-      'Build strategic partnerships',
-      'We meet partners halfway: their expertise, our market, benefit both ways.',
-    ],
-    [
-      'Deliver operational excellence',
-      'Indicators and standing reviews pull performance toward its centre, not its edges.',
-    ],
-    [
-      'Drive digital transformation',
-      'We run technology and data through the whole ecosystem, not one platform.',
-    ],
+    ['Develop economic platforms', 'We found and operate specialised entities, layer by layer, until each stands on its own.'],
+    ['Invest in high-growth sectors', 'We enter early where demand is moving, and raise our share as the sector grows.'],
+    ['Build strategic partnerships', 'We meet partners halfway: their expertise, our market, benefit both ways.'],
+    ['Deliver operational excellence', 'Indicators and standing reviews pull performance toward its centre, not its edges.'],
+    ['Drive digital transformation', 'We run technology and data through the whole ecosystem, not one platform.'],
   ],
-  sectorsH: 'Strategic focus sectors',
-  sectors: [
-    'Industry',
-    'Technology',
-    'Food',
-    'Logistics',
-    'Tourism',
-    'Real estate',
-    'Financial services',
-    'Entertainment',
+  sectorsLabel: 'Strategic focus sectors',
+  sectors: ['Industry', 'Technology', 'Food', 'Logistics', 'Tourism', 'Real estate', 'Financial services', 'Entertainment'],
+
+  modelH: 'One ecosystem, four stages of value',
+  modelLead: 'Every platform moves through the same four stages, then returns its yield to the ecosystem.',
+  model: [
+    ['Develop', ['Business platforms', 'New ventures', 'Business models']],
+    ['Operate', ['Platform management', 'Shared services', 'Performance optimization']],
+    ['Invest', ['Equity investments', 'Joint ventures', 'Strategic acquisitions']],
+    ['Monetize', ['Investment returns', 'Management fees', 'Platform revenues', 'Advisory services']],
   ],
-  sectorPh: 'Drop a photo from ',
-  railPrev: 'Previous',
-  railNext: 'Next',
+  returnTag: 'The return',
+  returnLine: 'The yield returns to the ecosystem, and the cycle begins again.', // draft
+  stageLabel: 'Stage', // draft
+
+  valueLabel: 'Value proposition',
+  valueH: 'What we bring to every platform', // draft
+  valueLead:
+    'We combine investment expertise, operational excellence and strategic partnerships to develop, operate and scale high-impact business platforms.',
+  valueProp: [
+    ['Investment expertise', 'Identifying, developing, and investing in high-potential opportunities.'],
+    ['Operational excellence', 'Transforming strategic vision into high-performing, scalable businesses.'],
+    ['Strategic partnerships', 'Building long-term partnerships that foster growth, innovation, and market access.'],
+    ['Scalable business platforms', 'Developing integrated platforms designed for sustainable growth and long-term scalability.'],
+    ['Sustainable economic value', 'Creating lasting value for all stakeholders through long-term economic impact.'],
+  ],
+
+  roadH: 'The roadmap to 2030',
+  roadLead: 'Four phases from foundation to leadership, and five measurable targets.',
+  phaseLabel: 'Phase', // draft
+  roadmap: [
+    ['2025', 'Foundation'],
+    ['2026-2028', 'Saudi expansion'],
+    ['2029', 'Regional expansion'],
+    ['2030', 'Leading economic ecosystem platform'],
+  ],
+  kpiH: 'Strategic targets by 2030',
+  kpiNote: 'The scale we are building toward — deployed across the ecosystem’s platforms and sectors.',
+  kpis: [
+    ['40', 'Business platforms', ''],
+    ['1', 'Investment portfolio', 'SR billion'],
+    ['200', 'Jobs created', ''],
+    ['50', 'Strategic partnerships', ''],
+    ['10%', 'Annual growth', ''],
+  ],
+
+  closeH: 'Be part of the road to 2030',
+  closeBody:
+    'We welcome investors, partners and government entities. Tell us what you are looking for and our team will come back to you directly.',
+  cta: 'Contact us',
+  second: 'Our ecosystem',
+  address: 'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
 }
 
 export const STRATEGY = { ar: AR, en: EN }
+
+/**
+ * Where each chapter's section sits, in the order `acts` lists them. `model` and `roadmap` are
+ * also where the two retired pages now redirect (see `next.config.ts`).
+ */
+export const STRATEGY_IDS = ['vision', 'pillars', 'model', 'value', 'roadmap', 'targets'] as const

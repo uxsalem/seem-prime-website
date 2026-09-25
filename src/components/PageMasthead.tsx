@@ -83,7 +83,7 @@ export function PageMasthead({
           style={css(
             'margin:clamp(18px,2.4vw,28px) 0 0;max-width:' +
               leadWidth +
-              ';font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.82)',
+              ';font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.6;color:rgba(255,255,255,.82);text-wrap:pretty',
           )}
         >
           {lead}

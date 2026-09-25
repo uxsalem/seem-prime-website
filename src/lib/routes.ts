@@ -2,14 +2,21 @@
 export const routes = {
   home: '/',
   about: '/about',
-  model: '/model',
   strategy: '/strategy',
   ecosystem: '/ecosystem',
-  roadmap: '/roadmap',
   contact: '/contact',
 } as const
 
 export type RouteKey = keyof typeof routes
+
+/**
+ * The business model and the roadmap were pages of their own; they are chapters of the strategy
+ * page now. Links to them land on the chapter, and so do the old URLs (see `next.config.ts`).
+ */
+export const chapters = {
+  model: '/strategy#model',
+  roadmap: '/strategy#roadmap',
+} as const
 
 /**
  * The abstract brand plates the build shipped with. The heroes, mastheads, banners and closing

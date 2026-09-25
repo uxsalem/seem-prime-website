@@ -4,11 +4,15 @@ import Link from 'next/link'
 import { Plate } from '@/components/Plate'
 import { css } from '@/lib/css'
 import { pagePlates } from '@/lib/media'
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
+import { chapters, EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { dispFont } from '@/lib/typography'
 
-export type CtaPage = 'model' | 'strategy' | 'ecosystem' | 'roadmap'
+/**
+ * The pages that close on the shared photographic band. The about and strategy pages close on
+ * moments of their own instead.
+ */
+export type CtaPage = 'ecosystem'
 
 const CTA = {
   ar: {
@@ -16,16 +20,10 @@ const CTA = {
     body: 'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية. أخبرنا بما تبحث عنه وسيتواصل معك فريقنا مباشرة.',
     city: 'جدة، المملكة العربية السعودية',
     lines: {
-      model: 'ضع منصتك داخل نموذج يعمل',
-      strategy: 'شاركنا في المرحلة القادمة',
       ecosystem: 'هل تبحث عن شراكة أو استثمار؟',
-      roadmap: 'كن جزءاً من الطريق حتى 2030',
     },
     second: {
-      model: ['منصات المحفظة', routes.ecosystem],
-      strategy: ['نموذج الأعمال', routes.model],
-      ecosystem: ['نموذج الأعمال', routes.model],
-      roadmap: ['الاستراتيجية', routes.strategy],
+      ecosystem: ['نموذج الأعمال', chapters.model],
     },
   },
   en: {
@@ -33,16 +31,10 @@ const CTA = {
     body: 'We welcome investors, partners and government entities. Tell us what you are looking for and our team will come back to you directly.',
     city: 'Jeddah, Saudi Arabia',
     lines: {
-      model: 'Put your platform inside a model that works',
-      strategy: 'Join us for the next phase',
       ecosystem: 'Looking to partner or invest?',
-      roadmap: 'Be part of the road to 2030',
     },
     second: {
-      model: ['Portfolio platforms', routes.ecosystem],
-      strategy: ['Business model', routes.model],
-      ecosystem: ['Business model', routes.model],
-      roadmap: ['Strategy', routes.strategy],
+      ecosystem: ['Business model', chapters.model],
     },
   },
 } as const

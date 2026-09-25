@@ -122,6 +122,30 @@ export const photos = {
     },
   },
   /**
+   * The same desk and skyline, with the focus pulled. `techFar` holds the skyline sharp and lets
+   * the laptop and the holograms go soft; `techNear` does the reverse. Each plane is blurred
+   * with only its own colours, so neither bleeds into the other. The strategy page racks
+   * between the two.
+   */
+  techFar: {
+    ...set('riyadh-tech-horizon-far', 1672),
+    lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgBHn5B+F0VKRb0BcAAP6GrKEftjBUEW3BRF9rNhntBIzj4blxVe4Y7NmH5CR/SkZ9NZFLhTSgwxU46Pjsu1l/oYRF0/KdM6DYj/2tsq65R7YLryJAVNvOquxw/V5L5mAA',
+    focus: '60% 48%',
+    alt: {
+      ar: 'أفق الرياض واضحاً عند الغروب، وأمامه حاسوب محمول وأيقونات رقمية خارج نطاق التركيز',
+      en: 'The Riyadh skyline in focus at golden hour, a laptop and floating data icons soft in the foreground',
+    },
+  },
+  techNear: {
+    ...set('riyadh-tech-horizon-near', 1672),
+    lqip: 'data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOgBHpriisBbZOU7gAA/oasoR+2Ht0djjKWMnaMetUphFHpx3AHKhf4cAWR1XA8SlvcikXER+9wwA6ccH4dz1p0HYqy+GRQ1vZ+OQXlteyfpL3Vs4UHslnyG/QAAAA=',
+    focus: '60% 48%',
+    alt: {
+      ar: 'حاسوب محمول بشيفرة برمجية وأيقونات السحابة والبيانات واضحة، وأفق الرياض خلفها خارج نطاق التركيز',
+      en: 'A laptop of code and floating cloud and data icons in focus, the Riyadh skyline soft behind them',
+    },
+  },
+  /**
    * A city from a lit terrace: towers, the roads and the water running off to the sun. No one
    * sector in it, which is the point — the about page assembles it out of four others.
    */
@@ -291,39 +315,22 @@ export const platformFrames: Framed[] = [
   { photo: photos.residence, focus: '60% 50%' },
 ]
 
-/** `Develop · Operate · Invest · Monetize` — one plate per stage of the business model. */
-export const stageFrames: Framed[] = [
-  { photo: photos.industry, focus: '60% 50%' },
-  { photo: photos.logistics, focus: '56% 56%' },
-  { photo: photos.technology, focus: '58% 46%' },
-  { photo: photos.leisure, focus: '58% 50%' },
-]
-
 /**
  * The masthead plate each inner page opens on, and the plate its closing band lands on. They
  * are deliberately never the same photograph twice on one page: the reader should feel they
- * have travelled somewhere between the title and the call to action. The about page closes on
- * a drawing of its own instead of a plate, so it only names its opening.
+ * have travelled somewhere between the title and the call to action. The about and strategy
+ * pages close on moments of their own instead of a plate, so they only name their opening.
  */
 export const pagePlates = {
   about: {
     masthead: { photo: photos.coast, focus: '30% 50%' },
   },
-  model: {
-    masthead: { photo: photos.industry, focus: '62% 50%' },
-    cta: { photo: photos.logistics, focus: '60% 56%' },
-  },
   strategy: {
-    masthead: { photo: photos.technology, focus: '62% 42%' },
-    cta: { photo: photos.coast, focus: '72% 50%' },
+    masthead: { photo: photos.city, focus: '58% 44%' },
   },
   ecosystem: {
     masthead: { photo: photos.leisure, focus: '56% 50%' },
     cta: { photo: photos.industry, focus: '40% 50%' },
-  },
-  roadmap: {
-    masthead: { photo: photos.logistics, focus: '20% 50%' },
-    cta: { photo: photos.technology, focus: '70% 44%' },
   },
   contact: {
     masthead: { photo: photos.residence, focus: '56% 50%' },
@@ -355,3 +362,36 @@ export const aboutWhole: Framed = { photo: photos.city, focus: '54% 46%' }
 
 /** The values open under green glass — the identity's own material — before the type takes over. */
 export const aboutCreed: Framed = { photo: photos.facade, focus: '40% 58%' }
+
+/**
+ * The strategy page's focus pull: the vision holds the horizon sharp, the mission the work in
+ * hand. Both are the same frame, so they share a crop.
+ */
+export const strategyFocus: { far: Framed; near: Framed } = {
+  far: { photo: photos.techFar, focus: '58% 46%' },
+  near: { photo: photos.techNear, focus: '58% 46%' },
+}
+
+/**
+ * `Develop · Operate · Invest · Monetize`, one picture per stage of the business model, seen
+ * through the square the stages run around: a hall being fitted, a hub at work, a property
+ * held, a payment settled.
+ */
+export const loopFrames: Framed[] = [
+  { photo: photos.manufacturing, focus: '44% 50%' },
+  { photo: photos.logistics, focus: '64% 56%' },
+  { photo: photos.residence, focus: '62% 50%' },
+  { photo: photos.payments, focus: '60% 48%' },
+]
+
+/**
+ * The roadmap's four phases, in order: Jeddah's coast for the foundation, a plant in the
+ * Kingdom's interior for the expansion at home, an evening destination for the region, and
+ * Riyadh at first light, in the identity's own green glass, for 2030.
+ */
+export const roadFrames: Framed[] = [
+  { photo: photos.coast, focus: '62% 50%' },
+  { photo: photos.industry, focus: '60% 50%' },
+  { photo: photos.leisure, focus: '58% 50%' },
+  { photo: photos.facade, focus: '34% 58%' },
+]

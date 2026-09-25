@@ -1,8 +1,9 @@
 # SEEM PRIME — website
 
-The SEEM PRIME corporate site, as a Next.js App Router project. Seven statically prerendered
+The SEEM PRIME corporate site, as a Next.js App Router project. Five statically prerendered
 pages, bilingual Arabic/English with full RTL, and a light/dark theme — all client-side, no
-backend.
+backend. The business model and the roadmap used to be pages of their own; they are chapters of
+the strategy page now, and `/model` and `/roadmap` redirect to them (`next.config.ts`).
 
 ```bash
 npm install
@@ -20,11 +21,12 @@ src/
     layout.tsx             <html>, global CSS, theme bootstrap, SiteProvider
     globals.css            fonts, tokens, reveal system, layout grids, hover states
     page.tsx               /            → HomePage
-    about|model|strategy|ecosystem|roadmap|contact/page.tsx
+    about|strategy|ecosystem|contact/page.tsx
   components/
     pages/                 the page bodies (client components)
     home/                  the home page's seven sections, each owning its own motion
     about/                 the about page's five chapters and its contents line, likewise
+    strategy/              the strategy page's six chapters in three acts, and their contents line
     PageShell.tsx          direction, body type scale, progress hairline, reveal pass, spotlight
     PageMasthead.tsx       the full-height opening shot every inner page starts on
     Plate.tsx              a full-bleed photograph behind a section: blur-up, scrim, drift
@@ -33,13 +35,14 @@ src/
   lib/
     site.tsx               language + theme context, persisted to localStorage
     css.ts                 CSS declaration string → React style object
-    hooks.ts               scroll driver, reveal, counters, media query, rails
+    hooks.ts               scroll driver, reveal, counters, in-page glide, rails
     motion.ts              plate parallax and the pointer glow, shared by every page
     media.ts               the photography: files, cuts, blur-ups, alt text, and where each is framed
     typography.ts          the shared style builders (h2, masthead, labels, captions)
-    routes.ts              URLs, brand plates, contact details
+    routes.ts              URLs, the chapter addresses, brand plates, contact details
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
+scripts/focus-states.py    regenerates the strategy page's two depth-of-field photographs
 ```
 
 ## How the styling works
@@ -90,9 +93,15 @@ type Framed = { photo: Photo; focus?: string; zoom?: number; origin?: string }
 ```
 
 The maps at the foot of the module decide what appears where: `heroFrames`, `sectorFrames`,
-`verbFrames`, `seemFrames`, `leisureTiles`, `platformFrames`, `stageFrames`, `pagePlates`,
-`homeHorizon`, `homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`. Re-shooting a subject
-is a one-line change.
+`verbFrames`, `seemFrames`, `leisureTiles`, `platformFrames`, `pagePlates`, `homeHorizon`,
+`homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`, `loopFrames`,
+`roadFrames`. Re-shooting a subject is a one-line change.
+
+One photograph has two derived states. `techFar` and `techNear` are the desk before the Riyadh
+skyline with the focus pulled: the horizon sharp and the laptop soft, then the reverse. They are
+generated from the original by `scripts/focus-states.py`, which traces the near plane by hand
+and blurs each plane with only its own colours, so the strategy page can rack focus between them
+as an opacity crossfade rather than a live blur.
 
 **Cuts.** The golden-hour set ships three: the full file (1402–1774px), a 1280px middle cut and
 an 880px card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the
@@ -113,24 +122,26 @@ Image weight, measured against a production build (whole page = after scrolling 
 |---|---|---|---|
 | home | 437KB | 861KB | 387KB |
 | about | 396KB | 663KB | 309KB |
-| model | 617KB | 617KB | 213KB |
-| strategy | 95KB | 694KB | 264KB |
+| strategy | 328KB | 1188KB | 522KB |
 | ecosystem | 173KB | 1108KB | 869KB |
-| roadmap | 249KB | 249KB | 86KB |
 | contact | 202KB | 202KB | 65KB |
 
 The home page's first screen on desktop is the hero's opening frame plus the next scene, which
 is fetched 1.4s in so the first cut never waits. Scenes after that load one ahead, never all at
 once. The about page's is its opening shot plus the four strand windows peeking under it; the
-city they assemble into is only mounted once the reader reaches that chapter.
+city they assemble into is only mounted once the reader reaches that chapter. The strategy page's
+is its opening shot and the two focus states under it. It carries the business model and the
+roadmap as well as the strategy, so it weighs more than any one of the three pages it replaced
+(together they were ~1.56MB), but the seal's four pictures and the roadmap's four are only
+mounted once their chapter is a screen away.
 
 ## Motion
 
 Scroll work runs through `useScrollDriver`, which mirrors the original throttle: per-frame work
 (progress bar, parallax) on every event, heavier passes at ~16fps with a trailing call.
 
-State-driven visuals (the open SEEM stage, the business-model stage, the strategy colonnade)
-are plain React renders. Continuous per-frame values are written straight to the DOM through
+State-driven visuals (the open SEEM stage, the stage the strategy page's seal is on, the year
+its counter shows) are plain React renders. Continuous per-frame values are written straight to the DOM through
 refs, because re-rendering a page this size sixty times a second to move a background plate
 would be absurd.
 
@@ -193,6 +204,41 @@ contents line along its foot, and each chapter in `src/components/about/` owns i
   to the Kingdom, the region and 2030 at the rim, with a ripple leaving the centre once they are
   drawn. Beside them sits the page's one call to action.
 
+### The strategy page, in three acts
+
+The strategy, the business model and the roadmap were three pages; they are one now, told in
+the three beats of the framework's own promise line — from strategy, to execution, to
+sustainable impact. The opening shot carries a contents line that groups the six chapters under
+those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns its motion:
+
+- **`FocusPull`** (vision and mission): one shot of a desk before the Riyadh skyline, with the
+  focus pulled between the two statements. The vision holds the horizon sharp while the laptop
+  and its holograms go soft; the scroll racks the focus forward until the work in hand is sharp
+  and the city blurs, and the mission takes its place. Each statement sits on the plane that is
+  out of focus, and a lens's focus scale tracks the pull from ∞ to arm's length.
+- **`Colonnade`** (pillars and sectors): the five pillars built in the order a building goes
+  up — the ground line, the eight sectors laid along it as the plinth, each pillar rising in
+  turn, and the beam across their heads, lettered SEEM PRIME. Inside each pillar its sentence
+  is drawn (`PillarFigure`): layers until the platform stands alone, a share that grows with its
+  sector, two sides meeting halfway, reviews pulling to the centre, one line through every
+  platform. Every part of a drawing reads its own window of one progress value, so it plays
+  back as well as forward.
+- **`ValueLoop`** (the business model): the model as the company's seal — a square frame
+  lettered with develop, operate, invest and monetize along its sides like a stamp. The section
+  pins and an ember line runs the border side by side, each side a stage with its picture in the
+  window; when it closes, the yield returns to the ecosystem and a spark keeps running the
+  border.
+- **`ValueSum`** (the value proposition): the four capabilities and the outcome they add up to,
+  set as a ledger column — a plus on each line, a double rule drawn under them, and the total on
+  the brand's green below it.
+- **`RoadTo2030`** (the roadmap): the year as a mechanical counter. The scroll clicks its wheels
+  over, 2025 to 2029, each year holding with its phase named beneath it and its picture behind it;
+  at the last turn the tens wheel goes over with the units, and 2030 lands in the light the home
+  page gives the sun. A ruler along the foot keeps the phases in proportion to their years.
+- **`Targets2030`** (the targets, and the close): each 2030 target is a small counter whose
+  wheels spin a full turn and settle on the figure as it arrives, the higher places last. Below
+  them sits the page's one call to action.
+
 Pinning and horizontal travel only switch on at 1000px and up, with room in height, and with
 motion welcome. Otherwise the sections are ordinary flowing layout.
 
@@ -200,7 +246,8 @@ The header takes the tone of whatever it passes over: any section marked `data-t
 under its middle line turns it to dark glass, so a cinematic section is never capped by a white
 bar. Every inner page's masthead is now a full-height opening shot whose frame widens to the
 edges as the page arrives, and every closing band lands on a different photograph from the one
-the page opened on. The about page closes on a drawing of its own instead (see above).
+the page opened on. The about and strategy pages close on moments of their own instead (see
+above).
 
 Photographic plates drift on their own shared loop (`usePlateParallax` in `src/lib/motion.ts`):
 one passive listener and one rAF pass for every plate on the page, each measured against its
@@ -229,7 +276,15 @@ still switches scenes, without the blade), the statement is fully lit with its c
 the reel becomes the swipe rail, the SEEM stages stack with every stage open, and the horizon is
 drawn in full. On the about page the four strands sit flat as a square above the city they make,
 the mark is drawn in full, every value is lit, the lines to the five groups are drawn and still,
-and the rings hold without their ripple.
+and the rings hold without their ripple. On the strategy page the two focus states stand one
+above the other, each over its statement; the pillars are built and drawn; the seal is traced,
+with the four stages in turn beside it and no spark; the phases are pictures in pairs, each with
+its years over it; and the targets show their figures without spinning.
+
+A page opened on a chapter's address (`/strategy#roadmap`, or `/roadmap` through its redirect)
+is taken back to the chapter once a stored English preference has re-rendered the page and the
+fonts have settled, because both move every section below the fold. `PageShell` does this unless
+the reader has already started to move.
 
 ## Known gaps
 
@@ -243,7 +298,8 @@ and the rings hold without their ripple.
 - **The photography is generated imagery, not shot on site.** The golden-hour set is
   art-directed for the brand, but nothing in it is a SEEM PRIME building, plant or property,
   and the people in it are not staff. Swapping in real assets is a change to `src/lib/media.ts`
-  alone.
+  alone — except the desk before the Riyadh skyline, whose two focus states have to be
+  regenerated with `scripts/focus-states.py` (and its near plane re-traced) if it is replaced.
 - **Some home page copy is draft.** The reel headline, the four new sector lines, the
   platforms kicker and the reel's closing link are new strings, marked `// draft` in
   `src/lib/content/home.ts`, in both languages. Everything else on the page is the approved
@@ -253,6 +309,13 @@ and the rings hold without their ripple.
   headline and its three notes, the values headline and "One ecosystem" are new. All are marked
   `// draft` in `src/lib/content/about.ts`. The mark's rationale (unity, strength, stability)
   and its 4.2 cm stamp size come from the logo concept document.
+- **Some strategy page copy is draft.** The vision, mission, pillars, sectors, model, phases and
+  targets are the approved copy of the three pages the strategy page replaced. The value
+  proposition's English statements are the framework's own; their Arabic is a drafted
+  translation. The page lead, the chapter names that are new ("Pillars & sectors", "2030
+  targets"), the pillars headline and lead, the focus scale's two ends, the value headline, the
+  return line and the stage and phase labels are new. All are marked `// draft` in
+  `src/lib/content/strategy.ts`.
 - **Two sectors have thinner photography than the rest.** Food's only picture is the waterfront
   table from the entertainment contact sheet, so it is card-sized and left out of the hero.
   Entertainment's extra frames are ~585px tiles. A proper food-manufacturing shot and larger
@@ -263,9 +326,10 @@ and the rings hold without their ripple.
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not
   wanted back.
-- **The business-model stage loads all four of its plates at once** (~620KB), because stacked
-  crossfade means every one of them is in the viewport. Deferring the three inactive stages
-  would need the stack to mount lazily rather than fade on `opacity`.
+- **The strategy page's roadmap loads its four pictures together** (~680KB on a wide screen,
+  full-bleed cuts), once the chapter is a screen away, because they crossfade in place. Mounting
+  only the current and the next phase would spread that over the chapter, though a reader who
+  scrolls through still fetches all four.
 
 ## `legacy-dc/`
 
