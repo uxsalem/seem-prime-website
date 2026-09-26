@@ -176,23 +176,6 @@ a:hover {
 }
 [data-page='contact'] [data-cols='2'] { gap: 16px; }
 
-/* --- Ecosystem ------------------------------------------------------------ */
-
-[data-eco] {
-  display: grid;
-  gap: clamp(24px, 4vw, 56px);
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-}
-
-@media (min-width: 1000px) {
-  [data-eco] { grid-template-columns: 1fr 1fr; }
-  /* The art is first in the source, so alternating means sending it second, not first —
-     `order:-1` (which the original build carried) left every platform's photograph on the
-     same side. */
-  [data-eco][data-flip='1'] > [data-art] { order: 2; }
-}
-
 /* --- Snap rails ----------------------------------------------------------- */
 
 [data-rail] {
@@ -2146,6 +2129,392 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-tg-close] { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
 }
 
+/* --- Ecosystem: the contents line ------------------------------------------------
+   The strategy page's grouped contents, with two groups instead of three: the four
+   platforms, then what they make together.
+   -------------------------------------------------------------------------- */
+
+[data-eco-acts] { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+
+/* --- Ecosystem: the platforms and the model ----------------------------------------
+   Laid flat by default: the title card, the four platforms as full-bleed frames in
+   turn, then the model at rest with its key. Where there is room the stage pins: the
+   platforms rise one over another, then lie back as the floors of the model, and the
+   scroll pass writes every position. The model's drawing is shared by both.
+   -------------------------------------------------------------------------- */
+
+[data-stack-pin] { position: relative; }
+[data-stack-mark] { position: absolute; top: 0; inset-inline-start: 0; width: 1px; height: 1px; pointer-events: none; }
+[data-stack-stage] { position: relative; }
+
+/* The title card: the chapter's line, and the platforms listed the way a building lists its floors. */
+[data-stack-intro] {
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(88px, 11vw, 150px) clamp(16px, 3vw, 32px) clamp(56px, 8vw, 100px);
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+}
+[data-directory] { margin: 0; padding: 0; list-style: none; border-block-start: 1px solid rgba(255, 255, 255, 0.18); }
+[data-dir-row] {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  grid-template-areas: 'num name' '. what';
+  gap: 4px 16px;
+  align-items: baseline;
+  padding-block: clamp(14px, 2vh, 20px);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  text-decoration: none;
+}
+[data-dir-row]:hover { color: #ffffff; text-decoration: none; }
+[data-dir-name] { grid-area: name; transition: transform 0.6s var(--ease-out); }
+[data-dir-what] { grid-area: what; font-size: 14px; line-height: 1.45; color: rgba(255, 255, 255, 0.62); }
+[data-dir-row]:hover [data-dir-name] { transform: translateX(10px); }
+[dir='rtl'] [data-dir-row]:hover [data-dir-name] { transform: translateX(-10px); }
+@media (min-width: 1000px) {
+  [data-stack-intro] { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+  [data-dir-row] { grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: 'num name what'; }
+}
+
+/* A platform: its picture, its name set large, its line, and a framed detail of what it leads to. */
+[data-card] {
+  position: relative;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(560px, 92svh, 900px);
+  background: #062621;
+  color: #ffffff;
+}
+[data-card-photo] { position: absolute; inset: 0; }
+[data-card-floor],
+[data-card-edge] { display: none; }
+[data-card-scrim] {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(4, 24, 21, 0.72) 0%, rgba(4, 24, 21, 0.26) 18%, rgba(4, 24, 21, 0) 32%),
+    linear-gradient(to top, rgba(4, 24, 21, 0.94) 0%, rgba(4, 24, 21, 0.62) 32%, rgba(4, 24, 21, 0.12) 62%, rgba(4, 24, 21, 0) 78%);
+}
+[data-card-shade] { position: absolute; inset: 0; pointer-events: none; background: #041815; opacity: 0; }
+[data-card-copy] {
+  position: relative;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px) clamp(16px, 3vw, 32px);
+  display: grid;
+  gap: 24px 28px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'top detail' '. .' 'foot foot';
+}
+[data-card-top] { grid-area: top; margin: 0; display: flex; flex-direction: column; gap: 12px; text-shadow: 0 1px 16px rgba(4, 24, 21, 0.7); }
+[data-card-sector] { display: flex; flex-direction: column; gap: 4px; }
+[data-card-detail] { grid-area: detail; width: clamp(108px, 28vw, 260px); }
+[data-detail-win] {
+  position: relative;
+  display: block;
+  overflow: clip;
+  aspect-ratio: 4 / 5;
+  background: #041815;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+[data-detail-cap] { display: flex; align-items: center; gap: 10px; margin-block-start: 12px; font-size: 13px; line-height: 1.35; color: rgba(255, 255, 255, 0.8); }
+[data-detail-rule] { display: block; flex: 0 0 auto; width: 18px; height: 1px; background: #dc4b1c; }
+[data-card-foot] { grid-area: foot; min-width: 0; }
+[data-card-name] { overflow-wrap: anywhere; }
+[data-card-line] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px 40px;
+  margin-block-start: clamp(16px, 2.4vh, 26px);
+}
+
+/* Chapter five's copy, and the model at rest with its key. */
+[data-model-copy] {
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(96px, 12vw, 160px) clamp(16px, 3vw, 32px) clamp(36px, 5vw, 56px);
+}
+[data-cores-note] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: clamp(22px, 3.2vh, 34px) 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.72);
+}
+[data-cores-glyph] { display: inline-flex; flex: 0 0 auto; gap: 4px; height: 16px; }
+[data-cores-glyph] > span { display: block; width: 1.5px; background: #dc4b1c; }
+[data-model-still] {
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px) clamp(88px, 11vw, 150px);
+  display: grid;
+  gap: clamp(32px, 5vw, 64px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+[data-still-svg] { display: block; width: 100%; max-width: 560px; height: auto; margin-inline: auto; overflow: visible; }
+[data-still-key] { display: flex; flex-direction: column; gap: 24px; }
+[data-key-floors] { margin: 0; padding: 0; list-style: none; border-block-start: 1px solid rgba(255, 255, 255, 0.18); }
+[data-key-floors] li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: baseline;
+  padding-block: 12px;
+  border-block-end: 1px solid rgba(255, 255, 255, 0.12);
+}
+[data-key-cores],
+[data-key-target] { margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.78); }
+@media (min-width: 900px) {
+  [data-model-still] { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+}
+
+/* The drawing. Faces are the brand's greens, lit from the front edge; the cores are ember. */
+[data-ground] line { stroke: rgba(255, 255, 255, 0.09); stroke-width: 1; }
+[data-face='podium-top'] { fill: #0b332c; }
+[data-face='podium-front'] { fill: #062621; }
+[data-face='podium-side'],
+[data-face='side'] { fill: #041c18; }
+[data-face='front'] { fill: #0a2f29; }
+[data-face-edge] { fill: none; stroke: rgba(255, 255, 255, 0.42); stroke-width: 1; }
+[data-face-back] { fill: none; stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+[data-podium-mark] { fill: rgba(255, 255, 255, 0.1); }
+[data-core-glow] { stroke: rgba(220, 75, 28, 0.22); stroke-width: 6; stroke-linecap: round; }
+[data-core-seg] { stroke: #dc4b1c; stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 0; }
+[data-core-pulse] {
+  stroke: #ffe2b8;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.14 2;
+  stroke-dashoffset: 0.14;
+  opacity: 0;
+}
+[data-core-plan] { stroke: rgba(220, 75, 28, 0.62); stroke-width: 1.2; stroke-dasharray: 4 5; }
+[data-collar] { fill: #dc4b1c; stroke: #dc4b1c; stroke-width: 1; }
+[data-ghost-face] { fill: rgba(255, 255, 255, 0.025); stroke: rgba(255, 255, 255, 0.4); stroke-width: 1; stroke-dasharray: 5 5; }
+[data-ghost-front] { fill: rgba(255, 255, 255, 0.04); }
+[data-ghost-collar] { fill: none; stroke: rgba(220, 75, 28, 0.62); stroke-width: 1; }
+
+/* Once the cores stand, light moves along them: up two, down two, a floor at a time. */
+@keyframes sp-core-up {
+  0% { stroke-dashoffset: 0.14; opacity: 1; }
+  22% { stroke-dashoffset: -1; opacity: 1; }
+  22.01%, 100% { stroke-dashoffset: -1; opacity: 0; }
+}
+@keyframes sp-core-down {
+  0% { stroke-dashoffset: -1; opacity: 1; }
+  22% { stroke-dashoffset: 0.14; opacity: 1; }
+  22.01%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
+}
+[data-live] [data-core-pulse] {
+  animation: sp-core-up 5.2s linear infinite;
+  animation-delay: calc(var(--seg) * 1.144s + var(--core) * 0.7s);
+}
+[data-live] [data-core-pulse][data-dir='down'] { animation-name: sp-core-down; }
+
+/* The labels the pinned model carries: each floor's name at the reading end, the floors to
+   come, the podium's lettering and each core's name under it. */
+[data-model-labels],
+[data-model-layer],
+[data-stack-rail] { display: none; }
+[data-floor-label],
+[data-target] { position: absolute; left: 0; right: 0; height: 0; }
+[data-leader] { position: absolute; top: 0; height: 1px; background: rgba(255, 255, 255, 0.34); }
+[data-leader][data-planned] {
+  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.42) 0 4px, transparent 4px 8px);
+}
+[data-tag] {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: 280px;
+  transform: translateY(-50%);
+  text-wrap: balance;
+}
+[data-tag-sub] { font-size: 12px; line-height: 1.4; color: rgba(255, 255, 255, 0.62); }
+[data-plinth] {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding-inline-start: 0.42em;
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.62);
+}
+[data-core-label] {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.74);
+}
+[data-core-tick] { display: block; width: 1px; height: 9px; background: #dc4b1c; }
+
+/* The rail along the foot of the pinned deck. */
+[data-rail-item] {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+  padding-block: 14px 4px;
+  color: #ffffff;
+  text-decoration: none;
+}
+[data-rail-item]:hover { color: #ffffff; text-decoration: none; }
+[data-rail-line] { position: absolute; top: 0; inset-inline: 0; height: 2px; overflow: clip; background: rgba(255, 255, 255, 0.24); }
+[data-rail-line]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #dc4b1c;
+  transform: scaleX(var(--fill, 0));
+  transform-origin: left center;
+}
+[dir='rtl'] [data-rail-line]::after { transform-origin: right center; }
+[data-rail-name] { font-size: 13px; white-space: nowrap; color: rgba(255, 255, 255, 0.56); transition: color 0.3s; }
+[data-rail-item][aria-current] [data-rail-name],
+[data-rail-item]:hover [data-rail-name] { color: #ffffff; }
+
+@media (min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
+  [data-stack] { --gutter: max(clamp(16px, 3vw, 32px), calc((100vw - 1400px) / 2 + 32px)); }
+  [data-stack-pin] { height: 700vh; }
+  [data-stack-stage] { position: sticky; top: 0; height: 100vh; overflow: clip; }
+  [data-stack-intro] {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    max-width: none;
+    margin: 0;
+    align-content: center;
+    padding: calc(clamp(56px, 6vw, 66px) + 4vh) var(--gutter) 10vh;
+    will-change: transform, opacity;
+  }
+  [data-card] {
+    position: absolute;
+    inset: 0;
+    z-index: calc(10 * (var(--k) + 1));
+    min-height: 0;
+    transform: translate3d(0, 100%, 0);
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+  [data-card-photo] { inset: -10% 0; will-change: transform; }
+  /* Every layer the scroll pass fades is composited on its own, so a fade never repaints the
+     full-screen picture under it. */
+  [data-card-floor] { display: block; position: absolute; inset: 0; opacity: 0; will-change: opacity; }
+  [data-card-scrim],
+  [data-card-shade] { will-change: opacity; }
+  /* The card's leading edge as it rises: a lit hairline, ember at the reading start. */
+  [data-card-edge] { display: block; position: absolute; top: 0; inset-inline: 0; height: 1px; background: rgba(255, 255, 255, 0.5); }
+  [data-card-edge]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    width: 64px;
+    height: 2px;
+    background: #dc4b1c;
+  }
+  [data-card-copy] {
+    position: absolute;
+    inset: 0;
+    max-width: none;
+    padding: calc(clamp(56px, 6vw, 66px) + 3.5vh) var(--gutter) calc(84px + 4vh);
+    grid-template-areas: 'top .' '. detail' 'foot detail';
+    will-change: transform, opacity;
+  }
+  [data-card-detail] { align-self: end; width: clamp(220px, 19vw, 320px); }
+  [data-detail-win] [data-imgwrap] { transform: scale(var(--settle, 1)); }
+  [data-model-copy] {
+    position: absolute;
+    z-index: 60;
+    top: calc(clamp(56px, 6vw, 66px) + 8vh);
+    inset-inline-start: var(--gutter);
+    width: min(400px, 28vw);
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  [data-model-still] { display: none; }
+  [data-model-layer] {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: calc(10 * var(--z) + 5);
+    overflow: visible;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+  [data-model-layer] [data-core-seg] { stroke-dashoffset: 1; }
+  [data-model-layer] [data-core-glow] { opacity: 0; transition: opacity 0.8s var(--ease-out); }
+  [data-live] [data-model-layer] [data-core-glow] { opacity: 1; }
+  [data-model-layer] [data-collar]:not([data-lit]) { fill: rgba(4, 24, 21, 0.4); stroke: rgba(255, 255, 255, 0.46); }
+  [data-floor-faces] > [data-face],
+  [data-floor-faces] > [data-face-edge],
+  [data-floor-faces] > [data-face-back],
+  [data-floor-faces] > [data-collar] { opacity: var(--faces, 1); }
+  [data-room] { opacity: var(--room, 1); }
+  [data-model-labels] { display: block; position: absolute; inset: 0; z-index: 60; pointer-events: none; will-change: transform; }
+  [data-floor-label],
+  [data-target],
+  [data-plinth],
+  [data-core-label] { opacity: 0; }
+  [data-stack-rail] {
+    display: grid;
+    position: absolute;
+    z-index: 70;
+    bottom: clamp(18px, 3vh, 34px);
+    inset-inline: var(--gutter);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    opacity: 0;
+    will-change: opacity;
+  }
+}
+
+/* --- Ecosystem: the close -------------------------------------------------------------- */
+
+[data-eco-close] { display: grid; gap: clamp(56px, 8vw, 110px); grid-template-columns: minmax(0, 1fr); align-items: end; }
+@media (min-width: 1000px) {
+  [data-eco-close] { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+}
+[data-partners] { display: flex; flex-direction: column; gap: 22px; }
+[data-plates] { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 600px) {
+  [data-plates] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+[data-plates] > li { display: flex; flex-direction: column; gap: 8px; }
+[data-plate] { position: relative; display: block; aspect-ratio: 3 / 2; background: var(--card); }
+
 /* --- Inner pages: the opening shot ----------------------------------------------
    Every masthead's frame opens as the page arrives: an inset window widens to the
    edges while the picture settles out of a slight push.
@@ -2385,4 +2754,7 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-seal-spark] { display: none !important; }
   [data-page] [data-sc='rule'] { transform: none; transition: none; }
   [data-tg-strip] { transition: none; }
+
+  [data-core-pulse] { animation: none !important; }
+  [data-dir-name], [data-rail-name] { transition: none; }
 }

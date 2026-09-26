@@ -27,11 +27,12 @@ src/
     home/                  the home page's seven sections, each owning its own motion
     about/                 the about page's five chapters and its contents line, likewise
     strategy/              the strategy page's six chapters in three acts, and their contents line
+    ecosystem/             the ecosystem page's platforms-and-model stage, its close, and its contents line
     PageShell.tsx          direction, body type scale, progress hairline, reveal pass, spotlight
     PageMasthead.tsx       the full-height opening shot every inner page starts on
     Plate.tsx              a full-bleed photograph behind a section: blur-up, scrim, drift
     ImageSlot.tsx          a framed photograph, or a captioned empty state
-    SiteHeader / SiteFooter / SiteCta / Mark
+    SiteHeader / SiteFooter / Mark
   lib/
     site.tsx               language + theme context, persisted to localStorage
     css.ts                 CSS declaration string → React style object
@@ -43,6 +44,7 @@ src/
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
 scripts/focus-states.py    regenerates the strategy page's two depth-of-field photographs
+scripts/soft-plate.py      regenerates the ecosystem page's out-of-focus JAZ Choklat plate
 ```
 
 ## How the styling works
@@ -78,8 +80,8 @@ leading, no letter-spacing, no uppercasing, and reversed arrows. The builders in
 
 The site is carried by one set of photographs, all taken at the same golden hour: a heritage
 coast, a processing plant, a logistics hub, a residence, a contactless payment, an evening
-destination, code before the Riyadh skyline, and a city seen from a lit terrace, plus six
-entertainment frames cut from one contact sheet. One light across every sector is what lets a
+destination, code before the Riyadh skyline, a city seen from a lit terrace and a resort above a
+Red Sea bay, plus six entertainment frames cut from one contact sheet. One light across every sector is what lets a
 refinery, a warehouse and a cinema read as one landscape rather than a stock collage. The
 brand's deep green is the ground they sit on (sections, scrims, the dark between frames), never
 a tint laid over the pictures.
@@ -93,15 +95,18 @@ type Framed = { photo: Photo; focus?: string; zoom?: number; origin?: string }
 ```
 
 The maps at the foot of the module decide what appears where: `heroFrames`, `sectorFrames`,
-`verbFrames`, `seemFrames`, `leisureTiles`, `platformFrames`, `pagePlates`, `homeHorizon`,
-`homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`, `loopFrames`,
-`roadFrames`. Re-shooting a subject is a one-line change.
+`verbFrames`, `seemFrames`, `leisureTiles`, `platformFrames`, `ecosystemPlatforms`, `pagePlates`,
+`homeHorizon`, `homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`,
+`loopFrames`, `roadFrames`. Re-shooting a subject is a one-line change.
 
-One photograph has two derived states. `techFar` and `techNear` are the desk before the Riyadh
+Two photographs have derived states. `techFar` and `techNear` are the desk before the Riyadh
 skyline with the focus pulled: the horizon sharp and the laptop soft, then the reverse. They are
 generated from the original by `scripts/focus-states.py`, which traces the near plane by hand
 and blurs each plane with only its own colours, so the strategy page can rack focus between them
-as an opacity crossfade rather than a live blur.
+as an opacity crossfade rather than a live blur. `diningSoft` is the waterfront table enlarged and
+thrown out of focus by `scripts/soft-plate.py`, a lens blur with the highlights lifted first so
+the lights open into bokeh. The table only exists at card size, and the ecosystem page opens JAZ
+Choklat on it at full bleed; the sharp table is set beside it as the detail.
 
 **Cuts.** The golden-hour set ships three: the full file (1402–1774px), a 1280px middle cut and
 an 880px card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the
@@ -110,8 +115,8 @@ a phone fetches the card cut and a desktop the full one. The entertainment tiles
 size only (~585px). The payments frame is cropped to leave out the emblem that opens the source
 image.
 
-Two components consume them. **`Plate`** is the full-bleed photograph behind a hero, masthead,
-banner or closing band: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
+Two components consume them. **`Plate`** is the full-bleed photograph behind a masthead or a
+band of copy: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
 framed picture inside a card, window or tile, and still renders its captioned empty state when
 no frame is passed. The contact page's portrait slots are deliberately still waiting for real
 people.
@@ -123,7 +128,7 @@ Image weight, measured against a production build (whole page = after scrolling 
 | home | 437KB | 861KB | 387KB |
 | about | 396KB | 663KB | 309KB |
 | strategy | 328KB | 1188KB | 522KB |
-| ecosystem | 173KB | 1108KB | 869KB |
+| ecosystem | 173KB | 1002KB | 450KB |
 | contact | 202KB | 202KB | 65KB |
 
 The home page's first screen on desktop is the hero's opening frame plus the next scene, which
@@ -133,7 +138,11 @@ city they assemble into is only mounted once the reader reaches that chapter. Th
 is its opening shot and the two focus states under it. It carries the business model and the
 roadmap as well as the strategy, so it weighs more than any one of the three pages it replaced
 (together they were ~1.56MB), but the seal's four pictures and the roadmap's four are only
-mounted once their chapter is a screen away.
+mounted once their chapter is a screen away. The ecosystem page's first screen is its opening
+shot alone. Its stage clips the platforms still to rise, which would keep the browser's lazy
+loading waiting until each card is already moving, so each platform's pictures are mounted as
+the card before it starts to rise, and load straight away; the model they become is drawn, not
+photographed.
 
 ## Motion
 
@@ -239,15 +248,36 @@ those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns it
   wheels spin a full turn and settle on the figure as it arrives, the higher places last. Below
   them sits the page's one call to action.
 
+### The ecosystem page, platform by platform
+
+The ecosystem page presents the four platforms, and then what they make together. The opening
+shot carries a contents line that lists all six stops, the platforms first (`EcosystemIndex`),
+and the two chapters in `src/components/ecosystem/` own their motion:
+
+- **`PlatformStack`** (the platforms, and one ecosystem): one pinned stage. A title card lists
+  the platforms the way a building lists its floors, top floor first. Then each platform rises
+  over the one before it as a full screen of its own (its picture, its name set large, its line,
+  and a framed detail of what it leads to) while the one beneath settles back, and a rail along
+  the foot keeps count. Once all four are down, the camera pulls back and the deck turns out to
+  have been a building: each card lies back into a floor of a model through one `matrix()`,
+  drawn the way an architect draws a model, in an oblique projection, on a podium lettered SEEM
+  PRIME. Four cores (capital, technology, operations, partnerships) rise through every floor,
+  and once they stand, light keeps moving along them, up two and down two. Last, the camera
+  looks up at two floors drawn but not yet built: forty platforms by 2030. The model around the
+  floors is SVG drawn from the same geometry (`StackModel.tsx`), one layer per height, stacked
+  between the cards so that every floor hides what is behind it. Each platform has an address of
+  its own (`/ecosystem#homera`), and the home page's platform index links straight to it.
+- **`EcosystemClose`** (build with us): after the long dark model the page comes out into the
+  light for its one call to action, set beside the plates the partners' marks will fill.
+
 Pinning and horizontal travel only switch on at 1000px and up, with room in height, and with
 motion welcome. Otherwise the sections are ordinary flowing layout.
 
 The header takes the tone of whatever it passes over: any section marked `data-tone="dark"`
 under its middle line turns it to dark glass, so a cinematic section is never capped by a white
-bar. Every inner page's masthead is now a full-height opening shot whose frame widens to the
-edges as the page arrives, and every closing band lands on a different photograph from the one
-the page opened on. The about and strategy pages close on moments of their own instead (see
-above).
+bar. Every inner page's masthead is a full-height opening shot whose frame widens to the edges
+as the page arrives. The about, strategy and ecosystem pages close on moments of their own (see
+above); the photographic closing band they once shared is gone.
 
 Photographic plates drift on their own shared loop (`usePlateParallax` in `src/lib/motion.ts`):
 one passive listener and one rAF pass for every plate on the page, each measured against its
@@ -279,7 +309,9 @@ the mark is drawn in full, every value is lit, the lines to the five groups are 
 and the rings hold without their ripple. On the strategy page the two focus states stand one
 above the other, each over its statement; the pillars are built and drawn; the seal is traced,
 with the four stages in turn beside it and no spark; the phases are pictures in pairs, each with
-its years over it; and the targets show their figures without spinning.
+its years over it; and the targets show their figures without spinning. On the ecosystem page the
+four platforms are full-bleed frames in turn, and the model stands at rest beneath them, drawn in
+full with a key beside it and no light moving along its cores.
 
 A page opened on a chapter's address (`/strategy#roadmap`, or `/roadmap` through its redirect)
 is taken back to the chapter once a stored English preference has re-rendered the page and the
@@ -316,13 +348,23 @@ the reader has already started to move.
   targets"), the pillars headline and lead, the focus scale's two ends, the value headline, the
   return line and the stage and phase labels are new. All are marked `// draft` in
   `src/lib/content/strategy.ts`.
+- **Some ecosystem page copy is draft.** The platforms' names, sectors and lines, the four
+  strands, the 2030 target and the closing copy are the approved framework copy. The chapter
+  names that are new ("Build with us"; "One ecosystem" is the about page's), the platforms
+  headline and lead, the sector label, the four detail captions, the model's headline, the cores
+  line, the target's second line and the model's description are new. All are marked `// draft`
+  in `src/lib/content/ecosystem.ts`.
 - **Two sectors have thinner photography than the rest.** Food's only picture is the waterfront
-  table from the entertainment contact sheet, so it is card-sized and left out of the hero.
-  Entertainment's extra frames are ~585px tiles. A proper food-manufacturing shot and larger
-  entertainment frames would close both.
-- **One superseded photograph is no longer used.** `red-sea-hospitality*.webp` is still in
-  `public/ds/img/` (~245KB); nothing names it. Delete it if it is not wanted back. (The skyline
-  that sat beside it is back in service as the about page's city.)
+  table from the entertainment contact sheet, so it is card-sized: it is left out of the hero,
+  and the ecosystem page opens JAZ Choklat on it thrown out of focus (`scripts/soft-plate.py`).
+  Entertainment's extra frames are ~585px tiles. A proper food-manufacturing shot (JAZ
+  Choklat's own chocolate, ideally) and larger entertainment frames would close both; the JAZ
+  plate is then a one-line change to `ecosystemPlatforms`.
+- **One superseded photograph is no longer used.** `about-manufacturing*.webp` (~200KB), the
+  packing line that stood for JAZ Choklat, is still in `public/ds/img/`; nothing names it. It was
+  lit by day, off the golden-hour set, and every box on its line carries the national emblem.
+  Delete it if it is not wanted back. (The Red Sea resort superseded before it is back in
+  service as HOMERA's detail.)
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not
   wanted back.
