@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import type { MouseEvent } from 'react'
 
 /** `useLayoutEffect` that does not warn during SSR. */
 export const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
@@ -129,17 +130,17 @@ export function runCounter(el: Element, duration: number) {
   requestAnimationFrame(step)
 }
 
-/** Tracks a media query as React state. */
-export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false)
-  useEffect(() => {
-    const mql = window.matchMedia(query)
-    const sync = () => setMatches(mql.matches)
-    sync()
-    mql.addEventListener('change', sync)
-    return () => mql.removeEventListener('change', sync)
-  }, [query])
-  return matches
+/**
+ * Follows an in-page link to `id` with a smooth scroll when a pointer clicked it. From the
+ * keyboard (`detail` is 0) the browser's own jump is kept, because that also moves focus to the
+ * target; reduced motion keeps it too.
+ */
+export function glide(event: MouseEvent<HTMLAnchorElement>, id: string) {
+  if (event.detail === 0 || reduceMotion()) return
+  const target = document.getElementById(id)
+  if (!target) return
+  event.preventDefault()
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 /**

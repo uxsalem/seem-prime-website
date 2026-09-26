@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Mark } from '@/components/Mark'
 import { css } from '@/lib/css'
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
+import { chapters, EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { capStyle } from '@/lib/typography'
 
@@ -24,10 +24,10 @@ const FT = {
     tagline: ['تمكين الأعمال', 'تسريع النمو', 'بناء المنظومات الاقتصادية'],
     links: [
       ['من نحن', routes.about],
-      ['نموذج الأعمال', routes.model],
       ['الاستراتيجية', routes.strategy],
+      ['نموذج الأعمال', chapters.model],
+      ['خارطة الطريق', chapters.roadmap],
       ['منظومتنا', routes.ecosystem],
-      ['خارطة الطريق', routes.roadmap],
       ['تواصل معنا', routes.contact],
     ],
   },
@@ -46,10 +46,10 @@ const FT = {
     tagline: ['Empowering businesses', 'Accelerating growth', 'Building economic ecosystems'],
     links: [
       ['About', routes.about],
-      ['Business model', routes.model],
       ['Strategy', routes.strategy],
+      ['Business model', chapters.model],
+      ['Roadmap', chapters.roadmap],
       ['Ecosystem', routes.ecosystem],
-      ['Roadmap', routes.roadmap],
       ['Contact us', routes.contact],
     ],
   },

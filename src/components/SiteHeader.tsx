@@ -11,10 +11,8 @@ const NAV = {
   ar: {
     navLabel: 'التنقل الرئيسي',
     about: 'من نحن',
-    model: 'نموذج الأعمال',
     strategy: 'الاستراتيجية',
     ecosystem: 'منظومتنا',
-    roadmap: 'خارطة الطريق',
     cta: 'تواصل معنا',
     switch: 'EN',
     switchLabel: 'Switch to English',
@@ -24,10 +22,8 @@ const NAV = {
   en: {
     navLabel: 'Main navigation',
     about: 'About',
-    model: 'Business model',
     strategy: 'Strategy',
     ecosystem: 'Ecosystem',
-    roadmap: 'Roadmap',
     cta: 'Contact us',
     switch: 'عربي',
     switchLabel: 'التبديل إلى العربية',
@@ -36,7 +32,8 @@ const NAV = {
   },
 } as const
 
-const LINKS = ['about', 'model', 'strategy', 'ecosystem', 'roadmap'] as const
+// The business model and the roadmap are chapters of the strategy page, not stops of their own.
+const LINKS = ['about', 'strategy', 'ecosystem'] as const
 type NavKey = (typeof LINKS)[number]
 
 const TOGGLE_BASE =

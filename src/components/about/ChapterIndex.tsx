@@ -1,9 +1,8 @@
 'use client'
 
-import type { MouseEvent } from 'react'
 import { ABOUT, CHAPTER_IDS } from '@/lib/content/about'
 import { css } from '@/lib/css'
-import { reduceMotion } from '@/lib/hooks'
+import { glide } from '@/lib/hooks'
 import { useSite } from '@/lib/site'
 import { BRONZE, ordinal } from '@/lib/typography'
 
@@ -15,15 +14,6 @@ import { BRONZE, ordinal } from '@/lib/typography'
 export function ChapterIndex() {
   const { lang } = useSite()
   const t = ABOUT[lang]
-
-  const glide = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
-    // `detail` is 0 when the link was activated from the keyboard.
-    if (event.detail === 0 || reduceMotion()) return
-    const target = document.getElementById(id)
-    if (!target) return
-    event.preventDefault()
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
 
   return (
     <nav aria-label={t.chaptersLabel} data-chapters="" data-sc="">

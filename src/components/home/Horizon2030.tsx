@@ -7,7 +7,7 @@ import { HOME } from '@/lib/content/home'
 import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { homeHorizon } from '@/lib/media'
-import { routes } from '@/lib/routes'
+import { chapters } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { BRONZE, display, kicker, KICKER_RULE } from '@/lib/typography'
 
@@ -91,7 +91,7 @@ export function Horizon2030() {
           </div>
           <Link
             data-sc=""
-            href={routes.roadmap}
+            href={chapters.roadmap}
             className="sp-nav"
             style={css(
               'position:relative;display:inline-flex;align-items:center;gap:10px;padding-block:6px;font-size:15px;font-weight:500;color:#ffffff;text-decoration:none',

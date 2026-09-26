@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef } from 'react'
 import { ABOUT, JEDDAH } from '@/lib/content/about'
-import { ROADMAP } from '@/lib/content/roadmap'
+import { STRATEGY } from '@/lib/content/strategy'
 import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
@@ -26,7 +26,7 @@ const RINGS = [0.42, 0.71, 1]
 export function AboutClose() {
   const { lang, ar, arrow } = useSite()
   const t = ABOUT[lang]
-  const phases = ROADMAP[lang].roadmap
+  const phases = STRATEGY[lang].roadmap
   const ringsRef = useRef<HTMLDivElement>(null)
 
   useScrollDriver({
