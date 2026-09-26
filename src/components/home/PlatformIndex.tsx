@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { ImageSlot } from '@/components/ImageSlot'
+import { PLATFORM_IDS } from '@/lib/content/ecosystem'
 import { HOME } from '@/lib/content/home'
 import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion } from '@/lib/hooks'
@@ -148,7 +149,7 @@ export function PlatformIndex() {
         <ol ref={listRef} data-plist="" style={css('margin:0;padding:0;list-style:none;border-block-start:1px solid var(--line2)')}>
           {t.platforms.map(([sector, name, blurb], i) => (
             <li key={name} data-sc="" data-stagger="" style={cssWith('border-block-end:1px solid var(--line2)', vars({ '--i': i }))}>
-              <Link href={routes.ecosystem} data-prow="" data-i={i}>
+              <Link href={routes.ecosystem + '#' + PLATFORM_IDS[i]} data-prow="" data-i={i}>
                 <span data-pthumb="" aria-hidden="true">
                   <ImageSlot frame={platformFrames[i]} alt="" placeholder={name} />
                 </span>

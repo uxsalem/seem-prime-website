@@ -158,6 +158,19 @@ export const photos = {
       en: 'A city at golden hour from a lit terrace — glass towers, and roads running off toward the water and the sun',
     },
   },
+  /**
+   * An infinity pool on a cliff above a Red Sea bay, a resort's terraces stepping down to the
+   * beach. The hospitality half of real estate and hospitality. It ships at full and card size.
+   */
+  hospitality: {
+    ...img('red-sea-hospitality', 1672),
+    lqip: 'data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAABQBACdASoUAAsAPulgqE0pJaOiMAgBIB0JQBOmUGWUEAAeIGorn9ltxhcAAP7p310G+upF99Jp12uQ2K2UA+6bAZGLLGDPq6CP4KPDNZOIynBGqvRzqzGPQ3gGfO+kDNGVRqbUL43EuAJhxEssmLwAAAA=',
+    focus: '36% 62%',
+    alt: {
+      ar: 'مسبح لا متناهٍ على جرف يطل على خليج في البحر الأحمر عند الغروب، ومدرّجات منتجع تنحدر نحو الشاطئ',
+      en: 'An infinity pool on a cliff above a Red Sea bay at sunset, a resort’s terraces stepping down to the beach',
+    },
+  },
 
   // --- Entertainment, cut from one contact sheet: six evenings, one sector --------------------
 
@@ -184,6 +197,19 @@ export const photos = {
     lqip: 'data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADQBACdASoUAA8APu1iqU2ppaOiMAgBMB2JaACdMoMYAE5N3Ge2Ku8qNONzzEKCAAD+o0pn2W0iDOMqYn489idcaNI/uUp48gk1TzdjQTipOLd8vc417un86KyvgddIJLiCNFn8E0L3Y0WGtphuS/JF6lUUkky5d+tVAMwQQthjl7SEX/yY23LrchmP1ztTQWSXoD3EvXWTIedlQAA=',
     focus: '36% 62%',
     alt: { ar: 'مائدة على الواجهة المائية عند الغروب، والشموع على الطاولة', en: 'Waterfront dining at dusk, candles on the table' },
+  },
+  /**
+   * The same table, enlarged and thrown out of focus by `scripts/soft-plate.py` so it can fill a
+   * screen: the tile itself only exists at card size. The ecosystem page opens JAZ Choklat on it.
+   */
+  diningSoft: {
+    ...img('ent-dining-soft', 1600),
+    lqip: 'data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAACQBACdASoUAA8APu1iqU2ppaOiMAgBMB2JZgCdMoMYA0h1hgfhowq2uJCZ4sAA/n6ZndpaQ/ear8QQsh59dLoIFyzXg5fWykXrsogw3nY0NKntHFQfHi18KNAOibNohViKBgXJtDxAtYeBGlNoosNbTDcl+SL5CivzGeEhvvRZDIZ+9WDkTGsbZRc343bPSQTcojPaSXTCRnA25b+1dSAfgAA=',
+    focus: '36% 62%',
+    alt: {
+      ar: 'مائدة على الواجهة المائية عند الغروب خارج نطاق التركيز، وأضواء الممشى خلفها',
+      en: 'Waterfront dining at dusk, out of focus, the promenade lights beyond',
+    },
   },
   esports: {
     ...tile('ent-esports'),
@@ -218,16 +244,6 @@ export const photos = {
     alt: {
       ar: 'صالة تصنيع متقدمة بأذرع آلية وخطوط إنتاج وفريق تشغيل',
       en: 'An advanced manufacturing hall — robotic arms, production lines and an operating crew',
-    },
-  },
-  /** A packing line on the factory floor. Premium food manufacturing, boxed and leaving. */
-  plant: {
-    ...img('about-manufacturing', 1200),
-    lqip: 'data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQBACdASoUAA0APulep00pJSOiMAgBIB0JZQDE2CBi8IvPaDz18VKhiHrgAP5kObGk1cRuM7ZXp4Efxd+AfP2iIOWZgBnWQKroMhcWkV6bZfKFwHx0RTbmPBEZoqvqhg8GxhC8S2IBzp1MWJVnLrg7fx0AAA==',
-    focus: '50% 50%',
-    alt: {
-      ar: 'خط إنتاج داخل أحد مصانع المنظومة',
-      en: 'A production line inside one of the ecosystem’s plants',
     },
   },
 } as const satisfies Record<string, Photo>
@@ -307,19 +323,40 @@ export const leisureTiles: Framed[] = [
   { photo: photos.esports },
 ]
 
-/** The four portfolio platforms, in the order every page lists them. */
+/**
+ * The four portfolio platforms, in the order every page lists them. JAZ Choklat is the table the
+ * food platforms end at, as it is on the reel and the ecosystem page.
+ */
 export const platformFrames: Framed[] = [
-  { photo: photos.plant, focus: '50% 50%' },
+  { photo: photos.dining, focus: '30% 64%' },
   { photo: photos.logistics, focus: '66% 60%' },
   { photo: photos.coast, focus: '72% 52%' },
   { photo: photos.residence, focus: '60% 50%' },
 ]
 
 /**
- * The masthead plate each inner page opens on, and the plate its closing band lands on. They
- * are deliberately never the same photograph twice on one page: the reader should feel they
- * have travelled somewhere between the title and the call to action. The about and strategy
- * pages close on moments of their own instead of a plate, so they only name their opening.
+ * The ecosystem page's four platforms, in the same order. Each opens on a full-bleed picture of
+ * the work and carries a framed detail of what it leads to: the table, the payment that closes
+ * the last mile, an evening out, the resort. JAZ Choklat opens on the table thrown out of focus,
+ * because its only picture exists at card size; the sharp table, closer in, is its detail.
+ * The four plates are also the floors of the model the page pulls back to; where a plate is soft,
+ * `floor` names the sharp picture the floor shows instead.
+ */
+export const ecosystemPlatforms: { plate: Framed; detail: Framed; floor?: Framed }[] = [
+  {
+    plate: { photo: photos.diningSoft, focus: '38% 62%' },
+    detail: { photo: photos.dining, focus: '26% 72%', zoom: 1.45, origin: '24% 78%' },
+    // Small enough on the model's floor for the card-sized table itself to be sharp.
+    floor: { photo: photos.dining, focus: '36% 62%' },
+  },
+  { plate: { photo: photos.logistics, focus: '62% 56%' }, detail: { photo: photos.payments, focus: '56% 44%' } },
+  { plate: { photo: photos.coast, focus: '64% 50%' }, detail: { photo: photos.promenade, focus: '52% 50%' } },
+  { plate: { photo: photos.residence, focus: '60% 50%' }, detail: { photo: photos.hospitality, focus: '30% 62%' } },
+]
+
+/**
+ * The masthead plate each inner page opens on. The about, strategy and ecosystem pages close on
+ * moments of their own rather than on a second plate.
  */
 export const pagePlates = {
   about: {
@@ -330,13 +367,11 @@ export const pagePlates = {
   },
   ecosystem: {
     masthead: { photo: photos.leisure, focus: '56% 50%' },
-    cta: { photo: photos.industry, focus: '40% 50%' },
   },
   contact: {
     masthead: { photo: photos.residence, focus: '56% 50%' },
-    cta: { photo: photos.facade, focus: '20% 50%' },
   },
-} as const satisfies Record<string, { masthead: Framed; cta?: Framed }>
+} as const satisfies Record<string, { masthead: Framed }>
 
 /**
  * The home page's closing moments. The horizon is the coast again — the page ends on the view
