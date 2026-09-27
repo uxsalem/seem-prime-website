@@ -10,7 +10,7 @@ import { reduceMotion } from '@/lib/hooks'
 import { platformFrames } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { display, ordinal } from '@/lib/typography'
 
 /** The preview window's size; it floats centred a little ahead of the pointer. */
 const PREVIEW_W = 300
@@ -119,19 +119,13 @@ export function PlatformIndex() {
               'margin-block-end:clamp(36px,5vw,72px)',
           )}
         >
-          <div>
-            <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(20px,2.6vw,30px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              {t.platformsKicker}
-            </p>
-            <h2
-              id="pl-h"
-              data-sc="rise"
-              style={css('margin:0;' + display(ar, ar ? 'clamp(32px,4.4vw,64px)' : 'clamp(34px,4.6vw,68px)') + ';color:var(--ink)')}
-            >
-              {t.ecosystemH}
-            </h2>
-          </div>
+          <h2
+            id="pl-h"
+            data-sc="rise"
+            style={css('margin:0;' + display(ar, ar ? 'clamp(32px,4.4vw,64px)' : 'clamp(34px,4.6vw,68px)') + ';color:var(--ink)')}
+          >
+            {t.ecosystemH}
+          </h2>
           <Link
             data-sc=""
             href={routes.ecosystem}

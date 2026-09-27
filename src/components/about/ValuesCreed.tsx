@@ -7,7 +7,7 @@ import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { aboutCreed } from '@/lib/media'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, dispFont, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, dispFont, ordinal } from '@/lib/typography'
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
@@ -61,13 +61,6 @@ export function ValuesCreed() {
             'padding:clamp(200px,34vh,360px) clamp(16px,3vw,32px) clamp(80px,10vw,150px)',
         )}
       >
-        <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.82)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-          <span aria-hidden="true" style={css(KICKER_RULE)} />
-          <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-            {ordinal(2)}
-          </span>
-          {t.chapters[2]}
-        </p>
         <h2
           id="vl-h"
           data-sc="rise"

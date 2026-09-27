@@ -6,7 +6,7 @@ import { ABOUT } from '@/lib/content/about'
 import { css } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { useSite } from '@/lib/site'
-import { display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { display, ordinal } from '@/lib/typography'
 
 /** Where the five lines fan out across the page. Narrower screens run one line down the reading edge. */
 export const FLOW_QUERY = '(min-width: 1000px)'
@@ -105,26 +105,17 @@ export function StakeholderFlow() {
         )}
       >
         <div data-flow-head="">
-          <div>
-            <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em")}>
-                {ordinal(3)}
-              </span>
-              {t.chapters[3]}
-            </p>
-            <h2
-              id="sv-h"
-              data-sc="rise"
-              style={css(
-                'margin:0;max-width:15ch;' +
-                  display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
-                  ';color:var(--ink);text-wrap:balance',
-              )}
-            >
-              {t.stakeH}
-            </h2>
-          </div>
+          <h2
+            id="sv-h"
+            data-sc="rise"
+            style={css(
+              'margin:0;max-width:15ch;' +
+                display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
+                ';color:var(--ink);text-wrap:balance',
+            )}
+          >
+            {t.stakeH}
+          </h2>
           <p
             data-sc=""
             style={css(

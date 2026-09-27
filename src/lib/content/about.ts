@@ -11,9 +11,6 @@
 export type AboutCopy = typeof AR
 
 const AR = {
-  home: 'الرئيسية',
-  crumbLabel: 'مسار التنقل',
-  navAbout: 'من نحن',
   // The masthead sets this over two lines; the no-break space keeps the noun and its adjective
   // together, so the break falls after «لبناء» and not before «الاقتصادية».
   positioning: 'شركة لبناء المنظومات\u00a0الاقتصادية',
@@ -103,9 +100,6 @@ const AR = {
 }
 
 const EN: AboutCopy = {
-  home: 'Home',
-  crumbLabel: 'Breadcrumb',
-  navAbout: 'About',
   positioning: 'An Economic Ecosystem Builder',
   aboutLead:
     'SEEM PRIME is a strategic investment and operating company specializing in developing, operating and investing in scalable business platforms.',

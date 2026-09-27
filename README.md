@@ -277,12 +277,11 @@ motion welcome. Otherwise the sections are ordinary flowing layout.
 The header takes the tone of whatever it passes over: any section marked `data-tone="dark"`
 under its middle line turns it to dark glass, so a cinematic section is never capped by a white
 bar. Every inner page's masthead is cut to the home hero's proportions: a screen tall, the bar
-clear over the photograph until the page moves, the breadcrumb where the home page sets its
-kicker, the title at the home page's scale and measure (`heroTitle`, which both share), and a
-contents line along the foot where the home page runs its index. The contact page's line holds
-its email, phone and office. The frame widens to the edges as the page arrives. The about,
-strategy and ecosystem pages close on moments of their own (see above); the photographic closing
-band they once shared is gone.
+clear over the photograph until the page moves, the title at the home page's scale and measure
+(`heroTitle`, which both share), and a contents line along the foot where the home page runs
+its index. The contact page's line holds its email, phone and office. The frame widens to the
+edges as the page arrives. The about, strategy and ecosystem pages close on moments of their own
+(see above); the photographic closing band they once shared is gone.
 
 Photographic plates drift on their own shared loop (`usePlateParallax` in `src/lib/motion.ts`):
 one passive listener and one rAF pass for every plate on the page, each measured against its
@@ -337,10 +336,9 @@ the reader has already started to move.
   and the people in it are not staff. Swapping in real assets is a change to `src/lib/media.ts`
   alone — except the desk before the Riyadh skyline, whose two focus states have to be
   regenerated with `scripts/focus-states.py` (and its near plane re-traced) if it is replaced.
-- **Some home page copy is draft.** The reel headline, the four new sector lines, the
-  platforms kicker and the reel's closing link are new strings, marked `// draft` in
-  `src/lib/content/home.ts`, in both languages. Everything else on the page is the approved
-  framework copy.
+- **Some home page copy is draft.** The reel headline, the four new sector lines and the
+  reel's closing link are new strings, marked `// draft` in `src/lib/content/home.ts`, in both
+  languages. Everything else on the page is the approved framework copy.
 - **Some about page copy is draft.** The English values are the framework's own full
   statements; their Arabic is a drafted translation. The chapter names, the name chapter's
   headline and its three notes, the values headline and "One ecosystem" are new. All are marked

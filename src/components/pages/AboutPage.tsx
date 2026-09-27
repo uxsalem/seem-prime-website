@@ -33,9 +33,6 @@ export function AboutPage() {
       <SiteHeader active="about" overHero />
 
       <PageMasthead
-        crumbLabel={t.crumbLabel}
-        homeLabel={t.home}
-        current={t.navAbout}
         title={t.positioning}
         lead={t.aboutLead}
         leadWidth="56ch"

@@ -68,9 +68,6 @@ export function ContactPage() {
       <SiteHeader active="" overHero />
 
       <PageMasthead
-        crumbLabel={t.crumbLabel}
-        homeLabel={t.home}
-        current={t.contactH}
         title={t.contactH}
         lead={t.contactBody}
         plate={pagePlates.contact.masthead}

@@ -7,7 +7,7 @@ import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { loopFrames } from '@/lib/media'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, ordinal } from '@/lib/typography'
 
 /** Pinned where the seal and its stage can share the screen, and motion is welcome. */
 export const LOOP_QUERY = '(min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)'
@@ -111,26 +111,17 @@ export function ValueLoop() {
         data-loop-head=""
         style={css('max-width:1400px;margin:0 auto;padding:clamp(96px,12vw,170px) clamp(16px,3vw,32px) clamp(28px,4vw,56px)')}
       >
-        <div>
-          <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-            <span aria-hidden="true" style={css(KICKER_RULE)} />
-            <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-              {ordinal(2)}
-            </span>
-            {t.acts[1][1][0]}
-          </p>
-          <h2
-            id="lp-h"
-            data-sc="rise"
-            style={css(
-              'margin:0;max-width:15ch;' +
-                display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
-                ';color:#ffffff;text-wrap:balance',
-            )}
-          >
-            {t.modelH}
-          </h2>
-        </div>
+        <h2
+          id="lp-h"
+          data-sc="rise"
+          style={css(
+            'margin:0;max-width:15ch;' +
+              display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
+              ';color:#ffffff;text-wrap:balance',
+          )}
+        >
+          {t.modelH}
+        </h2>
         <p
           data-sc=""
           style={css(

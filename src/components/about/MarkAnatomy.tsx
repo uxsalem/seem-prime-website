@@ -7,7 +7,7 @@ import { HOME } from '@/lib/content/home'
 import { css } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { useSite } from '@/lib/site'
-import { display, dispFont, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { display, dispFont, ordinal } from '@/lib/typography'
 
 /** Where the drawing holds still beside the steps. Elsewhere it simply draws itself on arrival. */
 export const NAME_QUERY = '(min-width: 1000px) and (min-height: 600px)'
@@ -153,13 +153,6 @@ export function MarkAnatomy() {
       >
         <div data-name-grid="">
           <div data-name-copy="">
-            <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em")}>
-                {ordinal(1)}
-              </span>
-              {t.chapters[1]}
-            </p>
             <h2
               id="nm-h"
               data-sc="rise"

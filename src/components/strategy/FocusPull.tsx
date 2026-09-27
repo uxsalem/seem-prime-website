@@ -7,7 +7,7 @@ import { css, cssWith, vars } from '@/lib/css'
 import { useScrollDriver } from '@/lib/hooks'
 import { strategyFocus } from '@/lib/media'
 import { useSite } from '@/lib/site'
-import { BRONZE, dispFont, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, dispFont } from '@/lib/typography'
 
 /** Pinned where the frame can hold the screen, and motion is welcome. */
 export const FOCUS_QUERY = '(min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)'
@@ -155,11 +155,8 @@ export function FocusPull() {
           </span>
 
           <div ref={farCopyRef} data-fp-copy="far">
-            <h2 id="fp-h" data-sc="" data-fp-kicker="" style={css(kicker(ar, 'rgba(255,255,255,.72)'))}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-                {ordinal(0)}
-              </span>
+            {/* On screen the two statements name themselves; the chapter's title is for assistive technology. */}
+            <h2 id="fp-h" data-sr="">
               {t.focusH}
             </h2>
             {label('∞', t.visionLabel)}

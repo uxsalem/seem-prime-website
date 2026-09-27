@@ -7,7 +7,7 @@ import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { roadFrames } from '@/lib/media'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, ordinal } from '@/lib/typography'
 
 /** Pinned where the counter can hold the screen, and motion is welcome. */
 export const ROAD_QUERY = '(min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)'
@@ -100,13 +100,6 @@ export function RoadTo2030() {
           style={cssWith('', vars({ '--fill': (year - 2024) / 6, '--sun': year === 2030 ? 1 : 0 }))}
         >
           <div data-odo-head="">
-            <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.78)') + ';margin-block-end:clamp(16px,2.4vh,26px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-                {ordinal(4)}
-              </span>
-              {t.acts[2][1][0]}
-            </p>
             <h2
               id="rd-h"
               data-sc="rise"

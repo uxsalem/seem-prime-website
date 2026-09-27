@@ -14,9 +14,6 @@
 export type StrategyCopy = typeof AR
 
 const AR = {
-  home: 'الرئيسية',
-  crumbLabel: 'مسار التنقل',
-  navStrategy: 'الاستراتيجية',
   pageH: 'من الاستراتيجية إلى الأثر المستدام',
   pageLead:
     'الرؤية والركائز التي تحدّد أين نعمل، والنموذج الذي نحوّلها به إلى قيمة، والطريق حتى 2030.', // draft
@@ -74,7 +71,6 @@ const AR = {
 
   // --- 04 · Value proposition -----------------------------------------------------------------
 
-  valueLabel: 'القيمة المضافة',
   valueH: 'ما نضيفه إلى كل منصة', // draft
   valueLead:
     'نجمع بين الخبرة الاستثمارية، والتميز التشغيلي، والشراكات الاستراتيجية لبناء وتوسيع منصات أعمال عالية الأثر.',
@@ -121,9 +117,6 @@ const AR = {
 }
 
 const EN: StrategyCopy = {
-  home: 'Home',
-  crumbLabel: 'Breadcrumb',
-  navStrategy: 'Strategy',
   pageH: 'From strategy to sustainable impact',
   pageLead:
     'The vision and pillars that set where we operate, the model that turns them into value, and the road to 2030.', // draft
@@ -170,7 +163,6 @@ const EN: StrategyCopy = {
   returnLine: 'The yield returns to the ecosystem, and the cycle begins again.', // draft
   stageLabel: 'Stage', // draft
 
-  valueLabel: 'Value proposition',
   valueH: 'What we bring to every platform', // draft
   valueLead:
     'We combine investment expertise, operational excellence and strategic partnerships to develop, operate and scale high-impact business platforms.',

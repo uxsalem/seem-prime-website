@@ -89,25 +89,3 @@ export const heroTitle = (ar: boolean) =>
   ';' +
   display(ar, ar ? 'clamp(34px,5vw,76px)' : 'clamp(34px,4.5vw,66px)') +
   ';color:#ffffff;text-wrap:balance'
-
-/**
- * The kicker over a section title: a short ember rule, then the label. Latin sets it in tracked
- * caps; Arabic drops the caps and the tracking and takes a size up, because Arabic has no
- * capitals to lean on.
- */
-export const kicker = (ar: boolean, color: string) =>
-  'display:inline-flex;align-items:center;gap:14px;margin:0;font-family:' +
-  (ar ? "'IBM Plex Sans Arabic',sans-serif" : "'Sora',sans-serif") +
-  ';font-size:' +
-  (ar ? '14px' : '11px') +
-  ';font-weight:' +
-  (ar ? '600' : '500') +
-  ';letter-spacing:' +
-  (ar ? 'normal' : '.24em') +
-  ';text-transform:' +
-  (ar ? 'none' : 'uppercase') +
-  ';color:' +
-  color
-
-/** The rule a kicker leads with. */
-export const KICKER_RULE = 'display:block;flex:0 0 auto;width:28px;height:2px;background:' + ACCENT

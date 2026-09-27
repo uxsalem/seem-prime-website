@@ -2,11 +2,11 @@
 
 import Link from 'next/link'
 import { ImageSlot } from '@/components/ImageSlot'
-import { ECOSYSTEM, ECOSYSTEM_IDS, PLATFORM_IDS } from '@/lib/content/ecosystem'
+import { ECOSYSTEM, ECOSYSTEM_IDS } from '@/lib/content/ecosystem'
 import { css, cssWith, vars } from '@/lib/css'
 import { chapters, EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { display, ordinal } from '@/lib/typography'
 
 /** Seats for the partners' marks, in two rows of three. */
 const PLATES = [0, 1, 2, 3, 4, 5]
@@ -34,13 +34,6 @@ export function EcosystemClose() {
       >
         <div data-eco-close="">
           <div>
-            <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em")}>
-                {ordinal(PLATFORM_IDS.length + 1)}
-              </span>
-              {t.groups[1][1][1]}
-            </p>
             <h2
               id="bw-h"
               data-sc="rise"
