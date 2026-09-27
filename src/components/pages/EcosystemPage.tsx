@@ -27,7 +27,7 @@ export function EcosystemPage() {
 
   return (
     <PageShell page="ecosystem">
-      <SiteHeader active="ecosystem" />
+      <SiteHeader active="ecosystem" overHero />
 
       <PageMasthead
         crumbLabel={t.crumbLabel}

@@ -14,7 +14,9 @@ const AR = {
   home: 'الرئيسية',
   crumbLabel: 'مسار التنقل',
   navAbout: 'من نحن',
-  positioning: 'شركة لبناء المنظومات الاقتصادية',
+  // The masthead sets this over two lines; the no-break space keeps the noun and its adjective
+  // together, so the break falls after «لبناء» and not before «الاقتصادية».
+  positioning: 'شركة لبناء المنظومات\u00a0الاقتصادية',
   aboutLead:
     'سيم برايم شركة استثمارية وتشغيلية استراتيجية متخصصة في تطوير وتشغيل والاستثمار في منصات الأعمال القابلة للتوسع.',
   chaptersLabel: 'فصول الصفحة', // draft

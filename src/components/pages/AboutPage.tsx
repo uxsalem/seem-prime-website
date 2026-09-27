@@ -30,7 +30,7 @@ export function AboutPage() {
 
   return (
     <PageShell page="about">
-      <SiteHeader active="about" />
+      <SiteHeader active="about" overHero />
 
       <PageMasthead
         crumbLabel={t.crumbLabel}

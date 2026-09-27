@@ -771,8 +771,9 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 }
 
 /* --- About: the contents line ------------------------------------------------------
-   The five chapters along the foot of the opening shot. Wide screens only; a phone
-   simply reads on.
+   The five chapters along the foot of the opening shot, across the full measure and at
+   the height the home page runs its index. The contact page sets its email, phone and
+   office on the same line. Wide screens only; a phone simply reads on.
    -------------------------------------------------------------------------- */
 
 [data-chapters] {
@@ -780,8 +781,7 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   grid-auto-flow: column;
   grid-auto-columns: minmax(0, 1fr);
   gap: 10px;
-  max-width: 1000px;
-  margin-block-start: clamp(40px, 7vh, 80px);
+  margin-block-start: clamp(28px, 6vh, 64px);
 }
 @media (min-width: 760px) {
   [data-chapters] { display: grid; }
@@ -1234,8 +1234,7 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   display: none;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px clamp(18px, 2.4vw, 34px);
-  max-width: 1180px;
-  margin-block-start: clamp(40px, 7vh, 80px);
+  margin-block-start: clamp(28px, 6vh, 64px);
 }
 @media (min-width: 760px) {
   [data-acts] { display: grid; }
@@ -2519,6 +2518,12 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
    Every masthead's frame opens as the page arrives: an inset window widens to the
    edges while the picture settles out of a slight push.
    -------------------------------------------------------------------------- */
+
+/* The contents line runs just above the foot, where the home page runs its index. A phone has
+   no contents line, so the lead would sit on the edge: it gets the room back. */
+@media (max-width: 759px) {
+  [data-masthead-copy] { padding-block-end: clamp(40px, 6vh, 56px) !important; }
+}
 
 @keyframes sp-frame-open {
   from { clip-path: inset(9% 7% 9% 7%); }

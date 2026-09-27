@@ -21,7 +21,7 @@ export function StrategyPage() {
 
   return (
     <PageShell page="strategy">
-      <SiteHeader active="strategy" />
+      <SiteHeader active="strategy" overHero />
 
       <PageMasthead
         crumbLabel={t.crumbLabel}
