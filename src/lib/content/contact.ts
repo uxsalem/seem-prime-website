@@ -6,6 +6,9 @@ const AR = {
   contactH: 'تواصل معنا',
   contactBody:
     'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية، ووسائل الإعلام. أرسل لنا رسالتك وسيتواصل معك فريقنا.',
+  linesLabel: 'قنوات التواصل', // draft
+  emailLabel: 'البريد الإلكتروني', // draft
+  phoneLabel: 'الهاتف', // draft
   officeH: 'المكتب الرئيسي في جدة',
   officeLabel: 'المكتب الرئيسي',
   address: 'حي الخالدية — جدة، المملكة العربية السعودية',
@@ -47,6 +50,9 @@ const EN: ContactCopy = {
   contactH: 'Contact us',
   contactBody:
     'We welcome investors, partners, government entities and the media. Send us your message and our team will be in touch.',
+  linesLabel: 'Ways to reach us', // draft
+  emailLabel: 'Email', // draft
+  phoneLabel: 'Phone', // draft
   officeH: 'Head office in Jeddah',
   officeLabel: 'Head office',
   address: 'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
@@ -83,3 +89,6 @@ const EN: ContactCopy = {
 }
 
 export const CONTACT = { ar: AR, en: EN }
+
+/** The office and the form below the masthead, for the opening's contact line. */
+export const OFFICE_ID = 'office'

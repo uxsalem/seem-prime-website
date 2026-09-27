@@ -28,6 +28,7 @@ src/
     about/                 the about page's five chapters and its contents line, likewise
     strategy/              the strategy page's six chapters in three acts, and their contents line
     ecosystem/             the ecosystem page's platforms-and-model stage, its close, and its contents line
+    contact/               the contact page's opening line: email, phone, the office
     PageShell.tsx          direction, body type scale, progress hairline, reveal pass, spotlight
     PageMasthead.tsx       the full-height opening shot every inner page starts on
     Plate.tsx              a full-bleed photograph behind a section: blur-up, scrim, drift
@@ -39,7 +40,7 @@ src/
     hooks.ts               scroll driver, reveal, counters, in-page glide, rails
     motion.ts              plate parallax and the pointer glow, shared by every page
     media.ts               the photography: files, cuts, blur-ups, alt text, and where each is framed
-    typography.ts          the shared style builders (h2, masthead, labels, captions)
+    typography.ts          the shared style builders (opening title, h2, labels, captions)
     routes.ts              URLs, the chapter addresses, brand plates, contact details
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
@@ -275,9 +276,13 @@ motion welcome. Otherwise the sections are ordinary flowing layout.
 
 The header takes the tone of whatever it passes over: any section marked `data-tone="dark"`
 under its middle line turns it to dark glass, so a cinematic section is never capped by a white
-bar. Every inner page's masthead is a full-height opening shot whose frame widens to the edges
-as the page arrives. The about, strategy and ecosystem pages close on moments of their own (see
-above); the photographic closing band they once shared is gone.
+bar. Every inner page's masthead is cut to the home hero's proportions: a screen tall, the bar
+clear over the photograph until the page moves, the breadcrumb where the home page sets its
+kicker, the title at the home page's scale and measure (`heroTitle`, which both share), and a
+contents line along the foot where the home page runs its index. The contact page's line holds
+its email, phone and office. The frame widens to the edges as the page arrives. The about,
+strategy and ecosystem pages close on moments of their own (see above); the photographic closing
+band they once shared is gone.
 
 Photographic plates drift on their own shared loop (`usePlateParallax` in `src/lib/motion.ts`):
 one passive listener and one rAF pass for every plate on the page, each measured against its

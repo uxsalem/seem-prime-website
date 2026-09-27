@@ -9,7 +9,7 @@ import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { heroFrames, srcSet } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { INTRO_KEY, useSite } from '@/lib/site'
-import { display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { display, heroTitle, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
 
 /** How long each scene holds, from the moment its blade starts to cross. */
 const DWELL = 6800
@@ -262,15 +262,7 @@ export function HeroCinema() {
           {t.positioning}
         </p>
 
-        <h1
-          style={css(
-            'margin:0;max-width:' +
-              (ar ? '20ch' : '15.5em') +
-              ';' +
-              display(ar, ar ? 'clamp(34px,5vw,76px)' : 'clamp(34px,4.5vw,66px)') +
-              ';color:#ffffff;text-wrap:balance',
-          )}
-        >
+        <h1 style={css(heroTitle(ar))}>
           {[t.h1a, t.h1b, t.h1c].map((line, i) => (
             <span key={i} data-sc="rise" data-stagger="" style={cssWith('display:block', vars({ '--i': i }))}>
               {line}

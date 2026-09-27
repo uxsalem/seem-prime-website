@@ -35,18 +35,6 @@ export const rootStyle = (ar: boolean) =>
   (ar ? '1.75' : '1.62') +
   ';-webkit-font-smoothing:antialiased'
 
-/** Masthead H1 on the inner pages. */
-export const pgH1Style = (ar: boolean) =>
-  'margin:0;max-width:22ch;font-family:' +
-  dispFont(ar) +
-  ';font-weight:' +
-  (ar ? '600' : '300') +
-  ';font-size:clamp(34px,5.4vw,84px);line-height:' +
-  (ar ? '1.24' : '1.02') +
-  ';letter-spacing:' +
-  (ar ? '0' : '-.03em') +
-  ';color:#ffffff;text-wrap:balance'
-
 /** Section H2, on the page surface or on a brand-green one. */
 export const h2Style = (ar: boolean, color = 'var(--ink)') =>
   'margin:0;font-family:' +
@@ -89,6 +77,18 @@ export const display = (ar: boolean, size: string, latinWeight = 300) =>
   (ar ? '1.28' : '1.02') +
   ';letter-spacing:' +
   (ar ? '0' : '-.03em')
+
+/**
+ * The title a page opens on, over its photograph. The home page set the scale, and every inner
+ * masthead shares it so no page opens louder than home. The measure matters as much as the size:
+ * it stacks a long title into a block of two lines rather than one banner across the frame.
+ */
+export const heroTitle = (ar: boolean) =>
+  'margin:0;max-width:' +
+  (ar ? '20ch' : '15.5em') +
+  ';' +
+  display(ar, ar ? 'clamp(34px,5vw,76px)' : 'clamp(34px,4.5vw,66px)') +
+  ';color:#ffffff;text-wrap:balance'
 
 /**
  * The kicker over a section title: a short ember rule, then the label. Latin sets it in tracked

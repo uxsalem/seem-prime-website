@@ -2,12 +2,13 @@
 
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
+import { ContactLines } from '@/components/contact/ContactLines'
 import { ImageSlot } from '@/components/ImageSlot'
 import { PageMasthead } from '@/components/PageMasthead'
 import { PageShell } from '@/components/PageShell'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
-import { CONTACT } from '@/lib/content/contact'
+import { CONTACT, OFFICE_ID } from '@/lib/content/contact'
 import { css, cssWith, vars } from '@/lib/css'
 import { pagePlates } from '@/lib/media'
 import { scrollRail } from '@/lib/hooks'
@@ -64,7 +65,7 @@ export function ContactPage() {
 
   return (
     <PageShell page="contact">
-      <SiteHeader active="" />
+      <SiteHeader active="" overHero />
 
       <PageMasthead
         crumbLabel={t.crumbLabel}
@@ -73,10 +74,12 @@ export function ContactPage() {
         title={t.contactH}
         lead={t.contactBody}
         plate={pagePlates.contact.masthead}
-      />
+      >
+        <ContactLines />
+      </PageMasthead>
 
       {/* --- Contact form --- */}
-      <section aria-labelledby="fm-h" style={css('background:var(--page)')}>
+      <section id={OFFICE_ID} aria-labelledby="fm-h" style={css('background:var(--page)')}>
         <div
           data-split=""
           style={css('max-width:1200px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,3vw,32px)')}
