@@ -9,7 +9,7 @@ import { useScrollDriver } from '@/lib/hooks'
 import { leisureTiles, sectorFrames } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, ordinal } from '@/lib/typography'
 
 /**
  * Where each sector's window sits on the pinned reel, in `--u` units (`min(1vh, .62vw)`):
@@ -168,10 +168,6 @@ export function SectorReel() {
           'position:relative;max-width:1400px;margin:0 auto;padding:clamp(88px,11vw,150px) clamp(16px,3vw,32px) clamp(36px,5vw,64px)',
         )}
       >
-        <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-          <span aria-hidden="true" style={css(KICKER_RULE)} />
-          {t.sectorsKicker}
-        </p>
         <div data-reel-head="">
           <h2
             id="rl-h"

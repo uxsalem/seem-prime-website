@@ -24,9 +24,6 @@ export function StrategyPage() {
       <SiteHeader active="strategy" overHero />
 
       <PageMasthead
-        crumbLabel={t.crumbLabel}
-        homeLabel={t.home}
-        current={t.navStrategy}
         title={t.pageH}
         lead={t.pageLead}
         leadWidth="54ch"

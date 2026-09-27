@@ -9,7 +9,7 @@ import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { homeHorizon } from '@/lib/media'
 import { chapters } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE } from '@/lib/typography'
+import { BRONZE, display } from '@/lib/typography'
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
@@ -76,19 +76,13 @@ export function Horizon2030() {
         <div
           style={css('display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px 40px')}
         >
-          <div>
-            <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.82)') + ';margin-block-end:clamp(20px,2.6vw,30px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              {t.roadKicker}
-            </p>
-            <h2
-              id="hz-h"
-              data-sc="rise"
-              style={css('margin:0;max-width:16ch;' + display(ar, ar ? 'clamp(32px,4.4vw,66px)' : 'clamp(34px,4.6vw,70px)') + ';color:#ffffff')}
-            >
-              {t.roadH}
-            </h2>
-          </div>
+          <h2
+            id="hz-h"
+            data-sc="rise"
+            style={css('margin:0;max-width:16ch;' + display(ar, ar ? 'clamp(32px,4.4vw,66px)' : 'clamp(34px,4.6vw,70px)') + ';color:#ffffff')}
+          >
+            {t.roadH}
+          </h2>
           <Link
             data-sc=""
             href={chapters.roadmap}

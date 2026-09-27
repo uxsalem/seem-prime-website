@@ -9,7 +9,7 @@ import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { verbFrames } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { capStyle, display, kicker, KICKER_RULE } from '@/lib/typography'
+import { capStyle, display } from '@/lib/typography'
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
@@ -58,11 +58,6 @@ export function Statement() {
           'max-width:1400px;margin:0 auto;padding:clamp(104px,15vw,220px) clamp(16px,3vw,32px) clamp(72px,10vw,150px)',
         )}
       >
-        <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(26px,3.4vw,44px)')}>
-          <span aria-hidden="true" style={css(KICKER_RULE)} />
-          {t.aboutKicker}
-        </p>
-
         <h2
           ref={lineRef}
           id="st-h"

@@ -1,8 +1,6 @@
 export type ContactCopy = typeof AR
 
 const AR = {
-  home: 'الرئيسية',
-  crumbLabel: 'مسار التنقل',
   contactH: 'تواصل معنا',
   contactBody:
     'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية، ووسائل الإعلام. أرسل لنا رسالتك وسيتواصل معك فريقنا.',
@@ -45,8 +43,6 @@ const AR = {
 }
 
 const EN: ContactCopy = {
-  home: 'Home',
-  crumbLabel: 'Breadcrumb',
   contactH: 'Contact us',
   contactBody:
     'We welcome investors, partners, government entities and the media. Send us your message and our team will be in touch.',

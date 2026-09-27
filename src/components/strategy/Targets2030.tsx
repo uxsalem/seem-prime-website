@@ -5,7 +5,7 @@ import { STRATEGY } from '@/lib/content/strategy'
 import { css, cssWith, vars } from '@/lib/css'
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display } from '@/lib/typography'
 
 /** Every wheel carries the figures twice, so each one spins a full turn before it settles. */
 const FACES = Array.from({ length: 20 }, (_, k) => String(k % 10))
@@ -36,26 +36,17 @@ export function Targets2030() {
         )}
       >
         <div data-tg-head="">
-          <div>
-            <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-                {ordinal(5)}
-              </span>
-              {t.acts[2][1][1]}
-            </p>
-            <h2
-              id="tg-h"
-              data-sc="rise"
-              style={css(
-                'margin:0;max-width:16ch;' +
-                  display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
-                  ';color:#ffffff;text-wrap:balance',
-              )}
-            >
-              {t.kpiH}
-            </h2>
-          </div>
+          <h2
+            id="tg-h"
+            data-sc="rise"
+            style={css(
+              'margin:0;max-width:16ch;' +
+                display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
+                ';color:#ffffff;text-wrap:balance',
+            )}
+          >
+            {t.kpiH}
+          </h2>
           <p
             data-sc=""
             style={css(

@@ -6,7 +6,7 @@ import { STRATEGY } from '@/lib/content/strategy'
 import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { useSite } from '@/lib/site'
-import { display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { display, ordinal } from '@/lib/typography'
 
 /** Where the five pillars stand side by side. Narrower screens stack them. */
 export const COLONNADE_QUERY = '(min-width: 1000px)'
@@ -76,26 +76,17 @@ export function Colonnade() {
         )}
       >
         <div data-col-head="">
-          <div>
-            <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em")}>
-                {ordinal(1)}
-              </span>
-              {t.acts[0][1][1]}
-            </p>
-            <h2
-              id="cl-h"
-              data-sc="rise"
-              style={css(
-                'margin:0;max-width:16ch;' +
-                  display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
-                  ';color:var(--ink);text-wrap:balance',
-              )}
-            >
-              {t.pillarsH}
-            </h2>
-          </div>
+          <h2
+            id="cl-h"
+            data-sc="rise"
+            style={css(
+              'margin:0;max-width:16ch;' +
+                display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
+                ';color:var(--ink);text-wrap:balance',
+            )}
+          >
+            {t.pillarsH}
+          </h2>
           <p
             data-sc=""
             style={css(

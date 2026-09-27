@@ -30,9 +30,6 @@ export function EcosystemPage() {
       <SiteHeader active="ecosystem" overHero />
 
       <PageMasthead
-        crumbLabel={t.crumbLabel}
-        homeLabel={t.home}
-        current={t.navEcosystem}
         title={t.ecosystemH}
         lead={t.ecosystemLead}
         plate={pagePlates.ecosystem.masthead}

@@ -7,7 +7,7 @@ import { css } from '@/lib/css'
 import { useScrollDriver } from '@/lib/hooks'
 import { seemFrames } from '@/lib/media'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, ordinal } from '@/lib/typography'
 
 /** Pinned, scroll-advanced panels where there is room for four side by side. */
 export const STAGES_QUERY = '(min-width: 1000px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)'
@@ -51,19 +51,13 @@ export function SeemStages() {
           'max-width:1400px;margin:0 auto;padding:clamp(88px,11vw,150px) clamp(16px,3vw,32px) clamp(28px,4vw,48px)',
         )}
       >
-        <div>
-          <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(20px,2.6vw,30px)')}>
-            <span aria-hidden="true" style={css(KICKER_RULE)} />
-            {t.seemKicker}
-          </p>
-          <h2
-            id="sm-h"
-            data-sc="rise"
-            style={css('margin:0;max-width:16ch;' + display(ar, ar ? 'clamp(32px,4.4vw,64px)' : 'clamp(34px,4.6vw,68px)') + ';color:#ffffff')}
-          >
-            {t.seemH}
-          </h2>
-        </div>
+        <h2
+          id="sm-h"
+          data-sc="rise"
+          style={css('margin:0;max-width:16ch;' + display(ar, ar ? 'clamp(32px,4.4vw,64px)' : 'clamp(34px,4.6vw,68px)') + ';color:#ffffff')}
+        >
+          {t.seemH}
+        </h2>
         <p
           data-sc=""
           style={css(

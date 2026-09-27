@@ -19,7 +19,7 @@ import { glide, useIsomorphicLayoutEffect, useScrollDriver } from '@/lib/hooks'
 import { ecosystemPlatforms } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, ordinal } from '@/lib/typography'
 
 /** Pinned where a card can hold the screen and the model has room beside its copy, and motion is welcome. */
 export const STACK_QUERY = '(min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)'
@@ -391,10 +391,6 @@ export function PlatformStack() {
           {/* The title card the first platform rises over. */}
           <div ref={introRef} data-stack-intro="">
             <div data-intro-copy="">
-              <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-                <span aria-hidden="true" style={css(KICKER_RULE)} />
-                {t.platformsKicker}
-              </p>
               <h2
                 id="ps-h"
                 data-sc="rise"
@@ -615,13 +611,6 @@ export function PlatformStack() {
 
           {/* Chapter five's copy: over the model when pinned, above it when laid flat. */}
           <div ref={copyRef} data-model-copy="">
-            <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(18px,2.6vh,30px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-                {ordinal(COUNT)}
-              </span>
-              {t.groups[1][1][0]}
-            </p>
             <h2
               data-sc="rise"
               style={css(
@@ -696,7 +685,7 @@ export function PlatformStack() {
           </figure>
 
           {/* Pinned, a rail along the foot: where the deck is, and a way to any platform. */}
-          <nav ref={railRef} aria-label={t.platformsKicker} data-stack-rail="">
+          <nav ref={railRef} aria-label={t.platformsLabel} data-stack-rail="">
             {t.platforms.map(([, , name], k) => (
               <a
                 key={name}

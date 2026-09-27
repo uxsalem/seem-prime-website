@@ -3,7 +3,7 @@
 import { STRATEGY } from '@/lib/content/strategy'
 import { css, cssWith, vars } from '@/lib/css'
 import { useSite } from '@/lib/site'
-import { dispFont, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { dispFont, display, ordinal } from '@/lib/typography'
 
 /**
  * Chapter four: what a platform gets from the model — the value proposition, set as the sum it
@@ -37,26 +37,17 @@ export function ValueSum() {
         style={css('max-width:1400px;margin:0 auto;padding:clamp(96px,12vw,170px) clamp(16px,3vw,32px) clamp(96px,12vw,170px)')}
       >
         <div data-sum-head="">
-          <div>
-            <p data-sc="" style={css(kicker(ar, 'var(--muted)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em")}>
-                {ordinal(3)}
-              </span>
-              {t.valueLabel}
-            </p>
-            <h2
-              id="vs-h"
-              data-sc="rise"
-              style={css(
-                'margin:0;max-width:14ch;' +
-                  display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
-                  ';color:var(--ink);text-wrap:balance',
-              )}
-            >
-              {t.valueH}
-            </h2>
-          </div>
+          <h2
+            id="vs-h"
+            data-sc="rise"
+            style={css(
+              'margin:0;max-width:14ch;' +
+                display(ar, ar ? 'clamp(34px,4.6vw,70px)' : 'clamp(36px,4.8vw,74px)') +
+                ';color:var(--ink);text-wrap:balance',
+            )}
+          >
+            {t.valueH}
+          </h2>
           <p
             data-sc=""
             style={css(

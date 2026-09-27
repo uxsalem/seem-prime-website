@@ -11,7 +11,6 @@ export type HomeCopy = typeof AR
 
 const AR = {
   heroLabel: 'المقدمة',
-  positioning: 'شركة لبناء المنظومات الاقتصادية',
   h1a: 'نُمكّن الأعمال،',
   h1b: 'نُسرّع النمو،',
   h1c: 'ونبني المنظومات الاقتصادية',
@@ -23,7 +22,6 @@ const AR = {
   pause: 'إيقاف العرض',
   play: 'تشغيل العرض',
 
-  aboutKicker: 'من نحن',
   /** The positioning line, one verb per photograph: [words, capsule after them or -1]. */
   statement: [
     ['نطوّر', 0],
@@ -41,7 +39,6 @@ const AR = {
   ],
   moreAbout: 'المزيد عنا',
 
-  sectorsKicker: 'القطاعات الاستراتيجية',
   reelH: 'ثمانية قطاعات، وأفقٌ واحد', // draft
   sectorsLead: 'ندخل حيث يتقدّم الطلب، ونبني منصة تخدم القطاع بأكمله لا مشروعاً واحداً فيه.',
   sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه'],
@@ -57,7 +54,6 @@ const AR = {
   ],
   reelMore: 'اطّلع على الاستراتيجية', // draft
 
-  platformsKicker: 'المنصات', // draft
   ecosystemH: 'منظومة أعمالنا',
   platforms: [
     ['تصنيع الأغذية الفاخرة', 'JAZ Choklat', 'من اختيار المكوّن حتى اكتمال التجربة.'],
@@ -67,7 +63,6 @@ const AR = {
   ],
   morePlatforms: 'كل المنصات',
 
-  seemKicker: 'نموذج SEEM',
   seemH: 'أربع مراحل تحكم كل قرار',
   seemLead: 'الاسم نفسه هو منهجنا: أربعة أسئلة نطرحها على كل منصة، وأربع نتائج نقيسها.',
   seem: [
@@ -78,7 +73,6 @@ const AR = {
   ],
   promiseLine: 'من الاستراتيجية .. إلى التنفيذ .. إلى الأثر المستدام',
 
-  roadKicker: 'خارطة الطريق',
   roadH: 'أربع مراحل حتى الريادة',
   roadmap: [
     ['2025', 'التأسيس'],
@@ -103,7 +97,6 @@ const AR = {
 
 const EN: HomeCopy = {
   heroLabel: 'Introduction',
-  positioning: 'An Economic Ecosystem Builder',
   h1a: 'Empowering business,',
   h1b: 'accelerating growth,',
   h1c: 'building economic ecosystems',
@@ -115,7 +108,6 @@ const EN: HomeCopy = {
   pause: 'Pause the scenes',
   play: 'Play the scenes',
 
-  aboutKicker: 'Who we are',
   statement: [
     ['We develop', 0],
     ['operate', 1],
@@ -132,7 +124,6 @@ const EN: HomeCopy = {
   ],
   moreAbout: 'More about us',
 
-  sectorsKicker: 'Strategic focus sectors',
   reelH: 'Eight sectors. One horizon.', // draft
   sectorsLead:
     'We enter where demand is moving, and build a platform that serves the whole sector rather than one venture inside it.',
@@ -158,7 +149,6 @@ const EN: HomeCopy = {
   ],
   reelMore: 'See the strategy', // draft
 
-  platformsKicker: 'Platforms', // draft
   ecosystemH: 'Our business ecosystem',
   platforms: [
     ['Premium food manufacturing', 'JAZ Choklat', 'From ingredient to finished experience.'],
@@ -168,7 +158,6 @@ const EN: HomeCopy = {
   ],
   morePlatforms: 'All platforms',
 
-  seemKicker: 'The SEEM model',
   seemH: 'Four stages behind every decision',
   seemLead:
     'The name is the method: four questions we put to every platform, and four outcomes we measure.',
@@ -180,7 +169,6 @@ const EN: HomeCopy = {
   ],
   promiseLine: 'From strategy .. to execution .. to sustainable impact',
 
-  roadKicker: 'Roadmap',
   roadH: 'Four phases to leadership',
   roadmap: [
     ['2025', 'Foundation'],

@@ -8,7 +8,7 @@ import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display } from '@/lib/typography'
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 const span = (p: number, a: number, b: number) => clamp01((p - a) / (b - a))
@@ -58,13 +58,6 @@ export function AboutClose() {
     >
       <div data-reach="" style={css('max-width:1400px;margin:0 auto;padding:clamp(96px,12vw,170px) clamp(16px,3vw,32px)')}>
         <div style={css('display:flex;flex-direction:column;justify-content:center')}>
-          <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-            <span aria-hidden="true" style={css(KICKER_RULE)} />
-            <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-              {ordinal(4)}
-            </span>
-            {t.chapters[4]}
-          </p>
           <h2
             id="rc-h"
             data-sc="rise"

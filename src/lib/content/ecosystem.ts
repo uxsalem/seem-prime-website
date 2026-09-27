@@ -11,9 +11,6 @@
 export type EcosystemCopy = typeof AR
 
 const AR = {
-  home: 'الرئيسية',
-  crumbLabel: 'مسار التنقل',
-  navEcosystem: 'منظومتنا',
   ecosystemH: 'منظومة أعمالنا',
   ecosystemLead: 'منصات متكاملة تصنع قيمة اقتصادية مستدامة.',
   contentsLabel: 'فصول الصفحة', // draft
@@ -25,7 +22,7 @@ const AR = {
 
   // --- The platforms --------------------------------------------------------------------------
 
-  platformsKicker: 'المنصات', // draft
+  platformsLabel: 'المنصات', // draft
   deckH: 'أربع منصات، ومنظومة واحدة', // draft
   deckLead: 'تُبنى كل منصة طبقةً فوق طبقة حتى تقوم بذاتها، وتقوم المنصات الأربع على منظومة واحدة.', // draft
   /**
@@ -73,9 +70,6 @@ const AR = {
 }
 
 const EN: EcosystemCopy = {
-  home: 'Home',
-  crumbLabel: 'Breadcrumb',
-  navEcosystem: 'Ecosystem',
   ecosystemH: 'Our business ecosystem',
   ecosystemLead: 'Integrated platforms creating sustainable economic value.',
   contentsLabel: 'On this page', // draft
@@ -84,7 +78,7 @@ const EN: EcosystemCopy = {
     ['The ecosystem', ['One ecosystem', 'Build with us']], // draft
   ],
 
-  platformsKicker: 'The platforms', // draft
+  platformsLabel: 'The platforms', // draft
   deckH: 'Four platforms, one ecosystem', // draft
   deckLead: 'Each platform is built layer by layer until it stands on its own, and all four stand on one ecosystem.', // draft
   platforms: [

@@ -7,7 +7,7 @@ import { css } from '@/lib/css'
 import { useScrollDriver } from '@/lib/hooks'
 import { aboutStrands, aboutWhole, srcSet } from '@/lib/media'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, kicker, KICKER_RULE, ordinal } from '@/lib/typography'
+import { BRONZE, display, ordinal } from '@/lib/typography'
 
 /** Pinned where four windows fit around a sentence with room to travel, and motion is welcome. */
 export const CONVERGE_QUERY = '(min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)'
@@ -260,13 +260,6 @@ export function Convergence() {
       <div ref={pinRef} data-conv-pin="">
         <div ref={stickRef} data-conv-stick="">
           <div ref={copyRef} data-conv-copy="">
-            <p data-sc="" style={css(kicker(ar, 'rgba(255,255,255,.72)') + ';margin-block-end:clamp(22px,3vw,34px)')}>
-              <span aria-hidden="true" style={css(KICKER_RULE)} />
-              <span style={css("font-family:'IBM Plex Mono',monospace;font-weight:400;letter-spacing:.06em;color:" + BRONZE)}>
-                {ordinal(0)}
-              </span>
-              {t.chapters[0]}
-            </p>
             <h2
               id="cv-h"
               data-sc="rise"
