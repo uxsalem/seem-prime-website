@@ -4,7 +4,7 @@ import { EcosystemPage } from '@/components/pages/EcosystemPage'
 export const metadata: Metadata = {
   title: 'منظومتنا',
   description:
-    'The SEEM PRIME portfolio — JAZ Choklat, eat.plus, ZL.TOURS and HOMERA — and the one ecosystem the four platforms stand on.',
+    'The SEEM PRIME portfolio — JAZ Choklat, eat.plus, ZL.TOURS, HOMERA and Qanif Farm — and the one ecosystem the five platforms stand on.',
 }
 
 export default function Page() {

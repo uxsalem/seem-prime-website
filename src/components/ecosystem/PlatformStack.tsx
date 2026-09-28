@@ -19,7 +19,7 @@ import { glide, useIsomorphicLayoutEffect, useScrollDriver } from '@/lib/hooks'
 import { ecosystemPlatforms } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, ordinal } from '@/lib/typography'
+import { BRONZE, display, markType, ordinal } from '@/lib/typography'
 
 /** Pinned where a card can hold the screen and the model has room beside its copy, and motion is welcome. */
 export const STACK_QUERY = '(min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)'
@@ -32,39 +32,49 @@ const arch = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 
 const mix = (a: number, b: number, t: number) => a + (b - a) * t
 const px = (n: number) => n.toFixed(1) + 'px'
 
+const COUNT = ecosystemPlatforms.length
+
 /**
- * The pin, as shares of its travel. Each platform rises over the one before it and holds; then
- * the camera pulls back and the deck is a model; the floors take their thickness, the chapter's
- * copy arrives, the cores rise through the floors, and last the camera looks up at the floors
- * still to come.
+ * The pin, in screens of scroll. The title card holds; each platform rises over the one before it
+ * and holds, the last a little longer; then the camera pulls back and the deck is a model; the
+ * floors take their thickness, the chapter's copy arrives, the cores rise through the floors, and
+ * last the camera looks up at the floors still to come. A platform more is a stretch of scroll
+ * more, never a faster deck: the pin is as tall as its travel (`--travel`, set on it below).
  */
-const DECK = 0.05
-const STEP = 0.125
-const RISE = 0.06
-const PULL: [number, number] = [0.56, 0.68]
-const FACES: [number, number] = [0.655, 0.69]
-const COPY: [number, number] = [0.64, 0.72]
-const CORES: [number, number] = [0.72, 0.84]
-const ROOM: [number, number] = [0.85, 0.94]
+const TITLE = 0.3
+const PER = 0.75
+/** Where the camera starts to pull back: every platform in, and the last one read. */
+const PULL_AT = TITLE + (COUNT - 1) * PER + 0.81
+const TRAVEL = PULL_AT + 2.64
+/** A point on the pin, in screens, as a share of its travel: what the scroll pass measures. */
+const at = (screens: number) => screens / TRAVEL
+const DECK = at(TITLE)
+const STEP = at(PER)
+const RISE = at(0.36)
+const PULL: [number, number] = [at(PULL_AT), at(PULL_AT + 0.72)]
+const FACES: [number, number] = [at(PULL_AT + 0.57), at(PULL_AT + 0.78)]
+const COPY: [number, number] = [at(PULL_AT + 0.48), at(PULL_AT + 0.96)]
+const CORES: [number, number] = [at(PULL_AT + 0.96), at(PULL_AT + 1.68)]
+const ROOM: [number, number] = [at(PULL_AT + 1.74), at(PULL_AT + 2.28)]
 /** How far the camera looks up at the end, in floors. */
 const PAN = 1.5
 /** How far each core rises behind the one before it, in floors. */
 const LAG = 0.06
+/** A core rises a floor at a time, each core a step behind the one before: all four finish together. */
+const RISEN = COUNT + LAG * 3
 const cardAt = (k: number) => DECK + k * STEP
 /** Where each platform can be read, card risen and copy in: its address. */
-const readAt = (k: number) => cardAt(k) + RISE + 0.03
-const MODEL_AT = COPY[1] + 0.01
-
-const COUNT = ecosystemPlatforms.length
+const readAt = (k: number) => cardAt(k) + RISE + at(0.18)
+const MODEL_AT = COPY[1] + at(0.06)
 
 /**
- * Chapters one to five: the four platforms, and what they stand on.
+ * A chapter per platform, and one for what they stand on.
  *
  * The platforms arrive one at a time, each a full screen of its own — its picture, its name set
  * large, its line, and a framed detail of what it leads to — and each is laid over the one
  * before it the way a floor is laid on the floor below, while the one beneath settles back. Once
- * all four are down, the camera pulls back and the deck turns out to have been a building: the
- * four cards lie back into four floors of a model, drawn as an architect draws one, on a podium
+ * the last is down, the camera pulls back and the deck turns out to have been a building: the
+ * cards lie back into the floors of a model, drawn as an architect draws one, on a podium
  * lettered SEEM PRIME. Four cores rise out of the podium through every floor — capital,
  * technology, operations, partnerships — and once they are up, light keeps moving along them,
  * up two and down two, for as long as the model is on screen. Last, the camera looks up: the
@@ -72,7 +82,7 @@ const COUNT = ecosystemPlatforms.length
  *
  * Everything moves on transforms the scroll pass writes. Each card becomes its floor through a
  * single `matrix()`, and the model around the floors is drawn in SVG from the same geometry, so
- * the two meet exactly (see `StackModel.tsx`). Narrow screens and reduced motion get the four
+ * the two meet exactly (see `StackModel.tsx`). Narrow screens and reduced motion get the
  * platforms in turn and the model at rest beneath them.
  */
 export function PlatformStack() {
@@ -85,7 +95,7 @@ export function PlatformStack() {
   // Platforms whose pictures are mounted. Pinned, the stage clips the cards still to rise, so the
   // browser's lazy loading would wait until each is already moving: the first is mounted once the
   // stage is halfway up the screen, each next one as the card before it starts to rise, and each
-  // loads as soon as it is mounted. Laid flat, all four are mounted and load lazily as usual.
+  // loads as soon as it is mounted. Laid flat, every one is mounted and loads lazily as usual.
   const [mounted, setMounted] = useState(0)
   const mountedRef = useRef(0)
   // The model at rest draws its floors with SVG images, which load even inside a hidden figure,
@@ -181,8 +191,6 @@ export function PlatformStack() {
       if (shade) shade.style.opacity = mix(0.62 * next, 0.06 * (COUNT - 1 - k), pull).toFixed(3)
       const scrim = card.querySelector<HTMLElement>('[data-card-scrim]')
       if (scrim) scrim.style.opacity = (1 - pull).toFixed(3)
-      const floor = card.querySelector<HTMLElement>('[data-card-floor]')
-      if (floor) floor.style.opacity = pull.toFixed(3)
       const copy = card.querySelector<HTMLElement>('[data-card-copy]')
       if (copy) {
         const arrive = span(p, cardAt(k) + RISE * 0.55, cardAt(k) + RISE + 0.02)
@@ -201,8 +209,7 @@ export function PlatformStack() {
     // The model around the floors: the podium rises into place with the pull, the floors take
     // their thickness once they have landed, and the cores rise through them.
     const faces = span(p, FACES[0], FACES[1])
-    // Four spans a core, each core a step behind the one before it, so all four finish together.
-    const cores = span(p, CORES[0], CORES[1]) * (4 + LAG * 3)
+    const cores = span(p, CORES[0], CORES[1]) * RISEN
     const room = span(p, ROOM[0] + 0.02, ROOM[1])
     layerRefs.current.forEach((layer, i) => {
       const lift = i === 0 ? (1 - pull) * 0.3 * H : 0
@@ -257,7 +264,7 @@ export function PlatformStack() {
     }
 
     // Light moves along the cores only once they stand, and only while the model is on screen.
-    const live = cores >= 4 + LAG * 3 && rect.bottom > vh * 0.2
+    const live = cores >= RISEN && rect.bottom > vh * 0.2
     if (live !== liveRef.current) {
       liveRef.current = live
       stage.toggleAttribute('data-live', live)
@@ -284,7 +291,7 @@ export function PlatformStack() {
         clear(introRef.current, 'opacity', 'transform')
         cardRefs.current.forEach((card) => {
           clear(card, 'transform')
-          card.querySelectorAll('[data-card-photo],[data-card-shade],[data-card-scrim],[data-card-floor],[data-card-copy]').forEach((el) =>
+          card.querySelectorAll('[data-card-photo],[data-card-shade],[data-card-scrim],[data-card-copy]').forEach((el) =>
             clear(el, 'transform', 'opacity'),
           )
           clear(card.querySelector('[data-detail-win]'), 'clip-path', '--settle')
@@ -316,7 +323,7 @@ export function PlatformStack() {
         top: Math.max(96, 0.12 * H),
         bottom: H - Math.max(58, 0.08 * H),
       }
-      const next = stackGeometry(W, H, dir, box)
+      const next = stackGeometry(W, H, dir, box, COUNT)
       geoRef.current = next
       setGeo(next)
       const travel = pin.offsetHeight - (window.innerHeight || H)
@@ -359,7 +366,7 @@ export function PlatformStack() {
   // flat, the figure's key is ordinary text.
   const described = [t.modelLabel, t.cores.map(([core]) => core).join(ar ? '، ' : ', '), t.target].join('. ')
   const pinned = geo !== null
-  const still = useMemo(() => stillGeometry(dir), [dir])
+  const still = useMemo(() => stillGeometry(dir, COUNT), [dir])
   const layers = useMemo(() => (geo ? modelLayers(geo, uid + '-pin') : []), [geo, uid])
   const stillLayers = useMemo(() => modelLayers(still.geo, uid + '-still'), [still, uid])
 
@@ -374,7 +381,7 @@ export function PlatformStack() {
       data-tone="dark"
       style={css('position:relative;background:#041815;color:#ffffff')}
     >
-      <div ref={pinRef} data-stack-pin="">
+      <div ref={pinRef} data-stack-pin="" style={vars({ '--travel': TRAVEL })}>
         {[...PLATFORM_IDS, ECOSYSTEM_IDS.model].map((id, i) => (
           <span
             key={id}
@@ -421,7 +428,7 @@ export function PlatformStack() {
                   <li key={name}>
                     <a href={'#' + PLATFORM_IDS[k]} onClick={(event) => glide(event, PLATFORM_IDS[k])} data-dir-row="">
                       <span style={css(mono)}>{ordinal(k)}</span>
-                      <span data-dir-name="" style={css(display(false, 'clamp(22px,2.1vw,32px)', 300) + ';color:#ffffff')}>
+                      <span data-dir-name="" style={css(markType(name, 'clamp(22px,2.1vw,32px)') + ';color:#ffffff')}>
                         {name}
                       </span>
                       <span data-dir-what="">{what}</span>
@@ -432,8 +439,8 @@ export function PlatformStack() {
             </ol>
           </div>
 
-          {/* The four platforms, each a card over the one before it, and each a floor of the model. */}
-          {ecosystemPlatforms.map(({ plate, detail, floor }, k) => {
+          {/* The platforms, each a card over the one before it, and each a floor of the model. */}
+          {ecosystemPlatforms.map(({ plate, detail }, k) => {
             const [sector, what, name, line] = t.platforms[k]
             const show = k < mounted
             return (
@@ -450,11 +457,6 @@ export function PlatformStack() {
                 <span data-card-photo="" aria-hidden="true">
                   {show ? <ImageSlot frame={plate} alt="" placeholder="" size="full" sizes="100vw" eager={pinned} /> : null}
                 </span>
-                {floor ? (
-                  <span data-card-floor="" aria-hidden="true">
-                    {show ? <ImageSlot frame={floor} alt="" placeholder="" eager={pinned} /> : null}
-                  </span>
-                ) : null}
                 <span data-card-scrim="" aria-hidden="true" />
                 <span data-card-shade="" aria-hidden="true" />
                 <span data-card-grain="" className="sp-grain" aria-hidden="true" />
@@ -489,7 +491,7 @@ export function PlatformStack() {
                       id={`ps-${k}`}
                       data-card-name=""
                       style={css(
-                        "margin:0;font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(56px,9.6vw,156px);line-height:.94;letter-spacing:-.045em;color:#ffffff",
+                        'margin:0;' + markType(name, 'clamp(56px,9.6vw,156px)', { leading: '.94', tracking: '-.045em' }) + ';color:#ffffff',
                       )}
                     >
                       {name}
@@ -558,7 +560,7 @@ export function PlatformStack() {
                     />
                     <span data-tag="" style={css(ar ? 'right:' + px(geo.W - edge + 12) : 'left:' + px(edge + 12))}>
                       <span style={css(mono)}>{ordinal(k)}</span>
-                      <span style={css(display(false, '19px', 400) + ';color:#ffffff')}>{t.platforms[k][2]}</span>
+                      <span style={css(markType(t.platforms[k][2], '19px', { weight: 400 }) + ';color:#ffffff')}>{t.platforms[k][2]}</span>
                       <span data-tag-sub="">{t.platforms[k][0]}</span>
                     </span>
                   </span>
@@ -609,7 +611,7 @@ export function PlatformStack() {
             </div>
           ) : null}
 
-          {/* Chapter five's copy: over the model when pinned, above it when laid flat. */}
+          {/* The model chapter's copy: over the model when pinned, above it when laid flat. */}
           <div ref={copyRef} data-model-copy="">
             <h2
               data-sc="rise"
@@ -649,7 +651,7 @@ export function PlatformStack() {
                   {layer}
                   {i < COUNT && stillNear ? (
                     <image
-                      href={(ecosystemPlatforms[i].floor ?? ecosystemPlatforms[i].plate).photo.sm}
+                      href={ecosystemPlatforms[i].plate.photo.sm}
                       width={still.geo.W}
                       height={still.geo.H}
                       preserveAspectRatio="xMidYMid slice"
@@ -664,7 +666,7 @@ export function PlatformStack() {
                 {[...t.platforms].reverse().map(([sector, , name], r) => (
                   <li key={name}>
                     <span style={css(mono)}>{ordinal(COUNT - 1 - r)}</span>
-                    <span style={css(display(false, '18px', 400) + ';color:#ffffff')}>{name}</span>
+                    <span style={css(markType(name, '18px', { weight: 400 }) + ';color:#ffffff')}>{name}</span>
                     <span data-tag-sub="">{sector}</span>
                   </li>
                 ))}

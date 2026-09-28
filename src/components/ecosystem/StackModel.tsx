@@ -3,8 +3,8 @@ import { MARK_PATHS } from '@/components/Mark'
 import { vars } from '@/lib/css'
 
 /**
- * The ecosystem as a model: four floors, one per platform, on a podium lettered SEEM PRIME, with
- * four shared cores rising through every floor and two floors still to be built above them.
+ * The ecosystem as a model: a floor per platform on a podium lettered SEEM PRIME, with four
+ * shared cores rising through every floor and two floors still to be built above them.
  *
  * It is drawn the way an architect draws a model, in an oblique projection: fronts stay true,
  * depth runs up and toward the reading end at a fixed slant, and there is no vanishing point. A
@@ -51,12 +51,12 @@ type Box = { left: number; right: number; top: number; bottom: number }
 
 /**
  * The model's geometry, as large as fits `box` — from the back edge of the top floor to the foot
- * of the podium — for floors cut from a `W × H` card. The two floors still to come sit above the
- * top one, outside the box: the stage pans up to them at the end.
+ * of the podium — for `count` floors cut from a `W × H` card. The two floors still to come sit
+ * above the top one, outside the box: the stage pans up to them at the end.
  */
-export function stackGeometry(W: number, H: number, dir: 1 | -1, box: Box): StackGeo {
-  // Vertically the stack spans 4 + 4·GAP floor depths plus the podium's; across, the podium.
-  const tall = DY * H * (PODIUM_D + 4 + 4 * GAP)
+export function stackGeometry(W: number, H: number, dir: 1 | -1, box: Box, count: number): StackGeo {
+  // Vertically the stack spans a floor and a gap per platform plus the podium; across, the podium.
+  const tall = DY * H * (PODIUM_D + count * (1 + GAP))
   const wide = PODIUM_W * W + DX * PODIUM_D * H
   const guess = Math.min((box.bottom - box.top - 18) / tall, (box.right - box.left) / wide)
   const tp = Math.max(12, Math.round(0.045 * guess * W))
@@ -71,22 +71,22 @@ export function stackGeometry(W: number, H: number, dir: 1 | -1, box: Box): Stac
 
   const podium: Level = { y: box.bottom - tp - pd / 2, w: PODIUM_W * w, d: PODIUM_D * d, t: tp }
   const first = podium.y - pd / 2 - GAP * fd - fd / 2
-  const floors = [0, 1, 2, 3].map((k) => ({ y: first - k * pitch, w, d, t }))
-  const ghosts = [4, 5].map((k) => ({ y: first - k * pitch, w, d, t }))
+  const floors = Array.from({ length: count }, (_, k) => ({ y: first - k * pitch, w, d, t }))
+  const ghosts = [count, count + 1].map((k) => ({ y: first - k * pitch, w, d, t }))
   const cx = (box.left + box.right) / 2
 
   return { W, H, dir, cx, s, podium, floors, ghosts, cores: CORE_AT.map((at) => cx + dir * at * w), pitch }
 }
 
 /**
- * The model at rest, for the still figure: floors cut from a 1000 × 625 card with the two planned
- * floors above them, a view box drawn around the whole of it, and each floor's picture placed
- * the way a card is laid down when the model is pinned.
+ * The model at rest, for the still figure: `count` floors cut from a 1000 × 625 card with the two
+ * planned floors above them, a view box drawn around the whole of it, and each floor's picture
+ * placed the way a card is laid down when the model is pinned.
  */
-export function stillGeometry(dir: 1 | -1) {
+export function stillGeometry(dir: 1 | -1, count: number) {
   const W = 1000
   const H = 625
-  const geo = stackGeometry(W, H, dir, { left: 0, right: W, top: -W * 4, bottom: W * 4 })
+  const geo = stackGeometry(W, H, dir, { left: 0, right: W, top: -W * 4, bottom: W * 4 }, count)
   const { podium, ghosts, cx } = geo
   const reach = podium.w / 2 + (DX * podium.d) / 2 + 6
   const top = ghosts[ghosts.length - 1].y - (DY * ghosts[0].d) / 2 - 6
@@ -154,7 +154,7 @@ function coreSpan(geo: StackGeo, j: number, i: number, from: Level, to: Level, p
         pathLength={1}
         data-core-pulse=""
         data-dir={j % 2 ? 'down' : 'up'}
-        style={vars({ '--seg': j % 2 ? 3 - i : i, '--core': j })}
+        style={vars({ '--seg': j % 2 ? geo.floors.length - 1 - i : i, '--core': j })}
       />
     </g>
   )
@@ -250,7 +250,7 @@ export function modelLayers(geo: StackGeo, id: string): ReactNode[] {
         {above ? cores.map((_, j) => coreSpan(geo, j, k + 1, floor, above)) : null}
         {above ? null : (
           <g data-room="">
-            {cores.map((_, j) => coreSpan(geo, j, 4, floor, ghosts[ghosts.length - 1], true))}
+            {cores.map((_, j) => coreSpan(geo, j, floors.length, floor, ghosts[ghosts.length - 1], true))}
             {ghosts.map((ghost, g) => {
               const gf = faces(geo, ghost)
               return (

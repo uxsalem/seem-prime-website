@@ -10,17 +10,17 @@ import { reduceMotion } from '@/lib/hooks'
 import { platformFrames } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { display, ordinal } from '@/lib/typography'
+import { display, markType, ordinal } from '@/lib/typography'
 
 /** The preview window's size; it floats centred a little ahead of the pointer. */
 const PREVIEW_W = 300
 const PREVIEW_H = 380
 
 /**
- * The four platforms as an index rather than a row of cards: the names set large, the rest of
- * the line quiet. Pointing at a platform floats a window of its picture beside the cursor —
- * the list stays typographic and the photography arrives only when asked for. Touch screens,
- * which have no pointer to follow, get the picture inline as a thumbnail instead.
+ * The platforms as an index rather than a row of cards: the names set large, the rest of the
+ * line quiet. Pointing at a platform floats a window of its mark beside the cursor — the list
+ * stays typographic and each platform's own logo arrives only when asked for. Touch screens,
+ * which have no pointer to follow, get the mark inline as a thumbnail instead.
  */
 export function PlatformIndex() {
   const { lang, ar, arrow } = useSite()
@@ -152,9 +152,7 @@ export function PlatformIndex() {
                 </span>
                 <span
                   data-pname=""
-                  style={css(
-                    "font-family:'Sora',sans-serif;font-weight:300;font-size:clamp(34px,6vw,96px);line-height:1;letter-spacing:-.035em;color:var(--ink)",
-                  )}
+                  style={css(markType(name, 'clamp(34px,6vw,96px)', { leading: '1', tracking: '-.035em' }) + ';color:var(--ink)')}
                 >
                   {name}
                 </span>

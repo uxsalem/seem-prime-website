@@ -14,8 +14,8 @@ import { useSite } from '@/lib/site'
 /**
  * The ecosystem page as the platforms, and then what they make together:
  *
- *   the opening shot and its contents line  →  four platforms, each a screen of its own, laid
- *   one on another  →  the camera pulls back: the four are the floors of one model, on one
+ *   the opening shot and its contents line  →  five platforms, each a screen of its own, laid
+ *   one on another  →  the camera pulls back: the five are the floors of one model, on one
  *   podium, with four cores through them and room above for more  →  the door, beside the
  *   partners' plates
  *
