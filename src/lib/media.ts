@@ -11,7 +11,7 @@ import type { Lang } from '@/lib/site'
  * There are two sets. The golden-hour set was shot at one light across every sector, so a
  * refinery, a warehouse, a coast and a cinema read as one landscape rather than a stock collage.
  * The sector set is the client's own: a picture per sector for the reel, and the pictures of the
- * platforms themselves (JAZ Choklat's chocolate, Qanif's farm). The home page never shows one
+ * platforms themselves (JAZ Chocolate's factory, Qanif's farm). The home page never shows one
  * photograph twice. The brand's deep green is the ground they all sit on — scrims, sections, the
  * dark between frames — never a tint laid over the pictures themselves.
  */
@@ -180,7 +180,7 @@ export const photos = {
 
   // --- The sector set: a picture per sector for the reel, and the platforms' own ---------------
 
-  /** An enrobing line in a bright hall, chocolate pouring into moulds. JAZ Choklat, at scale. */
+  /** An enrobing line in a bright hall, chocolate pouring into moulds. JAZ Chocolate, at scale. */
   chocolateFactory: {
     ...set('chocolate-factory', 1774),
     lqip: 'data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwCo9BmXKYs+S8c8c7oAAP4m9e9NiijkoufB+dgueu7p6GVqI/gO1Mqb74GTFDNDLm+4YkeHuSgV9EXcHY3too4QKshJnpBpoaQJTPEoU4Lf7svuJUBOFDryq14AAAA=',
@@ -341,7 +341,7 @@ export type PhotoKey = keyof typeof photos
  */
 export const marks = {
   jaz: {
-    ...mark('logo-jaz-choklat'),
+    ...mark('logo-jaz-chocolate'),
     lqip: 'data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoUABkAPu1aqU2ppKOiN/VYATAdiWUAAC31CrUJNcP6DygAAP7vvNOgzbBqlCHxtKH5AZwb2cqwrcovBQb9B7Gqvrnr2rLACt+ZVyMXhfTjG5sWS46STHnONgEphgAA',
     focus: '50% 50%',
     alt: { ar: 'شعار JAZ Chocolate بحروف برونزية', en: 'The JAZ Chocolate wordmark in bronze letters' },
@@ -393,7 +393,7 @@ export type Framed = {
  * The eight strategic sectors, in the order the copy lists them — Industry, Technology, Food,
  * Logistics, Tourism, Real estate, Financial services, Entertainment — one picture each from the
  * sector set, so the reel repeats nothing the hero has just shown. Where a sector has a platform,
- * its picture is the platform's: JAZ Choklat's line, its box, Qanif's farm.
+ * its picture is the platform's: JAZ Chocolate's line, its box, Qanif's farm.
  */
 export const sectorFrames: Framed[] = [
   { photo: photos.chocolateLine, focus: '38% 58%' },

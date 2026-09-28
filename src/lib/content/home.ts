@@ -55,7 +55,7 @@ const AR = {
 
   ecosystemH: 'منظومة أعمالنا',
   platforms: [
-    ['تصنيع الأغذية الفاخرة', 'JAZ Choklat', 'من اختيار المكوّن حتى اكتمال التجربة.'],
+    ['تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة.'],
     ['التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة.'],
     ['سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا.'],
     ['منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة.'],
@@ -150,7 +150,7 @@ const EN: HomeCopy = {
 
   ecosystemH: 'Our business ecosystem',
   platforms: [
-    ['Premium food manufacturing', 'JAZ Choklat', 'From ingredient to finished experience.'],
+    ['Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience.'],
     ['Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated.'],
     ['Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region.'],
     ['Real estate & hospitality', 'HOMERA', 'Property operations and hospitality.'],

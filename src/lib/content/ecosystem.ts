@@ -16,7 +16,7 @@ const AR = {
   contentsLabel: 'فصول الصفحة', // draft
   /** The contents line: the platforms, then the ecosystem they make: [group, chapters]. */
   groups: [
-    ['المنصات', ['JAZ Choklat', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'مزرعة قنيف']],
+    ['المنصات', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'مزرعة قنيف']],
     ['المنظومة', ['منظومة واحدة', 'ابنِ معنا']], // draft
   ] as [string, string[]][],
 
@@ -30,7 +30,7 @@ const AR = {
    * marks read the same in both languages, and Qanif's is written in each.
    */
   platforms: [
-    ['الصناعة', 'تصنيع الأغذية الفاخرة', 'JAZ Choklat', 'من اختيار المكوّن حتى اكتمال التجربة.'],
+    ['الصناعة', 'تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة.'],
     ['اللوجستيات', 'التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة.'],
     ['السياحة', 'سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا.'],
     ['العقار', 'منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة.'],
@@ -75,7 +75,7 @@ const EN: EcosystemCopy = {
   ecosystemLead: 'Integrated platforms creating sustainable economic value.',
   contentsLabel: 'On this page', // draft
   groups: [
-    ['The platforms', ['JAZ Choklat', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'Qanif Farm']],
+    ['The platforms', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'Qanif Farm']],
     ['The ecosystem', ['One ecosystem', 'Build with us']], // draft
   ],
 
@@ -83,7 +83,7 @@ const EN: EcosystemCopy = {
   deckH: 'Five platforms, one ecosystem', // draft
   deckLead: 'Each platform is built layer by layer until it stands on its own, and all five stand on one ecosystem.', // draft
   platforms: [
-    ['Industry', 'Premium food manufacturing', 'JAZ Choklat', 'From ingredient to finished experience.'],
+    ['Industry', 'Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience.'],
     ['Logistics', 'Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated.'],
     ['Tourism', 'Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region.'],
     ['Real estate', 'Real estate & hospitality', 'HOMERA', 'Property operations and hospitality.'],
@@ -124,14 +124,14 @@ export const ECOSYSTEM = { ar: AR, en: EN }
  * Each platform's address on the page, in the order every page lists them. The home page's
  * platform index links straight to them.
  */
-export const PLATFORM_IDS = ['jaz-choklat', 'eat-plus', 'zl-tours', 'homera', 'qanif-farm'] as const
+export const PLATFORM_IDS = ['jaz-chocolate', 'eat-plus', 'zl-tours', 'homera', 'qanif-farm'] as const
 
 /** The page's other chapters: the platforms as a whole, the ecosystem they stand on, the door. */
 export const ECOSYSTEM_IDS = { platforms: 'platforms', model: 'one-ecosystem', close: 'build-with-us' } as const
 
 /**
  * Where each platform sits among the eight strategic sectors, as `HOME.sectors` lists them:
- * JAZ Choklat in industry, eat.plus in logistics, ZL.TOURS in tourism, HOMERA in real estate and
- * Qanif Farm in entertainment. The home page's reel names each under its sector.
+ * JAZ Chocolate in industry, eat.plus in logistics, ZL.TOURS in tourism, HOMERA in real estate
+ * and Qanif Farm in entertainment. The home page's reel names each under its sector.
  */
 export const PLATFORM_SECTORS = [0, 3, 4, 5, 7]
