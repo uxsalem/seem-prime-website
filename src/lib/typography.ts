@@ -78,6 +78,25 @@ export const display = (ar: boolean, size: string, latinWeight = 300) =>
   ';letter-spacing:' +
   (ar ? '0' : '-.03em')
 
+/** Whether a string is written in Arabic script. */
+export const arabic = (s: string) => /[\u0600-\u06FF]/.test(s)
+
+/**
+ * A platform's name at any size. The name is the client's mark, so it keeps its own script
+ * whatever the page's language: a Latin mark runs Sora, set as `display` sets Latin, and a mark
+ * written in Arabic runs Plex Arabic, with a little more leading for its ascenders and no
+ * tracking, which would pull its joined letters apart. The options are the Latin setting; an
+ * Arabic mark takes the regular weight beside light Latin and the semibold beside anything heavier.
+ */
+export const markType = (name: string, size: string, { weight = 300, leading = '1.02', tracking = '-.03em' } = {}) =>
+  arabic(name)
+    ? "font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:" +
+      (weight > 400 ? 600 : 400) +
+      ';font-size:' +
+      size +
+      ';line-height:1.12;letter-spacing:0'
+    : "font-family:'Sora',sans-serif;font-weight:" + weight + ';font-size:' + size + ';line-height:' + leading + ';letter-spacing:' + tracking
+
 /**
  * The title a page opens on, over its photograph. The home page set the scale, and every inner
  * masthead shares it so no page opens louder than home. The measure matters as much as the size:

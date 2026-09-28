@@ -397,7 +397,8 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 
 /* --- Home: the sector reel --------------------------------------------------
    By default a swipe rail. Where there is room, the section pins and the track
-   travels along one horizon while the frames open as they arrive.
+   travels along one line while the frames open as they arrive. Every window is
+   the same size, 3:2, strung on the line through its middle.
    -------------------------------------------------------------------------- */
 
 [data-reel-head] { display: grid; gap: 22px 64px; grid-template-columns: minmax(0, 1fr); align-items: end; }
@@ -421,10 +422,8 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 }
 [data-reel-track]::-webkit-scrollbar { display: none; }
 [data-reel-frame] { position: relative; flex: 0 0 auto; width: min(78vw, 460px); scroll-snap-align: start; }
-[data-reel-group] { position: relative; display: flex; }
-[data-reel-win] { position: relative; flex: 1 1 auto; overflow: clip; aspect-ratio: 4 / 3; background: #062621; }
+[data-reel-win] { position: relative; overflow: clip; aspect-ratio: 3 / 2; background: #062621; }
 [data-reel-img] { position: absolute; inset: 0 -5%; }
-[data-reel-tiles] { display: none; }
 [data-reel-cap] { display: block; padding-block-start: 18px; }
 [data-reel-end] { flex: 0 0 auto; align-self: center; padding-inline: 24px 8vw; }
 [data-horizon],
@@ -432,8 +431,8 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 
 @media (min-width: 1000px) and (min-height: 560px) and (prefers-reduced-motion: no-preference) {
   [data-reel] { --u: min(1vh, 0.62vw); }
-  /* The horizon sits a little above centre, so the captions under the tallest frames clear
-     the foot of the screen. */
+  /* The line sits a little above centre, so the captions under the frames clear the foot of
+     the screen. */
   [data-reel-stick] {
     position: sticky;
     top: 0;
@@ -453,25 +452,13 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
     padding-inline: max(clamp(16px, 3vw, 32px), calc((100vw - 1400px) / 2 + 32px)) 16vw;
     will-change: transform;
   }
-  [data-reel-frame] { width: auto; transform: translateY(calc(var(--drop) * var(--u))); }
-  [data-reel-group] { gap: calc(3 * var(--u)); }
+  [data-reel-frame] { width: calc(66 * var(--u)); }
   [data-reel-win] {
-    flex: 0 0 auto;
-    aspect-ratio: auto;
-    width: calc(var(--w) * var(--u));
-    height: calc(var(--h) * var(--u));
     clip-path: inset(0 0 0 100%);
     transition: clip-path 1.3s var(--ease-arch);
   }
   [dir='ltr'] [data-reel-win] { clip-path: inset(0 100% 0 0); }
   [data-reel-frame][data-in] [data-reel-win] { clip-path: inset(0 0 0 0); }
-  [data-reel-tiles] { display: flex; flex-direction: column; gap: calc(3 * var(--u)); }
-  [data-reel-win][data-tile] {
-    width: calc(26 * var(--u));
-    height: calc((var(--h) - 3) / 2 * var(--u));
-    transition-delay: 0.18s;
-  }
-  [data-reel-win][data-tile] + [data-reel-win][data-tile] { transition-delay: 0.32s; }
   [data-reel-img] { will-change: transform; }
   [data-reel-cap] {
     position: absolute;
@@ -2123,15 +2110,15 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 }
 
 /* --- Ecosystem: the contents line ------------------------------------------------
-   The strategy page's grouped contents, with two groups instead of three: the four
-   platforms, then what they make together.
+   The strategy page's grouped contents, with two groups instead of three: the five
+   platforms, then what they make together. Each stop takes the same width.
    -------------------------------------------------------------------------- */
 
-[data-eco-acts] { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+[data-eco-acts] { grid-template-columns: minmax(0, 5fr) minmax(0, 2fr); }
 
 /* --- Ecosystem: the platforms and the model ----------------------------------------
-   Laid flat by default: the title card, the four platforms as full-bleed frames in
-   turn, then the model at rest with its key. Where there is room the stage pins: the
+   Laid flat by default: the title card, the platforms as full-bleed frames in turn,
+   then the model at rest with its key. Where there is room the stage pins: the
    platforms rise one over another, then lie back as the floors of the model, and the
    scroll pass writes every position. The model's drawing is shared by both.
    -------------------------------------------------------------------------- */
@@ -2184,7 +2171,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   color: #ffffff;
 }
 [data-card-photo] { position: absolute; inset: 0; }
-[data-card-floor],
 [data-card-edge] { display: none; }
 [data-card-scrim] {
   position: absolute;
@@ -2233,7 +2219,7 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   margin-block-start: clamp(16px, 2.4vh, 26px);
 }
 
-/* Chapter five's copy, and the model at rest with its key. */
+/* The model chapter's copy, and the model at rest with its key. */
 [data-model-copy] {
   box-sizing: border-box;
   max-width: 1400px;
@@ -2304,20 +2290,23 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 [data-ghost-front] { fill: rgba(255, 255, 255, 0.04); }
 [data-ghost-collar] { fill: none; stroke: rgba(220, 75, 28, 0.62); stroke-width: 1; }
 
-/* Once the cores stand, light moves along them: up two, down two, a floor at a time. */
+/* Once the cores stand, light moves along them: up two, down two, a floor at a time. Each
+   floor's stretch lights for 0.92s, 17.7% of the cycle, and hands on to the next, so a pulse
+   crosses the five floors in 4.6s and the core rests 0.6s before the next one. A floor more
+   or less means retiming both. */
 @keyframes sp-core-up {
   0% { stroke-dashoffset: 0.14; opacity: 1; }
-  22% { stroke-dashoffset: -1; opacity: 1; }
-  22.01%, 100% { stroke-dashoffset: -1; opacity: 0; }
+  17.7% { stroke-dashoffset: -1; opacity: 1; }
+  17.71%, 100% { stroke-dashoffset: -1; opacity: 0; }
 }
 @keyframes sp-core-down {
   0% { stroke-dashoffset: -1; opacity: 1; }
-  22% { stroke-dashoffset: 0.14; opacity: 1; }
-  22.01%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
+  17.7% { stroke-dashoffset: 0.14; opacity: 1; }
+  17.71%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
 }
 [data-live] [data-core-pulse] {
   animation: sp-core-up 5.2s linear infinite;
-  animation-delay: calc(var(--seg) * 1.144s + var(--core) * 0.7s);
+  animation-delay: calc(var(--seg) * 0.92s + var(--core) * 0.7s);
 }
 [data-live] [data-core-pulse][data-dir='down'] { animation-name: sp-core-down; }
 
@@ -2396,7 +2385,8 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 
 @media (min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
   [data-stack] { --gutter: max(clamp(16px, 3vw, 32px), calc((100vw - 1400px) / 2 + 32px)); }
-  [data-stack-pin] { height: 700vh; }
+  /* As tall as the pin's travel, in screens, which the stage sets from its platform count. */
+  [data-stack-pin] { height: calc((var(--travel) + 1) * 100vh); }
   [data-stack-stage] { position: sticky; top: 0; height: 100vh; overflow: clip; }
   [data-stack-intro] {
     position: absolute;
@@ -2420,7 +2410,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-card-photo] { inset: -10% 0; will-change: transform; }
   /* Every layer the scroll pass fades is composited on its own, so a fade never repaints the
      full-screen picture under it. */
-  [data-card-floor] { display: block; position: absolute; inset: 0; opacity: 0; will-change: opacity; }
   [data-card-scrim],
   [data-card-shade] { will-change: opacity; }
   /* The card's leading edge as it rises: a lit hairline, ember at the reading start. */
@@ -2487,7 +2476,8 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
     z-index: 70;
     bottom: clamp(18px, 3vh, 34px);
     inset-inline: var(--gutter);
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
     gap: 10px;
     opacity: 0;
     will-change: opacity;

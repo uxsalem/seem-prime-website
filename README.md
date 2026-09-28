@@ -45,7 +45,7 @@ src/
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
 scripts/focus-states.py    regenerates the strategy page's two depth-of-field photographs
-scripts/soft-plate.py      regenerates the ecosystem page's out-of-focus JAZ Choklat plate
+scripts/soft-plate.py      regenerated the out-of-focus plate JAZ Choklat used to open on (no longer used)
 ```
 
 ## How the styling works
@@ -79,13 +79,20 @@ leading, no letter-spacing, no uppercasing, and reversed arrows. The builders in
 
 ## Photography
 
-The site is carried by one set of photographs, all taken at the same golden hour: a heritage
-coast, a processing plant, a logistics hub, a residence, a contactless payment, an evening
-destination, code before the Riyadh skyline, a city seen from a lit terrace and a resort above a
-Red Sea bay, plus six entertainment frames cut from one contact sheet. One light across every sector is what lets a
-refinery, a warehouse and a cinema read as one landscape rather than a stock collage. The
-brand's deep green is the ground they sit on (sections, scrims, the dark between frames), never
-a tint laid over the pictures.
+The site is carried by two sets of photographs. The first was all taken at the same golden hour:
+a heritage coast, a processing plant, a logistics hub, a residence, a contactless payment, an
+evening destination, code before the Riyadh skyline, a city seen from a lit terrace and a resort
+above a Red Sea bay, plus two frames cut from an entertainment contact sheet. One light across
+every sector is what lets a refinery, a warehouse and a cinema read as one landscape rather than
+a stock collage. The second is the client's own sector set (September 2026): a picture per sector
+for the home page's reel, and pictures of the platforms themselves, JAZ Choklat's chocolate being
+made and boxed and Qanif's farm. The platforms' logos come with it. The brand's deep green is the
+ground they all sit on (sections, scrims, the dark between frames), never a tint laid over the
+pictures.
+
+The home page shows no photograph twice. The hero, the statement's capsules, the reel, the SEEM
+stages, the road to 2030 and the closing window each have pictures of their own, and the
+platform index shows the platforms' logos.
 
 `src/lib/media.ts` is the one place the photographs are named. Each carries its cuts, a 20px WebP
 blur-up inlined as a data URI, a focal point, and alt text in both languages. Call sites
@@ -96,25 +103,27 @@ type Framed = { photo: Photo; focus?: string; zoom?: number; origin?: string }
 ```
 
 The maps at the foot of the module decide what appears where: `heroFrames`, `sectorFrames`,
-`verbFrames`, `seemFrames`, `leisureTiles`, `platformFrames`, `ecosystemPlatforms`, `pagePlates`,
-`homeHorizon`, `homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`,
-`loopFrames`, `roadFrames`. Re-shooting a subject is a one-line change.
+`verbFrames`, `seemFrames`, `platformFrames`, `ecosystemPlatforms`, `pagePlates`, `homeHorizon`,
+`homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`, `loopFrames`,
+`roadFrames`. Re-shooting a subject is a one-line change. The logos live beside the photographs
+as `marks`; Qanif's card is set from its logo file, the Arabic name and both lines under it on
+white, the way the other four are supplied.
 
 Two photographs have derived states. `techFar` and `techNear` are the desk before the Riyadh
 skyline with the focus pulled: the horizon sharp and the laptop soft, then the reverse. They are
 generated from the original by `scripts/focus-states.py`, which traces the near plane by hand
 and blurs each plane with only its own colours, so the strategy page can rack focus between them
-as an opacity crossfade rather than a live blur. `diningSoft` is the waterfront table enlarged and
-thrown out of focus by `scripts/soft-plate.py`, a lens blur with the highlights lifted first so
-the lights open into bokeh. The table only exists at card size, and the ecosystem page opens JAZ
-Choklat on it at full bleed; the sharp table is set beside it as the detail.
+as an opacity crossfade rather than a live blur.
 
-**Cuts.** The golden-hour set ships three: the full file (1402–1774px), a 1280px middle cut and
-an 880px card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the
-browser can size, which covers the plates, the hero, and the reel, stage and closing windows, so
-a phone fetches the card cut and a desktop the full one. The entertainment tiles exist at card
-size only (~585px). The payments frame is cropped to leave out the emblem that opens the source
-image.
+**Cuts.** Both sets ship three: the full file (1402–1774px), a 1280px middle cut and an 880px
+card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the browser
+can size, which covers the plates, the hero, and the reel, stage and closing windows, so a phone
+fetches the card cut and a desktop the full one. The entertainment tiles exist at card size only
+(~585px). JAZ Choklat's box is a portrait (1122 × 1402) and ships at full and card size, so it
+only goes where a frame can hold a portrait: the reel's food window and JAZ's detail. The three
+pictures in the statement's capsules also ship a 400px cut (`xs`), because a capsule is a word
+wide. The logos ship as single 720 × 900 cards, the shape of the index's floating window. The
+payments frame is cropped to leave out the emblem that opens the source image.
 
 Two components consume them. **`Plate`** is the full-bleed photograph behind a masthead or a
 band of copy: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
@@ -126,15 +135,18 @@ Image weight, measured against a production build (whole page = after scrolling 
 
 | Page | 1440×900 first screen | 1440×900 whole page | 390×844 @2x whole page |
 |---|---|---|---|
-| home | 437KB | 861KB | 387KB |
+| home | 395KB | 1350KB | 807KB |
 | about | 396KB | 663KB | 309KB |
 | strategy | 328KB | 1188KB | 522KB |
-| ecosystem | 173KB | 1002KB | 450KB |
+| ecosystem | 173KB | 1477KB | 645KB |
 | contact | 202KB | 202KB | 65KB |
 
 The home page's first screen on desktop is the hero's opening frame plus the next scene, which
 is fetched 1.4s in so the first cut never waits. Scenes after that load one ahead, never all at
-once. The about page's is its opening shot plus the four strand windows peeking under it; the
+once. The whole page weighs more than it did (861KB and 387KB) because it no longer repeats a
+photograph: every section below the hero fetches pictures of its own rather than cuts the
+browser already has. The ecosystem page carries a fifth platform, and JAZ Choklat now opens on
+a full-size picture instead of a small blurred one (it was 1002KB and 450KB). The about page's is its opening shot plus the four strand windows peeking under it; the
 city they assemble into is only mounted once the reader reaches that chapter. The strategy page's
 is its opening shot and the two focus states under it. It carries the business model and the
 roadmap as well as the strategy, so it weighs more than any one of the three pages it replaced
@@ -164,26 +176,32 @@ Each section in `src/components/home/` owns its motion:
   bootstrap script in `site.tsx` sets `html[data-intro]` before first paint, so this runs in CSS
   from the first frame. The hero then cuts between seven sectors on a **diagonal blade** (the
   slant of the cut ends of the mark's letter bars) with a light hairline and an ember line
-  riding its edge. The blade travels right to left in Arabic and left to right in English. The
-  index along the foot names every scene and jumps to it; a pause button stops the clock. The
-  clock only runs while the hero is on screen and the tab is visible. Scrolling away closes the
-  frame into an inset panel.
+  riding its edge. It opens on logistics, then industry, with tourism third, so the first frame
+  a visitor sees says investor and builder rather than travel. The blade travels right to left
+  in Arabic and left to right in English. The index along the foot names every scene and jumps
+  to it; a pause button stops the clock. The clock only runs while the hero is on screen and the
+  tab is visible. Scrolling away closes the frame into an inset panel. The Arabic title is two
+  lines, a short one and a long one, joined by و rather than commas; the English keeps its
+  three beats, which the measure could not hold as two.
 - **`Statement`**: the positioning line, lit word by word at the pace of the scroll. Each verb
   opens a capsule onto the work it names. The capsules hold their width from the start and open
   on a clip, so the line never re-wraps.
 - **`SectorReel`**: on a wide screen the section pins and vertical scroll becomes a lateral
-  journey along one horizon line past eight windows of art-directed sizes. The ember line draws
-  itself to the middle of the screen, and each picture slides against the travel. Everywhere
-  else it is a swipe rail.
-- **`PlatformIndex`**: the four platforms as a typographic index. With a fine pointer, a window
-  of the platform's picture floats beside the cursor and the other rows dim. Touch screens get
-  an inline thumbnail instead.
+  journey past eight windows of one size, 3:2, strung on one line through their middles like
+  the frames of a film. The ember line draws itself to the middle of the screen, the counter
+  names the frame under it, and each picture slides against the travel. A sector with a
+  platform names it under its line. Everywhere else it is a swipe rail of the same frames.
+- **`PlatformIndex`**: the five platforms as a typographic index. With a fine pointer, a window
+  of the platform's logo floats beside the cursor and the other rows dim. Touch screens get the
+  logo inline as a thumbnail instead. Qanif's name is written in Arabic on the Arabic page, so
+  platform names are set by `markType` (`typography.ts`), which gives an Arabic mark the Arabic
+  face and no tracking.
 - **`SeemStages`**: four standing panels, one photograph each. Scroll (or a click) widens the
   open stage into a window and its question arrives.
-- **`Horizon2030`**: the page returns to the coast it opened on, turned in Arabic so the sun
-  always sits at the end of the reading line, where 2030 is. The four phases light along the
-  horizon as the rule draws toward the sun, and the targets count up along the foot. On a phone
-  the line runs down the reading edge instead.
+- **`Horizon2030`**: the road to 2030 runs across a city of towers at sunset, turned in Arabic
+  so the sun always sits at the end of the reading line, where 2030 is. The four phases light
+  along the horizon as the rule draws toward the sun, and the targets count up along the foot,
+  over the city they build toward. On a phone the line runs down the reading edge instead.
 - **`ClosingAperture`**: the square again, as a window that opens as it arrives, beside the
   page's closing line.
 
@@ -251,15 +269,17 @@ those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns it
 
 ### The ecosystem page, platform by platform
 
-The ecosystem page presents the four platforms, and then what they make together. The opening
-shot carries a contents line that lists all six stops, the platforms first (`EcosystemIndex`),
-and the two chapters in `src/components/ecosystem/` own their motion:
+The ecosystem page presents the five platforms (JAZ Choklat in industry, eat.plus in logistics,
+ZL.TOURS in tourism, HOMERA in real estate and Qanif Farm in entertainment), and then what they
+make together. The opening shot carries a contents line that lists all seven stops, the
+platforms first (`EcosystemIndex`), and the two chapters in `src/components/ecosystem/` own their
+motion:
 
 - **`PlatformStack`** (the platforms, and one ecosystem): one pinned stage. A title card lists
   the platforms the way a building lists its floors, top floor first. Then each platform rises
   over the one before it as a full screen of its own (its picture, its name set large, its line,
   and a framed detail of what it leads to) while the one beneath settles back, and a rail along
-  the foot keeps count. Once all four are down, the camera pulls back and the deck turns out to
+  the foot keeps count. Once the last is down, the camera pulls back and the deck turns out to
   have been a building: each card lies back into a floor of a model through one `matrix()`,
   drawn the way an architect draws a model, in an oblique projection, on a podium lettered SEEM
   PRIME. Four cores (capital, technology, operations, partnerships) rise through every floor,
@@ -267,7 +287,10 @@ and the two chapters in `src/components/ecosystem/` own their motion:
   looks up at two floors drawn but not yet built: forty platforms by 2030. The model around the
   floors is SVG drawn from the same geometry (`StackModel.tsx`), one layer per height, stacked
   between the cards so that every floor hides what is behind it. Each platform has an address of
-  its own (`/ecosystem#homera`), and the home page's platform index links straight to it.
+  its own (`/ecosystem#homera`), and the home page's platform index links straight to it. The
+  stage is built from the platform count: a platform more is a stretch of scroll more (the pin
+  sets its height from `--travel`), a card, a floor and a rail stop. The one exception is the
+  light on the cores, whose timing in `globals.css` is tuned for five floors.
 - **`EcosystemClose`** (build with us): after the long dark model the page comes out into the
   light for its one call to action, set beside the plates the partners' marks will fill.
 
@@ -294,7 +317,7 @@ Two reveal variants sit alongside the base `[data-sc]`:
 - `data-sc="mask"` — a frame that *unveils*. The frame opens on a `clip-path` while the picture
   inside settles out of its own crop.
 - `data-sc="rise"` — a line of display type arriving up, in, and out of focus into focus. The
-  hero's three headline lines stagger through it.
+  hero's headline lines stagger through it.
 
 Pointer states are all CSS, fed by one delegated listener: `[data-spot]` cards take an ember
 glow that follows the cursor (`useSpotlight`, wired once in `PageShell`), `.sp-zoom` leans its
@@ -314,7 +337,7 @@ and the rings hold without their ripple. On the strategy page the two focus stat
 above the other, each over its statement; the pillars are built and drawn; the seal is traced,
 with the four stages in turn beside it and no spark; the phases are pictures in pairs, each with
 its years over it; and the targets show their figures without spinning. On the ecosystem page the
-four platforms are full-bleed frames in turn, and the model stands at rest beneath them, drawn in
+platforms are full-bleed frames in turn, and the model stands at rest beneath them, drawn in
 full with a key beside it and no light moving along its cores.
 
 A page opened on a chapter's address (`/strategy#roadmap`, or `/roadmap` through its redirect)
@@ -333,12 +356,20 @@ the reader has already started to move.
   `public/ds/img/`, name it in `src/lib/media.ts`, and pass the frame to `ImageSlot`.
 - **The photography is generated imagery, not shot on site.** The golden-hour set is
   art-directed for the brand, but nothing in it is a SEEM PRIME building, plant or property,
-  and the people in it are not staff. Swapping in real assets is a change to `src/lib/media.ts`
-  alone — except the desk before the Riyadh skyline, whose two focus states have to be
-  regenerated with `scripts/focus-states.py` (and its near plane re-traced) if it is replaced.
-- **Some home page copy is draft.** The reel headline, the four new sector lines and the
-  reel's closing link are new strings, marked `// draft` in `src/lib/content/home.ts`, in both
-  languages. Everything else on the page is the approved framework copy.
+  and the people in it are not staff. The client's September 2026 set looks generated too (the
+  chocolate factory's windows open on snow-capped peaks), so neither JAZ Choklat's pictures nor
+  Qanif's should be read as the actual factory or farm. Swapping in real assets is a change to
+  `src/lib/media.ts` alone — except the desk before the Riyadh skyline, whose two focus states
+  have to be regenerated with `scripts/focus-states.py` (and its near plane re-traced) if it is
+  replaced.
+- **JAZ Choklat's name and its logo disagree.** The logo supplied for it reads "JAZ Chocolate";
+  the site calls it "JAZ Choklat" everywhere, as the framework copy does. One of the two needs
+  confirming.
+- **Some home page copy is draft.** The reel headline, the four new sector lines, the reel's
+  closing link and Qanif Farm's description and line are new strings, marked `// draft` in
+  `src/lib/content/home.ts`, in both languages. The Arabic hero title is the approved copy, set
+  as two lines joined by و at a reviewer's request. Everything else on the page is the approved
+  framework copy.
 - **Some about page copy is draft.** The English values are the framework's own full
   statements; their Arabic is a drafted translation. The chapter names, the name chapter's
   headline and its three notes, the values headline and "One ecosystem" are new. All are marked
@@ -351,23 +382,27 @@ the reader has already started to move.
   targets"), the pillars headline and lead, the focus scale's two ends, the value headline, the
   return line and the stage and phase labels are new. All are marked `// draft` in
   `src/lib/content/strategy.ts`.
-- **Some ecosystem page copy is draft.** The platforms' names, sectors and lines, the four
-  strands, the 2030 target and the closing copy are the approved framework copy. The chapter
-  names that are new ("Build with us"; "One ecosystem" is the about page's), the platforms
-  headline and lead, the sector label, the four detail captions, the model's headline, the cores
-  line, the target's second line and the model's description are new. All are marked `// draft`
-  in `src/lib/content/ecosystem.ts`.
-- **Two sectors have thinner photography than the rest.** Food's only picture is the waterfront
-  table from the entertainment contact sheet, so it is card-sized: it is left out of the hero,
-  and the ecosystem page opens JAZ Choklat on it thrown out of focus (`scripts/soft-plate.py`).
-  Entertainment's extra frames are ~585px tiles. A proper food-manufacturing shot (JAZ
-  Choklat's own chocolate, ideally) and larger entertainment frames would close both; the JAZ
-  plate is then a one-line change to `ecosystemPlatforms`.
-- **One superseded photograph is no longer used.** `about-manufacturing*.webp` (~200KB), the
-  packing line that stood for JAZ Choklat, is still in `public/ds/img/`; nothing names it. It was
-  lit by day, off the golden-hour set, and every box on its line carries the national emblem.
-  Delete it if it is not wanted back. (The Red Sea resort superseded before it is back in
-  service as HOMERA's detail.)
+- **Some ecosystem page copy is draft.** The first four platforms' names, sectors and lines, the
+  four strands, the 2030 target and the closing copy are the approved framework copy (JAZ
+  Choklat's sector is now industry, at the client's request). The chapter names that are new
+  ("Build with us"; "One ecosystem" is the about page's), the platforms headline and lead, the
+  sector label, the five detail captions, Qanif Farm's description and line, the model's
+  headline, the cores line, the target's second line and the model's description are new. All
+  are marked `// draft` in `src/lib/content/ecosystem.ts`.
+- **Two of the statement's capsules borrow from the entertainment sheet.** The client's set has
+  one picture for that section (the chocolatier, for "develop"), and every full-size picture
+  already has its place on the page, so "operate" and "invest" open onto two card-size frames
+  from the entertainment sheet, the waterfront table and the lit promenade. A picture of the
+  client's own for each would suit them better; each is a one-line change to `verbFrames`, plus
+  a 400px cut.
+- **Some superseded photographs are no longer used.** Nothing names these, and they are still in
+  `public/ds/img/`: `about-manufacturing*.webp` (~200KB), the packing line that once stood for
+  JAZ Choklat, lit by day, with the national emblem on every box; `ent-dining-soft*.webp`
+  (~100KB), the blurred table JAZ Choklat opened on before it had pictures of its own, with
+  `scripts/soft-plate.py` that made it; and the concert, coaster, cinema and esports tiles
+  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size. Delete
+  them if they are not wanted back. (The Red Sea resort superseded before them is back in
+  service as HOMERA's detail and the home page's closing window.)
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not
   wanted back.

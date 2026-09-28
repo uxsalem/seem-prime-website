@@ -3,30 +3,14 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { ImageSlot } from '@/components/ImageSlot'
-import { HOME, SECTOR_PLATFORMS } from '@/lib/content/home'
-import { css, cssWith, vars } from '@/lib/css'
+import { PLATFORM_SECTORS } from '@/lib/content/ecosystem'
+import { HOME } from '@/lib/content/home'
+import { css } from '@/lib/css'
 import { useScrollDriver } from '@/lib/hooks'
-import { leisureTiles, sectorFrames } from '@/lib/media'
+import { sectorFrames } from '@/lib/media'
 import { routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display, ordinal } from '@/lib/typography'
-
-/**
- * Where each sector's window sits on the pinned reel, in `--u` units (`min(1vh, .62vw)`):
- * width, height, and how far it drops below the horizon (negative rides above it). The sizes
- * are art-directed rather than uniform — the coast gets the widest frame, the residence stands
- * tall, the table from the entertainment sheet stays small because it is a card-sized picture.
- */
-const SHAPES: [number, number, number][] = [
-  [82, 54, 0],
-  [60, 40, -10],
-  [34, 44, 4],
-  [90, 50, 2],
-  [108, 58, 0],
-  [46, 56, 3],
-  [58, 38, -9],
-  [78, 52, 0],
-]
+import { BRONZE, arabic, display, markType, ordinal } from '@/lib/typography'
 
 /** Pinned only where there is room to travel sideways, and only when motion is welcome. */
 export const REEL_QUERY = '(min-width: 1000px) and (min-height: 560px) and (prefers-reduced-motion: no-preference)'
@@ -34,10 +18,11 @@ export const REEL_QUERY = '(min-width: 1000px) and (min-height: 560px) and (pref
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
 /**
- * The eight sectors as one landscape. On a wide screen the section pins and the reader travels
- * along a single horizon line — vertical scroll becomes a lateral journey past eight windows,
- * each opening as it arrives, the ember line drawing itself up to the middle of the screen.
- * Everywhere else it is a plain swipe rail with the same frames and captions.
+ * The eight sectors as one sequence. On a wide screen the section pins and the reader travels
+ * along a single line — vertical scroll becomes a lateral journey past eight windows of one size,
+ * strung on the line like frames of a film, each opening as it arrives, the ember drawing itself
+ * up to the middle of the screen. Everywhere else it is a plain swipe rail with the same frames
+ * and captions. A sector with a platform names it under its line.
  */
 export function SectorReel() {
   const { lang, ar, arrow } = useSite()
@@ -122,17 +107,14 @@ export function SectorReel() {
       const fill = fillRef.current
       if (fill) fill.style.transform = 'scaleX(' + clamp01((x + vw / 2) / track.scrollWidth).toFixed(4) + ')'
 
+      // The counter names the frame under the middle of the screen, where the ember ends: the
+      // last one whose leading edge has crossed it, so the reel opens on its first sector.
       let best = 0
-      let bestDistance = Infinity
       track.querySelectorAll<HTMLElement>('[data-reel-frame]').forEach((frame, i) => {
         const r = frame.getBoundingClientRect()
         const centre = r.left + r.width / 2
         if (r.left < vw * 0.94 && r.right > vw * 0.06) frame.setAttribute('data-in', '')
-        const distance = Math.abs(centre - vw / 2)
-        if (distance < bestDistance) {
-          bestDistance = distance
-          best = i
-        }
+        if (ar ? r.right >= vw / 2 : r.left <= vw / 2) best = i
         // Each window slides its picture against the travel, so the frames read as openings
         // onto a landscape that sits further back than the page.
         const shift = ((centre - vw / 2) / vw) * -7
@@ -197,32 +179,14 @@ export function SectorReel() {
             </span>
 
             {t.sectors.map((sector, i) => {
-              const [w, h, drop] = SHAPES[i]
-              const platform = SECTOR_PLATFORMS[i]
-              const cluster = i === 7
+              const k = PLATFORM_SECTORS.indexOf(i)
+              const platform = k < 0 ? null : t.platforms[k][1]
               return (
-                <figure
-                  key={i}
-                  data-reel-frame=""
-                  style={cssWith('margin:0', vars({ '--w': w, '--h': h, '--drop': drop }))}
-                >
-                  <div data-reel-group="">
-                    <div data-reel-win="">
-                      <span data-reel-img="">
-                        <ImageSlot frame={sectorFrames[i]} placeholder={sector} size={i === 2 ? 'sm' : 'md'} eager={warm} sizes="(min-width: 1000px) 60vw, 80vw" />
-                      </span>
-                    </div>
-                    {cluster ? (
-                      <div data-reel-tiles="" aria-hidden="true">
-                        {leisureTiles.slice(0, 2).map((frame, k) => (
-                          <div key={k} data-reel-win="" data-tile="">
-                            <span data-reel-img="">
-                              <ImageSlot frame={frame} alt="" placeholder="" eager={warm} />
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    ) : null}
+                <figure key={i} data-reel-frame="" style={css('margin:0')}>
+                  <div data-reel-win="">
+                    <span data-reel-img="">
+                      <ImageSlot frame={sectorFrames[i]} placeholder={sector} size="md" eager={warm} sizes="(min-width: 1000px) 41vw, min(78vw, 460px)" />
+                    </span>
                   </div>
                   <figcaption data-reel-cap="">
                     <span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:" + BRONZE)}>
@@ -237,7 +201,9 @@ export function SectorReel() {
                     {platform ? (
                       <span
                         style={css(
-                          "display:inline-flex;align-items:center;gap:8px;margin-block-start:12px;height:26px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.24);font-family:'Sora',sans-serif;font-size:11px;font-weight:500;letter-spacing:.14em;color:rgba(255,255,255,.86)",
+                          'display:inline-flex;align-items:center;gap:8px;margin-block-start:12px;height:26px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.24);' +
+                            markType(platform, arabic(platform) ? '13px' : '11px', { weight: 500, tracking: '.14em' }) +
+                            ';color:rgba(255,255,255,.86)',
                         )}
                       >
                         <span aria-hidden="true" style={css('width:5px;height:5px;border-radius:999px;background:' + BRONZE)} />

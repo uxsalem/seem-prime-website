@@ -11,9 +11,8 @@ export type HomeCopy = typeof AR
 
 const AR = {
   heroLabel: 'المقدمة',
-  h1a: 'نُمكّن الأعمال،',
-  h1b: 'نُسرّع النمو،',
-  h1c: 'ونبني المنظومات الاقتصادية',
+  /** The tagline, a line per entry: a short line, then a long one, joined by و rather than commas. */
+  h1: ['نُمكّن الأعمال ونُسرّع النمو', 'ونبني المنظومات الاقتصادية'],
   exploreCta: 'استكشف منظومتنا',
   cta: 'تواصل معنا',
   metaScroll: 'انزل لاستكشاف المنظومة',
@@ -39,7 +38,7 @@ const AR = {
   ],
   moreAbout: 'المزيد عنا',
 
-  reelH: 'ثمانية قطاعات، وأفقٌ واحد', // draft
+  reelH: 'ثمانية قطاعات في منظومة واحدة', // draft
   sectorsLead: 'ندخل حيث يتقدّم الطلب، ونبني منصة تخدم القطاع بأكمله لا مشروعاً واحداً فيه.',
   sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه'],
   sectorLines: [
@@ -60,6 +59,7 @@ const AR = {
     ['التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة.'],
     ['سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا.'],
     ['منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة.'],
+    ['مزرعة ريفية ترفيهية', 'مزرعة قنيف', 'يوم ريفي للعائلة في قلب الطبيعة.'], // draft
   ],
   morePlatforms: 'كل المنصات',
 
@@ -97,9 +97,8 @@ const AR = {
 
 const EN: HomeCopy = {
   heroLabel: 'Introduction',
-  h1a: 'Empowering business,',
-  h1b: 'accelerating growth,',
-  h1c: 'building economic ecosystems',
+  // The English keeps its three beats: joined into the Arabic's two lines, it would wrap to four.
+  h1: ['Empowering business,', 'accelerating growth,', 'building economic ecosystems'],
   exploreCta: 'Explore the ecosystem',
   cta: 'Contact us',
   metaScroll: 'Scroll to explore the ecosystem',
@@ -124,7 +123,7 @@ const EN: HomeCopy = {
   ],
   moreAbout: 'More about us',
 
-  reelH: 'Eight sectors. One horizon.', // draft
+  reelH: 'Eight sectors in one ecosystem', // draft
   sectorsLead:
     'We enter where demand is moving, and build a platform that serves the whole sector rather than one venture inside it.',
   sectors: [
@@ -155,6 +154,7 @@ const EN: HomeCopy = {
     ['Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated.'],
     ['Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region.'],
     ['Real estate & hospitality', 'HOMERA', 'Property operations and hospitality.'],
+    ['Rural leisure farm', 'Qanif Farm', 'A family day out in the countryside.'], // draft
   ],
   morePlatforms: 'All platforms',
 
@@ -192,14 +192,3 @@ const EN: HomeCopy = {
 }
 
 export const HOME = { ar: AR, en: EN }
-
-/**
- * Which platform already operates in which sector — the reel names it under the sector's line.
- * Platform names are the client's marks and read the same in both languages.
- */
-export const SECTOR_PLATFORMS: Record<number, string> = {
-  2: 'JAZ Choklat',
-  3: 'eat.plus',
-  4: 'ZL.TOURS',
-  5: 'HOMERA',
-}

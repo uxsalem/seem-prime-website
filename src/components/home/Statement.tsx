@@ -84,7 +84,7 @@ export function Statement() {
                 {cap >= 0 ? (
                   <>
                     <span data-cap="" data-at={word} aria-hidden="true">
-                      <ImageSlot frame={verbFrames[cap]} alt="" placeholder="" />
+                      <ImageSlot frame={verbFrames[cap]} alt="" placeholder="" size="xs" />
                     </span>{' '}
                   </>
                 ) : null}

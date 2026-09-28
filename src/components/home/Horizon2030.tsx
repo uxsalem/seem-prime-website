@@ -14,10 +14,10 @@ import { BRONZE, display } from '@/lib/typography'
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
 /**
- * The road to 2030, laid along a real horizon. The page returns to the coast it opened on,
- * turned in Arabic so the sun always sits at the end of the reading line — where 2030 is. The
- * four phases are stations on that line, lit one by one as the ember rule draws toward the sun,
- * and the 2030 targets count up along the foot of the frame.
+ * The road to 2030, laid along a real horizon: a city of towers at sunset, turned in Arabic so
+ * the sun always sits at the end of the reading line — where 2030 is. The four phases are
+ * stations on that line, lit one by one as the ember rule draws toward the sun, and the 2030
+ * targets count up along the foot of the frame, over the city they build toward.
  */
 export function Horizon2030() {
   const { lang, ar, arrow } = useSite()

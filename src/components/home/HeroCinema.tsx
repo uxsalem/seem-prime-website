@@ -258,7 +258,7 @@ export function HeroCinema() {
         )}
       >
         <h1 style={css(heroTitle(ar))}>
-          {[t.h1a, t.h1b, t.h1c].map((line, i) => (
+          {t.h1.map((line, i) => (
             <span key={i} data-sc="rise" data-stagger="" style={cssWith('display:block', vars({ '--i': i }))}>
               {line}
             </span>

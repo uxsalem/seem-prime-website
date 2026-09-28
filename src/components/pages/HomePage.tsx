@@ -15,8 +15,10 @@ import { SiteHeader } from '@/components/SiteHeader'
  * The home page as one journey through the ecosystem, told in photographs:
  *
  *   the square opens onto the sectors  →  what we do, in three verbs  →  eight sectors along
- *   one horizon  →  the platforms already built  →  the four stages behind every decision  →
- *   the road to 2030, back on the coast  →  the square again, and the door
+ *   one line  →  the platforms already built  →  the four stages behind every decision  →
+ *   the road to 2030, across the city  →  the square again, and the door
+ *
+ * No photograph appears twice on the page.
  *
  * Each section owns its own motion (see `src/components/home/`); this file only sets the order.
  */

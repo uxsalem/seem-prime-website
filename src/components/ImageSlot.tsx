@@ -26,7 +26,8 @@ export function ImageSlot({
   fit = 'cover',
   /**
    * `sm` is the ~880px cut — right for cards, rails and gallery tiles. `md` is the 1280px cut for
-   * larger windows, falling back to the full file where a photograph has no middle cut.
+   * larger windows, falling back to the full file where a photograph has no middle cut. `xs` is
+   * the 400px cut for frames a word wide, falling back to `sm`.
    */
   size = 'sm',
   /**
@@ -44,7 +45,7 @@ export function ImageSlot({
   alt?: string
   placeholder: string
   fit?: 'cover' | 'contain'
-  size?: 'sm' | 'md' | 'full'
+  size?: 'xs' | 'sm' | 'md' | 'full'
   eager?: boolean
   sizes?: string
 }) {
@@ -92,7 +93,7 @@ export function ImageSlot({
         {/* eslint-disable-next-line @next/next/no-img-element -- fluid frames, no intrinsic size to hand next/image */}
         <img
           data-img=""
-          src={size === 'full' ? photo.src : size === 'md' ? (photo.md ?? photo.src) : photo.sm}
+          src={size === 'full' ? photo.src : size === 'md' ? (photo.md ?? photo.src) : size === 'xs' ? (photo.xs ?? photo.sm) : photo.sm}
           srcSet={sizes ? srcSet(photo) : undefined}
           sizes={sizes}
           alt={alt ?? photo.alt[lang]}

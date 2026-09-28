@@ -6,12 +6,12 @@ import { glide } from '@/lib/hooks'
 import { useSite } from '@/lib/site'
 import { BRONZE, ordinal } from '@/lib/typography'
 
-/** Every address on the page, numbered straight through: the four platforms, then the model and the door. */
+/** Every address on the page, numbered straight through: the platforms, then the model and the door. */
 const IDS: string[] = [...PLATFORM_IDS, ECOSYSTEM_IDS.model, ECOSYSTEM_IDS.close]
 
 /**
- * The opening's contents line. The page is the four platforms and then what they make together,
- * so the six stops are grouped that way, the way the strategy page groups its chapters under the
+ * The opening's contents line. The page is the platforms and then what they make together, so
+ * its stops are grouped that way, the way the strategy page groups its chapters under the
  * promise line's beats, and each is a jump to its place.
  */
 export function EcosystemIndex() {
