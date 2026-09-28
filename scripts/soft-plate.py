@@ -1,7 +1,7 @@
 """
-The ecosystem page's JAZ Choklat backdrop: the waterfront table, thrown out of focus.
+The ecosystem page's JAZ Chocolate backdrop: the waterfront table, thrown out of focus.
 
-Every platform on the ecosystem page opens on a full-bleed photograph. JAZ Choklat's only picture
+Every platform on the ecosystem page opens on a full-bleed photograph. JAZ Chocolate's only picture
 in the golden-hour set is the table from the entertainment contact sheet, and that exists at card
 size alone (~585px), so at full bleed it would read as a soft enlargement. This script makes the
 softness the point instead: it enlarges the table and puts it through a lens blur, a disc kernel
@@ -9,7 +9,7 @@ with the highlights lifted before the blur so the lantern and the promenade ligh
 bokeh, and the page sets the sharp card-sized original beside it as a detail.
 
 It writes the full cut and the 880px card cut, and prints the 20px blur-up for `src/lib/media.ts`.
-A proper full-size photograph for JAZ Choklat replaces all of this with a one-line change there.
+A proper full-size photograph for JAZ Chocolate replaces all of this with a one-line change there.
 Run from the repository root:
 
     python3 -m venv .venv && .venv/bin/pip install numpy scipy pillow

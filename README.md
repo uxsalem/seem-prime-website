@@ -45,7 +45,7 @@ src/
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
 scripts/focus-states.py    regenerates the strategy page's two depth-of-field photographs
-scripts/soft-plate.py      regenerated the out-of-focus plate JAZ Choklat used to open on (no longer used)
+scripts/soft-plate.py      regenerated the out-of-focus plate JAZ Chocolate used to open on (no longer used)
 ```
 
 ## How the styling works
@@ -85,8 +85,8 @@ evening destination, code before the Riyadh skyline, a city seen from a lit terr
 above a Red Sea bay, plus two frames cut from an entertainment contact sheet. One light across
 every sector is what lets a refinery, a warehouse and a cinema read as one landscape rather than
 a stock collage. The second is the client's own sector set (September 2026): a picture per sector
-for the home page's reel, and pictures of the platforms themselves, JAZ Choklat's chocolate being
-made and boxed and Qanif's farm. The platforms' logos come with it. The brand's deep green is the
+for the home page's reel, and pictures of the platforms themselves: JAZ Chocolate's factory and
+boxes, and Qanif's farm. The platforms' logos come with it. The brand's deep green is the
 ground they all sit on (sections, scrims, the dark between frames), never a tint laid over the
 pictures.
 
@@ -119,7 +119,7 @@ as an opacity crossfade rather than a live blur.
 card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the browser
 can size, which covers the plates, the hero, and the reel, stage and closing windows, so a phone
 fetches the card cut and a desktop the full one. The entertainment tiles exist at card size only
-(~585px). JAZ Choklat's box is a portrait (1122 × 1402) and ships at full and card size, so it
+(~585px). JAZ Chocolate's box is a portrait (1122 × 1402) and ships at full and card size, so it
 only goes where a frame can hold a portrait: the reel's food window and JAZ's detail. The three
 pictures in the statement's capsules also ship a 400px cut (`xs`), because a capsule is a word
 wide. The logos ship as single 720 × 900 cards, the shape of the index's floating window. The
@@ -145,7 +145,7 @@ The home page's first screen on desktop is the hero's opening frame plus the nex
 is fetched 1.4s in so the first cut never waits. Scenes after that load one ahead, never all at
 once. The whole page weighs more than it did (861KB and 387KB) because it no longer repeats a
 photograph: every section below the hero fetches pictures of its own rather than cuts the
-browser already has. The ecosystem page carries a fifth platform, and JAZ Choklat now opens on
+browser already has. The ecosystem page carries a fifth platform, and JAZ Chocolate now opens on
 a full-size picture instead of a small blurred one (it was 1002KB and 450KB). The about page's is its opening shot plus the four strand windows peeking under it; the
 city they assemble into is only mounted once the reader reaches that chapter. The strategy page's
 is its opening shot and the two focus states under it. It carries the business model and the
@@ -269,7 +269,7 @@ those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns it
 
 ### The ecosystem page, platform by platform
 
-The ecosystem page presents the five platforms (JAZ Choklat in industry, eat.plus in logistics,
+The ecosystem page presents the five platforms (JAZ Chocolate in industry, eat.plus in logistics,
 ZL.TOURS in tourism, HOMERA in real estate and Qanif Farm in entertainment), and then what they
 make together. The opening shot carries a contents line that lists all seven stops, the
 platforms first (`EcosystemIndex`), and the two chapters in `src/components/ecosystem/` own their
@@ -357,14 +357,11 @@ the reader has already started to move.
 - **The photography is generated imagery, not shot on site.** The golden-hour set is
   art-directed for the brand, but nothing in it is a SEEM PRIME building, plant or property,
   and the people in it are not staff. The client's September 2026 set looks generated too (the
-  chocolate factory's windows open on snow-capped peaks), so neither JAZ Choklat's pictures nor
+  chocolate factory's windows open on snow-capped peaks), so neither JAZ Chocolate's pictures nor
   Qanif's should be read as the actual factory or farm. Swapping in real assets is a change to
   `src/lib/media.ts` alone — except the desk before the Riyadh skyline, whose two focus states
   have to be regenerated with `scripts/focus-states.py` (and its near plane re-traced) if it is
   replaced.
-- **JAZ Choklat's name and its logo disagree.** The logo supplied for it reads "JAZ Chocolate";
-  the site calls it "JAZ Choklat" everywhere, as the framework copy does. One of the two needs
-  confirming.
 - **Some home page copy is draft.** The reel headline, the four new sector lines, the reel's
   closing link and Qanif Farm's description and line are new strings, marked `// draft` in
   `src/lib/content/home.ts`, in both languages. The Arabic hero title is the approved copy, set
@@ -383,12 +380,13 @@ the reader has already started to move.
   return line and the stage and phase labels are new. All are marked `// draft` in
   `src/lib/content/strategy.ts`.
 - **Some ecosystem page copy is draft.** The first four platforms' names, sectors and lines, the
-  four strands, the 2030 target and the closing copy are the approved framework copy (JAZ
-  Choklat's sector is now industry, at the client's request). The chapter names that are new
-  ("Build with us"; "One ecosystem" is the about page's), the platforms headline and lead, the
-  sector label, the five detail captions, Qanif Farm's description and line, the model's
-  headline, the cores line, the target's second line and the model's description are new. All
-  are marked `// draft` in `src/lib/content/ecosystem.ts`.
+  four strands, the 2030 target and the closing copy are the approved framework copy, with two
+  changes to JAZ Chocolate: its sector is now industry, at the client's request, and its name is
+  spelled as its logo spells it, where the framework has "JAZ Choklat". The chapter names that
+  are new ("Build with us"; "One ecosystem" is the about page's), the platforms headline and
+  lead, the sector label, the five detail captions, Qanif Farm's description and line, the
+  model's headline, the cores line, the target's second line and the model's description are
+  new. All are marked `// draft` in `src/lib/content/ecosystem.ts`.
 - **Two of the statement's capsules borrow from the entertainment sheet.** The client's set has
   one picture for that section (the chocolatier, for "develop"), and every full-size picture
   already has its place on the page, so "operate" and "invest" open onto two card-size frames
@@ -397,8 +395,8 @@ the reader has already started to move.
   a 400px cut.
 - **Some superseded photographs are no longer used.** Nothing names these, and they are still in
   `public/ds/img/`: `about-manufacturing*.webp` (~200KB), the packing line that once stood for
-  JAZ Choklat, lit by day, with the national emblem on every box; `ent-dining-soft*.webp`
-  (~100KB), the blurred table JAZ Choklat opened on before it had pictures of its own, with
+  JAZ Chocolate, lit by day, with the national emblem on every box; `ent-dining-soft*.webp`
+  (~100KB), the blurred table JAZ Chocolate opened on before it had pictures of its own, with
   `scripts/soft-plate.py` that made it; and the concert, coaster, cinema and esports tiles
   (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size. Delete
   them if they are not wanted back. (The Red Sea resort superseded before them is back in
