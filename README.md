@@ -98,12 +98,13 @@ above a Red Sea bay, plus two frames cut from an entertainment contact sheet. On
 every sector is what lets a refinery, a warehouse and a cinema read as one landscape rather than
 a stock collage. The second is the client's own sector set, supplied in September 2026 and
 replaced in October by a more realistic edition: a picture per sector for the home page's reel,
-the hero's industry and entertainment scenes, the statement's first capsule, and pictures of the
-platforms themselves: JAZ Chocolate's plant and a box of its chocolate, Qanif's lit sign, and
-SEEM Catering's tables. The platforms' logos come with it. The set has no hero picture for
-catering, so the hero's catering scene, a banquet table laid for a function, is taken from SEEM
-Catering's profile. The brand's deep green is the ground they all sit on (sections, scrims, the
-dark between frames), never a tint laid over the pictures.
+the hero's industry scene, the statement's first capsule, and pictures of the platforms
+themselves: JAZ Chocolate's plant and a box of its chocolate, Qanif's lit sign, and SEEM
+Catering's tables. The platforms' logos come with it. The hero's entertainment scene uses the
+September edition's family at Qanif, preferred to October's roller coaster. The set has no hero
+picture for catering, so the hero's catering scene, a banquet table laid for a function, is taken
+from SEEM Catering's profile. The brand's deep green is the ground they all sit on (sections,
+scrims, the dark between frames), never a tint laid over the pictures.
 
 The home page shows no photograph twice. The hero, the statement's capsules, the reel, the SEEM
 stages and the closing window each have pictures of their own, and the platform index shows the
@@ -386,7 +387,8 @@ the reader has already started to move.
   and the people in it are not staff. The client's October 2026 edition is more realistic: the
   enrobing line in the statement and Qanif's sign are plainly photographs, but the rest reads as
   stock or generated (the box of chocolate is embossed with letters that spell nothing, and
-  Qanif's terrace, kept for its detail, is from the earlier generated set). The edition's second
+  Qanif's terrace, kept for its detail, and the hero's family at Qanif are from the earlier
+  generated set). The edition's second
   industry picture, the plant from outside with workers and a pallet, is not used: it has alpine
   mountains behind it, and every slot it would suit already has a picture. Swapping in real
   assets is a change to `src/lib/media.ts` alone — except the desk before the Riyadh skyline,
@@ -431,12 +433,14 @@ the reader has already started to move.
   JAZ Chocolate, lit by day, with the national emblem on every box; `ent-dining-soft*.webp`
   (~100KB), the blurred table JAZ Chocolate opened on before it had pictures of its own, with
   `scripts/soft-plate.py` that made it; and the concert, coaster, cinema and esports tiles
-  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size; and the
-  client's September set (~3.5MB), which its October edition replaced: `chocolate-factory`,
+  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size; the
+  client's September set (~2.8MB), which its October edition replaced: `chocolate-factory`,
   `chocolate-vat`, `chocolate-line`, `jaz-box`, `ai-desk-riyadh`, `cargo-hub-day`,
-  `lagoon-traveller`, `corniche-terrace`, `card-tap` and `farm-family-day` (each `*.webp`, with
-  its cuts). Delete them if they are not wanted back. (The Red Sea resort superseded before them
-  is back in service as HOMERA's detail and the home page's closing window.)
+  `lagoon-traveller`, `corniche-terrace` and `card-tap` (each `*.webp`, with its cuts); and
+  October's roller coaster (`coaster-dusk*.webp`, ~190KB), which the hero's entertainment scene
+  gave up for September's family at Qanif. Delete them if they are not wanted back. (The Red Sea
+  resort superseded before them is back in service as HOMERA's detail and the home page's
+  closing window.)
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not
   wanted back.
