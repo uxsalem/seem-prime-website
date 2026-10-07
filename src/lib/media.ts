@@ -339,6 +339,19 @@ export const photos = {
       en: 'A waitress carrying two plates — a dessert dressed with berries, and a salad',
     },
   },
+  /**
+   * A banquet table laid for a function: napkins folded into cones, glassware, the hall lit warm
+   * behind. Taken from SEEM Catering's profile, which only holds it at 1181px, so it ships at that.
+   */
+  cateringBanquet: {
+    ...img('catering-banquet', 1181),
+    lqip: 'data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABQBACdASoUAA4APu1iqU2ppaOiMAgBMB2JaACdMoAloho9Fnw+pVQI/yAgAPw6ewNq51QoQIr/Y+giWvGej68Zw6/Rh/dhF6b6kaFl7mHRMaqnOrny2yyEzmA6EZnfqps4hddaFiX91I7uBy1KTpmDR7+b5n0Xc9zH6iuhkWS/IWLe/qLvz4vs7M10+mZfmuWpxNwlaQ1MZwUbe+YwxEAA',
+    focus: '44% 50%',
+    alt: {
+      ar: 'طاولة مأدبة طويلة مُعدّة لمناسبة: مناديل كريمية مطويّة بنقوش ذهبية، وكؤوس زجاجية، والقاعة خلفها مضاءة بضوء دافئ',
+      en: 'A long banquet table laid for a function — cream napkins folded into cones with a gold pattern, glassware, the hall lit warm behind',
+    },
+  },
   /** Chefs finishing plates of chocolate dessert with a mint leaf. */
   cateringPlating: {
     ...set('catering-plating', 1774),
@@ -477,9 +490,9 @@ export const sectorFrames: Framed[] = [
 /**
  * The home page's opening sequence: one frame per sector the cinema cuts between, keyed to the
  * sector it shows. It opens on the work — logistics, then industry, with tourism third — so the
- * first frame says investor and builder rather than travel. Food sits this one out, because its
- * picture is a portrait and the hero is full-bleed at every width, and so does catering, which the
- * client's set gives no picture for this section.
+ * first frame says investor and builder rather than travel, and it closes on catering's banquet
+ * table, the one frame taken from SEEM Catering's profile. Food sits this one out, because its
+ * picture is a portrait and the hero is full-bleed at every width.
  */
 export const heroFrames: { sector: number; frame: Framed }[] = [
   { sector: 3, frame: { photo: photos.logistics, focus: '56% 52%' } },
@@ -489,6 +502,7 @@ export const heroFrames: { sector: number; frame: Framed }[] = [
   { sector: 1, frame: { photo: photos.technology, focus: '56% 46%' } },
   { sector: 7, frame: { photo: photos.coaster, focus: '52% 46%' } },
   { sector: 6, frame: { photo: photos.payments, focus: '60% 48%' } },
+  { sector: 8, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
 ]
 
 /**
