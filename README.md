@@ -45,6 +45,7 @@ src/
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
 scripts/focus-states.py    regenerates the strategy page's two depth-of-field photographs
+scripts/plain-zero.py      takes the dot out of IBM Plex Mono's zero in the site's two cuts
 scripts/soft-plate.py      regenerated the out-of-focus plate JAZ Chocolate used to open on (no longer used)
 ```
 
@@ -82,6 +83,11 @@ the headlines, the statement, the leads, each platform's, pillar's and value's l
 and the mission. A paragraph of two sentences keeps its stops, and so do the form's messages
 and the copyright line. The SEEM promise line runs its three beats without the ".." that used to
 part them.
+
+The zero is plain. IBM Plex Mono, which sets the phone number, the index numbers and the years,
+draws a dot inside its zero; `scripts/plain-zero.py` takes it out of the two cuts in
+`public/ds/fonts/`. New Plex Mono files bring the dot back until the script is run again. The
+other faces already draw a plain zero.
 
 ## Photography
 
