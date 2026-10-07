@@ -1,6 +1,5 @@
 'use client'
 
-import { EcosystemClose } from '@/components/ecosystem/EcosystemClose'
 import { EcosystemIndex } from '@/components/ecosystem/EcosystemIndex'
 import { PlatformStack } from '@/components/ecosystem/PlatformStack'
 import { PageMasthead } from '@/components/PageMasthead'
@@ -14,10 +13,12 @@ import { useSite } from '@/lib/site'
 /**
  * The ecosystem page as the platforms, and then what they make together:
  *
- *   the opening shot and its contents line  →  five platforms, each a screen of its own, laid
- *   one on another  →  the camera pulls back: the five are the floors of one model, on one
- *   podium, with four cores through them and room above for more  →  the door, beside the
- *   partners' plates
+ *   the opening shot and its contents line  →  six platforms, each a screen of its own, laid
+ *   one on another  →  the camera pulls back: the six are the floors of one model, on one
+ *   podium, with four cores through them and room above for more
+ *
+ * The page used to come out into the light for a call to action beside the partners' plates; the
+ * client did not want it, so the model is the last thing before the footer.
  *
  * Each chapter owns its motion (see `src/components/ecosystem/`); this file only sets the order.
  */
@@ -38,7 +39,6 @@ export function EcosystemPage() {
       </PageMasthead>
 
       <PlatformStack />
-      <EcosystemClose />
       <SiteFooter />
     </PageShell>
   )

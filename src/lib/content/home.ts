@@ -4,7 +4,7 @@
  * The page is carried by its photography, so the copy is deliberately spare: the tagline, one
  * positioning line, a name and a line per sector. Almost every string is lifted from the
  * approved framework copy; the handful that are new are marked `// draft`, for the client to
- * confirm before launch.
+ * confirm before launch. A one-sentence line carries no full stop at its end, in either language.
  */
 
 export type HomeCopy = typeof AR
@@ -26,21 +26,21 @@ const AR = {
     ['نطوّر', 0],
     ['ونشغّل', 1],
     ['ونستثمر', 2],
-    ['في منصات الأعمال القابلة للتوسع.', -1],
+    ['في منصات الأعمال القابلة للتوسع', -1],
   ] as [string, number][],
   aboutBody:
-    'نبني منظومات أعمال متكاملة تربط بين رأس المال والتقنية والعمليات والشراكات الاستراتيجية لتسريع النمو الاقتصادي المستدام.',
+    'نبني منظومات أعمال متكاملة تربط بين رأس المال والتقنية والعمليات والشراكات الاستراتيجية لتسريع النمو الاقتصادي المستدام',
   proof: [
     ['المقر', 'جدة، المملكة العربية السعودية'],
     ['التأسيس', '2025'],
-    ['القطاعات', 'ثمانية قطاعات استراتيجية'],
+    ['القطاعات', 'تسعة قطاعات استراتيجية'],
     ['الأفق', '2030'],
   ],
   moreAbout: 'المزيد عنا',
 
-  reelH: 'ثمانية قطاعات في منظومة واحدة', // draft
-  sectorsLead: 'ندخل حيث يتقدّم الطلب، ونبني منصة تخدم القطاع بأكمله لا مشروعاً واحداً فيه.',
-  sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه'],
+  reelH: 'تسعة قطاعات في منظومة واحدة', // draft
+  sectorsLead: 'ندخل حيث يتقدّم الطلب، ونبني منصة تخدم القطاع بأكمله لا مشروعاً واحداً فيه',
+  sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه', 'التموين والأغذية'],
   sectorLines: [
     'القدرة التصنيعية وسلاسل الإمداد', // draft
     'المنصات الرقمية والذكاء الاصطناعي', // draft
@@ -50,49 +50,34 @@ const AR = {
     'إدارة وتشغيل العقارات وحلول الضيافة',
     'المدفوعات والخدمات المالية الرقمية', // draft
     'الوجهات والفعاليات والتجارب', // draft
+    'التموين الفاخر وإدارة الضيافة والمرافق', // draft
   ],
   reelMore: 'اطّلع على الاستراتيجية', // draft
 
   ecosystemH: 'منظومة أعمالنا',
   platforms: [
-    ['تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة.'],
-    ['التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة.'],
-    ['سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا.'],
-    ['منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة.'],
-    ['مزرعة ريفية ترفيهية', 'مزرعة قنيف', 'يوم ريفي للعائلة في قلب الطبيعة.'], // draft
+    ['تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة'],
+    ['التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة'],
+    ['سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا'],
+    ['منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة'],
+    ['منتجع ريفي', 'قنيف', 'إقامة وتجارب عائلية في قلب الطبيعة'], // draft
+    ['خدمات التموين الفاخر', 'SEEM Catering', 'موائد أنيقة تُمتع العين والذائقة'], // draft
   ],
   morePlatforms: 'كل المنصات',
 
   seemH: 'أربع مراحل تحكم كل قرار',
-  seemLead: 'الاسم نفسه هو منهجنا: أربعة أسئلة نطرحها على كل منصة، وأربع نتائج نقيسها.',
+  seemLead: 'الاسم نفسه هو منهجنا: أربعة أسئلة نطرحها على كل منصة، وأربع نتائج نقيسها',
   seem: [
     ['S', 'الاستراتيجية', 'إلى أين نتجه؟', 'استراتيجية واضحة'],
     ['E', 'التمكين', 'هل نحن جاهزون للتنفيذ؟', 'جاهزية عالية'],
     ['E', 'التنفيذ', 'كيف نحوّل الخطط إلى واقع؟', 'تنفيذ منضبط'],
     ['M', 'القياس والتحسين', 'هل حققنا الأثر؟', 'أثر مستدام'],
   ],
-  promiseLine: 'من الاستراتيجية .. إلى التنفيذ .. إلى الأثر المستدام',
-
-  roadH: 'أربع مراحل حتى الريادة',
-  roadmap: [
-    ['2025', 'التأسيس'],
-    ['2026-2028', 'التوسع داخل المملكة'],
-    ['2029', 'التوسع الإقليمي'],
-    ['2030', 'الريادة في بناء المنظومات الاقتصادية'],
-  ],
-  moreRoad: 'خارطة الطريق كاملة',
-  kpiH: 'الأهداف الاستراتيجية بحلول 2030',
-  kpis: [
-    ['40', 'منصة أعمال', ''],
-    ['1', 'محفظة استثمارية', 'مليار ريال'],
-    ['200', 'فرصة عمل', ''],
-    ['50', 'شراكة استراتيجية', ''],
-    ['10%', 'نمو سنوي', 'سنوياً'],
-  ],
+  promiseLine: 'من الاستراتيجية إلى التنفيذ إلى الأثر المستدام',
 
   bannerH: 'من الفكرة إلى منصة تعمل وتنمو',
   bannerBody:
-    'نبني ونشغّل ونستثمر داخل منظومة واحدة، فتتبادل منصاتنا الخبرة وتتضاعف فرص النجاح المشترك.',
+    'نبني ونشغّل ونستثمر داخل منظومة واحدة، فتتبادل منصاتنا الخبرة وتتضاعف فرص النجاح المشترك',
 }
 
 const EN: HomeCopy = {
@@ -111,21 +96,21 @@ const EN: HomeCopy = {
     ['We develop', 0],
     ['operate', 1],
     ['and invest', 2],
-    ['in scalable business platforms.', -1],
+    ['in scalable business platforms', -1],
   ],
   aboutBody:
-    'We build integrated business ecosystems that connect capital, technology, operations and strategic partnerships to accelerate sustainable economic growth.',
+    'We build integrated business ecosystems that connect capital, technology, operations and strategic partnerships to accelerate sustainable economic growth',
   proof: [
     ['Head office', 'Jeddah, Saudi Arabia'],
     ['Established', '2025'],
-    ['Sectors', 'Eight strategic sectors'],
+    ['Sectors', 'Nine strategic sectors'],
     ['Horizon', '2030'],
   ],
   moreAbout: 'More about us',
 
-  reelH: 'Eight sectors in one ecosystem', // draft
+  reelH: 'Nine sectors in one ecosystem', // draft
   sectorsLead:
-    'We enter where demand is moving, and build a platform that serves the whole sector rather than one venture inside it.',
+    'We enter where demand is moving, and build a platform that serves the whole sector rather than one venture inside it',
   sectors: [
     'Industry',
     'Technology',
@@ -135,6 +120,7 @@ const EN: HomeCopy = {
     'Real estate',
     'Financial services',
     'Entertainment',
+    'Catering & food',
   ],
   sectorLines: [
     'Manufacturing capacity and supply chains', // draft
@@ -145,50 +131,35 @@ const EN: HomeCopy = {
     'Property operations and hospitality',
     'Payments and digital finance', // draft
     'Destinations, events and experiences', // draft
+    'VIP catering, hospitality and facilities', // draft
   ],
   reelMore: 'See the strategy', // draft
 
   ecosystemH: 'Our business ecosystem',
   platforms: [
-    ['Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience.'],
-    ['Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated.'],
-    ['Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region.'],
-    ['Real estate & hospitality', 'HOMERA', 'Property operations and hospitality.'],
-    ['Rural leisure farm', 'Qanif Farm', 'A family day out in the countryside.'], // draft
+    ['Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience'],
+    ['Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated'],
+    ['Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region'],
+    ['Real estate & hospitality', 'HOMERA', 'Property operations and hospitality'],
+    ['Countryside resort', 'Qanif', 'Family stays and experiences in the countryside'], // draft
+    ['VIP catering', 'SEEM Catering', 'Elegant spreads for the eye and the palate'], // draft
   ],
   morePlatforms: 'All platforms',
 
   seemH: 'Four stages behind every decision',
   seemLead:
-    'The name is the method: four questions we put to every platform, and four outcomes we measure.',
+    'The name is the method: four questions we put to every platform, and four outcomes we measure',
   seem: [
     ['S', 'Strategy', 'Where are we going?', 'Clear strategy'],
     ['E', 'Enablement', 'Are we ready to execute?', 'Strong readiness'],
     ['E', 'Execution', 'How do we turn plans into reality?', 'Disciplined execution'],
     ['M', 'Measurement & improvement', 'Did we achieve the impact?', 'Sustainable impact'],
   ],
-  promiseLine: 'From strategy .. to execution .. to sustainable impact',
-
-  roadH: 'Four phases to leadership',
-  roadmap: [
-    ['2025', 'Foundation'],
-    ['2026-2028', 'Saudi expansion'],
-    ['2029', 'Regional expansion'],
-    ['2030', 'Leading economic ecosystem platform'],
-  ],
-  moreRoad: 'The full roadmap',
-  kpiH: 'Strategic targets by 2030',
-  kpis: [
-    ['40', 'Business platforms', ''],
-    ['1', 'Investment portfolio', 'SR billion'],
-    ['200', 'Jobs created', ''],
-    ['50', 'Strategic partnerships', ''],
-    ['10%', 'Annual growth', 'per year'],
-  ],
+  promiseLine: 'From strategy to execution to sustainable impact',
 
   bannerH: 'From an idea to a platform that runs and grows',
   bannerBody:
-    'We build, operate and invest inside one ecosystem, so our platforms exchange expertise and multiply shared success.',
+    'We build, operate and invest inside one ecosystem, so our platforms exchange expertise and multiply shared success',
 }
 
 export const HOME = { ar: AR, en: EN }

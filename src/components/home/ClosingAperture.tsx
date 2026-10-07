@@ -16,7 +16,9 @@ const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
 /**
  * The close. The page opened by widening the SEEM square into the frame; it ends on the same
- * square, a window that opens as it arrives, beside the one line the whole page argues for.
+ * square, a window that opens as it arrives, beside the one line the whole page argues for. It
+ * follows the SEEM stages on the same green, so a hairline across the measure marks where the
+ * stages end.
  */
 export function ClosingAperture() {
   const { lang, ar, arrow } = useSite()
@@ -44,7 +46,13 @@ export function ClosingAperture() {
 
   return (
     <section aria-labelledby="cl-h" data-tone="dark" style={css('position:relative;overflow:clip;background:#041815;color:#ffffff')}>
-      <div data-closing="" style={css('max-width:1400px;margin:0 auto;padding:clamp(96px,12vw,170px) clamp(16px,3vw,32px)')}>
+      <div aria-hidden="true" style={css('max-width:1400px;margin:0 auto;padding:0 clamp(16px,3vw,32px)')}>
+        <span style={css('display:block;height:1px;background:rgba(255,255,255,.14)')} />
+      </div>
+      <div
+        data-closing=""
+        style={css('max-width:1400px;margin:0 auto;padding:clamp(72px,9vw,124px) clamp(16px,3vw,32px) clamp(96px,12vw,170px)')}
+      >
         <div style={css('display:flex;flex-direction:column;justify-content:center')}>
           <span aria-hidden="true" style={css('display:block;color:rgba(255,255,255,.9);margin-block-end:clamp(26px,3.4vw,40px)')}>
             <Mark size={44} />

@@ -18,8 +18,8 @@ export const REEL_QUERY = '(min-width: 1000px) and (min-height: 560px) and (pref
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
 /**
- * The eight sectors as one sequence. On a wide screen the section pins and the reader travels
- * along a single line — vertical scroll becomes a lateral journey past eight windows of one size,
+ * The nine sectors as one sequence. On a wide screen the section pins and the reader travels
+ * along a single line — vertical scroll becomes a lateral journey past nine windows of one size,
  * strung on the line like frames of a film, each opening as it arrives, the ember drawing itself
  * up to the middle of the screen. Everywhere else it is a plain swipe rail with the same frames
  * and captions. A sector with a platform names it under its line.

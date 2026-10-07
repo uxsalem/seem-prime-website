@@ -2,42 +2,44 @@
  * Ecosystem page copy. Arabic is the primary language; English is the parallel cut, not a gloss.
  *
  * The page presents the platforms one at a time, each laid on the one before it, then pulls back
- * to show what they stand on: one base, and four shared cores running through every platform. It
- * closes on the door. The first four platforms' names, sectors and lines, the four strands, the
- * 2030 target and the closing copy are the approved framework copy; the handful of strings that
- * are new, Qanif Farm's among them, are marked `// draft`, for the client to confirm before launch.
+ * to show what they stand on: one base, and four shared cores running through every platform.
+ * The first four platforms' names, sectors and lines, the four strands and the 2030 target are
+ * the approved framework copy; the handful of strings that are new, Qanif's and SEEM Catering's
+ * among them, are marked `// draft`, for the client to confirm before launch. A one-sentence line
+ * carries no full stop at its end, in either language.
  */
 
 export type EcosystemCopy = typeof AR
 
 const AR = {
   ecosystemH: 'منظومة أعمالنا',
-  ecosystemLead: 'منصات متكاملة تصنع قيمة اقتصادية مستدامة.',
+  ecosystemLead: 'منصات متكاملة تصنع قيمة اقتصادية مستدامة',
   contentsLabel: 'فصول الصفحة', // draft
   /** The contents line: the platforms, then the ecosystem they make: [group, chapters]. */
   groups: [
-    ['المنصات', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'مزرعة قنيف']],
-    ['المنظومة', ['منظومة واحدة', 'ابنِ معنا']], // draft
+    ['المنصات', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'قنيف', 'SEEM Catering']],
+    ['المنظومة', ['منظومة واحدة']], // draft
   ] as [string, string[]][],
 
   // --- The platforms --------------------------------------------------------------------------
 
   platformsLabel: 'المنصات', // draft
-  deckH: 'خمس منصات، ومنظومة واحدة', // draft
-  deckLead: 'تُبنى كل منصة طبقةً فوق طبقة حتى تقوم بذاتها، وتقوم المنصات الخمس على منظومة واحدة.', // draft
+  deckH: 'ست منصات، ومنظومة واحدة', // draft
+  deckLead: 'تُبنى كل منصة طبقةً فوق طبقة حتى تقوم بذاتها، وتقوم المنصات الست على منظومة واحدة', // draft
   /**
    * [sector, what the platform is, name, its line]. The name is the client's mark: the Latin
    * marks read the same in both languages, and Qanif's is written in each.
    */
   platforms: [
-    ['الصناعة', 'تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة.'],
-    ['اللوجستيات', 'التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة.'],
-    ['السياحة', 'سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا.'],
-    ['العقار', 'منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة.'],
-    ['الترفيه', 'مزرعة ريفية ترفيهية', 'مزرعة قنيف', 'يوم ريفي للعائلة في قلب الطبيعة.'], // draft
+    ['الصناعة', 'تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة'],
+    ['اللوجستيات', 'التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة'],
+    ['السياحة', 'سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا'],
+    ['العقار', 'منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة'],
+    ['الترفيه', 'منتجع ريفي', 'قنيف', 'إقامة وتجارب عائلية في قلب الطبيعة'], // draft
+    ['التموين والأغذية', 'خدمات التموين الفاخر', 'SEEM Catering', 'موائد أنيقة تُمتع العين والذائقة'], // draft
   ],
   /** What each platform's second picture shows, in the same order. */
-  details: ['التجربة المكتملة', 'الميل الأخير', 'وجهات وتجارب', 'الضيافة', 'يوم في المزرعة'], // draft
+  details: ['التجربة المكتملة', 'الميل الأخير', 'وجهات وتجارب', 'الضيافة', 'مساء في قنيف', 'فن التقديم'], // draft
   sectorLabel: 'القطاع', // draft
   ecoLink: 'تواصل بشأن هذه المنصة',
 
@@ -45,7 +47,7 @@ const AR = {
 
   modelH: 'ما تقوم عليه كل منصة', // draft
   modelBody:
-    'نبني ونشغّل ونستثمر داخل منظومة واحدة، فتتبادل منصاتنا الخبرة وتتضاعف فرص النجاح المشترك.',
+    'نبني ونشغّل ونستثمر داخل منظومة واحدة، فتتبادل منصاتنا الخبرة وتتضاعف فرص النجاح المشترك',
   /** The four shared cores, named as the framework names its four strands: [strand, what it brings]. */
   cores: [
     ['رأس المال', 'الخبرة الاستثمارية'],
@@ -55,47 +57,37 @@ const AR = {
   ],
   coresLabel: 'أربعة محاور مشتركة تمرّ بكل منصة', // draft
   target: '40 منصة أعمال بحلول 2030',
-  targetLine: 'منظومة صُمّمت لتتّسع لمنصات أكثر.', // draft
-  modelLabel: 'نموذج المنظومة: خمس منصات فوق قاعدة واحدة، تمرّ بها أربعة محاور مشتركة، ومتّسع لمنصات أكثر', // draft
-
-  // --- Build with us --------------------------------------------------------------------------
-
-  closeH: 'هل تبحث عن شراكة أو استثمار؟',
-  closeBody:
-    'نرحّب بالمستثمرين، والشركاء، والجهات الحكومية. أخبرنا بما تبحث عنه وسيتواصل معك فريقنا مباشرة.',
-  cta: 'تواصل معنا',
-  second: 'نموذج الأعمال',
-  partnersLine: 'شراكات استراتيجية تصنع منظومتنا',
-  logoPh: 'ضع شعار الشريك',
-  address: 'حي الخالدية — جدة، المملكة العربية السعودية',
+  targetLine: 'منظومة صُمّمت لتتّسع لمنصات أكثر', // draft
+  modelLabel: 'نموذج المنظومة: ست منصات فوق قاعدة واحدة، تمرّ بها أربعة محاور مشتركة، ومتّسع لمنصات أكثر', // draft
 }
 
 const EN: EcosystemCopy = {
   ecosystemH: 'Our business ecosystem',
-  ecosystemLead: 'Integrated platforms creating sustainable economic value.',
+  ecosystemLead: 'Integrated platforms creating sustainable economic value',
   contentsLabel: 'On this page', // draft
   groups: [
-    ['The platforms', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'Qanif Farm']],
-    ['The ecosystem', ['One ecosystem', 'Build with us']], // draft
+    ['The platforms', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'Qanif', 'SEEM Catering']],
+    ['The ecosystem', ['One ecosystem']], // draft
   ],
 
   platformsLabel: 'The platforms', // draft
-  deckH: 'Five platforms, one ecosystem', // draft
-  deckLead: 'Each platform is built layer by layer until it stands on its own, and all five stand on one ecosystem.', // draft
+  deckH: 'Six platforms, one ecosystem', // draft
+  deckLead: 'Each platform is built layer by layer until it stands on its own, and all six stand on one ecosystem', // draft
   platforms: [
-    ['Industry', 'Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience.'],
-    ['Logistics', 'Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated.'],
-    ['Tourism', 'Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region.'],
-    ['Real estate', 'Real estate & hospitality', 'HOMERA', 'Property operations and hospitality.'],
-    ['Entertainment', 'Rural leisure farm', 'Qanif Farm', 'A family day out in the countryside.'], // draft
+    ['Industry', 'Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience'],
+    ['Logistics', 'Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated'],
+    ['Tourism', 'Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region'],
+    ['Real estate', 'Real estate & hospitality', 'HOMERA', 'Property operations and hospitality'],
+    ['Entertainment', 'Countryside resort', 'Qanif', 'Family stays and experiences in the countryside'], // draft
+    ['Catering & food', 'VIP catering', 'SEEM Catering', 'Elegant spreads for the eye and the palate'], // draft
   ],
-  details: ['The finished experience', 'The last mile', 'Destinations and experiences', 'Hospitality', 'A day on the farm'], // draft
+  details: ['The finished experience', 'The last mile', 'Destinations and experiences', 'Hospitality', 'An evening at Qanif', 'The art of presentation'], // draft
   sectorLabel: 'Sector', // draft
   ecoLink: 'Enquire about this platform',
 
   modelH: 'What every platform stands on', // draft
   modelBody:
-    'We build, operate and invest inside one ecosystem, so our platforms exchange expertise and multiply shared success.',
+    'We build, operate and invest inside one ecosystem, so our platforms exchange expertise and multiply shared success',
   cores: [
     ['Capital', 'Investment expertise'],
     ['Technology', 'Digital transformation'],
@@ -104,18 +96,9 @@ const EN: EcosystemCopy = {
   ],
   coresLabel: 'Four shared cores run through every platform', // draft
   target: '40 business platforms by 2030',
-  targetLine: 'An ecosystem built to carry more.', // draft
+  targetLine: 'An ecosystem built to carry more', // draft
   modelLabel:
-    'A model of the ecosystem: five platforms stacked on one base, four shared cores running through them, and room for more', // draft
-
-  closeH: 'Looking to partner or invest?',
-  closeBody:
-    'We welcome investors, partners and government entities. Tell us what you are looking for and our team will come back to you directly.',
-  cta: 'Contact us',
-  second: 'Business model',
-  partnersLine: 'Strategic partnerships that build our ecosystem',
-  logoPh: 'Drop a partner logo',
-  address: 'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
+    'A model of the ecosystem: six platforms stacked on one base, four shared cores running through them, and room for more', // draft
 }
 
 export const ECOSYSTEM = { ar: AR, en: EN }
@@ -124,14 +107,15 @@ export const ECOSYSTEM = { ar: AR, en: EN }
  * Each platform's address on the page, in the order every page lists them. The home page's
  * platform index links straight to them.
  */
-export const PLATFORM_IDS = ['jaz-chocolate', 'eat-plus', 'zl-tours', 'homera', 'qanif-farm'] as const
+export const PLATFORM_IDS = ['jaz-chocolate', 'eat-plus', 'zl-tours', 'homera', 'qanif', 'seem-catering'] as const
 
-/** The page's other chapters: the platforms as a whole, the ecosystem they stand on, the door. */
-export const ECOSYSTEM_IDS = { platforms: 'platforms', model: 'one-ecosystem', close: 'build-with-us' } as const
+/** The page's other chapters: the platforms as a whole, and the ecosystem they stand on. */
+export const ECOSYSTEM_IDS = { platforms: 'platforms', model: 'one-ecosystem' } as const
 
 /**
- * Where each platform sits among the eight strategic sectors, as `HOME.sectors` lists them:
- * JAZ Chocolate in industry, eat.plus in logistics, ZL.TOURS in tourism, HOMERA in real estate
- * and Qanif Farm in entertainment. The home page's reel names each under its sector.
+ * Where each platform sits among the nine strategic sectors, as `HOME.sectors` lists them:
+ * JAZ Chocolate in industry, eat.plus in logistics, ZL.TOURS in tourism, HOMERA in real estate,
+ * Qanif in entertainment and SEEM Catering in catering and food. The home page's reel names each
+ * under its sector.
  */
-export const PLATFORM_SECTORS = [0, 3, 4, 5, 7]
+export const PLATFORM_SECTORS = [0, 3, 4, 5, 7, 8]

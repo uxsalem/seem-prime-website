@@ -19,7 +19,7 @@ import { useSite } from '@/lib/site'
  */
 
 /** How much brand green the copy needs between itself and the photograph. */
-export type Scrim = 'hero' | 'masthead' | 'cinema' | 'banner' | 'close' | 'stage' | 'horizon' | 'creed' | 'none'
+export type Scrim = 'hero' | 'masthead' | 'cinema' | 'banner' | 'close' | 'stage' | 'creed' | 'none'
 
 const GREEN = '4,24,21'
 
@@ -66,12 +66,6 @@ function scrimLayers(scrim: Scrim, ar: boolean): string[] {
         `linear-gradient(to bottom,rgba(${GREEN},.46) 0%,rgba(${GREEN},.3) 26%,rgba(${GREEN},.78) 62%,rgb(${GREEN}) 100%)`,
         `linear-gradient(to ${start},rgba(${GREEN},.52) 0%,transparent 64%)`,
       ]
-    // A title up top and figures along the foot, with the horizon left clear between them.
-    case 'horizon':
-      return [
-        `linear-gradient(to bottom,rgba(${GREEN},.72) 0%,rgba(${GREEN},.18) 30%,transparent 46%)`,
-        `linear-gradient(to top,rgba(${GREEN},.96) 0%,rgba(${GREEN},.82) 26%,rgba(${GREEN},.2) 52%,transparent 66%)`,
-      ]
     default:
       return []
   }
@@ -85,8 +79,6 @@ export function Plate({
   /** Stacked plates crossfade rather than swap; the hidden ones sit at 0. */
   show = true,
   still = false,
-  /** Turn the photograph horizontally — for a picture whose direction has to follow the reading. */
-  mirror = false,
 }: {
   frame: Framed
   scrim?: Scrim
@@ -94,7 +86,6 @@ export function Plate({
   priority?: boolean
   show?: boolean
   still?: boolean
-  mirror?: boolean
 }) {
   const { ar } = useSite()
   const plateRef = useRef<HTMLSpanElement>(null)
@@ -118,7 +109,8 @@ export function Plate({
         ref={plateRef}
         style={css('position:absolute;inset:-10% 0;overflow:clip;will-change:transform')}
       >
-        <span style={css('position:absolute;inset:0' + (mirror ? ';transform:scaleX(-1)' : ''))}>
+        {/* The plate's inner frame, beneath the parallax layer: a masthead's settle rides it. */}
+        <span style={css('position:absolute;inset:0')}>
         <span
           style={css(
             'position:absolute;inset:-6%;background-image:url("' +
