@@ -6,8 +6,8 @@ import { glide } from '@/lib/hooks'
 import { useSite } from '@/lib/site'
 import { BRONZE, ordinal } from '@/lib/typography'
 
-/** Every address on the page, numbered straight through: the platforms, then the model and the door. */
-const IDS: string[] = [...PLATFORM_IDS, ECOSYSTEM_IDS.model, ECOSYSTEM_IDS.close]
+/** Every address on the page, numbered straight through: the platforms, then the model. */
+const IDS: string[] = [...PLATFORM_IDS, ECOSYSTEM_IDS.model]
 
 /**
  * The opening's contents line. The page is the platforms and then what they make together, so

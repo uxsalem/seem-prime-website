@@ -27,7 +27,7 @@ src/
     home/                  the home page's seven sections, each owning its own motion
     about/                 the about page's five chapters and its contents line, likewise
     strategy/              the strategy page's six chapters in three acts, and their contents line
-    ecosystem/             the ecosystem page's platforms-and-model stage, its close, and its contents line
+    ecosystem/             the ecosystem page's platforms-and-model stage, and its contents line
     contact/               the contact page's opening line: email, phone, the office
     PageShell.tsx          direction, body type scale, progress hairline, reveal pass, spotlight
     PageMasthead.tsx       the full-height opening shot every inner page starts on
@@ -77,6 +77,12 @@ Arabic is the default. `ar` drives more than the copy: a heavier display weight,
 leading, no letter-spacing, no uppercasing, and reversed arrows. The builders in
 `src/lib/typography.ts` take that flag so the rule lives in one place.
 
+A line of one sentence ends without a full stop, in both languages, at the client's request:
+the headlines, the statement, the leads, each platform's, pillar's and value's line, the vision
+and the mission. A paragraph of two sentences keeps its stops, and so do the form's messages
+and the copyright line. The SEEM promise line runs its three beats without the ".." that used to
+part them.
+
 ## Photography
 
 The site is carried by two sets of photographs. The first was all taken at the same golden hour:
@@ -84,15 +90,17 @@ a heritage coast, a processing plant, a logistics hub, a residence, a contactles
 evening destination, code before the Riyadh skyline, a city seen from a lit terrace and a resort
 above a Red Sea bay, plus two frames cut from an entertainment contact sheet. One light across
 every sector is what lets a refinery, a warehouse and a cinema read as one landscape rather than
-a stock collage. The second is the client's own sector set (September 2026): a picture per sector
-for the home page's reel, and pictures of the platforms themselves: JAZ Chocolate's factory and
-boxes, and Qanif's farm. The platforms' logos come with it. The brand's deep green is the
-ground they all sit on (sections, scrims, the dark between frames), never a tint laid over the
+a stock collage. The second is the client's own sector set, supplied in September 2026 and
+replaced in October by a more realistic edition: a picture per sector for the home page's reel,
+the hero's industry and entertainment scenes, the statement's first capsule, and pictures of the
+platforms themselves: JAZ Chocolate's plant and a box of its chocolate, Qanif's lit sign, and
+SEEM Catering's tables. The platforms' logos come with it. The brand's deep green is the ground
+they all sit on (sections, scrims, the dark between frames), never a tint laid over the
 pictures.
 
 The home page shows no photograph twice. The hero, the statement's capsules, the reel, the SEEM
-stages, the road to 2030 and the closing window each have pictures of their own, and the
-platform index shows the platforms' logos.
+stages and the closing window each have pictures of their own, and the platform index shows the
+platforms' logos.
 
 `src/lib/media.ts` is the one place the photographs are named. Each carries its cuts, a 20px WebP
 blur-up inlined as a data URI, a focal point, and alt text in both languages. Call sites
@@ -103,11 +111,12 @@ type Framed = { photo: Photo; focus?: string; zoom?: number; origin?: string }
 ```
 
 The maps at the foot of the module decide what appears where: `heroFrames`, `sectorFrames`,
-`verbFrames`, `seemFrames`, `platformFrames`, `ecosystemPlatforms`, `pagePlates`, `homeHorizon`,
-`homeClosing`, `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`, `loopFrames`,
-`roadFrames`. Re-shooting a subject is a one-line change. The logos live beside the photographs
-as `marks`; Qanif's card is set from its logo file, the Arabic name and both lines under it on
-white, the way the other four are supplied.
+`verbFrames`, `seemFrames`, `platformFrames`, `ecosystemPlatforms`, `pagePlates`, `homeClosing`,
+`aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`, `loopFrames`, `roadFrames`.
+Re-shooting a subject is a one-line change. The logos live beside the photographs as `marks`.
+Qanif's card is set on white from page 1 of its logo file, قنيف over QANIF, the lockup that
+carries no line about a farm. SEEM Catering has no logo file: its card is the back cover of its
+profile, «SEEM PRIME CATERING» in its gold on its sand, until the client sends a mark.
 
 Two photographs have derived states. `techFar` and `techNear` are the desk before the Riyadh
 skyline with the focus pulled: the horizon sharp and the laptop soft, then the reverse. They are
@@ -119,11 +128,13 @@ as an opacity crossfade rather than a live blur.
 card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the browser
 can size, which covers the plates, the hero, and the reel, stage and closing windows, so a phone
 fetches the card cut and a desktop the full one. The entertainment tiles exist at card size only
-(~585px). JAZ Chocolate's box is a portrait (1122 × 1402) and ships at full and card size, so it
-only goes where a frame can hold a portrait: the reel's food window and JAZ's detail. The three
-pictures in the statement's capsules also ship a 400px cut (`xs`), because a capsule is a word
-wide. The logos ship as single 720 × 900 cards, the shape of the index's floating window. The
-payments frame is cropped to leave out the emblem that opens the source image.
+(~585px), and so does the reel's technology picture, which the client supplied at 657px; it looks
+soft on a high-density screen until a larger copy arrives. The box of chocolate is a portrait
+(1200 × 1607) and ships at full and card size, so it only goes where a frame can hold a
+portrait: the reel's food window and JAZ's detail. The three pictures in the statement's
+capsules also ship a 400px cut (`xs`), because a capsule is a word wide. The logos ship as single
+720 × 900 cards, the shape of the index's floating window. The payments frame is cropped to
+leave out the emblem that opens the source image.
 
 Two components consume them. **`Plate`** is the full-bleed photograph behind a masthead or a
 band of copy: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
@@ -135,18 +146,19 @@ Image weight, measured against a production build (whole page = after scrolling 
 
 | Page | 1440×900 first screen | 1440×900 whole page | 390×844 @2x whole page |
 |---|---|---|---|
-| home | 395KB | 1350KB | 807KB |
+| home | 283KB | 1056KB | 699KB |
 | about | 396KB | 663KB | 309KB |
 | strategy | 328KB | 1188KB | 522KB |
-| ecosystem | 173KB | 1477KB | 645KB |
-| contact | 202KB | 202KB | 65KB |
+| ecosystem | 173KB | 1810KB | 724KB |
+| contact | 202KB | 202KB | 64KB |
 
 The home page's first screen on desktop is the hero's opening frame plus the next scene, which
 is fetched 1.4s in so the first cut never waits. Scenes after that load one ahead, never all at
-once. The whole page weighs more than it did (861KB and 387KB) because it no longer repeats a
-photograph: every section below the hero fetches pictures of its own rather than cuts the
-browser already has. The ecosystem page carries a fifth platform, and JAZ Chocolate now opens on
-a full-size picture instead of a small blurred one (it was 1002KB and 450KB). The about page's is its opening shot plus the four strand windows peeking under it; the
+once. The whole page no longer repeats a photograph, so every section below the hero fetches
+pictures of its own rather than cuts the browser already has; it is lighter than it was (1350KB
+and 807KB) since the road to 2030, and the city behind it, left the page in October 2026. The
+ecosystem page carries six platforms, and JAZ Chocolate opens on the plant's hall, the heaviest
+picture in the set (351KB at full size); it was 1477KB and 645KB with five. The about page's is its opening shot plus the four strand windows peeking under it; the
 city they assemble into is only mounted once the reader reaches that chapter. The strategy page's
 is its opening shot and the two focus states under it. It carries the business model and the
 roadmap as well as the strategy, so it weighs more than any one of the three pages it replaced
@@ -187,23 +199,25 @@ Each section in `src/components/home/` owns its motion:
   opens a capsule onto the work it names. The capsules hold their width from the start and open
   on a clip, so the line never re-wraps.
 - **`SectorReel`**: on a wide screen the section pins and vertical scroll becomes a lateral
-  journey past eight windows of one size, 3:2, strung on one line through their middles like
+  journey past nine windows of one size, 3:2, strung on one line through their middles like
   the frames of a film. The ember line draws itself to the middle of the screen, the counter
   names the frame under it, and each picture slides against the travel. A sector with a
   platform names it under its line. Everywhere else it is a swipe rail of the same frames.
-- **`PlatformIndex`**: the five platforms as a typographic index. With a fine pointer, a window
+- **`PlatformIndex`**: the six platforms as a typographic index. With a fine pointer, a window
   of the platform's logo floats beside the cursor and the other rows dim. Touch screens get the
   logo inline as a thumbnail instead. Qanif's name is written in Arabic on the Arabic page, so
   platform names are set by `markType` (`typography.ts`), which gives an Arabic mark the Arabic
   face and no tracking.
 - **`SeemStages`**: four standing panels, one photograph each. Scroll (or a click) widens the
-  open stage into a window and its question arrives.
-- **`Horizon2030`**: the road to 2030 runs across a city of towers at sunset, turned in Arabic
-  so the sun always sits at the end of the reading line, where 2030 is. The four phases light
-  along the horizon as the rule draws toward the sun, and the targets count up along the foot,
-  over the city they build toward. On a phone the line runs down the reading edge instead.
+  open stage into a window and its question arrives. The panels spell the name, so they stand
+  S, E, E, M from left to right in Arabic as well as English, and the scroll walks them left to
+  right; each panel keeps the page's direction for its own copy.
 - **`ClosingAperture`**: the square again, as a window that opens as it arrives, beside the
-  page's closing line.
+  page's closing line. It follows the stages on the same green, so a hairline marks the seam.
+
+The road to 2030 and the 2030 figures had a section of their own between the stages and the
+close (`Horizon2030`). It was removed in October 2026 at the client's request; the strategy page
+still carries the roadmap and the targets.
 
 ### The about page, in five chapters
 
@@ -245,7 +259,7 @@ those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns it
   and the city blurs, and the mission takes its place. Each statement sits on the plane that is
   out of focus, and a lens's focus scale tracks the pull from ∞ to arm's length.
 - **`Colonnade`** (pillars and sectors): the five pillars built in the order a building goes
-  up — the ground line, the eight sectors laid along it as the plinth, each pillar rising in
+  up — the ground line, the nine sectors laid along it as the plinth, each pillar rising in
   turn, and the beam across their heads, lettered SEEM PRIME. Inside each pillar its sentence
   is drawn (`PillarFigure`): layers until the platform stands alone, a share that grows with its
   sector, two sides meeting halfway, reviews pulling to the centre, one line through every
@@ -261,19 +275,19 @@ those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns it
   the brand's green below it.
 - **`RoadTo2030`** (the roadmap): the year as a mechanical counter. The scroll clicks its wheels
   over, 2025 to 2029, each year holding with its phase named beneath it and its picture behind it;
-  at the last turn the tens wheel goes over with the units, and 2030 lands in the light the home
-  page gives the sun. A ruler along the foot keeps the phases in proportion to their years.
+  at the last turn the tens wheel goes over with the units, and 2030 lands in the light of a low
+  sun. A ruler along the foot keeps the phases in proportion to their years.
 - **`Targets2030`** (the targets, and the close): each 2030 target is a small counter whose
   wheels spin a full turn and settle on the figure as it arrives, the higher places last. Below
   them sits the page's one call to action.
 
 ### The ecosystem page, platform by platform
 
-The ecosystem page presents the five platforms (JAZ Chocolate in industry, eat.plus in logistics,
-ZL.TOURS in tourism, HOMERA in real estate and Qanif Farm in entertainment), and then what they
-make together. The opening shot carries a contents line that lists all seven stops, the
-platforms first (`EcosystemIndex`), and the two chapters in `src/components/ecosystem/` own their
-motion:
+The ecosystem page presents the six platforms (JAZ Chocolate in industry, eat.plus in logistics,
+ZL.TOURS in tourism, HOMERA in real estate, Qanif in entertainment and SEEM Catering in catering
+and food), and then what they make together. The opening shot carries a contents line that lists
+all seven stops, the platforms first (`EcosystemIndex`), and both chapters play out on one stage
+in `src/components/ecosystem/`:
 
 - **`PlatformStack`** (the platforms, and one ecosystem): one pinned stage. A title card lists
   the platforms the way a building lists its floors, top floor first. Then each platform rises
@@ -290,9 +304,12 @@ motion:
   its own (`/ecosystem#homera`), and the home page's platform index links straight to it. The
   stage is built from the platform count: a platform more is a stretch of scroll more (the pin
   sets its height from `--travel`), a card, a floor and a rail stop. The one exception is the
-  light on the cores, whose timing in `globals.css` is tuned for five floors.
-- **`EcosystemClose`** (build with us): after the long dark model the page comes out into the
-  light for its one call to action, set beside the plates the partners' marks will fill.
+  light on the cores, whose timing in `globals.css` is tuned for six floors.
+
+The page ends on the model. It used to come out into the light for a call to action beside six
+plates for partners' logos (`EcosystemClose`); the client did not want it, and it was removed in
+October 2026. The footer now follows the model on the same green, so as the camera looks up and
+the podium drops below the frame, the stage's foot fades into the green instead of cutting it off.
 
 Pinning and horizontal travel only switch on at 1000px and up, with room in height, and with
 motion welcome. Otherwise the sections are ordinary flowing layout.
@@ -330,8 +347,8 @@ so they compose instead of fighting.
 the mask and rise reveals, the hover zoom and the pointer glow, and lights the reveal system
 statically. On the home page the aperture never plays, the hero holds its first scene (the index
 still switches scenes, without the blade), the statement is fully lit with its capsules open,
-the reel becomes the swipe rail, the SEEM stages stack with every stage open, and the horizon is
-drawn in full. On the about page the four strands sit flat as a square above the city they make,
+the reel becomes the swipe rail, and the SEEM stages stack with every stage open. On the about
+page the four strands sit flat as a square above the city they make,
 the mark is drawn in full, every value is lit, the lines to the five groups are drawn and still,
 and the rings hold without their ripple. On the strategy page the two focus states stand one
 above the other, each over its statement; the pillars are built and drawn; the seal is traced,
@@ -350,20 +367,24 @@ the reader has already started to move.
 - **The contact form and newsletter signup do not send anything.** Both validate and show a
   confirmation locally. Wire them to a route handler or form service — see the `TODO` in
   `src/components/pages/ContactPage.tsx` and `src/components/SiteFooter.tsx`.
-- **Two sets of image slots are still empty**, both deliberately: the contact page's
-  testimonial portraits (a building is not a stand-in for a person) and the ecosystem page's
-  partner logo plates. Both keep their captioned placeholder. To fill them, add the file to
-  `public/ds/img/`, name it in `src/lib/media.ts`, and pass the frame to `ImageSlot`.
-- **The photography is generated imagery, not shot on site.** The golden-hour set is
+- **One set of image slots is still empty**, deliberately: the contact page's testimonial
+  portraits (a building is not a stand-in for a person). They keep their captioned placeholder.
+  To fill them, add the file to `public/ds/img/`, name it in `src/lib/media.ts`, and pass the
+  frame to `ImageSlot`. (The ecosystem page's partner logo plates went with its closing section.)
+- **Most of the photography is generated or stock, not shot on site.** The golden-hour set is
   art-directed for the brand, but nothing in it is a SEEM PRIME building, plant or property,
-  and the people in it are not staff. The client's September 2026 set looks generated too (the
-  chocolate factory's windows open on snow-capped peaks), so neither JAZ Chocolate's pictures nor
-  Qanif's should be read as the actual factory or farm. Swapping in real assets is a change to
-  `src/lib/media.ts` alone — except the desk before the Riyadh skyline, whose two focus states
-  have to be regenerated with `scripts/focus-states.py` (and its near plane re-traced) if it is
-  replaced.
-- **Some home page copy is draft.** The reel headline, the four new sector lines, the reel's
-  closing link and Qanif Farm's description and line are new strings, marked `// draft` in
+  and the people in it are not staff. The client's October 2026 edition is more realistic: the
+  enrobing line in the statement and Qanif's sign are plainly photographs, but the rest reads as
+  stock or generated (the box of chocolate is embossed with letters that spell nothing, and
+  Qanif's terrace, kept for its detail, is from the earlier generated set). The edition's second
+  industry picture, the plant from outside with workers and a pallet, is not used: it has alpine
+  mountains behind it, and every slot it would suit already has a picture. Swapping in real
+  assets is a change to `src/lib/media.ts` alone — except the desk before the Riyadh skyline,
+  whose two focus states have to be regenerated with `scripts/focus-states.py` (and its near
+  plane re-traced) if it is replaced.
+- **Some home page copy is draft.** The reel headline, the five new sector lines (catering and
+  food's among them), the reel's closing link, and Qanif's and SEEM Catering's descriptions and
+  lines are new strings, marked `// draft` in
   `src/lib/content/home.ts`, in both languages. The Arabic hero title is the approved copy, set
   as two lines joined by و at a reviewer's request. Everything else on the page is the approved
   framework copy.
@@ -380,27 +401,32 @@ the reader has already started to move.
   return line and the stage and phase labels are new. All are marked `// draft` in
   `src/lib/content/strategy.ts`.
 - **Some ecosystem page copy is draft.** The first four platforms' names, sectors and lines, the
-  four strands, the 2030 target and the closing copy are the approved framework copy, with two
-  changes to JAZ Chocolate: its sector is now industry, at the client's request, and its name is
-  spelled as its logo spells it, where the framework has "JAZ Choklat". The chapter names that
-  are new ("Build with us"; "One ecosystem" is the about page's), the platforms headline and
-  lead, the sector label, the five detail captions, Qanif Farm's description and line, the
-  model's headline, the cores line, the target's second line and the model's description are
-  new. All are marked `// draft` in `src/lib/content/ecosystem.ts`.
-- **Two of the statement's capsules borrow from the entertainment sheet.** The client's set has
-  one picture for that section (the chocolatier, for "develop"), and every full-size picture
-  already has its place on the page, so "operate" and "invest" open onto two card-size frames
-  from the entertainment sheet, the waterfront table and the lit promenade. A picture of the
-  client's own for each would suit them better; each is a one-line change to `verbFrames`, plus
-  a 400px cut.
+  four strands and the 2030 target are the approved framework copy, with two changes to JAZ
+  Chocolate: its sector is now industry, at the client's request, and its name is spelled as its
+  logo spells it, where the framework has "JAZ Choklat". The contents line's group names (its
+  "One ecosystem" is the about page's), the platforms headline and lead, the sector label, the
+  six detail captions, Qanif's and SEEM Catering's descriptions and
+  lines, the model's headline, the cores line, the target's second line and the model's
+  description are new. All are marked `// draft` in `src/lib/content/ecosystem.ts`. Qanif is
+  written without «مزرعة» (farm) everywhere, because it is becoming a resort; its address is
+  `#qanif` now, not `#qanif-farm`. SEEM Catering's lines are drawn from its profile, which names
+  it «SEEM PRIME CATERING» on its covers and «SEEM Catering» in its text.
+- **One of the statement's capsules borrows from the entertainment sheet.** The client's set has
+  one picture for that section (the enrobing line, for "develop"); "operate" opens onto a
+  waitress carrying two plates from the catering set, and "invest" still opens onto a card-size
+  frame from the entertainment sheet, the lit promenade. A picture of the client's own would
+  suit it better; it is a one-line change to `verbFrames`, plus a 400px cut.
 - **Some superseded photographs are no longer used.** Nothing names these, and they are still in
   `public/ds/img/`: `about-manufacturing*.webp` (~200KB), the packing line that once stood for
   JAZ Chocolate, lit by day, with the national emblem on every box; `ent-dining-soft*.webp`
   (~100KB), the blurred table JAZ Chocolate opened on before it had pictures of its own, with
   `scripts/soft-plate.py` that made it; and the concert, coaster, cinema and esports tiles
-  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size. Delete
-  them if they are not wanted back. (The Red Sea resort superseded before them is back in
-  service as HOMERA's detail and the home page's closing window.)
+  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size; and the
+  client's September set (~3.5MB), which its October edition replaced: `chocolate-factory`,
+  `chocolate-vat`, `chocolate-line`, `jaz-box`, `ai-desk-riyadh`, `cargo-hub-day`,
+  `lagoon-traveller`, `corniche-terrace`, `card-tap` and `farm-family-day` (each `*.webp`, with
+  its cuts). Delete them if they are not wanted back. (The Red Sea resort superseded before them
+  is back in service as HOMERA's detail and the home page's closing window.)
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not
   wanted back.

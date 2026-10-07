@@ -11,12 +11,12 @@ import { capStyle } from '@/lib/typography'
 
 const FT = {
   ar: {
-    footerText: 'شركة استثمارية وتشغيلية استراتيجية تبني وتشغّل منصات أعمال قابلة للتوسع.',
+    footerText: 'شركة استثمارية وتشغيلية استراتيجية تبني وتشغّل منصات أعمال قابلة للتوسع',
     fCompany: 'الشركة',
     fContact: 'التواصل',
     address: 'حي الخالدية — جدة، المملكة العربية السعودية',
     nlLabel: 'النشرة البريدية',
-    nlBody: 'تحديثات دورية عن منصاتنا واستثماراتنا.',
+    nlBody: 'تحديثات دورية عن منصاتنا واستثماراتنا',
     nlPlaceholder: 'بريدك الإلكتروني',
     nlBtn: 'اشترك',
     nlOk: 'تم الاشتراك. شكراً لك.',
@@ -33,12 +33,12 @@ const FT = {
   },
   en: {
     footerText:
-      'A strategic investment and operating company building and operating scalable business platforms.',
+      'A strategic investment and operating company building and operating scalable business platforms',
     fCompany: 'Company',
     fContact: 'Contact',
     address: 'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
     nlLabel: 'Newsletter',
-    nlBody: 'Periodic updates on our platforms and investments.',
+    nlBody: 'Periodic updates on our platforms and investments',
     nlPlaceholder: 'Your email address',
     nlBtn: 'Subscribe',
     nlOk: 'Subscribed. Thank you.',

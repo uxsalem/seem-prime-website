@@ -21,6 +21,10 @@ const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
  * the four stages in order; a click takes any stage directly and holds it for a moment so the
  * scroll pass does not snatch it back. Narrow screens and reduced motion get the four stages
  * stacked, every one of them open.
+ *
+ * The panels spell the name, so they stand S, E, E, M from left to right in Arabic as well as in
+ * English, and the scroll walks them left to right. Only the row is turned: each panel keeps the
+ * page's direction for its own copy.
  */
 export function SeemStages() {
   const { lang, ar } = useSite()
@@ -70,13 +74,14 @@ export function SeemStages() {
 
       <div ref={pinRef} data-seem-pin="">
         <div data-seem-stick="">
-          <div data-seem-row="">
+          <div data-seem-row="" dir="ltr">
             {t.seem.map(([letter, name, question, outcome], i) => {
               const on = open === i
               return (
                 <button
                   key={`${letter}-${i}`}
                   type="button"
+                  dir={ar ? 'rtl' : undefined}
                   data-seem-panel=""
                   data-on={on ? '' : undefined}
                   aria-pressed={on}

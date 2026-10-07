@@ -672,75 +672,6 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   [data-seem-promise] { margin-block-start: 0 !important; }
 }
 
-/* --- Home: the horizon ------------------------------------------------------- */
-
-[data-hz-line] { --dot: 13px; }
-[data-hz-track] {
-  position: absolute;
-  top: calc(clamp(48px, 8vh, 96px) + var(--dot) / 2);
-  inset-inline: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.34);
-}
-[data-hz-fill] {
-  position: absolute;
-  inset: 0;
-  background: #dc4b1c;
-  transform: scaleX(var(--p, 0));
-  transform-origin: left center;
-}
-[dir='rtl'] [data-hz-fill] { transform-origin: right center; }
-[data-hz-nodes] { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-/* The stations sit on open water; a soft shadow keeps them legible without a panel behind them. */
-[data-hz-node] > span:not([data-hz-dot]) { text-shadow: 0 1px 14px rgba(4, 24, 21, 0.75), 0 0 2px rgba(4, 24, 21, 0.5); }
-[data-hz-node] { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
-[data-hz-node][data-last] { align-items: flex-end; text-align: end; }
-[data-hz-dot] {
-  display: block;
-  width: var(--dot);
-  height: var(--dot);
-  box-sizing: border-box;
-  border-radius: 999px;
-  background: #041815;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  transition: background-color 0.5s, border-color 0.5s, box-shadow 0.9s var(--ease-out);
-}
-[data-hz-node][data-lit] [data-hz-dot] { background: #dc4b1c; border-color: #dc4b1c; }
-/* 2030 is the sun on the line. */
-[data-hz-node][data-last][data-lit] [data-hz-dot] {
-  background: #ffe2b8;
-  border-color: #ffe2b8;
-  box-shadow: 0 0 0 7px rgba(255, 214, 160, 0.16), 0 0 46px 14px rgba(255, 186, 110, 0.5);
-}
-/* Narrow screens run the line down the reading edge instead, one station per row. */
-@media (max-width: 759px) {
-  [data-hz-track] {
-    top: clamp(48px, 8vh, 96px);
-    bottom: clamp(48px, 8vh, 96px);
-    inset-inline: calc(var(--dot) / 2) auto;
-    width: 1px;
-    height: auto;
-  }
-  [data-hz-fill] { transform: scaleY(var(--p, 0)); transform-origin: center top !important; }
-  [data-hz-nodes] { grid-template-columns: minmax(0, 1fr); gap: 26px; }
-  [data-hz-node] {
-    display: grid;
-    grid-template-columns: var(--dot) minmax(0, 1fr);
-    column-gap: 16px;
-    row-gap: 4px;
-    align-items: center;
-  }
-  [data-hz-node][data-last] { align-items: center; text-align: start; }
-  [data-hz-node] > span:not([data-hz-dot]) { grid-column: 2; }
-}
-[data-hz-kpis] { display: grid; gap: 24px 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 760px) {
-  [data-hz-kpis] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-@media (min-width: 1100px) {
-  [data-hz-kpis] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-}
-
 /* --- Home: the close --------------------------------------------------------- */
 
 [data-closing] { display: grid; gap: clamp(44px, 6vw, 96px); grid-template-columns: minmax(0, 1fr); align-items: center; }
@@ -1165,7 +1096,7 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   opacity: var(--o, 1);
   transform: translate(-50%, -50%) scale(var(--s, 1));
 }
-/* 2030 is the rim, lit the colour the horizon gives the sun on the home page. */
+/* 2030 is the rim, lit the colour of a low sun. */
 [data-ring][data-last] { border-color: rgba(255, 226, 184, 0.55); box-shadow: inset 0 0 70px rgba(255, 186, 110, 0.07); }
 [data-ring-pulse] {
   width: 100%;
@@ -1545,12 +1476,14 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   [dir='rtl'] [data-col-ground] { transform-origin: right center; }
   [data-col-plinth] {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 8fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 9fr);
     margin-block-start: 0;
     border-block-end: 1px solid var(--line2);
   }
   [data-col-plinth-label] { margin: 0; padding: 18px 0; align-self: start; }
-  [data-col-sectors] { grid-template-columns: repeat(8, minmax(0, 1fr)); border: 0; }
+  /* Nine to a row: on a narrower screen a long single word like «Entertainment» is wider than an
+     equal share, so each sector is at least as wide as its longest word and the rest is shared. */
+  [data-col-sectors] { grid-template-columns: repeat(9, minmax(min-content, 1fr)); border: 0; }
   [data-col-sector] {
     flex-direction: column;
     gap: 6px;
@@ -2110,11 +2043,11 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 }
 
 /* --- Ecosystem: the contents line ------------------------------------------------
-   The strategy page's grouped contents, with two groups instead of three: the five
+   The strategy page's grouped contents, with two groups instead of three: the six
    platforms, then what they make together. Each stop takes the same width.
    -------------------------------------------------------------------------- */
 
-[data-eco-acts] { grid-template-columns: minmax(0, 5fr) minmax(0, 2fr); }
+[data-eco-acts] { grid-template-columns: minmax(0, 6fr) minmax(0, 1fr); }
 
 /* --- Ecosystem: the platforms and the model ----------------------------------------
    Laid flat by default: the title card, the platforms as full-bleed frames in turn,
@@ -2291,21 +2224,21 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 [data-ghost-collar] { fill: none; stroke: rgba(220, 75, 28, 0.62); stroke-width: 1; }
 
 /* Once the cores stand, light moves along them: up two, down two, a floor at a time. Each
-   floor's stretch lights for 0.92s, 17.7% of the cycle, and hands on to the next, so a pulse
-   crosses the five floors in 4.6s and the core rests 0.6s before the next one. A floor more
+   floor's stretch lights for 0.92s, 15% of the cycle, and hands on to the next, so a pulse
+   crosses the six floors in 5.52s and the core rests 0.6s before the next one. A floor more
    or less means retiming both. */
 @keyframes sp-core-up {
   0% { stroke-dashoffset: 0.14; opacity: 1; }
-  17.7% { stroke-dashoffset: -1; opacity: 1; }
-  17.71%, 100% { stroke-dashoffset: -1; opacity: 0; }
+  15.03% { stroke-dashoffset: -1; opacity: 1; }
+  15.04%, 100% { stroke-dashoffset: -1; opacity: 0; }
 }
 @keyframes sp-core-down {
   0% { stroke-dashoffset: -1; opacity: 1; }
-  17.7% { stroke-dashoffset: 0.14; opacity: 1; }
-  17.71%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
+  15.03% { stroke-dashoffset: 0.14; opacity: 1; }
+  15.04%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
 }
 [data-live] [data-core-pulse] {
-  animation: sp-core-up 5.2s linear infinite;
+  animation: sp-core-up 6.12s linear infinite;
   animation-delay: calc(var(--seg) * 0.92s + var(--core) * 0.7s);
 }
 [data-live] [data-core-pulse][data-dir='down'] { animation-name: sp-core-down; }
@@ -2388,6 +2321,20 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   /* As tall as the pin's travel, in screens, which the stage sets from its platform count. */
   [data-stack-pin] { height: calc((var(--travel) + 1) * 100vh); }
   [data-stack-stage] { position: sticky; top: 0; height: 100vh; overflow: clip; }
+  /* When the camera looks up at the floors to come, the podium drops below the frame. The page
+     goes straight on to the footer on the same green, so the frame's foot fades into it rather
+     than cutting the podium off. Above every floor and its labels, under the rail. */
+  [data-stack-stage]::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 66;
+    height: 8vh;
+    background: linear-gradient(to bottom, rgba(4, 24, 21, 0), #041815 88%);
+    opacity: var(--look-up, 0);
+    pointer-events: none;
+  }
   [data-stack-intro] {
     position: absolute;
     inset: 0;
@@ -2483,20 +2430,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
     will-change: opacity;
   }
 }
-
-/* --- Ecosystem: the close -------------------------------------------------------------- */
-
-[data-eco-close] { display: grid; gap: clamp(56px, 8vw, 110px); grid-template-columns: minmax(0, 1fr); align-items: end; }
-@media (min-width: 1000px) {
-  [data-eco-close] { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
-}
-[data-partners] { display: flex; flex-direction: column; gap: 22px; }
-[data-plates] { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-@media (min-width: 600px) {
-  [data-plates] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-[data-plates] > li { display: flex; flex-direction: column; gap: 8px; }
-[data-plate] { position: relative; display: block; aspect-ratio: 3 / 2; background: var(--card); }
 
 /* --- Inner pages: the opening shot ----------------------------------------------
    Every masthead's frame opens as the page arrives: an inset window widens to the
@@ -2733,7 +2666,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-cap] [data-imgwrap] { transform: none; transition: none; }
   [data-w] { transition: none; }
   [data-pv], [data-pv] [data-imgwrap], [data-pname], [data-parrow] { transition: none; }
-  [data-hz-dot] { transition: none; }
   [data-masthead-plate], [data-masthead-plate] > span > span:first-child > span { animation: none; }
 
   [data-chapter-line]::after, [data-noun]::after, [data-creed-line], [data-name-step] { transition: none; }

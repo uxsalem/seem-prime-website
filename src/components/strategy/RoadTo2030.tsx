@@ -36,9 +36,9 @@ const TENS = ['2', '3']
  * behind it:
  * Jeddah's coast for the foundation, a plant in the Kingdom for the expansion at home, an
  * evening destination for the region. At the last turn the tens wheel goes over with the units,
- * the way an odometer turns a decade, and the counter lands on 2030 in the light the home page
- * gives the sun, over Riyadh at first light. A ruler along the foot keeps the four phases in
- * proportion to the years they take.
+ * the way an odometer turns a decade, and the counter lands on 2030 in the light of a low sun,
+ * over Riyadh at first light. A ruler along the foot keeps the four phases in proportion to the
+ * years they take.
  *
  * Narrow screens and reduced motion get the four phases as a sequence of pictures instead,
  * each with its years set large over it.

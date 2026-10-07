@@ -211,6 +211,8 @@ export function PlatformStack() {
     const faces = span(p, FACES[0], FACES[1])
     const cores = span(p, CORES[0], CORES[1]) * RISEN
     const room = span(p, ROOM[0] + 0.02, ROOM[1])
+    // Looking up leaves the podium below the frame; the frame's foot fades as it goes.
+    stage.style.setProperty('--look-up', room.toFixed(3))
     layerRefs.current.forEach((layer, i) => {
       const lift = i === 0 ? (1 - pull) * 0.3 * H : 0
       layer.style.transform = 'translate3d(0,' + px(lift + pan) + ',0)'
@@ -297,6 +299,7 @@ export function PlatformStack() {
           clear(card.querySelector('[data-detail-win]'), 'clip-path', '--settle')
         })
         clear(copyRef.current, 'opacity', 'transform')
+        clear(stage, '--look-up')
         stage.removeAttribute('data-live')
         liveRef.current = false
         // Laid flat, each address is simply where its platform, or the model, starts.

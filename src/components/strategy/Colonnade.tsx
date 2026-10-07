@@ -16,7 +16,7 @@ const span = (p: number, a: number, b: number) => clamp01((p - a) / (b - a))
 
 /**
  * Chapter two: how the strategy is carried, and where it stands. The five pillars are built as
- * a colonnade in the order a building goes up — the ground line first, then the eight sectors
+ * a colonnade in the order a building goes up — the ground line first, then the nine sectors
  * laid along it as the plinth, then each pillar rising in turn, and last the beam across their
  * heads, lettered with the company's name. Inside each pillar its sentence is drawn: layers
  * until the platform stands alone, a share that grows with its sector, two sides meeting
@@ -135,7 +135,7 @@ export function Colonnade() {
 
           <span data-col-ground="" aria-hidden="true" />
 
-          {/* The plinth: the eight sectors the pillars stand on. */}
+          {/* The plinth: the nine sectors the pillars stand on. */}
           <div data-col-plinth="">
             <span data-col-plinth-label="">{t.sectorsLabel}</span>
             <ol data-col-sectors="">
