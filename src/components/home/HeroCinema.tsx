@@ -96,7 +96,7 @@ export function HeroCinema() {
     return () => clearTimeout(done)
   }, [])
 
-  // The next scene's photograph is fetched while this one holds, never all seven at once.
+  // The next scene's photograph is fetched while this one holds, never all of them at once.
   useEffect(() => {
     const soon = setTimeout(() => load(active + 1), 1400)
     return () => clearTimeout(soon)

@@ -295,14 +295,14 @@ export const photos = {
       en: 'Parents at a table on a timber deck by the bougainvillea, their children playing on the grass below green mountains',
     },
   },
-  /** A boy in an astronaut helmet before the loops of a roller coaster at sunset. */
-  coaster: {
-    ...set('coaster-dusk', 1774),
-    lqip: 'data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgCdABttosSKkGMbTsYAAP7kIbejhIIgr6dXh471wdeUO+Qh1PaI9CD36wC06UT32WRwk1wfWpFiWMSHl96H2WNZva/yQE7SCgvrG2am2DlxSs/IrzFHRAAAAA==',
-    focus: '52% 46%',
+  /** Qanif: a family at a stone country house, the mountains in cloud behind it. From the September edition. */
+  qanifFamily: {
+    ...set('qanif-family-day', 1774),
+    lqip: 'data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZACdABMgzRNW96CGwAD9470AGgjUKYhnuKdCfUp8xnvI4OcLtjQ48VkDNa33KzgdMyosgfg0Y+vJId8QPUoBhBAg3e8CVkOuOeCF6Cf5SMZZkPAAAA==',
+    focus: '44% 60%',
     alt: {
-      ar: 'طفل بخوذة رائد فضاء يرفع ذراعه أمام حلقات أفعوانية عند الغروب',
-      en: 'A boy in an astronaut helmet, one arm raised, before the loops of a roller coaster at sunset',
+      ar: 'عائلة عند بيت ريفي حجري تحت جبال يلفّها الضباب: أب وابنه يرصّان الحجارة، وطفل يركض بطائرته الورقية',
+      en: 'A family at a stone country house below misty mountains — a father and son stacking stones, a boy running with a kite',
     },
   },
 
@@ -337,6 +337,19 @@ export const photos = {
     alt: {
       ar: 'نادلة تحمل طبقين: حلوى مزيّنة بالتوت، وسلطة',
       en: 'A waitress carrying two plates — a dessert dressed with berries, and a salad',
+    },
+  },
+  /**
+   * A banquet table laid for a function: napkins folded into cones, glassware, the hall lit warm
+   * behind. Taken from SEEM Catering's profile, which only holds it at 1181px, so it ships at that.
+   */
+  cateringBanquet: {
+    ...img('catering-banquet', 1181),
+    lqip: 'data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABQBACdASoUAA4APu1iqU2ppaOiMAgBMB2JaACdMoAloho9Fnw+pVQI/yAgAPw6ewNq51QoQIr/Y+giWvGej68Zw6/Rh/dhF6b6kaFl7mHRMaqnOrny2yyEzmA6EZnfqps4hddaFiX91I7uBy1KTpmDR7+b5n0Xc9zH6iuhkWS/IWLe/qLvz4vs7M10+mZfmuWpxNwlaQ1MZwUbe+YwxEAA',
+    focus: '44% 50%',
+    alt: {
+      ar: 'طاولة مأدبة طويلة مُعدّة لمناسبة: مناديل كريمية مطويّة بنقوش ذهبية، وكؤوس زجاجية، والقاعة خلفها مضاءة بضوء دافئ',
+      en: 'A long banquet table laid for a function — cream napkins folded into cones with a gold pattern, glassware, the hall lit warm behind',
     },
   },
   /** Chefs finishing plates of chocolate dessert with a mint leaf. */
@@ -477,9 +490,10 @@ export const sectorFrames: Framed[] = [
 /**
  * The home page's opening sequence: one frame per sector the cinema cuts between, keyed to the
  * sector it shows. It opens on the work — logistics, then industry, with tourism third — so the
- * first frame says investor and builder rather than travel. Food sits this one out, because its
- * picture is a portrait and the hero is full-bleed at every width, and so does catering, which the
- * client's set gives no picture for this section.
+ * first frame says investor and builder rather than travel, and it closes on catering's banquet
+ * table, the one frame taken from SEEM Catering's profile. Entertainment is the family at Qanif
+ * from the September edition, preferred to October's roller coaster. Food sits this one out,
+ * because its picture is a portrait and the hero is full-bleed at every width.
  */
 export const heroFrames: { sector: number; frame: Framed }[] = [
   { sector: 3, frame: { photo: photos.logistics, focus: '56% 52%' } },
@@ -487,8 +501,9 @@ export const heroFrames: { sector: number; frame: Framed }[] = [
   { sector: 4, frame: { photo: photos.coast, focus: '50% 50%' } },
   { sector: 5, frame: { photo: photos.residence, focus: '58% 52%' } },
   { sector: 1, frame: { photo: photos.technology, focus: '56% 46%' } },
-  { sector: 7, frame: { photo: photos.coaster, focus: '52% 46%' } },
+  { sector: 7, frame: { photo: photos.qanifFamily, focus: '46% 58%' } },
   { sector: 6, frame: { photo: photos.payments, focus: '60% 48%' } },
+  { sector: 8, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
 ]
 
 /**

@@ -45,6 +45,7 @@ src/
     content/               Arabic and English copy, one module per page
 public/ds/                 fonts and imagery
 scripts/focus-states.py    regenerates the strategy page's two depth-of-field photographs
+scripts/plain-zero.py      takes the dot out of IBM Plex Mono's zero in the site's two cuts
 scripts/soft-plate.py      regenerated the out-of-focus plate JAZ Chocolate used to open on (no longer used)
 ```
 
@@ -83,6 +84,11 @@ and the mission. A paragraph of two sentences keeps its stops, and so do the for
 and the copyright line. The SEEM promise line runs its three beats without the ".." that used to
 part them.
 
+The zero is plain. IBM Plex Mono, which sets the phone number, the index numbers and the years,
+draws a dot inside its zero; `scripts/plain-zero.py` takes it out of the two cuts in
+`public/ds/fonts/`. New Plex Mono files bring the dot back until the script is run again. The
+other faces already draw a plain zero.
+
 ## Photography
 
 The site is carried by two sets of photographs. The first was all taken at the same golden hour:
@@ -92,11 +98,13 @@ above a Red Sea bay, plus two frames cut from an entertainment contact sheet. On
 every sector is what lets a refinery, a warehouse and a cinema read as one landscape rather than
 a stock collage. The second is the client's own sector set, supplied in September 2026 and
 replaced in October by a more realistic edition: a picture per sector for the home page's reel,
-the hero's industry and entertainment scenes, the statement's first capsule, and pictures of the
-platforms themselves: JAZ Chocolate's plant and a box of its chocolate, Qanif's lit sign, and
-SEEM Catering's tables. The platforms' logos come with it. The brand's deep green is the ground
-they all sit on (sections, scrims, the dark between frames), never a tint laid over the
-pictures.
+the hero's industry scene, the statement's first capsule, and pictures of the platforms
+themselves: JAZ Chocolate's plant and a box of its chocolate, Qanif's lit sign, and SEEM
+Catering's tables. The platforms' logos come with it. The hero's entertainment scene uses the
+September edition's family at Qanif, preferred to October's roller coaster. The set has no hero
+picture for catering, so the hero's catering scene, a banquet table laid for a function, is taken
+from SEEM Catering's profile. The brand's deep green is the ground they all sit on (sections,
+scrims, the dark between frames), never a tint laid over the pictures.
 
 The home page shows no photograph twice. The hero, the statement's capsules, the reel, the SEEM
 stages and the closing window each have pictures of their own, and the platform index shows the
@@ -129,7 +137,9 @@ card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any fra
 can size, which covers the plates, the hero, and the reel, stage and closing windows, so a phone
 fetches the card cut and a desktop the full one. The entertainment tiles exist at card size only
 (~585px), and so does the reel's technology picture, which the client supplied at 657px; it looks
-soft on a high-density screen until a larger copy arrives. The box of chocolate is a portrait
+soft on a high-density screen until a larger copy arrives. The banquet table is 1181px wide in
+the profile, the largest copy there is, so it ships at that size and a card cut, and is a little
+soft at full bleed on a large screen. The box of chocolate is a portrait
 (1200 × 1607) and ships at full and card size, so it only goes where a frame can hold a
 portrait: the reel's food window and JAZ's detail. The three pictures in the statement's
 capsules also ship a 400px cut (`xs`), because a capsule is a word wide. The logos ship as single
@@ -186,10 +196,11 @@ Each section in `src/components/home/` owns its motion:
 - **`HeroCinema`**: on the first visit in a tab, the page opens on the SEEM square on deep
   green. The photograph fills the square from inside and the square widens to the frame. The
   bootstrap script in `site.tsx` sets `html[data-intro]` before first paint, so this runs in CSS
-  from the first frame. The hero then cuts between seven sectors on a **diagonal blade** (the
-  slant of the cut ends of the mark's letter bars) with a light hairline and an ember line
-  riding its edge. It opens on logistics, then industry, with tourism third, so the first frame
-  a visitor sees says investor and builder rather than travel. The blade travels right to left
+  from the first frame. The hero then cuts between eight of the nine sectors (food sits out,
+  because its one picture is a portrait) on a **diagonal blade** (the slant of the cut ends of
+  the mark's letter bars) with a light hairline and an ember line riding its edge. It opens on
+  logistics, then industry, with tourism third, so the first frame a visitor sees says investor
+  and builder rather than travel, and it closes on catering. The blade travels right to left
   in Arabic and left to right in English. The index along the foot names every scene and jumps
   to it; a pause button stops the clock. The clock only runs while the hero is on screen and the
   tab is visible. Scrolling away closes the frame into an inset panel. The Arabic title is two
@@ -376,7 +387,8 @@ the reader has already started to move.
   and the people in it are not staff. The client's October 2026 edition is more realistic: the
   enrobing line in the statement and Qanif's sign are plainly photographs, but the rest reads as
   stock or generated (the box of chocolate is embossed with letters that spell nothing, and
-  Qanif's terrace, kept for its detail, is from the earlier generated set). The edition's second
+  Qanif's terrace, kept for its detail, and the hero's family at Qanif are from the earlier
+  generated set). The edition's second
   industry picture, the plant from outside with workers and a pallet, is not used: it has alpine
   mountains behind it, and every slot it would suit already has a picture. Swapping in real
   assets is a change to `src/lib/media.ts` alone — except the desk before the Riyadh skyline,
@@ -421,12 +433,14 @@ the reader has already started to move.
   JAZ Chocolate, lit by day, with the national emblem on every box; `ent-dining-soft*.webp`
   (~100KB), the blurred table JAZ Chocolate opened on before it had pictures of its own, with
   `scripts/soft-plate.py` that made it; and the concert, coaster, cinema and esports tiles
-  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size; and the
-  client's September set (~3.5MB), which its October edition replaced: `chocolate-factory`,
+  (`ent-*-sm.webp`, ~130KB), which closed the reel before every window took one size; the
+  client's September set (~2.8MB), which its October edition replaced: `chocolate-factory`,
   `chocolate-vat`, `chocolate-line`, `jaz-box`, `ai-desk-riyadh`, `cargo-hub-day`,
-  `lagoon-traveller`, `corniche-terrace`, `card-tap` and `farm-family-day` (each `*.webp`, with
-  its cuts). Delete them if they are not wanted back. (The Red Sea resort superseded before them
-  is back in service as HOMERA's detail and the home page's closing window.)
+  `lagoon-traveller`, `corniche-terrace` and `card-tap` (each `*.webp`, with its cuts); and
+  October's roller coaster (`coaster-dusk*.webp`, ~190KB), which the hero's entertainment scene
+  gave up for September's family at Qanif. Delete them if they are not wanted back. (The Red Sea
+  resort superseded before them is back in service as HOMERA's detail and the home page's
+  closing window.)
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not
   wanted back.
