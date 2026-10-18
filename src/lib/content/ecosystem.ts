@@ -17,7 +17,7 @@ const AR = {
   contentsLabel: 'فصول الصفحة', // draft
   /** The contents line: the platforms, then the ecosystem they make: [group, chapters]. */
   groups: [
-    ['المنصات', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'قنيف', 'سيم للتوريدات']],
+    ['المنصات', ['JAZ Chocolate', 'eat.plus', 'ZL.TOURS', 'HOMERA', 'Qanif', 'سيم للتوريدات']],
     ['المنظومة', ['منظومة واحدة']], // draft
   ] as [string, string[]][],
 
@@ -27,20 +27,21 @@ const AR = {
   deckH: 'ست منصات، ومنظومة واحدة', // draft
   deckLead: 'تُبنى كل منصة طبقةً فوق طبقة حتى تقوم بذاتها، وتقوم المنصات الست على منظومة واحدة', // draft
   /**
-   * [sector, what the platform is, name, its line]. The name is the client's mark: the Latin
-   * marks read the same in both languages, and Qanif's and SEEM Supply's, whose logos carry both
-   * scripts, are written in each. A platform that spans two sectors names both.
+   * [sector, what the platform is, name, its line]. The name is the client's mark, and a Latin
+   * mark reads the same in both languages. Qanif's logo carries both scripts, but the client wants
+   * its name in Latin on both pages; SEEM Supply's, whose logo carries both too, is written in
+   * each. A platform that spans two sectors names both.
    */
   platforms: [
     ['الصناعة', 'تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة'],
     ['اللوجستيات', 'التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة'],
     ['السياحة', 'سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا'],
     ['العقار', 'منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة'],
-    ['الترفيه والزراعة', 'منتجع ريفي', 'قنيف', 'إقامة وتجارب عائلية في قلب الطبيعة'], // draft
+    ['الترفيه والزراعة', 'منتجع ريفي', 'Qanif', 'إقامة وتجارب عائلية في قلب الطبيعة'], // draft
     ['التموين والتوريد', 'خدمات التوريد والتموين الفاخر', 'سيم للتوريدات', 'من التوريد إلى المائدة'], // draft
   ],
   /** What each platform's second picture shows, in the same order. */
-  details: ['التجربة المكتملة', 'الميل الأخير', 'وجهات وتجارب', 'الضيافة', 'مساء في قنيف', 'فن التقديم'], // draft
+  details: ['التجربة المكتملة', 'الميل الأخير', 'وجهات وتجارب', 'الضيافة', 'مساء في Qanif', 'فن التقديم'], // draft
   sectorLabel: 'القطاع', // draft
   sectorsLabel: 'القطاعان', // draft
   ecoLink: 'تواصل بشأن هذه المنصة',
