@@ -141,7 +141,7 @@ soft on a high-density screen until a larger copy arrives. The banquet table is 
 the profile, the largest copy there is, so it ships at that size and a card cut, and is a little
 soft at full bleed on a large screen. The box of chocolate is a portrait
 (1200 × 1607) and ships at full and card size, so it only goes where a frame can hold a
-portrait: the reel's food window and JAZ's detail. The three pictures in the statement's
+portrait: JAZ's detail. The three pictures in the statement's
 capsules also ship a 400px cut (`xs`), because a capsule is a word wide. The logos ship as single
 720 × 900 cards, the shape of the index's floating window. The payments frame is cropped to
 leave out the emblem that opens the source image.
@@ -156,7 +156,7 @@ Image weight, measured against a production build (whole page = after scrolling 
 
 | Page | 1440×900 first screen | 1440×900 whole page | 390×844 @2x whole page |
 |---|---|---|---|
-| home | 283KB | 1056KB | 699KB |
+| home | 283KB | 1018KB | 713KB |
 | about | 396KB | 663KB | 309KB |
 | strategy | 328KB | 1188KB | 522KB |
 | ecosystem | 173KB | 1810KB | 724KB |
@@ -166,8 +166,11 @@ The home page's first screen on desktop is the hero's opening frame plus the nex
 is fetched 1.4s in so the first cut never waits. Scenes after that load one ahead, never all at
 once. The whole page no longer repeats a photograph, so every section below the hero fetches
 pictures of its own rather than cuts the browser already has; it is lighter than it was (1350KB
-and 807KB) since the road to 2030, and the city behind it, left the page in October 2026. The
-ecosystem page carries six platforms, and JAZ Chocolate opens on the plant's hall, the heaviest
+and 807KB) since the road to 2030, and the city behind it, left the page in October 2026. Food's
+window left the reel later that month. The desktop page is 38KB lighter for it, and a phone's
+14KB heavier (it was 699KB): the rail there only fetches the windows within reach, and tourism's
+picture, a little heavier than the box of chocolate, is now one of them. The ecosystem page
+carries six platforms, and JAZ Chocolate opens on the plant's hall, the heaviest
 picture in the set (351KB at full size); it was 1477KB and 645KB with five. The about page's is its opening shot plus the four strand windows peeking under it; the
 city they assemble into is only mounted once the reader reaches that chapter. The strategy page's
 is its opening shot and the two focus states under it. It carries the business model and the
@@ -196,21 +199,20 @@ Each section in `src/components/home/` owns its motion:
 - **`HeroCinema`**: on the first visit in a tab, the page opens on the SEEM square on deep
   green. The photograph fills the square from inside and the square widens to the frame. The
   bootstrap script in `site.tsx` sets `html[data-intro]` before first paint, so this runs in CSS
-  from the first frame. The hero then cuts between eight of the nine sectors (food sits out,
-  because its one picture is a portrait) on a **diagonal blade** (the slant of the cut ends of
-  the mark's letter bars) with a light hairline and an ember line riding its edge. It opens on
-  logistics, then industry, with tourism third, so the first frame a visitor sees says investor
-  and builder rather than travel, and it closes on catering. The blade travels right to left
-  in Arabic and left to right in English. The index along the foot names every scene and jumps
-  to it; a pause button stops the clock. The clock only runs while the hero is on screen and the
-  tab is visible. Scrolling away closes the frame into an inset panel. The Arabic title is two
-  lines, a short one and a long one, joined by و rather than commas; the English keeps its
-  three beats, which the measure could not hold as two.
+  from the first frame. The hero then cuts between all eight sectors on a **diagonal blade**
+  (the slant of the cut ends of the mark's letter bars) with a light hairline and an ember line
+  riding its edge. It opens on logistics, then industry, with tourism third, so the first frame
+  a visitor sees says investor and builder rather than travel, and it closes on catering. The
+  blade travels right to left in Arabic and left to right in English. The index along the foot
+  names every scene and jumps to it; a pause button stops the clock. The clock only runs while
+  the hero is on screen and the tab is visible. Scrolling away closes the frame into an inset
+  panel. The Arabic title is two lines, a short one and a long one, joined by و rather than
+  commas; the English keeps its three beats, which the measure could not hold as two.
 - **`Statement`**: the positioning line, lit word by word at the pace of the scroll. Each verb
   opens a capsule onto the work it names. The capsules hold their width from the start and open
   on a clip, so the line never re-wraps.
 - **`SectorReel`**: on a wide screen the section pins and vertical scroll becomes a lateral
-  journey past nine windows of one size, 3:2, strung on one line through their middles like
+  journey past eight windows of one size, 3:2, strung on one line through their middles like
   the frames of a film. The ember line draws itself to the middle of the screen, the counter
   names the frame under it, and each picture slides against the travel. A sector with a
   platform names it under its line. Everywhere else it is a swipe rail of the same frames.
@@ -229,6 +231,10 @@ Each section in `src/components/home/` owns its motion:
 The road to 2030 and the 2030 figures had a section of their own between the stages and the
 close (`Horizon2030`). It was removed in October 2026 at the client's request; the strategy page
 still carries the roadmap and the targets.
+
+Food («الأغذية») was a sector of its own, third of nine, until the client removed it later in
+October 2026 as a duplicate of catering and food. The sectors are eight on every page now, and the
+hero, which food used to sit out because its one picture was a portrait, shows all of them.
 
 ### The about page, in five chapters
 
@@ -270,7 +276,7 @@ those beats (`ActIndex`), and each chapter in `src/components/strategy/` owns it
   and the city blurs, and the mission takes its place. Each statement sits on the plane that is
   out of focus, and a lens's focus scale tracks the pull from ∞ to arm's length.
 - **`Colonnade`** (pillars and sectors): the five pillars built in the order a building goes
-  up — the ground line, the nine sectors laid along it as the plinth, each pillar rising in
+  up — the ground line, the eight sectors laid along it as the plinth, each pillar rising in
   turn, and the beam across their heads, lettered SEEM PRIME. Inside each pillar its sentence
   is drawn (`PillarFigure`): layers until the platform stands alone, a share that grows with its
   sector, two sides meeting halfway, reviews pulling to the centre, one line through every

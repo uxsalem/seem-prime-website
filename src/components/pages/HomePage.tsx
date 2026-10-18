@@ -13,7 +13,7 @@ import { SiteHeader } from '@/components/SiteHeader'
 /**
  * The home page as one journey through the ecosystem, told in photographs:
  *
- *   the square opens onto the sectors  →  what we do, in three verbs  →  nine sectors along
+ *   the square opens onto the sectors  →  what we do, in three verbs  →  eight sectors along
  *   one line  →  the platforms already built  →  the four stages behind every decision  →
  *   the square again, and the door
  *

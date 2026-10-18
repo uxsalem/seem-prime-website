@@ -33,18 +33,17 @@ const AR = {
   proof: [
     ['المقر', 'جدة، المملكة العربية السعودية'],
     ['التأسيس', '2025'],
-    ['القطاعات', 'تسعة قطاعات استراتيجية'],
+    ['القطاعات', 'ثمانية قطاعات استراتيجية'],
     ['الأفق', '2030'],
   ],
   moreAbout: 'المزيد عنا',
 
-  reelH: 'تسعة قطاعات في منظومة واحدة', // draft
+  reelH: 'ثمانية قطاعات في منظومة واحدة', // draft
   sectorsLead: 'ندخل حيث يتقدّم الطلب، ونبني منصة تخدم القطاع بأكمله لا مشروعاً واحداً فيه',
-  sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه', 'التموين والأغذية'],
+  sectors: ['الصناعة', 'التقنية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه', 'التموين والأغذية'],
   sectorLines: [
     'القدرة التصنيعية وسلاسل الإمداد', // draft
     'المنصات الرقمية والذكاء الاصطناعي', // draft
-    'تصنيع الأغذية الفاخرة',
     'التجارة والتوصيل في الميل الأخير',
     'تجارب داخل المملكة وإقليميًا',
     'إدارة وتشغيل العقارات وحلول الضيافة',
@@ -103,18 +102,17 @@ const EN: HomeCopy = {
   proof: [
     ['Head office', 'Jeddah, Saudi Arabia'],
     ['Established', '2025'],
-    ['Sectors', 'Nine strategic sectors'],
+    ['Sectors', 'Eight strategic sectors'],
     ['Horizon', '2030'],
   ],
   moreAbout: 'More about us',
 
-  reelH: 'Nine sectors in one ecosystem', // draft
+  reelH: 'Eight sectors in one ecosystem', // draft
   sectorsLead:
     'We enter where demand is moving, and build a platform that serves the whole sector rather than one venture inside it',
   sectors: [
     'Industry',
     'Technology',
-    'Food',
     'Logistics',
     'Tourism',
     'Real estate',
@@ -125,7 +123,6 @@ const EN: HomeCopy = {
   sectorLines: [
     'Manufacturing capacity and supply chains', // draft
     'Digital platforms and AI', // draft
-    'Premium food manufacturing',
     'Last-mile commerce',
     'Experiences across the Kingdom and region',
     'Property operations and hospitality',
