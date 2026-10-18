@@ -1477,14 +1477,14 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   [dir='rtl'] [data-col-ground] { transform-origin: right center; }
   [data-col-plinth] {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 8fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 9fr);
     margin-block-start: 0;
     border-block-end: 1px solid var(--line2);
   }
   [data-col-plinth-label] { margin: 0; padding: 18px 0; align-self: start; }
-  /* Eight to a row: on a narrower screen a long single word like «Entertainment» is wider than an
+  /* Nine to a row: on a narrower screen a long single word like «Entertainment» is wider than an
      equal share, so each sector is at least as wide as its longest word and the rest is shared. */
-  [data-col-sectors] { grid-template-columns: repeat(8, minmax(min-content, 1fr)); border: 0; }
+  [data-col-sectors] { grid-template-columns: repeat(9, minmax(min-content, 1fr)); border: 0; }
   [data-col-sector] {
     flex-direction: column;
     gap: 6px;

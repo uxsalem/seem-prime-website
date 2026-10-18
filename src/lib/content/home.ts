@@ -33,23 +33,24 @@ const AR = {
   proof: [
     ['المقر', 'جدة، المملكة العربية السعودية'],
     ['التأسيس', '2025'],
-    ['القطاعات', 'ثمانية قطاعات استراتيجية'],
+    ['القطاعات', 'تسعة قطاعات استراتيجية'],
     ['الأفق', '2030'],
   ],
   moreAbout: 'المزيد عنا',
 
-  reelH: 'ثمانية قطاعات في منظومة واحدة', // draft
+  reelH: 'تسعة قطاعات في منظومة واحدة', // draft
   sectorsLead: 'ندخل حيث يتقدّم الطلب، ونبني منصة تخدم القطاع بأكمله لا مشروعاً واحداً فيه',
-  sectors: ['الصناعة', 'التقنية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه', 'التموين والأغذية'],
+  sectors: ['الصناعة', 'التجارة الإلكترونية', 'اللوجستيات', 'السياحة', 'العقار', 'الترفيه', 'التموين', 'التوريد', 'الزراعة'],
   sectorLines: [
     'القدرة التصنيعية وسلاسل الإمداد', // draft
-    'المنصات الرقمية والذكاء الاصطناعي', // draft
+    'المتاجر الإلكترونية ومنصات البيع الرقمية', // draft
     'التجارة والتوصيل في الميل الأخير',
     'تجارب داخل المملكة وإقليميًا',
     'إدارة وتشغيل العقارات وحلول الضيافة',
-    'المدفوعات والخدمات المالية الرقمية', // draft
     'الوجهات والفعاليات والتجارب', // draft
     'التموين الفاخر وإدارة الضيافة والمرافق', // draft
+    'توريد المنتجات والمواد من المصدر إلى العميل', // draft
+    'زراعة البن والكاكاو', // draft
   ],
   reelMore: 'اطّلع على الاستراتيجية', // draft
 
@@ -60,7 +61,7 @@ const AR = {
     ['سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا'],
     ['منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة'],
     ['منتجع ريفي', 'قنيف', 'إقامة وتجارب عائلية في قلب الطبيعة'], // draft
-    ['خدمات التموين الفاخر', 'SEEM Catering', 'موائد أنيقة تُمتع العين والذائقة'], // draft
+    ['خدمات التوريد والتموين الفاخر', 'سيم للتوريدات', 'من التوريد إلى المائدة'], // draft
   ],
   morePlatforms: 'كل المنصات',
 
@@ -102,33 +103,35 @@ const EN: HomeCopy = {
   proof: [
     ['Head office', 'Jeddah, Saudi Arabia'],
     ['Established', '2025'],
-    ['Sectors', 'Eight strategic sectors'],
+    ['Sectors', 'Nine strategic sectors'],
     ['Horizon', '2030'],
   ],
   moreAbout: 'More about us',
 
-  reelH: 'Eight sectors in one ecosystem', // draft
+  reelH: 'Nine sectors in one ecosystem', // draft
   sectorsLead:
     'We enter where demand is moving, and build a platform that serves the whole sector rather than one venture inside it',
   sectors: [
     'Industry',
-    'Technology',
+    'E-commerce',
     'Logistics',
     'Tourism',
     'Real estate',
-    'Financial services',
     'Entertainment',
-    'Catering & food',
+    'Catering',
+    'Supply',
+    'Agriculture',
   ],
   sectorLines: [
     'Manufacturing capacity and supply chains', // draft
-    'Digital platforms and AI', // draft
+    'Online stores and digital marketplaces', // draft
     'Last-mile commerce',
     'Experiences across the Kingdom and region',
     'Property operations and hospitality',
-    'Payments and digital finance', // draft
     'Destinations, events and experiences', // draft
     'VIP catering, hospitality and facilities', // draft
+    'Products and materials, from source to client', // draft
+    'Coffee and cocoa farming', // draft
   ],
   reelMore: 'See the strategy', // draft
 
@@ -139,7 +142,7 @@ const EN: HomeCopy = {
     ['Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region'],
     ['Real estate & hospitality', 'HOMERA', 'Property operations and hospitality'],
     ['Countryside resort', 'Qanif', 'Family stays and experiences in the countryside'], // draft
-    ['VIP catering', 'SEEM Catering', 'Elegant spreads for the eye and the palate'], // draft
+    ['Supply and VIP catering', 'SEEM Supply', 'From supply to the table'], // draft
   ],
   morePlatforms: 'All platforms',
 

@@ -53,12 +53,16 @@ export function ImageSlot({
   const [loaded, setLoaded] = useState(false)
 
   if (!frame) {
+    // Plex Mono has no Arabic, and the monospaced fallback sets each letter apart, so an Arabic
+    // caption takes the Arabic face.
     return (
       <span
         style={css(
           'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;' +
             'box-sizing:border-box;background:rgba(127,127,127,.08);border:1px dashed var(--line2);' +
-            "text-align:center;font:13px/1.4 'IBM Plex Mono',monospace;color:var(--muted)",
+            'text-align:center;font:13px/1.4 ' +
+            (lang === 'ar' ? "'IBM Plex Sans Arabic',sans-serif" : "'IBM Plex Mono',monospace") +
+            ';color:var(--muted)',
         )}
       >
         {placeholder}

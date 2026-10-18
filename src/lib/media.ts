@@ -11,7 +11,7 @@ import type { Lang } from '@/lib/site'
  * There are two sets. The golden-hour set was shot at one light across every sector, so a
  * refinery, a warehouse, a coast and a cinema read as one landscape rather than a stock collage.
  * The sector set is the client's own, and more realistic: a picture per sector for the reel, and
- * the pictures of the platforms themselves (JAZ Chocolate's plant, Qanif's sign, SEEM Catering's
+ * the pictures of the platforms themselves (JAZ Chocolate's plant, Qanif's sign, the catering
  * tables). The home page never shows one photograph twice. The brand's deep green is the ground
  * they all sit on — scrims, sections, the dark between frames — never a tint laid over the
  * pictures themselves.
@@ -222,19 +222,6 @@ export const photos = {
       en: 'A kraft box of dark chocolate — a bar, two medallions, curls and cocoa beans — a cup of coffee behind it',
     },
   },
-  /**
-   * A robot hand and a human hand at a holographic display. It was supplied at 657px, so it ships
-   * as one card-size file, like the tiles, and looks soft on a high-density screen.
-   */
-  aiTouch: {
-    ...tile('ai-touch', 657),
-    lqip: 'data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAACwBACdASoUAA4APu1iqU2ppaOiMAgBMB2JYgCdMoKP+HkEQNkFBjlD9Aye6WOgAP7wzLhDWV/omP73xQh5rrdZsGYu4jsAkhFP7NlBX3iLxccN9xx2LOa4XsBwFyAaDKgfmVwHTAnr8YMhPEfwMkfpxhCqw2bJO7lFPefQ7aU90NjiBbtr3IK7yziUpEAA',
-    focus: '50% 40%',
-    alt: {
-      ar: 'يد آلية ويد إنسان تلمسان واجهة رقمية من الرسوم البيانية',
-      en: 'A robot hand and a human hand touching a holographic display of charts',
-    },
-  },
   /** An aisle between racks of cartons, the crew moving and checking the stock. */
   warehouse: {
     ...set('warehouse-aisle', 1774),
@@ -265,14 +252,31 @@ export const photos = {
       en: 'A residential compound around a fountain court, palm-lined walks at golden hour',
     },
   },
-  /** Reports and charts across a desk, a laptop and a tablet beside them. */
-  financeDesk: {
-    ...set('finance-desk', 1774),
-    lqip: 'data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAACwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JZgCdIE36AFPyJQSH6U5BHjr4EXoAAP29DPZ4Cem9A0FSJ9+L1+bIW9up6C29+vvU5Xsd2Yg3I3+zwU6rcWM8W0vrDoTYJO2XbSWGT0esCnucIgMN6QlvQ3gV+r91M22rR6AwunnAVNEEFcT67k3Qb1n6v+cov/JyR4hEgkeG6DgArv4aJkT9iIAAAA==',
-    focus: '56% 50%',
+  /**
+   * A card held to a handheld terminal across a marble counter, shopping bags and a laptop beside
+   * it. From the September edition: the client's sets have no picture of e-commerce, so this one
+   * stands in for it.
+   */
+  cardTap: {
+    ...set('card-tap', 1774),
+    lqip: 'data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADwAwCdASoUAAkAPu1iqk2ppaQiMAgBMB2JQBOgA3ZQ21wCcmx0ImWAAPZGCKFovnxyYVVOUFMpvLWlNsjrs9M1wqn4/30uXWGsq9ir7KvPpy4wErzdwKmfPi70GKFfkWYELHOZ6ceHkvvjWLsevWck0E21KBdLOAAAAA==',
+    focus: '50% 50%',
     alt: {
-      ar: 'أيدٍ فوق مكتب تراجع تقارير ورسوماً بيانية بجوار حاسوب محمول وجهاز لوحي',
-      en: 'Hands over a desk reviewing reports and charts beside a laptop and a tablet',
+      ar: 'بطاقة تُمرَّر على جهاز دفع محمول فوق طاولة رخامية، وبجوارها أكياس تسوّق وحاسوب محمول',
+      en: 'A card held to a handheld payment terminal across a marble counter, shopping bags and a laptop beside it',
+    },
+  },
+  /**
+   * A cargo hub by day, a plane climbing over the mountains beyond the docks. From the September
+   * edition, back in service for supply: the reel's window, and SEEM Supply's card.
+   */
+  cargoHub: {
+    ...set('cargo-hub-day', 1774),
+    lqip: 'data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAwCdASoUAAkAPu1iqk2ppaQiMAgBMB2JYgCdMoACR/vQIwc+gAD5dtt892K7sH26DEOdE2YshCfbF6PAjffTFrekqokknQgeRdJchQ4FiVOtGb5V/smdhCZW5SFRM/TQ8HDRgORHANWoLLObEscPQ/BgS6LGqTCSbIbtwAAAAA==',
+    focus: '44% 56%',
+    alt: {
+      ar: 'مركز شحن نهاراً: رافعات شوكية ومنصات بضائع، وشاحنات عند الأرصفة، وطائرة تحلّق فوق الجبال',
+      en: 'A cargo hub by day — forklifts and pallets, trucks at the docks, a plane climbing over the mountains',
     },
   },
   /** Qanif's own sign, lit at dusk among the bougainvillea. The one photograph of the place itself. */
@@ -306,7 +310,7 @@ export const photos = {
     },
   },
 
-  // --- SEEM Catering, from the client's set and its profile -------------------------------------
+  // --- Catering, from the client's set and the SEEM Catering profile ----------------------------
 
   /** Two waiters serving from a buffet in a restaurant. Catering as a service, people first. */
   cateringService: {
@@ -316,16 +320,6 @@ export const photos = {
     alt: {
       ar: 'نادلان بقميصين أبيضين ومريلتين يقدّمان من أطباق البوفيه في مطعم',
       en: 'Two waiters in white shirts and aprons serving from a buffet of chafing dishes in a restaurant',
-    },
-  },
-  /** An open buffet, domed chafing dishes down one side and platters down the other. */
-  cateringBuffet: {
-    ...set('catering-buffet', 1774),
-    lqip: 'data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgCw7Aq/iNxxH9xCAP5YR/Kv0su57FRf2wKohRyA4nbaeUWTIge36a29rZW+hSBuI15nv0EcVcQONJ/VZou0tq6U8EL2Pb26+6BbkZuosFPnVbqentfn2WpvvkwkeJ3UGtn4AAA=',
-    focus: '54% 56%',
-    alt: {
-      ar: 'بوفيه مفتوح: أوانٍ مقبّبة وأطباق من المقبلات والمأكولات البحرية والفاكهة',
-      en: 'An open buffet — domed chafing dishes, platters of starters, seafood and fruit',
     },
   },
   /** A waitress carrying two plates. Ships a 400px cut for the statement's capsules. */
@@ -409,8 +403,9 @@ export type PhotoKey = keyof typeof photos
 /**
  * The platforms' own marks, each set on its card the way the client supplied it. Qanif's is set
  * from its logo file on white: the Arabic name over the Latin one, the lockup with no line about a
- * farm under it. SEEM Catering has no logo yet: its card is its profile's back cover, the name in
- * gold on sand.
+ * farm under it. SEEM Supply's is set on white from the logo the client sent with its notes: the
+ * S wound round a globe over a truck and its load, the wordmark, and «سيم للتوريدات» beneath. It
+ * stands in for now, because the client means SEEM to name the group rather than any one venture.
  */
 export const marks = {
   jaz: {
@@ -443,11 +438,14 @@ export const marks = {
     focus: '50% 50%',
     alt: { ar: 'شعار قنيف باللون الأخضر: الاسم بالعربية وتحته QANIF', en: 'The Qanif logo in green: the Arabic name over QANIF' },
   },
-  seemCatering: {
-    ...mark('logo-seem-catering'),
-    lqip: 'data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAgCdASoUABkAPu1wsFKppiSiqAgBMB2JZQAAPjFjAAD+7i01kmGvuT9ZAKD5mwGmU7DoezIAAA==',
+  seemSupply: {
+    ...mark('logo-seem-supply'),
+    lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADQBACdASoUABkAPtFUpk2oJCOiMBgIAQAaCWMAz2QQ7/xDeFwXP0H1YdwrLpjAAAD+9gL92aUnkR1CDRXZpUbijQf9hvu1BBQ4RvKuVgJ/GeI+FXGJJXtEyJC/U3l1OjOW/Ru59gjIkWCh07sE5pc6/ilmufOmF3MacAAA',
     focus: '50% 50%',
-    alt: { ar: 'اسم SEEM PRIME CATERING بأحرف ذهبية على أرضية رملية', en: 'SEEM PRIME CATERING in gold letters on sand' },
+    alt: {
+      ar: 'شعار سيم للتوريدات: حرف S يلتفّ حول كرة أرضية فوق شاحنة وصناديق، وتحته SEEM SUPPLY',
+      en: 'The SEEM Supply logo: an S wound round a globe above a truck and boxes, over SEEM SUPPLY',
+    },
   },
 } as const satisfies Record<string, Photo>
 
@@ -469,39 +467,43 @@ export type Framed = {
 }
 
 /**
- * The eight strategic sectors, in the order the copy lists them — Industry, Technology,
- * Logistics, Tourism, Real estate, Financial services, Entertainment, Catering & food — one
- * picture each from the sector set, so the reel repeats nothing the hero has just shown. Where a
- * sector has a platform, its picture is the platform's: JAZ Chocolate's plant, Qanif's sign, SEEM
- * Catering's waiters at the buffet.
+ * The nine strategic sectors, in the order the copy lists them — Industry, E-commerce,
+ * Logistics, Tourism, Real estate, Entertainment, Catering, Supply, Agriculture — one picture
+ * each from the sector set, so the reel repeats nothing the hero has just shown. Where a sector
+ * has a platform, its picture is the platform's: JAZ Chocolate's plant, Qanif's sign, the waiters
+ * at the buffet. E-commerce and supply take two pictures from the September edition, the card at
+ * the counter and the cargo hub. Agriculture has none yet — nothing the client has sent shows its
+ * coffee or cocoa — so its window shows its empty state until a picture arrives.
  */
-export const sectorFrames: Framed[] = [
+export const sectorFrames: (Framed | undefined)[] = [
   { photo: photos.chocolateHall, focus: '50% 62%' },
-  { photo: photos.aiTouch, focus: '50% 40%' },
+  { photo: photos.cardTap, focus: '52% 50%' },
   { photo: photos.warehouse, focus: '52% 56%' },
   { photo: photos.longtail, focus: '50% 54%' },
   { photo: photos.courtyard, focus: '50% 56%' },
-  { photo: photos.financeDesk, focus: '56% 50%' },
   { photo: photos.qanifSign, focus: '62% 54%' },
   { photo: photos.cateringService, focus: '40% 50%' },
+  { photo: photos.cargoHub, focus: '42% 60%' },
+  undefined,
 ]
 
 /**
- * The home page's opening sequence: one frame per sector, all eight, keyed to the sector it
- * shows. It opens on the work — logistics, then industry, with tourism third — so the first
- * frame says investor and builder rather than travel, and it closes on catering's banquet table,
- * the one frame taken from SEEM Catering's profile. Entertainment is the family at Qanif from the
- * September edition, preferred to October's roller coaster.
+ * The home page's opening sequence: one frame per sector, keyed to the sector it shows. It opens
+ * on the work — logistics, then industry, with tourism third — so the first frame says investor
+ * and builder rather than travel, and it closes on catering's banquet table, the one frame taken
+ * from the SEEM Catering profile. Entertainment is the family at Qanif from the September edition,
+ * preferred to October's roller coaster, and e-commerce is the payment going through on a phone.
+ * Two of the nine sectors sit this one out: supply, whose one picture, a cargo hub, would repeat
+ * the logistics hub the sequence opens on, and agriculture, which has no picture yet.
  */
 export const heroFrames: { sector: number; frame: Framed }[] = [
   { sector: 2, frame: { photo: photos.logistics, focus: '56% 52%' } },
   { sector: 0, frame: { photo: photos.chocolateConveyor, focus: '56% 60%' } },
   { sector: 3, frame: { photo: photos.coast, focus: '50% 50%' } },
   { sector: 4, frame: { photo: photos.residence, focus: '58% 52%' } },
-  { sector: 1, frame: { photo: photos.technology, focus: '56% 46%' } },
-  { sector: 6, frame: { photo: photos.qanifFamily, focus: '46% 58%' } },
-  { sector: 5, frame: { photo: photos.payments, focus: '60% 48%' } },
-  { sector: 7, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
+  { sector: 5, frame: { photo: photos.qanifFamily, focus: '46% 58%' } },
+  { sector: 1, frame: { photo: photos.payments, focus: '60% 48%' } },
+  { sector: 6, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
 ]
 
 /**
@@ -537,14 +539,15 @@ export const platformFrames: Framed[] = [
   { photo: marks.zlTours },
   { photo: marks.homera },
   { photo: marks.qanif },
-  { photo: marks.seemCatering },
+  { photo: marks.seemSupply },
 ]
 
 /**
  * The ecosystem page's platforms, in the same order. Each opens on a full-bleed picture of the
  * work and carries a framed detail of what it leads to: the box on the table, the payment that
- * closes the last mile, an evening out, the resort, Qanif's sign lit for the evening, a dessert
- * being finished. The plates are also the floors of the model the page pulls back to.
+ * closes the last mile, an evening out, the resort, Qanif's sign lit for the evening, and, at the
+ * far end of SEEM Supply's docks, a dessert being finished. The plates are also the floors of the
+ * model the page pulls back to.
  */
 export const ecosystemPlatforms: { plate: Framed; detail: Framed }[] = [
   { plate: { photo: photos.chocolateHall, focus: '50% 60%' }, detail: { photo: photos.chocolateBox, focus: '50% 62%' } },
@@ -552,7 +555,7 @@ export const ecosystemPlatforms: { plate: Framed; detail: Framed }[] = [
   { plate: { photo: photos.coast, focus: '64% 50%' }, detail: { photo: photos.promenade, focus: '52% 50%' } },
   { plate: { photo: photos.residence, focus: '60% 50%' }, detail: { photo: photos.hospitality, focus: '30% 62%' } },
   { plate: { photo: photos.qanifTerrace, focus: '40% 58%' }, detail: { photo: photos.qanifSign, focus: '68% 50%' } },
-  { plate: { photo: photos.cateringBuffet, focus: '54% 56%' }, detail: { photo: photos.cateringPlating, focus: '62% 62%' } },
+  { plate: { photo: photos.cargoHub, focus: '46% 56%' }, detail: { photo: photos.cateringPlating, focus: '62% 62%' } },
 ]
 
 /**
