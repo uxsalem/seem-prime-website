@@ -470,7 +470,9 @@ export function PlatformStack() {
                     <span style={css(mono)}>{ordinal(k) + ' / ' + ordinal(COUNT - 1)}</span>
                     <span data-card-sector="">
                       <span data-lbl="" style={css(label)}>
-                        {t.sectorLabel + ' ' + ordinal(PLATFORM_SECTORS[k])}
+                        {(PLATFORM_SECTORS[k].length > 1 ? t.sectorsLabel : t.sectorLabel) +
+                          ' ' +
+                          PLATFORM_SECTORS[k].map((i) => ordinal(i)).join(' · ')}
                       </span>
                       <span style={css(display(ar, ar ? '18px' : '17px', 400) + ';color:#ffffff')}>{sector}</span>
                     </span>
