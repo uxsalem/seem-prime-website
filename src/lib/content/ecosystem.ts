@@ -113,9 +113,9 @@ export const PLATFORM_IDS = ['jaz-chocolate', 'eat-plus', 'zl-tours', 'homera', 
 export const ECOSYSTEM_IDS = { platforms: 'platforms', model: 'one-ecosystem' } as const
 
 /**
- * Where each platform sits among the nine strategic sectors, as `HOME.sectors` lists them:
+ * Where each platform sits among the eight strategic sectors, as `HOME.sectors` lists them:
  * JAZ Chocolate in industry, eat.plus in logistics, ZL.TOURS in tourism, HOMERA in real estate,
  * Qanif in entertainment and SEEM Catering in catering and food. The home page's reel names each
  * under its sector.
  */
-export const PLATFORM_SECTORS = [0, 3, 4, 5, 7, 8]
+export const PLATFORM_SECTORS = [0, 2, 3, 4, 6, 7]

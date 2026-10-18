@@ -469,7 +469,7 @@ export type Framed = {
 }
 
 /**
- * The nine strategic sectors, in the order the copy lists them — Industry, Technology, Food,
+ * The eight strategic sectors, in the order the copy lists them — Industry, Technology,
  * Logistics, Tourism, Real estate, Financial services, Entertainment, Catering & food — one
  * picture each from the sector set, so the reel repeats nothing the hero has just shown. Where a
  * sector has a platform, its picture is the platform's: JAZ Chocolate's plant, Qanif's sign, SEEM
@@ -478,7 +478,6 @@ export type Framed = {
 export const sectorFrames: Framed[] = [
   { photo: photos.chocolateHall, focus: '50% 62%' },
   { photo: photos.aiTouch, focus: '50% 40%' },
-  { photo: photos.chocolateBox, focus: '50% 64%' },
   { photo: photos.warehouse, focus: '52% 56%' },
   { photo: photos.longtail, focus: '50% 54%' },
   { photo: photos.courtyard, focus: '50% 56%' },
@@ -488,22 +487,21 @@ export const sectorFrames: Framed[] = [
 ]
 
 /**
- * The home page's opening sequence: one frame per sector the cinema cuts between, keyed to the
- * sector it shows. It opens on the work — logistics, then industry, with tourism third — so the
- * first frame says investor and builder rather than travel, and it closes on catering's banquet
- * table, the one frame taken from SEEM Catering's profile. Entertainment is the family at Qanif
- * from the September edition, preferred to October's roller coaster. Food sits this one out,
- * because its picture is a portrait and the hero is full-bleed at every width.
+ * The home page's opening sequence: one frame per sector, all eight, keyed to the sector it
+ * shows. It opens on the work — logistics, then industry, with tourism third — so the first
+ * frame says investor and builder rather than travel, and it closes on catering's banquet table,
+ * the one frame taken from SEEM Catering's profile. Entertainment is the family at Qanif from the
+ * September edition, preferred to October's roller coaster.
  */
 export const heroFrames: { sector: number; frame: Framed }[] = [
-  { sector: 3, frame: { photo: photos.logistics, focus: '56% 52%' } },
+  { sector: 2, frame: { photo: photos.logistics, focus: '56% 52%' } },
   { sector: 0, frame: { photo: photos.chocolateConveyor, focus: '56% 60%' } },
-  { sector: 4, frame: { photo: photos.coast, focus: '50% 50%' } },
-  { sector: 5, frame: { photo: photos.residence, focus: '58% 52%' } },
+  { sector: 3, frame: { photo: photos.coast, focus: '50% 50%' } },
+  { sector: 4, frame: { photo: photos.residence, focus: '58% 52%' } },
   { sector: 1, frame: { photo: photos.technology, focus: '56% 46%' } },
-  { sector: 7, frame: { photo: photos.qanifFamily, focus: '46% 58%' } },
-  { sector: 6, frame: { photo: photos.payments, focus: '60% 48%' } },
-  { sector: 8, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
+  { sector: 6, frame: { photo: photos.qanifFamily, focus: '46% 58%' } },
+  { sector: 5, frame: { photo: photos.payments, focus: '60% 48%' } },
+  { sector: 7, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
 ]
 
 /**

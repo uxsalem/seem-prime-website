@@ -42,8 +42,8 @@ const AR = {
 
   // --- 02 · Pillars & sectors -----------------------------------------------------------------
 
-  pillarsH: 'خمس ركائز، وتسعة قطاعات، ومنظومة واحدة', // draft
-  pillarsLead: 'خمس ركائز تحدّد كيف ننفّذ، على تسعة قطاعات تحدّد أين نعمل', // draft
+  pillarsH: 'خمس ركائز، وثمانية قطاعات، ومنظومة واحدة', // draft
+  pillarsLead: 'خمس ركائز تحدّد كيف ننفّذ، على ثمانية قطاعات تحدّد أين نعمل', // draft
   pillarsLabel: 'الركائز الاستراتيجية',
   pillars: [
     ['تطوير المنصات الاقتصادية', 'نؤسس ونشغّل كيانات متخصصة، طبقةً فوق طبقة، حتى تقوم بذاتها'],
@@ -53,7 +53,7 @@ const AR = {
     ['التحول الرقمي والابتكار', 'نمرّر التقنية والبيانات عبر المنظومة كلها، لا في منصة واحدة'],
   ],
   sectorsLabel: 'القطاعات الاستراتيجية',
-  sectors: ['الصناعة', 'التقنية', 'الأغذية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه', 'التموين والأغذية'],
+  sectors: ['الصناعة', 'التقنية', 'اللوجستيات', 'السياحة', 'العقار', 'الخدمات المالية', 'الترفيه', 'التموين والأغذية'],
 
   // --- 03 · Business model --------------------------------------------------------------------
 
@@ -139,8 +139,8 @@ const EN: StrategyCopy = {
   focusNear: 'The work in hand', // draft
   metre: 'm',
 
-  pillarsH: 'Five pillars, nine sectors, one ecosystem', // draft
-  pillarsLead: 'Five pillars set how we execute; nine sectors set where we operate', // draft
+  pillarsH: 'Five pillars, eight sectors, one ecosystem', // draft
+  pillarsLead: 'Five pillars set how we execute; eight sectors set where we operate', // draft
   pillarsLabel: 'Strategic pillars',
   pillars: [
     ['Develop economic platforms', 'We found and operate specialised entities, layer by layer, until each stands on its own'],
@@ -150,7 +150,7 @@ const EN: StrategyCopy = {
     ['Drive digital transformation', 'We run technology and data through the whole ecosystem, not one platform'],
   ],
   sectorsLabel: 'Strategic focus sectors',
-  sectors: ['Industry', 'Technology', 'Food', 'Logistics', 'Tourism', 'Real estate', 'Financial services', 'Entertainment', 'Catering & food'],
+  sectors: ['Industry', 'Technology', 'Logistics', 'Tourism', 'Real estate', 'Financial services', 'Entertainment', 'Catering & food'],
 
   modelH: 'One ecosystem, four stages of value',
   modelLead: 'Every platform moves through the same four stages, then returns its yield to the ecosystem',
