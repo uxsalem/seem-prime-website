@@ -191,11 +191,17 @@ a:hover {
 [data-rail] > * { scroll-snap-align: start; }
 
 /* --- Home: the opening -----------------------------------------------------
-   The stage is the photograph; the copy sits over it. On a first visit the
-   stage opens out of the SEEM square (`html[data-intro='play']`, set by the
-   bootstrap script before first paint). After that, every change of scene is a
-   diagonal blade whose slant is the cut on the ends of the mark's letter bars.
+   A day in the ecosystem. Each scene is a whole frame: its photograph, the
+   scrim, its hour drawn in outline, and its copy. Every change of scene is a
+   diagonal blade whose slant is the cut on the ends of the mark's letter bars,
+   and because the copy belongs to the frame, the blade carries it with the
+   picture. On a first visit the stage opens out of the SEEM square
+   (`html[data-intro='play']`, set by the bootstrap script before first paint).
    -------------------------------------------------------------------------- */
+
+/* The index's height, so the scenes' copy stands clear of it; HeroCinema measures the real one. */
+[data-hero] { --hfoot: 92px; }
+@media (min-width: 760px) { [data-hero] { --hfoot: 128px; } }
 
 [data-hero-stage] {
   position: absolute;
@@ -204,12 +210,19 @@ a:hover {
   overflow: clip;
   background: #041815;
 }
-[data-hero-stage] .sp-grain { z-index: 5; }
 
 [data-hframe] { position: absolute; inset: 0; overflow: clip; visibility: hidden; }
 [data-hframe][data-state='under'] { visibility: visible; z-index: 1; }
 [data-hframe][data-state='on'],
 [data-hframe][data-state='enter'] { visibility: visible; z-index: 2; }
+
+/* The photograph drifts down as the page scrolls away (`--hdrift`, written by HeroCinema). */
+[data-hphoto] {
+  position: absolute;
+  inset: -6% 0 0;
+  transform: translate3d(0, var(--hdrift, 0px), 0);
+}
+[data-hframe]:not([data-state='off']) [data-hphoto] { will-change: transform; }
 
 /* The picture settles out of a slow push while it holds. The animation is the same across
    enter → on → under, so the move never restarts mid-scene. */
@@ -241,6 +254,33 @@ a:hover {
 [dir='rtl'] [data-hframe][data-state='enter'] { animation: sp-blade-rtl 1.5s var(--ease-arch) both; }
 [dir='ltr'] [data-hframe][data-state='enter'] { animation: sp-blade-ltr 1.5s var(--ease-arch) both; }
 
+/* The copy travels with the blade: the incoming lines glide in behind its edge, one after
+   another, and the outgoing ones are pushed on ahead of it. */
+@keyframes sp-glide-rtl {
+  from { transform: translateX(72px); }
+  to { transform: none; }
+}
+@keyframes sp-glide-ltr {
+  from { transform: translateX(-72px); }
+  to { transform: none; }
+}
+@keyframes sp-push-rtl {
+  from { transform: none; }
+  to { transform: translateX(-36px); }
+}
+@keyframes sp-push-ltr {
+  from { transform: none; }
+  to { transform: translateX(36px); }
+}
+[dir='rtl'] [data-hframe][data-state='enter'] [data-hg] {
+  animation: sp-glide-rtl 1.5s var(--ease-out) calc(var(--i, 0) * 55ms) both;
+}
+[dir='ltr'] [data-hframe][data-state='enter'] [data-hg] {
+  animation: sp-glide-ltr 1.5s var(--ease-out) calc(var(--i, 0) * 55ms) both;
+}
+[dir='rtl'] [data-hframe][data-state='under'] [data-hg] { animation: sp-push-rtl 1.5s var(--ease-arch) both; }
+[dir='ltr'] [data-hframe][data-state='under'] [data-hg] { animation: sp-push-ltr 1.5s var(--ease-arch) both; }
+
 /* The blade's edge rides the clip exactly: same distance, same curve, same time. */
 [data-hblade] { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
 [dir='rtl'] [data-hblade] { animation: sp-edge-rtl 1.5s var(--ease-arch) both; }
@@ -250,19 +290,138 @@ a:hover {
 [data-hblade] [data-edge='ember'] { stroke: #dc4b1c; stroke-width: 2px; }
 [data-hblade] [data-edge='light'] { stroke: rgba(255, 255, 255, 0.75); stroke-width: 1px; }
 
-/* Top for the bar, foot for the headline, reading edge for the index; the sky stays open. */
-[data-hero-scrim] { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+/* Top for the bar, foot for the copy, reading edge for the column of it; the sky stays open.
+   The copy runs to a paragraph now, so the foot's shade climbs higher than a title alone needs. */
+[data-hero-scrim] { position: absolute; inset: 0; pointer-events: none; }
 [dir='rtl'] [data-hero-scrim] {
   background:
     linear-gradient(to bottom, rgba(4, 24, 21, 0.58) 0%, rgba(4, 24, 21, 0) 22%),
-    linear-gradient(to top, rgba(4, 24, 21, 0.94) 0%, rgba(4, 24, 21, 0.64) 26%, rgba(4, 24, 21, 0.16) 54%, rgba(4, 24, 21, 0) 70%),
-    linear-gradient(to left, rgba(4, 24, 21, 0.46) 0%, rgba(4, 24, 21, 0) 58%);
+    linear-gradient(to top, rgba(4, 24, 21, 0.94) 0%, rgba(4, 24, 21, 0.72) 30%, rgba(4, 24, 21, 0.3) 56%, rgba(4, 24, 21, 0) 76%),
+    linear-gradient(to left, rgba(4, 24, 21, 0.56) 0%, rgba(4, 24, 21, 0) 62%);
 }
 [dir='ltr'] [data-hero-scrim] {
   background:
     linear-gradient(to bottom, rgba(4, 24, 21, 0.58) 0%, rgba(4, 24, 21, 0) 22%),
-    linear-gradient(to top, rgba(4, 24, 21, 0.94) 0%, rgba(4, 24, 21, 0.64) 26%, rgba(4, 24, 21, 0.16) 54%, rgba(4, 24, 21, 0) 70%),
-    linear-gradient(to right, rgba(4, 24, 21, 0.46) 0%, rgba(4, 24, 21, 0) 58%);
+    linear-gradient(to top, rgba(4, 24, 21, 0.94) 0%, rgba(4, 24, 21, 0.72) 30%, rgba(4, 24, 21, 0.3) 56%, rgba(4, 24, 21, 0) 76%),
+    linear-gradient(to right, rgba(4, 24, 21, 0.56) 0%, rgba(4, 24, 21, 0) 62%);
+}
+
+/* A scene's copy: the column at the foot on the reading side, the hour in the far corner. It
+   lifts and fades as the page scrolls away (`--hlift`, `--hfade`). */
+[data-hscene] {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px) calc(var(--hfoot) + clamp(16px, 3.2vh, 34px));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+  transform: translate3d(0, var(--hlift, 0px), 0);
+  opacity: var(--hfade, 1);
+}
+
+/* The hour, in outline: the plain-zero Plex Mono, stroked rather than filled. */
+[data-hclock] {
+  position: absolute;
+  inset-block-start: calc(clamp(64px, 7vw, 80px) + clamp(6px, 2.6vh, 28px));
+  inset-inline-end: clamp(16px, 3vw, 32px);
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  font-size: clamp(60px, 11vw, 176px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.42);
+  pointer-events: none;
+  user-select: none;
+}
+
+[data-hcol] { max-width: min(100%, 700px); text-shadow: 0 1px 22px rgba(4, 24, 21, 0.3); }
+[data-hcol] [data-solid] { text-shadow: none; }
+
+/* The hour and the sector, after an ember dot that keeps time while the day runs. */
+[data-hmeta] {
+  margin: 0 0 clamp(8px, 1.6vh, 16px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+[data-htime] { font-family: 'IBM Plex Mono', monospace; font-size: 0.94em; letter-spacing: 0.02em; }
+[data-hsep] { width: 1px; height: 13px; background: rgba(255, 255, 255, 0.36); }
+[data-hdot] { position: relative; flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: #dc4b1c; }
+[data-hdot]::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 75, 28, 0.75);
+  animation: sp-ping 2.4s var(--ease-out) infinite;
+}
+[data-hero][data-paused] [data-hdot]::after { animation: none; opacity: 0; }
+@keyframes sp-ping {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  80%, 100% { transform: scale(1.5); opacity: 0; }
+}
+
+[data-hsub] {
+  margin: clamp(8px, 1.4vh, 14px) 0 0;
+  max-width: 34em;
+  font-size: clamp(17px, 1.6vw, 23px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.94);
+  text-wrap: pretty;
+}
+[dir='rtl'] [data-hsub] { line-height: 1.7; }
+
+/* What the sector does: the scene's paragraph, quieter than everything above it. */
+[data-hbody] {
+  margin: clamp(10px, 1.8vh, 18px) 0 0;
+  max-width: 38em;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.76);
+  text-wrap: pretty;
+}
+[dir='rtl'] [data-hbody] { line-height: 1.9; }
+
+/* Whose scene it is; a sector still being built says so beside its name. */
+[data-hbrand] {
+  margin: clamp(10px, 1.8vh, 18px) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.66);
+}
+[data-hstatus] {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border: 1px solid rgba(240, 138, 98, 0.62);
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #f3936d;
+}
+
+[data-hctas] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+  margin-block-start: clamp(16px, 3vh, 30px);
 }
 
 /* The opening aperture: the mark appears on deep green, the photograph fills its square from
@@ -291,7 +450,9 @@ html[data-intro='play'] [data-hero-mark] {
   animation: sp-mark 1.6s var(--ease-arch) both;
 }
 html[data-intro='play'] [data-hero-stage] { animation: sp-aperture 2s var(--ease-arch) 0.25s backwards; }
-html[data-intro='play'] [data-hero-copy] [data-sc] { transition-delay: calc(var(--d, 0ms) + 1250ms); }
+html[data-intro='play'] [data-hero] [data-sc] { transition-delay: calc(var(--d, 0ms) + 1250ms); }
+/* The index sits outside the opening frame, so it waits for the frame to have opened around it. */
+html[data-intro='play'] [data-hfoot] [data-sc] { transition-delay: 1900ms; }
 /* Scoped to the home page: a flag left behind by leaving home mid-aperture never touches the bar
    on an inner page. */
 html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s var(--ease-out) 1.5s backwards; }
@@ -312,7 +473,21 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   to { opacity: 1; }
 }
 
-/* The index: one track per scene, the running one drawing its ember rule. */
+/* The index: the day laid out hour by hour, one track per scene, the running one drawing its
+   ember rule. It lifts and fades with the copy as the page scrolls away. */
+[data-hfoot] {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px) clamp(18px, 3vh, 30px);
+  color: #ffffff;
+  transform: translate3d(0, var(--hlift, 0px), 0);
+  opacity: var(--hfade, 1);
+}
 [data-htracks] { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px; }
 [data-htrack] {
   all: unset;
@@ -321,8 +496,16 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   padding-block: 12px 2px;
+}
+[data-hhour] {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.44);
+  transition: color 0.3s;
 }
 [data-hline] { position: relative; display: block; height: 2px; overflow: clip; background: rgba(255, 255, 255, 0.24); }
 [data-hfill] {
@@ -342,8 +525,8 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   text-overflow: ellipsis;
   transition: color 0.3s;
 }
-[data-htrack]:hover [data-hlabel],
-[data-htrack][aria-current] [data-hlabel] { color: #ffffff; }
+[data-htrack]:hover :is([data-hlabel], [data-hhour]),
+[data-htrack][aria-current] :is([data-hlabel], [data-hhour]) { color: #ffffff; }
 [data-hpause] {
   all: unset;
   box-sizing: border-box;
@@ -362,7 +545,7 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 }
 [data-hpause]:hover { background: rgba(255, 255, 255, 0.1); }
 @media (max-width: 759px) {
-  [data-hlabel] { display: none; }
+  [data-hlabel], [data-hhour] { display: none; }
   [data-htracks] { gap: 6px; }
 }
 
@@ -2638,8 +2821,10 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   .sp-kb, [data-page] [data-sc='mask'], [data-page] [data-sc='rise'] { will-change: auto; }
 
   [data-hframe] [data-himg],
-  [data-hframe][data-state='enter'] { animation: none !important; }
+  [data-hframe][data-state='enter'],
+  [data-hframe] [data-hg] { animation: none !important; }
   [data-hblade] { display: none; }
+  [data-hdot]::after { animation: none; opacity: 0; }
   [data-cap] { clip-path: none; transition: none; }
   [data-cap] [data-imgwrap] { transform: none; transition: none; }
   [data-w] { transition: none; }

@@ -1,22 +1,151 @@
+import type { PLATFORM_IDS } from '@/lib/content/ecosystem'
+
 /**
  * Home page copy. Arabic is the primary language; English is the parallel cut, not a gloss.
  *
- * The page is carried by its photography, so the copy is deliberately spare: the tagline, one
- * positioning line, a name and a line per sector. Almost every string is lifted from the
- * approved framework copy; the handful that are new are marked `// draft`, for the client to
+ * The page is carried by its photography, so the copy is deliberately spare: a day in the
+ * ecosystem, one positioning line, a name and a line per sector. Almost every string is lifted
+ * from the approved copy; the handful that are new are marked `// draft`, for the client to
  * confirm before launch. A one-sentence line carries no full stop at its end, in either language.
  */
 
 export type HomeCopy = typeof AR
 
+/** One scene of the hero's day. */
+type Scene = {
+  /** The part of the day, beside its hour: «الفجر · 5:00». */
+  part: string
+  /** The main line, then the line under it, then what the sector does. */
+  title: string
+  sub: string
+  body: string
+  /** Whose scene it is: a platform, a sector still being built, or the ecosystem itself. */
+  brand: string
+  cta: string
+}
+
+/** Where a scene of the hero's day sits in the day, and in the ecosystem. */
+type Hour = {
+  /** The hour drawn in the scene's corner: «05:00», or «24» for the whole day. */
+  clock: string
+  /** The scene's place in `sectors`; the first scene is the ecosystem itself, not one sector of it. */
+  sector: number | null
+  /** The platform whose address on the ecosystem page the scene opens onto. */
+  platform?: (typeof PLATFORM_IDS)[number]
+  /** A sector whose platform is still being built: it says so beside its name, and opens onto the strategy. */
+  building?: true
+}
+
+/**
+ * The hero's day, the same in both languages: the whole day first, then a sector at the hour it
+ * meets someone's day, from dawn to evening. Every language's `day` follows this order.
+ */
+export const DAY: Hour[] = [
+  { clock: '24', sector: null },
+  { clock: '05:00', sector: 4, platform: 'homera' },
+  { clock: '07:30', sector: 2, platform: 'eat-plus' },
+  { clock: '09:30', sector: 8, platform: 'qanif' },
+  { clock: '12:00', sector: 0, platform: 'jaz-chocolate' },
+  { clock: '14:30', sector: 3, platform: 'zl-tours' },
+  { clock: '16:30', sector: 7, building: true },
+  { clock: '18:00', sector: 1, building: true },
+  { clock: '20:30', sector: 6, platform: 'seem-supply' },
+]
+
 const AR = {
   heroLabel: 'المقدمة',
-  /** The tagline, a line per entry: a short line, then a long one, joined by و rather than commas. */
-  h1: ['نُمكّن الأعمال ونُسرّع النمو', 'ونبني المنظومات الاقتصادية'],
+  /** The page's title for assistive technology and search; on screen, each scene sets its own. */
+  heroTitle: 'سيم برايم: منظومة تُرافق يومك',
+  /** The first scene's name in the index, where the others name their sectors. */
+  ecosystemName: 'منظومة سيم',
+  /** Beside the name of a sector whose platform is still being built. */
+  building: 'قيد التطوير',
+  /**
+   * The client's copy for the hero, scene by scene, in `DAY`'s order. Spelling slips in the
+   * supplied text are corrected: «إمدادك» takes its hamza, «شركاءنا» is the object of «نمكّن»,
+   * «وناسه» drops a damma the genitive cannot carry, «بمعايير عالية» gets its space, and the
+   * line after «تذوّق قطعة من الفرح» loses its trailing «..». Qanif is written in Latin, as
+   * everywhere else on the Arabic pages.
+   */
+  day: [
+    {
+      part: 'يوم كامل',
+      title: 'منظومة تُرافق يومك',
+      sub: '',
+      body: 'تتكامل مشاريع سيم لتكون جزءاً من نمط حياتك، فنربط خيرات الأرض بالإنتاج المحلي ونقرّب المنتجات والخدمات إليك، لنبني منظومة ترتقي بجودة الحياة وتنمو مع المجتمع برؤية تراعي الاستدامة والبيئة',
+      brand: 'SEEM',
+      cta: 'استكشف منظومتنا',
+    },
+    {
+      part: 'الفجر',
+      title: 'نَم على حلمك',
+      sub: 'تحت سقفك، ينام القلب قبل العين',
+      body: 'نقدم الفرص العقارية من خلال منظومة متكاملة تجمع التسويق العقاري والحلول التمويلية والتسهيلات لتلبية تطلعات الأفراد والمستثمرين، وندعم خيارات السكن والتملّك والاستثمار بما يعزز جودة الحياة ويسهم في تنمية مجتمعات أكثر استقراراً وازدهاراً',
+      brand: 'HOMERA',
+      cta: 'اكتشف HOMERA',
+    },
+    {
+      part: 'الصباح',
+      title: 'اطلب الحي كله',
+      sub: 'من مطابخ الحي إلى بابك: شيفات مستقلون وفود ترك وبقالات الحي في مكان واحد',
+      body: 'نقرّب منتجات أهل الحي من عملائهم، ونفتح للأسر والطهاة المستقلين وأصحاب العربات فرصاً أوسع للنمو والوصول',
+      brand: 'eat.plus',
+      cta: 'اكتشف eat.plus',
+    },
+    {
+      part: 'الضحى',
+      title: 'اشرب ما زُرع هنا',
+      sub: 'بُنك الصباحي وكاكاوك من قلب جازان',
+      body: 'نعتز بخيرات أرضنا ومعرفة مزارعينا، ونطور الزراعة المحلية بممارسات تحافظ على التربة والمياه وتضمن استمرار الإنتاج للأجيال القادمة',
+      brand: 'Qanif · كاكاو وبن سعودي',
+      cta: 'اكتشف Qanif',
+    },
+    {
+      part: 'الظهيرة',
+      title: 'تذوّق قطعة من الفرح',
+      sub: 'نصنع ما يُفرح كل يوم',
+      body: 'نستثمر في مقومات جازان لنبني صناعة محلية بمعايير عالية، وننقل المعرفة ونطور المهارات المحلية بما يدعم استدامة الإنتاج ويصنع منتجاً يفخر به أهله',
+      brand: 'JAZ Chocolate',
+      cta: 'اكتشف JAZ Chocolate',
+    },
+    {
+      part: 'بعد الظهر',
+      title: 'عِش المكان مع أهله',
+      sub: 'تجارب تعرّفك على ثقافة المكان وطبيعته وناسه',
+      body: 'نربط الزوار بأهل المكان وثقافته، ونفتح فرصاً للمجتمعات المحلية عبر تجارب أصيلة تحترم تراثنا وتحافظ على طبيعة مواقعنا',
+      brand: 'ZL.TOURS',
+      cta: 'اكتشف ZL.TOURS',
+    },
+    {
+      part: 'العصر',
+      title: 'احتياجك يصلك دائماً',
+      sub: 'إمدادك ثابت مهما تقلّب السوق',
+      body: 'نبني شراكات طويلة مع الموردين المحليين ترفع كفاءة الإمداد، فتستمر أعمال شركائنا بثبات ويقل الهدر في كل مرحلة من السلسلة',
+      brand: 'التوريد',
+      cta: 'اطّلع على الاستراتيجية',
+    },
+    {
+      part: 'المغرب',
+      title: 'تسوّق من كل منصاتنا',
+      sub: 'منتجاتنا وخدماتنا على بُعد ضغطة',
+      body: 'نجمع منتجات المنظومة وخدماتها في قنوات رقمية متكاملة تسهّل البيع والشراء، ونمكّن مشاريعنا وشركاءنا من النمو والوصول إلى عملاء أكثر',
+      brand: 'JAZ · ZL.TOURS · HOMERA · eat.plus',
+      cta: 'اطّلع على الاستراتيجية',
+    },
+    {
+      part: 'المساء',
+      title: 'احتفِ بنكهة المكان',
+      sub: 'موائد فاخرة وأنيقة تُروى حكايتها',
+      // Two sentences, so both keep their full stops.
+      body: 'نرتقي بمفهوم التموين والضيافة ليكون جزءًا من جودة الحياة وثقافة اللقاء، من خلال تجارب تجمع الناس وتعكس كرم الضيافة وتنوّع المذاق. ونربط هذا الدور بتنمية الكفاءات ودعم المنتجات المحلية والاستخدام المسؤول للموارد، بما يخلق قيمة تمتد إلى المجتمع والاقتصاد والبيئة.',
+      brand: 'SEEM Catering',
+      cta: 'اكتشف SEEM Catering',
+    },
+  ] as Scene[],
   exploreCta: 'استكشف منظومتنا',
   cta: 'تواصل معنا',
   metaScroll: 'انزل لاستكشاف المنظومة',
-  scenes: 'مشاهد من قطاعات المنظومة',
+  scenes: 'مشاهد من يوم في المنظومة',
   sceneLabel: 'عرض مشهد',
   pause: 'إيقاف العرض',
   play: 'تشغيل العرض',
@@ -82,12 +211,88 @@ const AR = {
 
 const EN: HomeCopy = {
   heroLabel: 'Introduction',
-  // The English keeps its three beats: joined into the Arabic's two lines, it would wrap to four.
-  h1: ['Empowering business,', 'accelerating growth,', 'building economic ecosystems'],
+  heroTitle: 'SEEM PRIME: an ecosystem for your whole day', // draft
+  ecosystemName: 'SEEM ecosystem', // draft
+  building: 'In development', // draft
+  /** The client wrote the hero in Arabic; every English scene is a draft translation of it. */
+  day: [
+    {
+      part: 'All day',
+      title: 'An ecosystem for your whole day',
+      sub: '',
+      body: 'SEEM’s ventures fit together into the way you live: we connect the land’s bounty to local production and bring products and services closer to you, building an ecosystem that raises the quality of life and grows with the community, with sustainability and the environment in mind',
+      brand: 'SEEM',
+      cta: 'Explore the ecosystem',
+    },
+    {
+      part: 'Dawn',
+      title: 'Sleep in your dream home',
+      sub: 'Under your own roof, the heart falls asleep before the eyes',
+      body: 'We bring real estate opportunities through an integrated ecosystem of property marketing, financing solutions and facilitation that meets the ambitions of individuals and investors, and we support the choice to live, own and invest in ways that raise the quality of life and help communities grow more stable and prosperous',
+      brand: 'HOMERA',
+      cta: 'Discover HOMERA',
+    },
+    {
+      part: 'Morning',
+      title: 'Order the whole neighborhood',
+      sub: 'From the neighborhood’s kitchens to your door: independent chefs, food trucks and local grocers in one place',
+      body: 'We bring the neighborhood’s products closer to its customers, and give families, independent cooks and food-truck owners more room to grow and reach people',
+      brand: 'eat.plus',
+      cta: 'Discover eat.plus',
+    },
+    {
+      part: 'Late morning',
+      title: 'Drink what was grown here',
+      sub: 'Your morning coffee and cocoa, from the heart of Jazan',
+      body: 'We take pride in our land’s bounty and our farmers’ knowledge, and develop local agriculture with practices that protect the soil and the water and keep production going for generations to come',
+      brand: 'Qanif · Saudi cocoa and coffee',
+      cta: 'Discover Qanif',
+    },
+    {
+      part: 'Noon',
+      title: 'Taste a piece of joy',
+      sub: 'We make what brings joy, every day',
+      body: 'We invest in what Jazan has to offer to build local industry to high standards, passing on knowledge and developing local skills so that production lasts and makes something its people are proud of',
+      brand: 'JAZ Chocolate',
+      cta: 'Discover JAZ Chocolate',
+    },
+    {
+      part: 'Afternoon',
+      title: 'Live the place with its people',
+      sub: 'Experiences that introduce you to a place’s culture, its nature and its people',
+      body: 'We connect visitors with the people of a place and its culture, and open opportunities for local communities through authentic experiences that respect our heritage and protect the nature of our sites',
+      brand: 'ZL.TOURS',
+      cta: 'Discover ZL.TOURS',
+    },
+    {
+      part: 'Late afternoon',
+      title: 'What you need, always on its way',
+      sub: 'Your supply holds steady, however the market turns',
+      body: 'We build long partnerships with local suppliers that make supply more efficient, so our partners’ businesses run steadily and less is wasted at every link of the chain',
+      brand: 'Supply',
+      cta: 'See the strategy',
+    },
+    {
+      part: 'Sunset',
+      title: 'Shop all our platforms',
+      sub: 'Our products and services, a tap away',
+      body: 'We bring the ecosystem’s products and services together in integrated digital channels that make buying and selling easier, and help our ventures and partners grow and reach more customers',
+      brand: 'JAZ · ZL.TOURS · HOMERA · eat.plus',
+      cta: 'See the strategy',
+    },
+    {
+      part: 'Evening',
+      title: 'Celebrate the taste of the place',
+      sub: 'Fine, elegant tables, each with a story to tell',
+      body: 'We make catering and hospitality part of the quality of life and the culture of gathering, through experiences that bring people together and reflect generous hospitality and a variety of flavors. We tie this role to developing talent, supporting local produce and using resources responsibly, creating value that reaches society, the economy and the environment.',
+      brand: 'SEEM Catering',
+      cta: 'Discover SEEM Catering',
+    },
+  ],
   exploreCta: 'Explore the ecosystem',
   cta: 'Contact us',
   metaScroll: 'Scroll to explore the ecosystem',
-  scenes: 'Scenes from the ecosystem’s sectors',
+  scenes: 'Scenes from a day in the ecosystem',
   sceneLabel: 'Show the scene:',
   pause: 'Pause the scenes',
   play: 'Play the scenes',

@@ -98,16 +98,17 @@ above a Red Sea bay, plus two frames cut from an entertainment contact sheet. On
 every sector is what lets a refinery, a warehouse and a cinema read as one landscape rather than
 a stock collage. The second is the client's own sector set, supplied in September 2026 and
 replaced in October by a more realistic edition: a picture per sector for the home page's reel,
-the hero's industry scene, the statement's first capsule, and pictures of the platforms
-themselves: JAZ Chocolate's plant and a box of its chocolate, Qanif's lit sign, and the
-catering tables. The platforms' logos come with it. The hero's entertainment scene uses the
-September edition's family at Qanif, preferred to October's roller coaster, and two more
-September pictures stand in for sectors the October edition has nothing for: a card at a
-counter for e-commerce, and a cargo hub for supply. Nothing the client has sent shows
-agriculture's coffee or cocoa, so its reel window keeps its empty state. The set has no hero
-picture for catering, so the hero's catering scene, a banquet table laid for a function, is taken
-from SEEM Catering's profile. The brand's deep green is the ground they all sit on (sections,
-scrims, the dark between frames), never a tint laid over the pictures.
+the statement's first capsule, and pictures of the platforms themselves: JAZ Chocolate's plant
+and a box of its chocolate, Qanif's lit sign, and the catering tables. The platforms' logos come
+with it. Two September pictures stand in for sectors the October edition has nothing for: a card
+at a counter for e-commerce, and a cargo hub for supply. On October 18 the client sent a set for
+the hero's day, a few pictures per sector, and one of each became an hour of it: a family on a
+villa's terrace for the whole day, a man asleep before dawn, a courier riding into the sunrise
+through Riyadh, a farmer picking coffee, chocolate poured into moulds, a yacht over the Red Sea's
+reefs, trucks at the docks at dusk, an online shop's studio at sunset and a banquet hall laid for
+the evening. Its cocoa pods became the reel's agriculture window, which had stood empty. The
+brand's deep green is the ground they all sit on (sections, scrims, the dark between frames),
+never a tint laid over the pictures.
 
 The home page shows no photograph twice. The hero, the statement's capsules, the reel, the SEEM
 stages and the closing window each have pictures of their own, and the platform index shows the
@@ -141,25 +142,24 @@ as an opacity crossfade rather than a live blur.
 card cut, as WebP at quality 80 / 78 / 76. `srcSet()` hands all three to any frame the browser
 can size, which covers the plates, the hero, and the reel, stage and closing windows, so a phone
 fetches the card cut and a desktop the full one. The entertainment tiles exist at card size only
-(~585px). The banquet table is 1181px wide in the profile, the largest copy there is, so it
-ships at that size and a card cut, and is a little soft at full bleed on a large screen. The box of chocolate is a portrait
-(1200 × 1607) and ships at full and card size, so it only goes where a frame can hold a
-portrait: JAZ's detail. The three pictures in the statement's
-capsules also ship a 400px cut (`xs`), because a capsule is a word wide. The logos ship as single
-720 × 900 cards, the shape of the index's thumbnails on a wide screen. The payments frame is
-cropped to leave out the emblem that opens the source image.
+(~585px). The courier came as a 1717px file, so its full cut is that size. The box of chocolate
+is a portrait (1200 × 1607) and ships at full and card size, so it only goes where a frame can
+hold a portrait: JAZ's detail. The three pictures in the statement's capsules also ship a 400px
+cut (`xs`), because a capsule is a word wide. The logos ship as single 720 × 900 cards, the shape
+of the index's thumbnails on a wide screen. The payments frame is cropped to leave out the
+emblem that opens the source image.
 
 Two components consume them. **`Plate`** is the full-bleed photograph behind a masthead or a
 band of copy: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
 framed picture inside a card, window or tile, and still renders its captioned empty state when
 no frame is passed. The contact page's portrait slots are deliberately still waiting for real
-people, and the reel's agriculture window for a picture of its own.
+people.
 
 Image weight, measured against a production build (whole page = after scrolling to the foot):
 
 | Page | 1440×900 first screen | 1440×900 whole page | 390×844 @2x whole page |
 |---|---|---|---|
-| home | 283KB | 1131KB | 718KB |
+| home | 375KB | 1282KB | 709KB |
 | about | 396KB | 663KB | 309KB |
 | strategy | 328KB | 1188KB | 522KB |
 | ecosystem | 173KB | 1805KB | 709KB |
@@ -174,7 +174,11 @@ window left the reel later that month, and then the technology and financial ser
 did too, for e-commerce, supply and an agriculture window still without a picture; the desktop
 page is 9KB heavier for that (it was 1018KB), and a phone's 5KB (713KB). The platform index's
 six logos now come with the page on a desktop as well, where they used to wait for the pointer,
-which adds 104KB there (it was 1027KB); a phone always fetched them. The ecosystem page
+which adds 104KB there (it was 1027KB); a phone always fetched them. When the hero became a day
+in October 2026, it opened on the family on a villa's terrace, a busier picture than the
+logistics hub before it, and the reel's agriculture window took a picture of its own (60KB), so
+the desktop page is heavier (it was 283KB on the first screen and 1131KB in all); a phone's is
+9KB lighter (718KB), because the opening scenes' card cuts are. The ecosystem page
 carries six platforms, and JAZ Chocolate opens on the plant's hall, the heaviest
 picture in the set (351KB at full size); it was 1477KB and 645KB with five. SEEM Supply opening
 on the cargo hub, where SEEM Catering opened on the buffet, took 5KB and 15KB off it (1810KB and
@@ -206,17 +210,27 @@ Each section in `src/components/home/` owns its motion:
 - **`HeroCinema`**: on the first visit in a tab, the page opens on the SEEM square on deep
   green. The photograph fills the square from inside and the square widens to the frame. The
   bootstrap script in `site.tsx` sets `html[data-intro]` before first paint, so this runs in CSS
-  from the first frame. The hero then cuts between seven of the nine sectors on a **diagonal
-  blade** (the slant of the cut ends of the mark's letter bars) with a light hairline and an
-  ember line riding its edge. It opens on logistics, then industry, with tourism third, so the
-  first frame a visitor sees says investor and builder rather than travel, and it closes on
-  catering. Supply sits it out, because its one picture, a cargo hub, would repeat the logistics
-  hub the hero opens on, and so does agriculture, which has no picture yet. The
-  blade travels right to left in Arabic and left to right in English. The index along the foot
-  names every scene and jumps to it; a pause button stops the clock. The clock only runs while
-  the hero is on screen and the tab is visible. Scrolling away closes the frame into an inset
-  panel. The Arabic title is two lines, a short one and a long one, joined by و rather than
-  commas; the English keeps its three beats, which the measure could not hold as two.
+  from the first frame. The hero then tells **a day in the ecosystem**, in nine scenes: the whole
+  day first («منظومة تُرافق يومك», with 24 in the corner), then a sector at the hour it meets
+  someone's day, from real estate at dawn, 5:00, through logistics, agriculture, industry,
+  tourism, supply and e-commerce, to catering in the evening, 20:30 (`DAY` in
+  `content/home.ts`). Each scene is a whole frame: its photograph, its hour drawn in outline in
+  the far corner, and its copy in the order the client set it, the hour and the sector, the main
+  line, the line under it, what the sector does, whose scene it is and its door. A sector whose
+  platform is still being built (supply, e-commerce) says so beside its name and opens onto the
+  strategy. Entertainment has no hour in the client's day; Qanif comes in at 9:30, through its
+  coffee and cocoa. The scenes cut on a **diagonal blade** (the slant of the cut ends of the mark's
+  letter bars) with a light hairline and an ember line riding its edge, and because the copy
+  belongs to the frame, the blade carries it: the new lines glide in behind the edge while the
+  old ones are pushed on ahead of it. The blade travels right to left in Arabic and left to right
+  in English. The index along the foot lays the day out hour by hour and jumps to any scene; a
+  pause button stops the clock, and on a touch screen a swipe in the reading direction goes
+  forward. A scene holds for nine seconds, long enough to read; the clock only runs while the
+  hero is on screen and the tab is visible, and it holds while the pointer rests on the copy or
+  the keyboard is inside the hero. Scrolling away closes the frame into an inset panel. The
+  page's `h1` is the hero's name for assistive technology and search, «سيم برايم: منظومة تُرافق
+  يومك»; on screen each scene's main line is its own heading. The tagline that used to title the
+  hero («نُمكّن الأعمال ونُسرّع النمو…») lives on in the footer.
 - **`Statement`**: the positioning line, lit word by word at the pace of the scroll. Each verb
   opens a capsule onto the work it names. The capsules hold their width from the start and open
   on a clip, so the line never re-wraps.
@@ -402,20 +416,20 @@ the reader has already started to move.
 - **The contact form and newsletter signup do not send anything.** Both validate and show a
   confirmation locally. Wire them to a route handler or form service — see the `TODO` in
   `src/components/pages/ContactPage.tsx` and `src/components/SiteFooter.tsx`.
-- **Two image slots are still empty.** The contact page's testimonial portraits are empty
-  deliberately (a building is not a stand-in for a person), and the home reel's agriculture
-  window because nothing the client has sent shows its coffee or cocoa; a photograph of Qanif's
-  crops would fill it. Both keep their captioned placeholder. To fill one, add the file to
-  `public/ds/img/`, name it in `src/lib/media.ts`, and pass the frame to `ImageSlot` (for the
-  reel, the last entry of `sectorFrames`). (The ecosystem page's partner logo plates went with
-  its closing section.)
+- **One kind of image slot is still empty.** The contact page's testimonial portraits are empty
+  deliberately (a building is not a stand-in for a person), so they keep their captioned
+  placeholder. To fill one, add the file to `public/ds/img/`, name it in `src/lib/media.ts`, and
+  pass the frame to `ImageSlot`. (The reel's agriculture window took the cocoa pods from the
+  client's October 18 set, and the ecosystem page's partner logo plates went with its closing
+  section.)
 - **Most of the photography is generated or stock, not shot on site.** The golden-hour set is
   art-directed for the brand, but nothing in it is a SEEM PRIME building, plant or property,
   and the people in it are not staff. The client's October 2026 edition is more realistic: the
   enrobing line in the statement and Qanif's sign are plainly photographs, but the rest reads as
   stock or generated (the box of chocolate is embossed with letters that spell nothing, and
-  Qanif's terrace, kept for its detail, and the hero's family at Qanif are from the earlier
-  generated set). The edition's second
+  Qanif's terrace, kept for its detail, is from the earlier generated set). The October 18 set
+  for the hero's day reads as generated too; its aerial of a chocolate plant is not used, because
+  the sign on its roof reads «JAZAN CHOCOLATE» rather than the platform's name. The edition's second
   industry picture, the plant from outside with workers and a pallet, is not used: it has alpine
   mountains behind it, and every slot it would suit already has a picture. Swapping in real
   assets is a change to `src/lib/media.ts` alone — except the desk before the Riyadh skyline,
@@ -424,9 +438,16 @@ the reader has already started to move.
 - **Some home page copy is draft.** The reel headline, the six new sector lines (e-commerce's,
   catering's, supply's and agriculture's among them), the reel's closing link, and Qanif's and
   SEEM Supply's descriptions and lines are new strings, marked `// draft` in
-  `src/lib/content/home.ts`, in both languages. The Arabic hero title is the approved copy, set
-  as two lines joined by و at a reviewer's request. Everything else on the page is the approved
-  framework copy.
+  `src/lib/content/home.ts`, in both languages. The hero's day is the client's own Arabic copy,
+  with a handful of spelling slips corrected (listed beside it); its English is a drafted
+  translation, and so are the hero's names for its first scene and for a sector still being
+  built. Everything else on the page is the approved framework copy.
+- **The hero and the platform pages name the catering venture differently.** The client's copy
+  for the hero calls it SEEM Catering, and gives supply no platform of its own, so the hero marks
+  supply as in development. The platform index and the ecosystem page still carry the stand-in
+  from the client's October notes: one platform, SEEM Supply («سيم للتوريدات»), across catering
+  and supply. The hero's SEEM Catering opens onto SEEM Supply's address (`/ecosystem#seem-supply`)
+  until the client settles the name.
 - **Some about page copy is draft.** The English values are the framework's own full
   statements; their Arabic is a drafted translation. The chapter names, the name chapter's
   headline and its three notes, the values headline and "One ecosystem" are new. All are marked
@@ -466,12 +487,14 @@ the reader has already started to move.
   client's September set (~2.4MB), which its October edition replaced: `chocolate-factory`,
   `chocolate-vat`, `chocolate-line`, `jaz-box`, `ai-desk-riyadh`, `lagoon-traveller` and
   `corniche-terrace` (each `*.webp`, with its cuts); October's roller coaster
-  (`coaster-dusk*.webp`, ~190KB), which the hero's entertainment scene gave up for September's
-  family at Qanif; the technology and financial services windows (`ai-touch-sm.webp` and
+  (`coaster-dusk*.webp`, ~190KB), which the hero's old entertainment scene gave up for
+  September's family at Qanif; the technology and financial services windows (`ai-touch-sm.webp` and
   `finance-desk*.webp`, ~210KB) and the buffet SEEM Catering's card opened on
-  (`catering-buffet*.webp`, ~350KB), which left with the sectors and the platform; and SEEM
-  Catering's lettered card (`logo-seem-catering.webp`). Delete them if they are not wanted
-  back. (The Red Sea resort superseded before them is back in service as HOMERA's detail and the
+  (`catering-buffet*.webp`, ~350KB), which left with the sectors and the platform; SEEM
+  Catering's lettered card (`logo-seem-catering.webp`); and the three pictures the hero lost when
+  it became a day (~980KB): the chocolate on its conveyor (`chocolate-conveyor*.webp`), the family
+  at Qanif (`qanif-family-day*.webp`) and the banquet table from SEEM Catering's profile
+  (`catering-banquet*.webp`). Delete them if they are not wanted back. (The Red Sea resort superseded before them is back in service as HOMERA's detail and the
   home page's closing window.)
 - **The five original brand plates are no longer used.** `plates` in `src/lib/routes.ts` still
   names them and the PNGs are still in `public/ds/img/` (~5MB). Delete both if they are not

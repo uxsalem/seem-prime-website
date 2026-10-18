@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import type { FocusEvent, TouchEvent } from 'react'
 import { Mark } from '@/components/Mark'
-import { HOME } from '@/lib/content/home'
+import { DAY, HOME } from '@/lib/content/home'
 import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { heroFrames, srcSet } from '@/lib/media'
@@ -11,8 +12,8 @@ import { routes } from '@/lib/routes'
 import { INTRO_KEY, useSite } from '@/lib/site'
 import { display, heroTitle, ordinal } from '@/lib/typography'
 
-/** How long each scene holds, from the moment its blade starts to cross. */
-const DWELL = 6800
+/** How long each scene holds, from the moment its blade starts to cross: long enough to read it. */
+const DWELL = 9000
 /** The blade's crossing. Kept in step with `sp-blade-*` in globals.css. */
 const BLADE = 1500
 /** The opening aperture, when it plays: the first scene holds this much longer. */
@@ -20,19 +21,35 @@ const INTRO = 1900
 
 type FrameState = 'enter' | 'on' | 'under' | 'off'
 
+/** A scene's door: its platform's address, the strategy for a sector still being built, or the ecosystem. */
+const doorOf = (i: number) => {
+  const { platform, building } = DAY[i]
+  if (platform) return routes.ecosystem + '#' + platform
+  return building ? routes.strategy : routes.ecosystem
+}
+
+/** The hour as the scene's line says it, «5:00»; the clock in the corner keeps the leading zero. */
+const hourOf = (i: number) => (DAY[i].sector === null ? '' : DAY[i].clock.replace(/^0/, ''))
+
 /**
- * The home page's opening: the ecosystem, sector by sector, through one window.
+ * The home page's opening: a day in the ecosystem, one hour and one sector at a time.
  *
  * On a first visit the page opens on the SEEM square — the mark on deep green — and the square
  * becomes an aperture that widens to the full frame (pure CSS, keyed off `html[data-intro]`,
- * which the bootstrap script sets before first paint). From there the cinema cuts between the
- * sectors on a diagonal blade with an ember hairline riding its edge: the identity's one
- * signature transition, taken from the cut terminals of the mark's own letters.
+ * which the bootstrap script sets before first paint). The first scene is the whole day; the
+ * rest run from dawn to evening, each a sector at the hour it meets someone's day. A scene is a
+ * whole frame: its photograph, its hour in outline in the far corner, and its copy — the hour and
+ * the sector, the main line, the line under it, what the sector does, whose scene it is and its
+ * door. The cinema cuts between scenes on a diagonal blade with an ember hairline riding its
+ * edge, the identity's one signature transition, and the blade carries the copy with the
+ * picture, so the incoming scene's lines glide in behind it as the old ones are pushed out.
  *
  * Scenes advance on a clock that only runs while the hero is on screen, the tab is visible and
- * nobody has paused it. The index along the foot names every sector and jumps to it. Scrolling
- * away closes the frame into an inset panel, so the next section arrives on the page rather
- * than under a hard cut. Reduced motion gets the first scene, still, with the index working.
+ * nobody has paused it; it also holds while the pointer rests on the copy, or the keyboard is
+ * inside the hero, so a scene can be read to the end. The index along the foot lays the day out
+ * hour by hour and jumps to any scene; on a touch screen a swipe in the reading direction goes
+ * forward. Scrolling away closes the frame into an inset panel. Reduced motion gets the first
+ * scene, still, with the index working.
  */
 export function HeroCinema() {
   const { lang, ar, arrow } = useSite()
@@ -46,16 +63,22 @@ export function HeroCinema() {
 
   const sectionRef = useRef<HTMLElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
-  const driftRef = useRef<HTMLDivElement>(null)
-  const copyRef = useRef<HTMLDivElement>(null)
+  const footRef = useRef<HTMLDivElement>(null)
   const barsRef = useRef<HTMLSpanElement[]>([])
 
   const activeRef = useRef(0)
   const elapsedRef = useRef(0)
   const visibleRef = useRef(true)
+  const pointerHoldRef = useRef(false)
+  const focusHoldRef = useRef(false)
+  const touchRef = useRef<{ x: number; y: number } | null>(null)
   const settleRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const count = heroFrames.length
+  const nameOf = (i: number) => {
+    const sector = DAY[i].sector
+    return sector === null ? t.ecosystemName : t.sectors[sector]
+  }
 
   const load = useCallback((...indices: number[]) => {
     setLoaded((current) => {
@@ -115,6 +138,16 @@ export function HeroCinema() {
     return () => io.disconnect()
   }, [])
 
+  // The scenes' copy stands clear of the index along the foot, whatever height the index takes.
+  useEffect(() => {
+    const section = sectionRef.current
+    const foot = footRef.current
+    if (!section || !foot) return
+    const ro = new ResizeObserver(() => section.style.setProperty('--hfoot', Math.ceil(foot.offsetHeight) + 'px'))
+    ro.observe(foot)
+    return () => ro.disconnect()
+  }, [])
+
   // The clock. One rAF loop, alive only while playing; it writes the index progress directly.
   useEffect(() => {
     if (!playing || reduceMotion()) return
@@ -123,7 +156,8 @@ export function HeroCinema() {
     const tick = (now: number) => {
       const dt = last ? Math.min(64, now - last) : 0
       last = now
-      if (visibleRef.current && document.visibilityState === 'visible') elapsedRef.current += dt
+      const held = pointerHoldRef.current || focusHoldRef.current
+      if (visibleRef.current && !held && document.visibilityState === 'visible') elapsedRef.current += dt
       const p = Math.max(0, Math.min(1, elapsedRef.current / DWELL))
       const bar = barsRef.current[activeRef.current]
       if (bar) bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'
@@ -144,7 +178,9 @@ export function HeroCinema() {
     })
   }, [active])
 
-  // Scrolling away closes the frame into an inset panel and lets the copy go first.
+  // Scrolling away closes the frame into an inset panel and lets the copy go first. The
+  // photographs drift and the copy lifts through custom properties, because every scene carries
+  // its own of each.
   useScrollDriver({
     onFrame: () => {
       const section = sectionRef.current
@@ -154,23 +190,42 @@ export function HeroCinema() {
       const p = Math.max(0, Math.min(1, (window.scrollY || 0) / (h * 0.86)))
       const inset = Math.min(56, window.innerWidth * 0.04) * p
       stage.style.clipPath = p > 0 ? 'inset(' + inset.toFixed(1) + 'px round ' + (p * 6).toFixed(1) + 'px)' : ''
-      const drift = driftRef.current
-      if (drift) drift.style.transform = 'translate3d(0,' + (p * h * 0.16).toFixed(1) + 'px,0)'
-      const copy = copyRef.current
-      if (copy) {
-        copy.style.transform = 'translate3d(0,' + (p * -84).toFixed(1) + 'px,0)'
-        copy.style.opacity = Math.max(0, 1 - p * 1.3).toFixed(3)
-      }
+      section.style.setProperty('--hdrift', (p * h * 0.16).toFixed(1) + 'px')
+      section.style.setProperty('--hlift', (p * -84).toFixed(1) + 'px')
+      section.style.setProperty('--hfade', Math.max(0, 1 - p * 1.3).toFixed(3))
     },
   })
+
+  // The keyboard holds the clock while it is inside the hero; a click on the index does not.
+  const onFocus = (event: FocusEvent<HTMLElement>) => {
+    focusHoldRef.current = event.target.matches(':focus-visible')
+  }
+  const onBlur = (event: FocusEvent<HTMLElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) focusHoldRef.current = false
+  }
+
+  // A swipe in the reading direction goes forward: the next scene comes in from the side the
+  // blade starts on, so the finger draws it across.
+  const onTouchStart = (event: TouchEvent<HTMLElement>) => {
+    const touch = event.touches[0]
+    touchRef.current = touch ? { x: touch.clientX, y: touch.clientY } : null
+  }
+  const onTouchEnd = (event: TouchEvent<HTMLElement>) => {
+    const start = touchRef.current
+    const touch = event.changedTouches[0]
+    touchRef.current = null
+    if (!start || !touch) return
+    const dx = touch.clientX - start.x
+    const dy = touch.clientY - start.y
+    if (Math.abs(dx) < 56 || Math.abs(dx) < Math.abs(dy) * 1.5) return
+    go(activeRef.current + ((ar ? dx < 0 : dx > 0) ? 1 : -1))
+  }
 
   const stateOf = (i: number): FrameState => {
     if (i === active) return previous === null ? 'on' : 'enter'
     if (i === previous) return 'under'
     return 'off'
   }
-
-  const current = heroFrames[active]
 
   return (
     <section
@@ -179,10 +234,17 @@ export function HeroCinema() {
       aria-label={t.heroLabel}
       data-hero=""
       data-tone="dark"
+      data-paused={playing ? undefined : ''}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
       style={css(
         'position:relative;height:100svh;min-height:600px;max-height:1200px;overflow:clip;background:var(--page)',
       )}
     >
+      <h1 data-sr="">{t.heroTitle}</h1>
+
       {/* The ground the square opens out of, and the mark it opens from. Both only paint while
           the aperture runs; the mark sits over the stage so the photograph fills it from inside. */}
       <div data-hero-veil="" aria-hidden="true" />
@@ -190,12 +252,23 @@ export function HeroCinema() {
         <Mark size={88} />
       </span>
 
-      <div ref={stageRef} data-hero-stage="" aria-hidden="true">
-        <div ref={driftRef} style={css('position:absolute;inset:-6% 0 0;will-change:transform')}>
-          {heroFrames.map(({ frame }, i) => {
-            const at = frame.focus ?? frame.photo.focus
-            return (
-              <div key={i} data-hframe="" data-state={stateOf(i)}>
+      <div ref={stageRef} data-hero-stage="">
+        {heroFrames.map((frame, i) => {
+          const at = frame.focus ?? frame.photo.focus
+          const scene = t.day[i]
+          const hour = hourOf(i)
+          // The first scene is the one on screen at load: its lines arrive through the page's
+          // reveal, after the aperture when it plays. The others arrive behind the blade.
+          const sc = (variant = '') => (i === 0 ? { 'data-sc': variant } : {})
+          return (
+            <div
+              key={i}
+              data-hframe=""
+              data-state={stateOf(i)}
+              role="group"
+              aria-label={ordinal(i) + ' / ' + ordinal(count - 1) + ' · ' + nameOf(i)}
+            >
+              <div data-hphoto="" aria-hidden="true">
                 <span
                   style={css(
                     'position:absolute;inset:-4%;background-image:url("' +
@@ -230,93 +303,120 @@ export function HeroCinema() {
                   />
                 ) : null}
               </div>
-            )
-          })}
-        </div>
+              <span data-hero-scrim="" aria-hidden="true" />
+              <span className="sp-grain" aria-hidden="true" />
+
+              <div data-hscene="">
+                {/* The hour, drawn in outline in the far corner: 24 for the whole day. */}
+                <p data-hclock="" aria-hidden="true">
+                  {DAY[i].clock}
+                </p>
+
+                <div
+                  data-hcol=""
+                  onPointerEnter={(event) => {
+                    if (event.pointerType === 'mouse') pointerHoldRef.current = true
+                  }}
+                  onPointerLeave={() => {
+                    pointerHoldRef.current = false
+                  }}
+                >
+                  <p data-hg="" data-hmeta="" {...sc()} data-stagger="" style={vars({ '--i': 0 })}>
+                    <span data-hdot="" aria-hidden="true" />
+                    <span>
+                      {scene.part}
+                      {hour ? (
+                        <>
+                          {' · '}
+                          <span data-htime="">{hour}</span>
+                        </>
+                      ) : null}
+                    </span>
+                    <span data-hsep="" aria-hidden="true" />
+                    <span>{nameOf(i)}</span>
+                  </p>
+
+                  <h2 data-hg="" {...sc('rise')} data-stagger="" style={cssWith(heroTitle(ar), vars({ '--i': 1 }))}>
+                    {scene.title}
+                  </h2>
+
+                  {scene.sub ? (
+                    <p data-hg="" data-hsub="" {...sc()} data-stagger="" style={vars({ '--i': 2 })}>
+                      {scene.sub}
+                    </p>
+                  ) : null}
+
+                  <p data-hg="" data-hbody="" {...sc()} data-stagger="" style={vars({ '--i': 3 })}>
+                    {scene.body}
+                  </p>
+
+                  <p data-hg="" data-hbrand="" {...sc()} data-stagger="" style={vars({ '--i': 4 })}>
+                    <span>{scene.brand}</span>
+                    {DAY[i].building ? <span data-hstatus="">{t.building}</span> : null}
+                  </p>
+
+                  <div data-hg="" data-hctas="" {...sc()} data-stagger="" style={vars({ '--i': 5 })}>
+                    <Link
+                      href={doorOf(i)}
+                      className="sp-lift sp-sheen"
+                      data-solid=""
+                      style={css(
+                        'box-sizing:border-box;display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 30px;' +
+                          'border-radius:999px;background:#ffffff;color:#041815;font-size:15px;font-weight:500;' +
+                          'text-decoration:none;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s',
+                      )}
+                    >
+                      {scene.cta}
+                      <span aria-hidden="true">{arrow}</span>
+                    </Link>
+                    <Link
+                      href={routes.contact}
+                      className="sp-nav"
+                      style={css('position:relative;font-size:15px;font-weight:500;color:#ffffff;text-decoration:none;padding-block:6px')}
+                    >
+                      {t.cta}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
 
         {/* The blade's edge: a light hairline with ember riding just behind it. */}
         {previous !== null ? (
-          <span key={active} data-hblade="">
+          <span key={active} data-hblade="" aria-hidden="true">
             <svg viewBox="0 0 100 100" preserveAspectRatio="none">
               <line x1={ar ? 118.4 : -18.4} y1="0" x2={ar ? 100.4 : -0.4} y2="100" data-edge="ember" />
               <line x1={ar ? 118 : -18} y1="0" x2={ar ? 100 : 0} y2="100" data-edge="light" />
             </svg>
           </span>
         ) : null}
-
-        <span data-hero-scrim="" />
-        <span className="sp-grain" />
       </div>
 
-      <div
-        ref={copyRef}
-        data-hero-copy=""
-        style={css(
-          'position:relative;z-index:3;box-sizing:border-box;height:100%;max-width:1400px;margin:0 auto;' +
-            'display:flex;flex-direction:column;justify-content:flex-end;' +
-            'padding:clamp(96px,14vh,150px) clamp(16px,3vw,32px) clamp(18px,3vh,30px);color:#ffffff;will-change:transform,opacity',
-        )}
-      >
-        <h1 style={css(heroTitle(ar))}>
-          {t.h1.map((line, i) => (
-            <span key={i} data-sc="rise" data-stagger="" style={cssWith('display:block', vars({ '--i': i }))}>
-              {line}
-            </span>
-          ))}
-        </h1>
-
-        <div
-          data-sc=""
-          style={css(
-            'display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px;margin-block-start:clamp(22px,3.4vh,36px)',
-          )}
-        >
-          <Link
-            href={routes.ecosystem}
-            className="sp-lift sp-sheen"
-            data-solid=""
-            style={css(
-              'box-sizing:border-box;display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 30px;' +
-                'border-radius:999px;background:#ffffff;color:#041815;font-size:15px;font-weight:500;' +
-                'text-decoration:none;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s',
-            )}
-          >
-            {t.exploreCta}
-            <span aria-hidden="true">{arrow}</span>
-          </Link>
-          <Link
-            href={routes.contact}
-            className="sp-nav"
-            style={css('position:relative;font-size:15px;font-weight:500;color:#ffffff;text-decoration:none;padding-block:6px')}
-          >
-            {t.cta}
-          </Link>
-        </div>
-
-        {/* The index: every scene named, the running one drawing its ember rule. */}
-        <div
-          data-sc=""
-          style={css(
-            'display:flex;align-items:flex-end;gap:clamp(12px,2vw,24px);margin-block-start:clamp(28px,6vh,64px)',
-          )}
-        >
+      {/* The index: the day laid out hour by hour, the running scene drawing its ember rule. */}
+      <div ref={footRef} data-hfoot="">
+        <div data-sc="" style={css('display:flex;align-items:flex-end;gap:clamp(12px,2vw,24px)')}>
           <div role="group" aria-label={t.scenes} data-hindex="" style={css('flex:1 1 auto;min-width:0')}>
             <p data-hnow="" style={css('margin:0 0 12px;display:flex;align-items:baseline;gap:12px')}>
               <span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.62)")}>
                 {ordinal(active)} / {ordinal(count - 1)}
               </span>
-              <span style={css(display(ar, ar ? '18px' : '17px', 400) + ';color:#ffffff')}>{t.sectors[current.sector]}</span>
+              <span style={css(display(ar, ar ? '18px' : '17px', 400) + ';color:#ffffff')}>{nameOf(active)}</span>
             </p>
             <div data-htracks="">
-              {heroFrames.map(({ sector }, i) => (
+              {heroFrames.map((_, i) => (
                 <button
                   key={i}
                   type="button"
                   data-htrack=""
                   aria-current={i === active ? 'true' : undefined}
-                  aria-label={t.sceneLabel + ' ' + t.sectors[sector]}
+                  aria-label={t.sceneLabel + ' ' + nameOf(i)}
                   onClick={() => go(i)}
                 >
+                  <span data-hhour="" aria-hidden="true">
+                    {DAY[i].clock}
+                  </span>
                   <span data-hline="">
                     <span
                       ref={(node) => {
@@ -325,7 +425,7 @@ export function HeroCinema() {
                       data-hfill=""
                     />
                   </span>
-                  <span data-hlabel="">{t.sectors[sector]}</span>
+                  <span data-hlabel="">{nameOf(i)}</span>
                 </button>
               ))}
             </div>
