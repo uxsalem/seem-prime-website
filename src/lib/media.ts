@@ -10,11 +10,11 @@ import type { Lang } from '@/lib/site'
  *
  * There are two sets. The golden-hour set was shot at one light across every sector, so a
  * refinery, a warehouse, a coast and a cinema read as one landscape rather than a stock collage.
- * The sector set is the client's own, and more realistic: a picture per sector for the reel, and
- * the pictures of the platforms themselves (JAZ Chocolate's plant, Qanif's sign, the catering
- * tables). The home page never shows one photograph twice. The brand's deep green is the ground
- * they all sit on — scrims, sections, the dark between frames — never a tint laid over the
- * pictures themselves.
+ * The sector set is the client's own, and more realistic: a picture per sector for the reel, the
+ * pictures of the platforms themselves (JAZ Chocolate's plant, Qanif's sign, the catering
+ * tables), and, since October 18, a picture for each hour of the hero's day. The home page never
+ * shows one photograph twice. The brand's deep green is the ground they all sit on — scrims,
+ * sections, the dark between frames — never a tint laid over the pictures themselves.
  */
 export type Photo = {
   /** Full-bleed cut — plates, mastheads, banners, the hero. */
@@ -184,16 +184,6 @@ export const photos = {
 
   // --- The client's own set: a picture per sector for the reel, and the platforms' own ------------
 
-  /** Chocolates travelling along a conveyor, an operator at the panel behind. Industry, at work. */
-  chocolateConveyor: {
-    ...set('chocolate-conveyor', 1774),
-    lqip: 'data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZQDCgCDLN1McZg52mn6gAMtKD4wDcFHf+bu0fl0hzyM13LsnhCSUhojksQrfbI79ary40VJnqSkCedZcY9zNjEFgI2F7/0vmeFNcPyMdhEMrD5hvGxKQaiYAAA==',
-    focus: '56% 60%',
-    alt: {
-      ar: 'قطع الشوكولاتة على سير ناقل في صالة مصنع، ومشغّل عند لوحة التحكم في الخلفية',
-      en: 'Chocolates travelling along a conveyor in a factory hall, an operator at the control panel behind',
-    },
-  },
   /** A worker lining up chocolates as they leave the enrober. The one picture shot on a real line. */
   chocolateEnrober: {
     ...set('chocolate-enrober', 1774),
@@ -302,18 +292,8 @@ export const photos = {
       en: 'Parents at a table on a timber deck by the bougainvillea, their children playing on the grass below green mountains',
     },
   },
-  /** Qanif: a family at a stone country house, the mountains in cloud behind it. From the September edition. */
-  qanifFamily: {
-    ...set('qanif-family-day', 1774),
-    lqip: 'data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZACdABMgzRNW96CGwAD9470AGgjUKYhnuKdCfUp8xnvI4OcLtjQ48VkDNa33KzgdMyosgfg0Y+vJId8QPUoBhBAg3e8CVkOuOeCF6Cf5SMZZkPAAAA==',
-    focus: '44% 60%',
-    alt: {
-      ar: 'عائلة عند بيت ريفي حجري تحت جبال يلفّها الضباب: أب وابنه يرصّان الحجارة، وطفل يركض بطائرته الورقية',
-      en: 'A family at a stone country house below misty mountains — a father and son stacking stones, a boy running with a kite',
-    },
-  },
 
-  // --- Catering, from the client's set and the SEEM Catering profile ----------------------------
+  // --- Catering, from the client's set ----------------------------------------------------------
 
   /** Two waiters serving from a buffet in a restaurant. Catering as a service, people first. */
   cateringService: {
@@ -336,19 +316,6 @@ export const photos = {
       en: 'A waitress carrying two plates — a dessert dressed with berries, and a salad',
     },
   },
-  /**
-   * A banquet table laid for a function: napkins folded into cones, glassware, the hall lit warm
-   * behind. Taken from SEEM Catering's profile, which only holds it at 1181px, so it ships at that.
-   */
-  cateringBanquet: {
-    ...img('catering-banquet', 1181),
-    lqip: 'data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABQBACdASoUAA4APu1iqU2ppaOiMAgBMB2JaACdMoAloho9Fnw+pVQI/yAgAPw6ewNq51QoQIr/Y+giWvGej68Zw6/Rh/dhF6b6kaFl7mHRMaqnOrny2yyEzmA6EZnfqps4hddaFiX91I7uBy1KTpmDR7+b5n0Xc9zH6iuhkWS/IWLe/qLvz4vs7M10+mZfmuWpxNwlaQ1MZwUbe+YwxEAA',
-    focus: '44% 50%',
-    alt: {
-      ar: 'طاولة مأدبة طويلة مُعدّة لمناسبة: مناديل كريمية مطويّة بنقوش ذهبية، وكؤوس زجاجية، والقاعة خلفها مضاءة بضوء دافئ',
-      en: 'A long banquet table laid for a function — cream napkins folded into cones with a gold pattern, glassware, the hall lit warm behind',
-    },
-  },
   /** Chefs finishing plates of chocolate dessert with a mint leaf. */
   cateringPlating: {
     ...set('catering-plating', 1774),
@@ -357,6 +324,109 @@ export const photos = {
     alt: {
       ar: 'طهاة يضعون ورقة نعناع على أطباق حلوى الشوكولاتة',
       en: 'Chefs placing a mint leaf on plates of chocolate dessert',
+    },
+  },
+
+  // --- The client's October 18 set: the hero's day, a picture per hour -------------------------
+
+  /** A family on the terrace of a villa at golden hour, the garden and the house behind them. */
+  familyGarden: {
+    ...set('family-garden', 1774),
+    lqip: 'data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOl4AAoGWu9T9yQAGcXAAD82SPLcPSqNr8Ae1OHFzDSrQ1sMikJEJk174X7qmSjBmUc9L7Y2XPKsRsDLqO3vOcwozBiA+eE3+UwKSwrmj7tVRPI27KvuUy0JYMpyBKnaASCcavis7/yLQ4AAA==',
+    focus: '44% 62%',
+    alt: {
+      ar: 'عائلة في جلسة خارجية أمام فيلا عند الغروب: أب وابنته وأم وابنها حول طاولة القهوة، والحديقة والبيت خلفهم',
+      en: 'A family on the terrace of a villa at golden hour — a father and daughter, a mother and son around the coffee table, the garden and the house behind them',
+    },
+  },
+  /** A man asleep in a wide bed, seen from above, the room still dark. */
+  asleepDawn: {
+    ...set('asleep-dawn', 1774),
+    lqip: 'data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAACQAwCdASoUAAsAPu1kqk4ppaQiMAgBMB2JZQC2yBgj8C4Sea+AAP7xf4CSEXKqTOEhRJnEUzb76ktKPeBtnFKjrJcR8UdZzNR86GzW7Tmx/dldyF1zk/OMRUP1gAAA',
+    focus: '50% 38%',
+    alt: {
+      ar: 'رجل نائم في سرير واسع يُرى من الأعلى، والغرفة ما زالت معتمة',
+      en: 'A man asleep in a wide bed, seen from above, the room still dark',
+    },
+  },
+  /** A courier on a scooter, a box on the back, riding into the sunrise through Riyadh's towers. */
+  riderSunrise: {
+    ...set('rider-sunrise', 1717),
+    lqip: 'data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAADQAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBdkAzdQAE6znniVuo4A/p8ZcLZW6gOQR2xkvmOk0xb9pjn2tRM70RhFiE2tDDha4fFSIC1wsSfM1jOpGZCK12CUp84xIKxr8GD4BVwJ6oowh2N0dcNtPvfcVapS4MJN9HYV2g+kAA==',
+    focus: '42% 58%',
+    alt: {
+      ar: 'مندوب توصيل على دراجة نارية وخلفه صندوق الطلبات، يعبر بين أبراج الرياض مع شروق الشمس',
+      en: 'A courier on a scooter, a delivery box on the back, riding between Riyadh’s towers at sunrise',
+    },
+  },
+  /** A farmer in a red shemagh picking ripe coffee cherries. */
+  coffeeHarvest: {
+    ...set('coffee-harvest', 1774),
+    lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgA+YuPlzj4JJDNnnmg0AA/tJeF71BW0X6NGExbbP5wZkmyZQ3D1LzjrUmTUOHLYEyZc/EmiVyIh2VwyPwgU4kbkKd8ik5DCs9fuUGlMaqC/smBvQDNHNhD9kbxh7d3rIA',
+    focus: '26% 44%',
+    alt: {
+      ar: 'مزارع بشماغ أحمر يقطف حبات البن الناضجة من أغصانها',
+      en: 'A farmer in a red shemagh picking ripe coffee cherries from the branch',
+    },
+  },
+  /** Chocolate poured from a jug into moulds on a steel bench, the plant behind. */
+  chocolatePour: {
+    ...set('chocolate-pour', 1774),
+    lqip: 'data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZwBTAFwYsg31z/rsYaYAAP598GjssN4+ECtLmc2STuqfuPkCgCZHE1ISZw6Ic+D5dNb2pkiIqjd0CqeOp7ohS1yiP30omB1krfz4wtfzfY24TF3Adot48emiRyzNH7UilGPZ3nTG4dlAAJQAAA==',
+    focus: '78% 46%',
+    alt: {
+      ar: 'شوكولاتة سائلة تُصبّ من إبريق في قوالب على طاولة من الفولاذ، والمصنع خلفها',
+      en: 'Chocolate poured from a jug into moulds on a steel bench, the plant behind',
+    },
+  },
+  /** A yacht crossing the coral shallows of the Red Sea, the mountains on the shore beyond. */
+  redSeaYacht: {
+    ...set('red-sea-yacht', 1774),
+    lqip: 'data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JbACsMoGv/gPdh/bU2za65JSOAP5V+w9wqTIPq7nvi6nedSHG2TZ61GzzB8Xx/IW6aARu5+9tug8g7bjocnbKdvbh/BY2Rcp3FZw4UW7tk0XHJNfxLT7EV8xWM7CneIAAAA==',
+    focus: '46% 64%',
+    alt: {
+      ar: 'يخت يعبر الشعاب المرجانية في مياه البحر الأحمر الفيروزية، والجبال على الشاطئ في الأفق',
+      en: 'A yacht crossing the coral shallows of the Red Sea, the mountains on the shore beyond',
+    },
+  },
+  /** A row of trucks backed onto a distribution centre's docks as the sun goes down. */
+  trucksDusk: {
+    ...set('trucks-dusk', 1774),
+    lqip: 'data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADQAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgBEBLYjzTbVNkMYAA4mXD10C4GFKho2niS+mHdc6xQHotBNoYpqTQBtoMdcBADI9s4VaE1f4tMJs78ryEGAfU7ag84cOhohAA',
+    focus: '50% 62%',
+    alt: {
+      ar: 'صف من الشاحنات عند أرصفة مركز توزيع مع غروب الشمس',
+      en: 'A row of trucks backed onto the docks of a distribution centre as the sun goes down',
+    },
+  },
+  /** An online shop's studio: a laptop open on the store, parcels packed, Riyadh in the window. */
+  ecommerceStudio: {
+    ...set('ecommerce-studio', 1774),
+    lqip: 'data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwCdMoAlshBqQljU9Nx8VgAA995uMnPEDckE/BJXSGXOG5TIN+gZys9qv3D5PUgxB9nVLEF3vg/APmd9ewZet4y1DSWz7QCrZNf4sPOBDpsgWxbDqBfeTd8jSDBDHXBlz5xpSTFWQ7AKZJ+MIHjp+aQAAA==',
+    focus: '40% 56%',
+    alt: {
+      ar: 'مكتب متجر إلكتروني: حاسوب محمول على صفحة المتجر وطرود جاهزة للشحن، وأفق الرياض من النافذة',
+      en: 'An online shop’s studio — a laptop open on the store, parcels packed for shipping, the Riyadh skyline in the window',
+    },
+  },
+  /** A banquet hall laid for an evening: long tables, folded napkins, chandeliers lit along the walls. */
+  banquetHall: {
+    ...set('banquet-hall', 1774),
+    lqip: 'data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOmUABn9ytOB3egSAw8AAD9ocNWMzJWML4iOsu3kh/AF4yjkuBCB5oagXIgRMjVFHiIEb8bx3Zn70CvaGbjXFePbA6UJEp2GKHMlV/tfPPyf+ohzxNw+pUcQNTY4D7Tc2kYYBJxJmxrNdgAAA==',
+    focus: '50% 56%',
+    alt: {
+      ar: 'قاعة مأدبة مُعدّة لأمسية: موائد طويلة ومناديل مطويّة بنقوش ذهبية، والثريات مضاءة على الجدران',
+      en: 'A banquet hall laid for an evening — long tables, napkins folded with a gold pattern, chandeliers lit along the walls',
+    },
+  },
+  /** Cocoa pods ripening on the branch. Agriculture's window in the reel. */
+  cacaoPods: {
+    ...set('cacao-pods', 1774),
+    lqip: 'data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JbAC7ABdjOV5v42WO0ywAAP54pec6EHvsr06po01Uo+eZAma6nRVWbPWBmnK3Q8dgNHUM8Vp36XNmdA60qX+ApSHGSwLvr9eKejU3Tv5h/5C/I9F68axpYhYpFZtjHMleRgQWmz+FPEYB8GCQq3ZYsfUc2c/LRhdUYgAA',
+    focus: '56% 56%',
+    alt: {
+      ar: 'ثمار الكاكاو تنضج على غصنها بين الأوراق الخضراء',
+      en: 'Cocoa pods ripening on the branch among green leaves',
     },
   },
 
@@ -475,8 +545,8 @@ export type Framed = {
  * each from the sector set, so the reel repeats nothing the hero has just shown. Where a sector
  * has a platform, its picture is the platform's: JAZ Chocolate's plant, Qanif's sign, the waiters
  * at the buffet. E-commerce and supply take two pictures from the September edition, the card at
- * the counter and the cargo hub. Agriculture has none yet — nothing the client has sent shows its
- * coffee or cocoa — so its window shows its empty state until a picture arrives.
+ * the counter and the cargo hub. Agriculture's is the cocoa ripening on the branch, from the
+ * October 18 set, whose coffee harvest the hero shows.
  */
 export const sectorFrames: (Framed | undefined)[] = [
   { photo: photos.chocolateHall, focus: '50% 62%' },
@@ -487,26 +557,27 @@ export const sectorFrames: (Framed | undefined)[] = [
   { photo: photos.qanifSign, focus: '62% 54%' },
   { photo: photos.cateringService, focus: '40% 50%' },
   { photo: photos.cargoHub, focus: '42% 60%' },
-  undefined,
+  { photo: photos.cacaoPods, focus: '56% 56%' },
 ]
 
 /**
- * The home page's opening sequence: one frame per sector, keyed to the sector it shows. It opens
- * on the work — logistics, then industry, with tourism third — so the first frame says investor
- * and builder rather than travel, and it closes on catering's banquet table, the one frame taken
- * from the SEEM Catering profile. Entertainment is the family at Qanif from the September edition,
- * preferred to October's roller coaster, and e-commerce is the payment going through on a phone.
- * Two of the nine sectors sit this one out: supply, whose one picture, a cargo hub, would repeat
- * the logistics hub the sequence opens on, and agriculture, which has no picture yet.
+ * The home page's opening: a day in the ecosystem, one picture per hour, in the order of `DAY`
+ * in the home copy. The whole day opens on a family at home; then the bedroom before dawn, a
+ * courier riding into the sunrise, the coffee harvest, chocolate poured at noon, the Red Sea in
+ * the afternoon, trucks at the docks as the light goes, an online shop's studio at sunset and a
+ * banquet hall laid for the evening. Every picture is from the client's October 18 set, and none
+ * of them appears anywhere else on the page.
  */
-export const heroFrames: { sector: number; frame: Framed }[] = [
-  { sector: 2, frame: { photo: photos.logistics, focus: '56% 52%' } },
-  { sector: 0, frame: { photo: photos.chocolateConveyor, focus: '56% 60%' } },
-  { sector: 3, frame: { photo: photos.coast, focus: '50% 50%' } },
-  { sector: 4, frame: { photo: photos.residence, focus: '58% 52%' } },
-  { sector: 5, frame: { photo: photos.qanifFamily, focus: '46% 58%' } },
-  { sector: 1, frame: { photo: photos.payments, focus: '60% 48%' } },
-  { sector: 6, frame: { photo: photos.cateringBanquet, focus: '44% 50%' } },
+export const heroFrames: Framed[] = [
+  { photo: photos.familyGarden, focus: '34% 62%' },
+  { photo: photos.asleepDawn, focus: '50% 38%' },
+  { photo: photos.riderSunrise, focus: '42% 58%' },
+  { photo: photos.coffeeHarvest, focus: '12% 44%' },
+  { photo: photos.chocolatePour, focus: '54% 46%' },
+  { photo: photos.redSeaYacht, focus: '46% 64%' },
+  { photo: photos.trucksDusk, focus: '50% 62%' },
+  { photo: photos.ecommerceStudio, focus: '40% 56%' },
+  { photo: photos.banquetHall, focus: '50% 56%' },
 ]
 
 /**
