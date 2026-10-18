@@ -39,7 +39,10 @@ const img = (name: string, w: number) => ({ src: `/ds/img/${name}.webp`, w, sm: 
 const set = (name: string, w: number) => ({ ...img(name, w), md: `/ds/img/${name}-md.webp` })
 /** Tiles cut from a contact sheet only exist at card size, so both cuts are the same file. */
 const tile = (name: string, w = 585) => ({ src: `/ds/img/${name}-sm.webp`, w, sm: `/ds/img/${name}-sm.webp` })
-/** A platform's mark ships as one 720 × 900 card, the shape of the window it is shown in. */
+/**
+ * A platform's mark ships as one 720 × 900 card, the shape of its thumbnail in the home page's
+ * index on a wide screen.
+ */
 const mark = (name: string) => ({ src: `/ds/img/${name}.webp`, w: 720, sm: `/ds/img/${name}.webp` })
 
 /**
@@ -285,7 +288,7 @@ export const photos = {
     lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JaACdAB0/0OxC+tmpyvlAAMlxq7MhpYpxE76VWANaMKpCMo7+axbO4FltAg9fcDyqpHIsEbSTVYHDV0WEe1MNxA3dvumcFATa1gdoaeBlKdhaxer5lVS3l2+y5EgPS6JYgAAA',
     focus: '66% 54%',
     alt: {
-      ar: 'لافتة قنيف الخشبية مضاءة بين شجيرات الجهنمية عند الغسق، وزائرة تلتقط لها صورة',
+      ar: 'لافتة Qanif الخشبية مضاءة بين شجيرات الجهنمية عند الغسق، وزائرة تلتقط لها صورة',
       en: 'The lit wooden sign of Qanif among the bougainvillea at dusk, a visitor taking its picture',
     },
   },
@@ -436,7 +439,7 @@ export const marks = {
     ...mark('logo-qanif'),
     lqip: 'data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwBACdASoUABkAPu1gp04ppSMiMBgMATAdiUAAfHgg38QrGW6BXTK1sEAA/vNqV8HdYcnkxo0f3aK7hNZe5iOw0Sid3E4HEALSDUbrdZl7Mw8ABNfhcwuKuRZFM6XOhWG7YSw4LnSgAA==',
     focus: '50% 50%',
-    alt: { ar: 'شعار قنيف باللون الأخضر: الاسم بالعربية وتحته QANIF', en: 'The Qanif logo in green: the Arabic name over QANIF' },
+    alt: { ar: 'شعار Qanif باللون الأخضر: الاسم بالعربية وتحته QANIF', en: 'The Qanif logo in green: the Arabic name over QANIF' },
   },
   seemSupply: {
     ...mark('logo-seem-supply'),

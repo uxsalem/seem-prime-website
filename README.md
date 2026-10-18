@@ -146,8 +146,8 @@ ships at that size and a card cut, and is a little soft at full bleed on a large
 (1200 × 1607) and ships at full and card size, so it only goes where a frame can hold a
 portrait: JAZ's detail. The three pictures in the statement's
 capsules also ship a 400px cut (`xs`), because a capsule is a word wide. The logos ship as single
-720 × 900 cards, the shape of the index's floating window. The payments frame is cropped to
-leave out the emblem that opens the source image.
+720 × 900 cards, the shape of the index's thumbnails on a wide screen. The payments frame is
+cropped to leave out the emblem that opens the source image.
 
 Two components consume them. **`Plate`** is the full-bleed photograph behind a masthead or a
 band of copy: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
@@ -159,7 +159,7 @@ Image weight, measured against a production build (whole page = after scrolling 
 
 | Page | 1440×900 first screen | 1440×900 whole page | 390×844 @2x whole page |
 |---|---|---|---|
-| home | 283KB | 1027KB | 718KB |
+| home | 283KB | 1131KB | 718KB |
 | about | 396KB | 663KB | 309KB |
 | strategy | 328KB | 1188KB | 522KB |
 | ecosystem | 173KB | 1805KB | 709KB |
@@ -172,7 +172,9 @@ pictures of its own rather than cuts the browser already has; it is lighter than
 and 807KB) since the road to 2030, and the city behind it, left the page in October 2026. Food's
 window left the reel later that month, and then the technology and financial services windows
 did too, for e-commerce, supply and an agriculture window still without a picture; the desktop
-page is 9KB heavier for that (it was 1018KB), and a phone's 5KB (713KB). The ecosystem page
+page is 9KB heavier for that (it was 1018KB), and a phone's 5KB (713KB). The platform index's
+six logos now come with the page on a desktop as well, where they used to wait for the pointer,
+which adds 104KB there (it was 1027KB); a phone always fetched them. The ecosystem page
 carries six platforms, and JAZ Chocolate opens on the plant's hall, the heaviest
 picture in the set (351KB at full size); it was 1477KB and 645KB with five. SEEM Supply opening
 on the cargo hub, where SEEM Catering opened on the buffet, took 5KB and 15KB off it (1810KB and
@@ -224,11 +226,15 @@ Each section in `src/components/home/` owns its motion:
   names the frame under it, and each picture slides against the travel. A sector with a
   platform names it under its line: Qanif under entertainment and agriculture, SEEM Supply
   under catering and supply. Everywhere else it is a swipe rail of the same frames.
-- **`PlatformIndex`**: the six platforms as a typographic index. With a fine pointer, a window
-  of the platform's logo floats beside the cursor and the other rows dim. Touch screens get the
-  logo inline as a thumbnail instead. Qanif's name is written in Arabic on the Arabic page, so
-  platform names are set by `markType` (`typography.ts`), which gives an Arabic mark the Arabic
-  face and no tracking.
+- **`PlatformIndex`**: the six platforms as an index, each line led by the platform's logo, so
+  the logos stand one under another down the reading edge with the names set large beside them.
+  The logos are always in sight and never move, on every screen. A window of the logo used to
+  float beside a fine pointer instead, until the client asked in October 2026 for the logos to
+  show on a laptop the way they do on a phone. From 1000px each platform takes one line, and a
+  fine pointer leans its name in and dims the other lines' copy, never their logos. SEEM Supply's
+  name is written in Arabic on the Arabic page, so platform names are set by `markType`
+  (`typography.ts`), which gives an Arabic mark the Arabic face and no tracking. Qanif's was
+  too, until the client asked for it in Latin, «Qanif», on both pages.
 - **`SeemStages`**: four standing panels, one photograph each. Scroll (or a click) widens the
   open stage into a window and its question arrives. The panels spell the name, so they stand
   S, E, E, M from left to right in Arabic as well as English, and the scroll walks them left to
