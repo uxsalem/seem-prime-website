@@ -7,9 +7,9 @@ import { useSite } from '@/lib/site'
 import { BRONZE, ordinal } from '@/lib/typography'
 
 /**
- * The opening's contents line. The page runs in the three beats of the framework's promise
- * line — strategy, execution, sustainable impact — so the six chapters are grouped under the
- * beat they belong to, and each is a jump to its section.
+ * The opening's contents line. The page runs in two beats — the strategy, then its execution —
+ * so the four chapters are grouped under the beat they belong to, and each is a jump to its
+ * section.
  */
 export function ActIndex() {
   const { lang } = useSite()

@@ -8,7 +8,7 @@ import { HOME } from '@/lib/content/home'
 import { css } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
 import { homeClosing } from '@/lib/media'
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
+import { EMAIL, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { display } from '@/lib/typography'
 
@@ -105,9 +105,6 @@ export function ClosingAperture() {
           >
             <a href={`mailto:${EMAIL}`} className="sp-op" style={css('color:#ffffff;text-decoration:none;opacity:.82')}>
               {EMAIL}
-            </a>
-            <a href={PHONE_HREF} className="sp-op" style={css('color:#ffffff;text-decoration:none;opacity:.82')}>
-              <span dir="ltr">{PHONE_DISPLAY}</span>
             </a>
           </div>
         </div>

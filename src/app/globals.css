@@ -101,6 +101,19 @@ a:hover {
   outline-offset: 2px !important;
 }
 
+/* Read by assistive technology, never painted: the home page's title, the focus pull's heading. */
+[data-sr] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* --- Scroll reveal -------------------------------------------------------- */
 
 [data-sc] {
@@ -323,7 +336,8 @@ a:hover {
   opacity: var(--hfade, 1);
 }
 
-/* The hour, in outline: the plain-zero Plex Mono, stroked rather than filled. */
+/* The hour, in outline: the plain-zero Plex Mono, stroked rather than filled, on a 12-hour clock
+   with its half of the day (ص / م, AM / PM) set small beside it, on the same baseline. */
 [data-hclock] {
   position: absolute;
   inset-block-start: calc(clamp(64px, 7vw, 80px) + clamp(6px, 2.6vh, 28px));
@@ -339,37 +353,15 @@ a:hover {
   pointer-events: none;
   user-select: none;
 }
+[data-hclock] [data-hhalf] {
+  margin-inline-start: 0.14em;
+  font-size: 0.3em;
+  letter-spacing: 0.02em;
+}
+[dir='rtl'] [data-hhalf] { font-family: 'IBM Plex Sans Arabic', sans-serif; font-weight: 400; letter-spacing: 0; }
 
 [data-hcol] { max-width: min(100%, 700px); text-shadow: 0 1px 22px rgba(4, 24, 21, 0.3); }
 [data-hcol] [data-solid] { text-shadow: none; }
-
-/* The hour and the sector, after an ember dot that keeps time while the day runs. */
-[data-hmeta] {
-  margin: 0 0 clamp(8px, 1.6vh, 16px);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 12px;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.82);
-}
-[data-htime] { font-family: 'IBM Plex Mono', monospace; font-size: 0.94em; letter-spacing: 0.02em; }
-[data-hsep] { width: 1px; height: 13px; background: rgba(255, 255, 255, 0.36); }
-[data-hdot] { position: relative; flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: #dc4b1c; }
-[data-hdot]::after {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 1px solid rgba(220, 75, 28, 0.75);
-  animation: sp-ping 2.4s var(--ease-out) infinite;
-}
-[data-hero][data-paused] [data-hdot]::after { animation: none; opacity: 0; }
-@keyframes sp-ping {
-  0% { transform: scale(0.4); opacity: 0.9; }
-  80%, 100% { transform: scale(1.5); opacity: 0; }
-}
 
 [data-hsub] {
   margin: clamp(8px, 1.4vh, 14px) 0 0;
@@ -392,28 +384,13 @@ a:hover {
 }
 [dir='rtl'] [data-hbody] { line-height: 1.9; }
 
-/* Whose scene it is; a sector still being built says so beside its name. */
+/* Whose scene it is, where the button does not already name it. */
 [data-hbrand] {
   margin: clamp(10px, 1.8vh, 18px) 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
   font-size: 13px;
   font-weight: 500;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.66);
-}
-[data-hstatus] {
-  display: inline-flex;
-  align-items: center;
-  height: 22px;
-  padding: 0 10px;
-  border: 1px solid rgba(240, 138, 98, 0.62);
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 400;
-  color: #f3936d;
 }
 
 [data-hctas] {
@@ -507,6 +484,7 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   color: rgba(255, 255, 255, 0.44);
   transition: color 0.3s;
 }
+[data-hhour] [data-hhalf] { margin-inline-start: 0.4em; }
 [data-hline] { position: relative; display: block; height: 2px; overflow: clip; background: rgba(255, 255, 255, 0.24); }
 [data-hfill] {
   position: absolute;
@@ -575,6 +553,8 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 
 [data-stmt-foot] { display: grid; gap: clamp(36px, 5vw, 64px); grid-template-columns: minmax(0, 1fr); }
 [data-proof] { display: grid; gap: 20px 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Three facts: the head office across the top, the founding year and the sectors side by side. */
+[data-proof] > :first-child { grid-column: 1 / -1; }
 @media (min-width: 1000px) {
   [data-stmt-foot] { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: start; }
 }
@@ -851,8 +831,8 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 
 /* --- About: the contents line ------------------------------------------------------
    The five chapters along the foot of the opening shot, across the full measure and at
-   the height the home page runs its index. The contact page sets its email, phone and
-   office on the same line. Wide screens only; a phone simply reads on.
+   the height the home page runs its index. The contact page sets its email and office
+   on the same line. Wide screens only; a phone simply reads on.
    -------------------------------------------------------------------------- */
 
 [data-chapters] {
@@ -1257,7 +1237,7 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   opacity: var(--o, 1);
   transform: translate(-50%, -50%) scale(var(--s, 1));
 }
-/* 2030 is the rim, lit the colour of a low sun. */
+/* The outer ring, the lead, is lit the colour of a low sun. */
 [data-ring][data-last] { border-color: rgba(255, 226, 184, 0.55); box-shadow: inset 0 0 70px rgba(255, 186, 110, 0.07); }
 [data-ring-pulse] {
   width: 100%;
@@ -1305,13 +1285,13 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
 }
 
 /* --- Strategy: the contents line -------------------------------------------------
-   The six chapters under the three beats of the promise line, along the foot of the
-   opening shot. Wide screens only; a phone simply reads on.
+   The four chapters under the page's two beats, along the foot of the opening shot.
+   Wide screens only; a phone simply reads on.
    -------------------------------------------------------------------------- */
 
 [data-acts] {
   display: none;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px clamp(18px, 2.4vw, 34px);
   margin-block-start: clamp(28px, 6vh, 64px);
 }
@@ -1637,14 +1617,14 @@ html[data-intro='play'] [data-page='home'] [data-hdr] { animation: sp-fade 0.9s 
   [dir='rtl'] [data-col-ground] { transform-origin: right center; }
   [data-col-plinth] {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 9fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 8fr);
     margin-block-start: 0;
     border-block-end: 1px solid var(--line2);
   }
   [data-col-plinth-label] { margin: 0; padding: 18px 0; align-self: start; }
-  /* Nine to a row: on a narrower screen a long single word like «Entertainment» is wider than an
+  /* Eight to a row: on a narrower screen a long single word like «Agriculture» is wider than an
      equal share, so each sector is at least as wide as its longest word and the rest is shared. */
-  [data-col-sectors] { grid-template-columns: repeat(9, minmax(min-content, 1fr)); border: 0; }
+  [data-col-sectors] { grid-template-columns: repeat(8, minmax(min-content, 1fr)); border: 0; }
   [data-col-sector] {
     flex-direction: column;
     gap: 6px;
@@ -1923,289 +1903,9 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 [dir='rtl'] [data-page] [data-sc='rule'] { transform-origin: right center; }
 [data-page] [data-sc='rule'][data-in] { transform: none; }
 
-/* --- Strategy: the road to 2030 ----------------------------------------------------
-   Laid flat by default: the four phases as pictures in turn, each with its years over
-   it. Where there is room the stage pins: the pictures stack and cross behind a counter
-   whose wheels the scroll pass turns, and `--fill` and `--sun` ride the stage.
-   -------------------------------------------------------------------------- */
-
-[data-odo-stick] {
-  box-sizing: border-box;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: clamp(96px, 12vw, 170px) clamp(16px, 3vw, 32px) clamp(88px, 11vw, 150px);
-}
-[data-odo-head] { margin-block-end: clamp(40px, 6vw, 64px); }
-[data-odo-phases] { margin: 0; padding: 0; list-style: none; display: grid; gap: clamp(12px, 2vw, 20px); }
-[data-odo-phase] {
-  position: relative;
-  overflow: clip;
-  display: flex;
-  align-items: flex-end;
-  aspect-ratio: 4 / 5;
-  background: #062621;
-}
-@media (min-width: 600px) {
-  [data-odo-phase] { aspect-ratio: 16 / 10; }
-}
-/* A wide screen that is not pinned — too short, or asking for less motion — sets them in pairs. */
-@media (min-width: 1000px) {
-  [data-odo-phases] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-[data-odo-photo] { position: absolute; inset: 0; }
-[data-odo-photo]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(4, 24, 21, 0.9) 0%, rgba(4, 24, 21, 0.36) 52%, rgba(4, 24, 21, 0.08) 100%);
-}
-[data-odo-cap] { position: relative; display: block; padding: clamp(20px, 4vw, 36px); }
-[data-odo-years] {
-  display: block;
-  font-family: 'Sora', sans-serif;
-  font-weight: 300;
-  font-size: clamp(48px, 12vw, 96px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-  color: #ffffff;
-}
-[data-odo-phase]:last-child [data-odo-years] { color: #ffe2b8; }
-[data-odo-shade],
-[data-odo-grain],
-[data-odo-count],
-[data-odo-ruler] { display: none; }
-
-@media (min-width: 1000px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
-  [data-odo-pin] { height: 400vh; }
-  [data-odo-stick] {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    overflow: clip;
-  }
-  [data-odo-head] {
-    position: absolute;
-    z-index: 3;
-    top: calc(clamp(56px, 6vw, 66px) + 5vh);
-    inset-inline-start: max(clamp(16px, 3vw, 32px), calc((100vw - 1400px) / 2 + 32px));
-    margin: 0;
-  }
-  [data-odo-phases] { display: block; position: absolute; inset: 0; }
-  [data-odo-phase] { display: contents; }
-  [data-odo-photo] { opacity: 0; transition: opacity 1.2s var(--ease-out); }
-  [data-odo-phase][data-on] [data-odo-photo] { opacity: 1; }
-  [data-odo-photo] [data-imgwrap] { transform: scale(1.1); transition: transform 3.4s var(--ease-out); }
-  [data-odo-phase][data-on] [data-odo-photo] [data-imgwrap] { transform: none; }
-  [data-odo-photo]::after,
-  [data-odo-cap] { display: none; }
-  [data-odo-shade],
-  [data-odo-grain] { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-  [data-odo-shade] {
-    background:
-      linear-gradient(to bottom, rgba(4, 24, 21, 0.72) 0%, rgba(4, 24, 21, 0.2) 34%, rgba(4, 24, 21, 0.2) 60%, rgba(4, 24, 21, 0.9) 100%),
-      linear-gradient(to left, rgba(4, 24, 21, 0.62) 0%, rgba(4, 24, 21, 0) 64%);
-  }
-  [dir='ltr'] [data-odo-shade] {
-    background:
-      linear-gradient(to bottom, rgba(4, 24, 21, 0.72) 0%, rgba(4, 24, 21, 0.2) 34%, rgba(4, 24, 21, 0.2) 60%, rgba(4, 24, 21, 0.9) 100%),
-      linear-gradient(to right, rgba(4, 24, 21, 0.62) 0%, rgba(4, 24, 21, 0) 64%);
-  }
-  [data-odo-head] h2 { max-width: none !important; }
-  [data-odo-count] {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 3;
-    top: 56%;
-    inset-inline-start: max(clamp(16px, 3vw, 32px), calc((100vw - 1400px) / 2 + 32px));
-    transform: translateY(-44%);
-  }
-  /* The glow is a filter on the whole counter, so the wheels' clipping never boxes it in. */
-  [data-odo-year] {
-    display: flex;
-    align-self: flex-start;
-    font-family: 'Sora', sans-serif;
-    font-weight: 300;
-    font-size: clamp(140px, min(19vw, 30vh), 300px);
-    line-height: 1;
-    letter-spacing: -0.045em;
-    font-variant-numeric: tabular-nums;
-    color: color-mix(in srgb, #ffe2b8 calc(var(--sun, 0) * 100%), #ffffff);
-    filter: drop-shadow(0 0 calc(var(--sun, 0) * 34px) rgba(255, 186, 110, calc(var(--sun, 0) * 0.55)));
-    transition: color 1.4s var(--ease-out) 0.5s, filter 1.8s var(--ease-out) 0.5s;
-  }
-  /* A drum, not a slot: the figures dim as they turn over its edges. */
-  [data-odo-wheel] {
-    display: block;
-    height: 1em;
-    overflow: clip;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
-  }
-  [data-odo-strip] {
-    display: flex;
-    flex-direction: column;
-    transform: translate3d(0, calc(var(--turn, 0) * -1em), 0);
-    transition: transform 0.95s cubic-bezier(0.7, 0, 0.2, 1);
-    will-change: transform;
-  }
-  [data-odo-strip] > span { display: block; height: 1em; }
-  [data-odo-now] { display: grid; margin-block-start: clamp(10px, 2vh, 22px); }
-  [data-odo-name] {
-    grid-area: 1 / 1;
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-    transition: opacity 0.45s var(--ease-out), transform 0.7s var(--ease-out);
-  }
-  [data-odo-name][data-on] { opacity: 1; transform: none; transition-delay: 0.1s; }
-  [data-odo-ruler] {
-    display: flex;
-    position: absolute;
-    z-index: 3;
-    inset-inline: max(clamp(16px, 3vw, 32px), calc((100vw - 1400px) / 2 + 32px));
-    bottom: clamp(28px, 5vh, 56px);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  [data-odo-fill] {
-    position: absolute;
-    top: -1px;
-    inset-inline: 0;
-    height: 2px;
-    background: #dc4b1c;
-    transform: scaleX(var(--fill, 0));
-    transform-origin: left center;
-    transition: transform 0.95s cubic-bezier(0.7, 0, 0.2, 1);
-  }
-  [dir='rtl'] [data-odo-fill] { transform-origin: right center; }
-  [data-odo-seg] {
-    flex: var(--span) 1 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding: 16px 0 0;
-    padding-inline-end: 16px;
-    border-block-start: 1px solid rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.46);
-    transition: color 0.5s var(--ease-out);
-  }
-  [data-odo-seg]::before {
-    content: '';
-    position: absolute;
-    margin-block-start: -21px;
-    width: 1px;
-    height: 9px;
-    background: rgba(255, 255, 255, 0.5);
-  }
-  [data-odo-seg][data-past] { color: rgba(255, 255, 255, 0.7); }
-  [data-odo-seg][data-on] { color: #ffffff; }
-  [data-odo-seg] > span:first-child { align-self: flex-start; }
-  [data-odo-seg-name] { font-size: 13px; line-height: 1.4; }
-}
-
-/* --- Strategy: the 2030 targets, and the close --------------------------------------
-   Each target is a small counter: its wheels spin a full turn and settle on the figure
-   once the reveal pass stamps `data-in`, the higher places last.
-   -------------------------------------------------------------------------- */
-
-[data-sr] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-[data-tg-head] {
-  display: grid;
-  gap: 20px 64px;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: end;
-  margin-block-end: clamp(52px, 7vw, 96px);
-}
-@media (min-width: 1000px) {
-  [data-tg-head] { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
-}
-[data-tg-list] {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 44px 24px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-@media (min-width: 760px) {
-  [data-tg-list] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-@media (min-width: 1100px) {
-  [data-tg-list] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-}
-[data-tg] {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  min-width: 0;
-  padding-block-start: 24px;
-  border-block-start: 1px solid rgba(255, 255, 255, 0.2);
-}
-[data-tg-figure] {
-  display: flex;
-  align-items: flex-start;
-  align-self: flex-start;
-  font-family: 'Sora', sans-serif;
-  font-weight: 300;
-  font-size: clamp(60px, 7.2vw, 116px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-  color: #ffffff;
-}
-[data-tg-wheel] {
-  display: block;
-  height: 1em;
-  overflow: clip;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
-}
-[data-tg-strip] {
-  display: flex;
-  flex-direction: column;
-  transform: translate3d(0, 0, 0);
-  transition: transform calc(1.4s + var(--j) * 0.35s) cubic-bezier(0.6, 0, 0.15, 1) calc(var(--i, 0) * 90ms + 0.15s);
-}
-[data-tg-strip] > span { display: block; height: 1em; }
-[data-tg][data-in] [data-tg-strip] { transform: translate3d(0, calc(var(--to) * -1em), 0); }
-[data-tg-suffix] { font-size: 0.56em; line-height: 1; margin-block-start: 0.08em; margin-inline-start: 0.04em; }
-[data-tg-rule] { display: block; width: 28px; height: 2px; background: rgba(255, 255, 255, 0.34); }
-/* The investment portfolio is the figure the plan is built around, so it alone carries the ember. */
-[data-tg]:nth-child(2) [data-tg-rule] { background: #dc4b1c; }
-
-[data-tg-close] {
-  display: grid;
-  gap: 28px 64px;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: end;
-  margin-block-start: clamp(104px, 13vw, 180px);
-  padding-block-start: clamp(44px, 5vw, 64px);
-  border-block-start: 1px solid rgba(255, 255, 255, 0.14);
-}
-@media (min-width: 1000px) {
-  [data-tg-close] { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
-}
-
 /* --- Ecosystem: the contents line ------------------------------------------------
-   The strategy page's grouped contents, with two groups instead of three: the six
-   platforms, then what they make together. Each stop takes the same width.
+   The strategy page's grouped contents: the six platforms, then what they make
+   together. Each stop takes the same width.
    -------------------------------------------------------------------------- */
 
 [data-eco-acts] { grid-template-columns: minmax(0, 6fr) minmax(0, 1fr); }
@@ -2352,8 +2052,7 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   padding-block: 12px;
   border-block-end: 1px solid rgba(255, 255, 255, 0.12);
 }
-[data-key-cores],
-[data-key-target] { margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.78); }
+[data-key-cores] { margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.78); }
 @media (min-width: 900px) {
   [data-model-still] { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
 }
@@ -2378,11 +2077,7 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   stroke-dashoffset: 0.14;
   opacity: 0;
 }
-[data-core-plan] { stroke: rgba(220, 75, 28, 0.62); stroke-width: 1.2; stroke-dasharray: 4 5; }
 [data-collar] { fill: #dc4b1c; stroke: #dc4b1c; stroke-width: 1; }
-[data-ghost-face] { fill: rgba(255, 255, 255, 0.025); stroke: rgba(255, 255, 255, 0.4); stroke-width: 1; stroke-dasharray: 5 5; }
-[data-ghost-front] { fill: rgba(255, 255, 255, 0.04); }
-[data-ghost-collar] { fill: none; stroke: rgba(220, 75, 28, 0.62); stroke-width: 1; }
 
 /* Once the cores stand, light moves along them: up two, down two, a floor at a time. Each
    floor's stretch lights for 0.92s, 15% of the cycle, and hands on to the next, so a pulse
@@ -2404,17 +2099,13 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 }
 [data-live] [data-core-pulse][data-dir='down'] { animation-name: sp-core-down; }
 
-/* The labels the pinned model carries: each floor's name at the reading end, the floors to
-   come, the podium's lettering and each core's name under it. */
+/* The labels the pinned model carries: each floor's name at the reading end, the podium's
+   lettering and each core's name under it. */
 [data-model-labels],
 [data-model-layer],
 [data-stack-rail] { display: none; }
-[data-floor-label],
-[data-target] { position: absolute; left: 0; right: 0; height: 0; }
+[data-floor-label] { position: absolute; left: 0; right: 0; height: 0; }
 [data-leader] { position: absolute; top: 0; height: 1px; background: rgba(255, 255, 255, 0.34); }
-[data-leader][data-planned] {
-  background: repeating-linear-gradient(to right, rgba(255, 255, 255, 0.42) 0 4px, transparent 4px 8px);
-}
 [data-tag] {
   position: absolute;
   top: 0;
@@ -2482,20 +2173,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   /* As tall as the pin's travel, in screens, which the stage sets from its platform count. */
   [data-stack-pin] { height: calc((var(--travel) + 1) * 100vh); }
   [data-stack-stage] { position: sticky; top: 0; height: 100vh; overflow: clip; }
-  /* When the camera looks up at the floors to come, the podium drops below the frame. The page
-     goes straight on to the footer on the same green, so the frame's foot fades into it rather
-     than cutting the podium off. Above every floor and its labels, under the rail. */
-  [data-stack-stage]::after {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    z-index: 66;
-    height: 8vh;
-    background: linear-gradient(to bottom, rgba(4, 24, 21, 0), #041815 88%);
-    opacity: var(--look-up, 0);
-    pointer-events: none;
-  }
   [data-stack-intro] {
     position: absolute;
     inset: 0;
@@ -2572,10 +2249,8 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-floor-faces] > [data-face-edge],
   [data-floor-faces] > [data-face-back],
   [data-floor-faces] > [data-collar] { opacity: var(--faces, 1); }
-  [data-room] { opacity: var(--room, 1); }
   [data-model-labels] { display: block; position: absolute; inset: 0; z-index: 60; pointer-events: none; will-change: transform; }
   [data-floor-label],
-  [data-target],
   [data-plinth],
   [data-core-label] { opacity: 0; }
   [data-stack-rail] {
@@ -2824,7 +2499,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-hframe][data-state='enter'],
   [data-hframe] [data-hg] { animation: none !important; }
   [data-hblade] { display: none; }
-  [data-hdot]::after { animation: none; opacity: 0; }
   [data-cap] { clip-path: none; transition: none; }
   [data-cap] [data-imgwrap] { transform: none; transition: none; }
   [data-w] { transition: none; }
@@ -2838,7 +2512,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-ring-pulse] { animation: none !important; }
   [data-seal-spark] { display: none !important; }
   [data-page] [data-sc='rule'] { transform: none; transition: none; }
-  [data-tg-strip] { transition: none; }
 
   [data-core-pulse] { animation: none !important; }
   [data-dir-name], [data-rail-name] { transition: none; }

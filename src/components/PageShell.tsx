@@ -42,7 +42,7 @@ export function PageShell({
 
   // The server renders Arabic, so a stored English preference re-renders the page after hydration,
   // and the fonts swap in after that; both move every section below the fold. A page opened on a
-  // chapter's address (`/strategy#roadmap`) is taken back to it once they settle — unless the
+  // chapter's address (`/strategy#model`) is taken back to it once they settle — unless the
   // reader has already started moving.
   const moved = useRef(false)
   useEffect(() => {

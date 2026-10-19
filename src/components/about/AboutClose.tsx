@@ -3,30 +3,28 @@
 import Link from 'next/link'
 import { useRef } from 'react'
 import { ABOUT, JEDDAH } from '@/lib/content/about'
-import { STRATEGY } from '@/lib/content/strategy'
 import { css, cssWith, vars } from '@/lib/css'
 import { reduceMotion, useScrollDriver } from '@/lib/hooks'
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
+import { EMAIL, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
-import { BRONZE, display } from '@/lib/typography'
+import { display } from '@/lib/typography'
 
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 const span = (p: number, a: number, b: number) => clamp01((p - a) / (b - a))
 const arch = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
-/** Each ring's diameter, as a share of the drawing: the Kingdom, the region, and 2030 at the edge. */
+/** Each ring's diameter, as a share of the drawing: the Kingdom, the region, and the lead at the edge. */
 const RINGS = [0.42, 0.71, 1]
 
 /**
  * Chapter five, and the close: where the company stands and how far it means to reach. The
- * roadmap's phases are drawn as rings around one point — Jeddah, 2025 — widening to the
- * Kingdom, the region, and 2030 at the rim, with a slow ripple leaving the centre once they are
- * drawn. Beside it, the page's one call to action.
+ * reach is drawn as rings around one point — Jeddah — widening to the Kingdom, the region, and
+ * the lead at the rim, with a slow ripple leaving the centre once they are drawn. The rings carry
+ * no dates: the site sets no timeline. Beside it, the page's one call to action.
  */
 export function AboutClose() {
   const { lang, ar, arrow } = useSite()
   const t = ABOUT[lang]
-  const phases = STRATEGY[lang].roadmap
   const ringsRef = useRef<HTMLDivElement>(null)
 
   useScrollDriver({
@@ -111,9 +109,6 @@ export function AboutClose() {
             <a href={`mailto:${EMAIL}`} className="sp-op" style={css('color:#ffffff;text-decoration:none;opacity:.82')}>
               {EMAIL}
             </a>
-            <a href={PHONE_HREF} className="sp-op" style={css('color:#ffffff;text-decoration:none;opacity:.82')}>
-              <span dir="ltr">{PHONE_DISPLAY}</span>
-            </a>
             <span data-lbl="">{t.address}</span>
           </div>
         </div>
@@ -132,39 +127,25 @@ export function AboutClose() {
           {[0, 1, 2].map((k) => (
             <span key={'pulse' + k} data-ring-pulse="" aria-hidden="true" style={cssWith('', vars({ '--k': k }))} />
           ))}
-          {RINGS.map((d, k) => {
-            const [year, phase] = phases[k + 1]
-            return (
-              <span
-                key={'label' + k}
-                data-ring-label=""
-                aria-hidden="true"
-                style={css('top:' + ((1 - d) * 50).toFixed(2) + '%')}
-              >
-                <span style={css("font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:" + BRONZE)}>
-                  {year}
-                </span>
-                <span style={css('font-size:13px;line-height:1.35;color:rgba(255,255,255,.86)')}>{phase}</span>
-              </span>
-            )
-          })}
+          {RINGS.map((d, k) => (
+            <span
+              key={'label' + k}
+              data-ring-label=""
+              aria-hidden="true"
+              style={css('top:' + ((1 - d) * 50).toFixed(2) + '%')}
+            >
+              <span style={css('font-size:13px;line-height:1.35;color:rgba(255,255,255,.86)')}>{t.reach[k]}</span>
+            </span>
+          ))}
           <span data-ring-core="" aria-hidden="true">
             <span data-ring-dot="" />
             <span style={css('display:block;margin-block-start:14px;' + display(ar, ar ? '24px' : '22px', 400) + ';color:#ffffff')}>
               {t.city}
             </span>
             <span
-              style={css(
-                "display:block;margin-block-start:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:" +
-                  BRONZE,
-              )}
-            >
-              {phases[0][0]} · {phases[0][1]}
-            </span>
-            <span
               dir="ltr"
               style={css(
-                "display:block;margin-block-start:4px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.5)",
+                "display:block;margin-block-start:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.5)",
               )}
             >
               {JEDDAH}

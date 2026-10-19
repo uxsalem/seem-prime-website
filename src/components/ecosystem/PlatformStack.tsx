@@ -38,14 +38,14 @@ const COUNT = ecosystemPlatforms.length
  * The pin, in screens of scroll. The title card holds; each platform rises over the one before it
  * and holds, the last a little longer; then the camera pulls back and the deck is a model; the
  * floors take their thickness, the chapter's copy arrives, the cores rise through the floors, and
- * last the camera looks up at the floors still to come. A platform more is a stretch of scroll
- * more, never a faster deck: the pin is as tall as its travel (`--travel`, set on it below).
+ * the model holds while light runs along them. A platform more is a stretch of scroll more, never
+ * a faster deck: the pin is as tall as its travel (`--travel`, set on it below).
  */
 const TITLE = 0.3
 const PER = 0.75
 /** Where the camera starts to pull back: every platform in, and the last one read. */
 const PULL_AT = TITLE + (COUNT - 1) * PER + 0.81
-const TRAVEL = PULL_AT + 2.64
+const TRAVEL = PULL_AT + 2.1
 /** A point on the pin, in screens, as a share of its travel: what the scroll pass measures. */
 const at = (screens: number) => screens / TRAVEL
 const DECK = at(TITLE)
@@ -55,9 +55,6 @@ const PULL: [number, number] = [at(PULL_AT), at(PULL_AT + 0.72)]
 const FACES: [number, number] = [at(PULL_AT + 0.57), at(PULL_AT + 0.78)]
 const COPY: [number, number] = [at(PULL_AT + 0.48), at(PULL_AT + 0.96)]
 const CORES: [number, number] = [at(PULL_AT + 0.96), at(PULL_AT + 1.68)]
-const ROOM: [number, number] = [at(PULL_AT + 1.74), at(PULL_AT + 2.28)]
-/** How far the camera looks up at the end, in floors. */
-const PAN = 1.5
 /** How far each core rises behind the one before it, in floors. */
 const LAG = 0.06
 /** A core rises a floor at a time, each core a step behind the one before: all four finish together. */
@@ -77,8 +74,7 @@ const MODEL_AT = COPY[1] + at(0.06)
  * cards lie back into the floors of a model, drawn as an architect draws one, on a podium
  * lettered SEEM PRIME. Four cores rise out of the podium through every floor — capital,
  * technology, operations, partnerships — and once they are up, light keeps moving along them,
- * up two and down two, for as long as the model is on screen. Last, the camera looks up: the
- * cores carry on past the top floor, through two floors drawn but not yet built.
+ * up two and down two, for as long as the model is on screen.
  *
  * Everything moves on transforms the scroll pass writes. Each card becomes its floor through a
  * single `matrix()`, and the model around the floors is drawn in SVG from the same geometry, so
@@ -160,7 +156,6 @@ export function PlatformStack() {
     if (rect.top < vh * 0.5) mountUpTo(1 + ecosystemPlatforms.filter((_, k) => p >= cardAt(k)).length)
 
     const pull = arch(span(p, PULL[0], PULL[1]))
-    const pan = arch(span(p, ROOM[0], ROOM[1])) * PAN * g.pitch
 
     const intro = introRef.current
     if (intro) {
@@ -179,7 +174,7 @@ export function PlatformStack() {
       const m = floorMatrix(g, k)
       card.style.transform =
         'matrix(' +
-        [mix(q, m.a, pull), 0, mix(0, m.c, pull), mix(q, m.d, pull), mix(0, m.e, pull), mix(ty, m.f, pull) + pan]
+        [mix(q, m.a, pull), 0, mix(0, m.c, pull), mix(q, m.d, pull), mix(0, m.e, pull), mix(ty, m.f, pull)]
           .map((n) => n.toFixed(4))
           .join(',') +
         ')'
@@ -210,15 +205,11 @@ export function PlatformStack() {
     // their thickness once they have landed, and the cores rise through them.
     const faces = span(p, FACES[0], FACES[1])
     const cores = span(p, CORES[0], CORES[1]) * RISEN
-    const room = span(p, ROOM[0] + 0.02, ROOM[1])
-    // Looking up leaves the podium below the frame; the frame's foot fades as it goes.
-    stage.style.setProperty('--look-up', room.toFixed(3))
     layerRefs.current.forEach((layer, i) => {
       const lift = i === 0 ? (1 - pull) * 0.3 * H : 0
-      layer.style.transform = 'translate3d(0,' + px(lift + pan) + ',0)'
+      layer.style.transform = 'translate3d(0,' + px(lift) + ',0)'
       layer.style.opacity = (i === 0 ? span(pull, 0.25, 0.9) : 1).toFixed(3)
       layer.style.setProperty('--faces', faces.toFixed(3))
-      layer.style.setProperty('--room', room.toFixed(3))
     })
     stage.querySelectorAll<SVGLineElement>('[data-model-layer] [data-core-seg]').forEach((seg) => {
       const i = Number(seg.dataset.seg)
@@ -231,17 +222,14 @@ export function PlatformStack() {
 
     const labels = labelsRef.current
     if (labels) {
-      labels.style.transform = 'translate3d(0,' + px(pan) + ',0)'
       labels.querySelectorAll<HTMLElement>('[data-floor-label]').forEach((label, k) => {
         label.style.opacity = span(p, COPY[0] + 0.012 * k, COPY[0] + 0.035 + 0.012 * k).toFixed(3)
       })
       labels.querySelectorAll<HTMLElement>('[data-core-label]').forEach((label, j) => {
-        label.style.opacity = (span(p, CORES[0] + 0.01 * j, CORES[0] + 0.05 + 0.01 * j) * (1 - span(p, ROOM[0], ROOM[0] + 0.05))).toFixed(3)
+        label.style.opacity = span(p, CORES[0] + 0.01 * j, CORES[0] + 0.05 + 0.01 * j).toFixed(3)
       })
       const plinth = labels.querySelector<HTMLElement>('[data-plinth]')
-      if (plinth) plinth.style.opacity = (faces * (1 - span(p, ROOM[0], ROOM[0] + 0.05))).toFixed(3)
-      const target = labels.querySelector<HTMLElement>('[data-target]')
-      if (target) target.style.opacity = span(p, ROOM[0] + 0.04, ROOM[1]).toFixed(3)
+      if (plinth) plinth.style.opacity = faces.toFixed(3)
     }
 
     const copy = copyRef.current
@@ -367,7 +355,7 @@ export function PlatformStack() {
 
   // Pinned, the model's labels are one picture to assistive technology, described in full; laid
   // flat, the figure's key is ordinary text.
-  const described = [t.modelLabel, t.cores.map(([core]) => core).join(ar ? '، ' : ', '), t.target].join('. ')
+  const described = [t.modelLabel, t.cores.map(([core]) => core).join(ar ? '، ' : ', ')].join('. ')
   const pinned = geo !== null
   const still = useMemo(() => stillGeometry(dir, COUNT), [dir])
   const layers = useMemo(() => (geo ? modelLayers(geo, uid + '-pin') : []), [geo, uid])
@@ -573,27 +561,6 @@ export function PlatformStack() {
               })}
 
               {(() => {
-                const [x, y] = labelAnchor(geo, geo.ghosts[0])
-                const edge = labelEdge(geo)
-                return (
-                  <span data-target="" style={css('top:' + px(y))}>
-                    <span
-                      data-leader=""
-                      data-planned=""
-                      style={css('left:' + px(Math.min(x, edge)) + ';width:' + px(Math.abs(edge - x)))}
-                    />
-                    <span data-tag="" style={css(ar ? 'right:' + px(geo.W - edge + 12) : 'left:' + px(edge + 12))}>
-                      <span dir="ltr" style={css(mono)}>
-                        {ordinal(COUNT) + ' — 40'}
-                      </span>
-                      <span style={css(display(ar, ar ? '20px' : '19px', 400) + ';color:#ffffff')}>{t.target}</span>
-                      <span data-tag-sub="">{t.targetLine}</span>
-                    </span>
-                  </span>
-                )
-              })()}
-
-              {(() => {
                 const front = podiumFront(geo)
                 return (
                   <>
@@ -681,12 +648,6 @@ export function PlatformStack() {
                   SEEM PRIME
                 </span>
                 <span>{t.cores.map(([core]) => core).join(' · ')}</span>
-              </p>
-              <p data-key-target="">
-                <span dir="ltr" style={css(mono)}>
-                  {ordinal(COUNT) + ' — 40'}
-                </span>
-                <span>{t.target}</span>
               </p>
             </figcaption>
           </figure>

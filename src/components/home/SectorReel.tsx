@@ -18,12 +18,12 @@ export const REEL_QUERY = '(min-width: 1000px) and (min-height: 560px) and (pref
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
 
 /**
- * The nine sectors as one sequence. On a wide screen the section pins and the reader travels
- * along a single line — vertical scroll becomes a lateral journey past nine windows of one size,
+ * The eight sectors as one sequence. On a wide screen the section pins and the reader travels
+ * along a single line — vertical scroll becomes a lateral journey past eight windows of one size,
  * strung on the line like frames of a film, each opening as it arrives, the ember drawing itself
  * up to the middle of the screen. Everywhere else it is a plain swipe rail with the same frames
- * and captions. A sector with a platform names it under its line; a sector with no picture yet
- * shows its window's empty state.
+ * and captions. A sector names every platform it holds under its line — tourism has two — and a
+ * sector with no picture yet shows its window's empty state.
  */
 export function SectorReel() {
   const { lang, ar, arrow } = useSite()
@@ -180,8 +180,7 @@ export function SectorReel() {
             </span>
 
             {t.sectors.map((sector, i) => {
-              const k = PLATFORM_SECTORS.findIndex((sectors) => sectors.includes(i))
-              const platform = k < 0 ? null : t.platforms[k][1]
+              const platforms = PLATFORM_SECTORS.flatMap((sectors, k) => (sectors.includes(i) ? [t.platforms[k][1]] : []))
               return (
                 <figure key={i} data-reel-frame="" style={css('margin:0')}>
                   <div data-reel-win="">
@@ -199,16 +198,21 @@ export function SectorReel() {
                     <span style={css('display:block;max-width:34ch;font-size:14px;line-height:1.55;color:rgba(255,255,255,.66)')}>
                       {t.sectorLines[i]}
                     </span>
-                    {platform ? (
-                      <span
-                        style={css(
-                          'display:inline-flex;align-items:center;gap:8px;margin-block-start:12px;height:26px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.24);' +
-                            markType(platform, arabic(platform) ? '13px' : '11px', { weight: 500, tracking: '.14em' }) +
-                            ';color:rgba(255,255,255,.86)',
-                        )}
-                      >
-                        <span aria-hidden="true" style={css('width:5px;height:5px;border-radius:999px;background:' + BRONZE)} />
-                        {platform}
+                    {platforms.length ? (
+                      <span style={css('display:flex;flex-wrap:wrap;gap:8px;margin-block-start:12px')}>
+                        {platforms.map((platform) => (
+                          <span
+                            key={platform}
+                            style={css(
+                              'display:inline-flex;align-items:center;gap:8px;height:26px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.24);' +
+                                markType(platform, arabic(platform) ? '13px' : '11px', { weight: 500, tracking: '.14em' }) +
+                                ';color:rgba(255,255,255,.86)',
+                            )}
+                          >
+                            <span aria-hidden="true" style={css('width:5px;height:5px;border-radius:999px;background:' + BRONZE)} />
+                            {platform}
+                          </span>
+                        ))}
                       </span>
                     ) : null}
                   </figcaption>

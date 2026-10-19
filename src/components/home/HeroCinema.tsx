@@ -21,15 +21,22 @@ const INTRO = 1900
 
 type FrameState = 'enter' | 'on' | 'under' | 'off'
 
-/** A scene's door: its platform's address, the strategy for a sector still being built, or the ecosystem. */
+/** A scene's door: its platform's address on the ecosystem page, or the page itself. */
 const doorOf = (i: number) => {
-  const { platform, building } = DAY[i]
-  if (platform) return routes.ecosystem + '#' + platform
-  return building ? routes.strategy : routes.ecosystem
+  const { platform } = DAY[i]
+  return platform ? routes.ecosystem + '#' + platform : routes.ecosystem
 }
 
-/** The hour as the scene's line says it, «5:00»; the clock in the corner keeps the leading zero. */
-const hourOf = (i: number) => (DAY[i].sector === null ? '' : DAY[i].clock.replace(/^0/, ''))
+/**
+ * A scene's hour on a 12-hour clock, as [hour, half of the day]: «20:30» reads «8:30» and the
+ * evening's mark, «05:00» reads «5:00» and the morning's. «24», the whole day, has no half.
+ */
+const twelveOf = (i: number, am: string, pm: string): [string, string] => {
+  const at = /^(\d{1,2}):(\d{2})$/.exec(DAY[i].clock)
+  if (!at) return [DAY[i].clock, '']
+  const h = Number(at[1])
+  return [((h + 11) % 12) + 1 + ':' + at[2], h < 12 ? am : pm]
+}
 
 /**
  * The home page's opening: a day in the ecosystem, one hour and one sector at a time.
@@ -38,9 +45,11 @@ const hourOf = (i: number) => (DAY[i].sector === null ? '' : DAY[i].clock.replac
  * becomes an aperture that widens to the full frame (pure CSS, keyed off `html[data-intro]`,
  * which the bootstrap script sets before first paint). The first scene is the whole day; the
  * rest run from dawn to evening, each a sector at the hour it meets someone's day. A scene is a
- * whole frame: its photograph, its hour in outline in the far corner, and its copy — the hour and
- * the sector, the main line, the line under it, what the sector does, whose scene it is and its
- * door. The cinema cuts between scenes on a diagonal blade with an ember hairline riding its
+ * whole frame: its photograph, its hour in outline in the far corner, on a 12-hour clock with its
+ * half of the day beside it, and its copy — the main line, the line under it, what the sector
+ * does, whose scene it is where the button does not already say, and its door. The sector itself
+ * is named once, in the index. The cinema cuts between scenes on a diagonal blade with an ember
+ * hairline riding its
  * edge, the identity's one signature transition, and the blade carries the copy with the
  * picture, so the incoming scene's lines glide in behind it as the old ones are pushed out.
  *
@@ -256,7 +265,7 @@ export function HeroCinema() {
         {heroFrames.map((frame, i) => {
           const at = frame.focus ?? frame.photo.focus
           const scene = t.day[i]
-          const hour = hourOf(i)
+          const [hour, half] = twelveOf(i, t.am, t.pm)
           // The first scene is the one on screen at load: its lines arrive through the page's
           // reveal, after the aperture when it plays. The others arrive behind the blade.
           const sc = (variant = '') => (i === 0 ? { 'data-sc': variant } : {})
@@ -307,9 +316,11 @@ export function HeroCinema() {
               <span className="sp-grain" aria-hidden="true" />
 
               <div data-hscene="">
-                {/* The hour, drawn in outline in the far corner: 24 for the whole day. */}
+                {/* The hour, drawn in outline in the far corner, its half of the day set small beside
+                    it: 24 for the whole day. */}
                 <p data-hclock="" aria-hidden="true">
-                  {DAY[i].clock}
+                  {hour}
+                  {half ? <span data-hhalf="">{half}</span> : null}
                 </p>
 
                 <div
@@ -321,41 +332,27 @@ export function HeroCinema() {
                     pointerHoldRef.current = false
                   }}
                 >
-                  <p data-hg="" data-hmeta="" {...sc()} data-stagger="" style={vars({ '--i': 0 })}>
-                    <span data-hdot="" aria-hidden="true" />
-                    <span>
-                      {scene.part}
-                      {hour ? (
-                        <>
-                          {' · '}
-                          <span data-htime="">{hour}</span>
-                        </>
-                      ) : null}
-                    </span>
-                    <span data-hsep="" aria-hidden="true" />
-                    <span>{nameOf(i)}</span>
-                  </p>
-
-                  <h2 data-hg="" {...sc('rise')} data-stagger="" style={cssWith(heroTitle(ar), vars({ '--i': 1 }))}>
+                  <h2 data-hg="" {...sc('rise')} data-stagger="" style={cssWith(heroTitle(ar), vars({ '--i': 0 }))}>
                     {scene.title}
                   </h2>
 
                   {scene.sub ? (
-                    <p data-hg="" data-hsub="" {...sc()} data-stagger="" style={vars({ '--i': 2 })}>
+                    <p data-hg="" data-hsub="" {...sc()} data-stagger="" style={vars({ '--i': 1 })}>
                       {scene.sub}
                     </p>
                   ) : null}
 
-                  <p data-hg="" data-hbody="" {...sc()} data-stagger="" style={vars({ '--i': 3 })}>
+                  <p data-hg="" data-hbody="" {...sc()} data-stagger="" style={vars({ '--i': 2 })}>
                     {scene.body}
                   </p>
 
-                  <p data-hg="" data-hbrand="" {...sc()} data-stagger="" style={vars({ '--i': 4 })}>
-                    <span>{scene.brand}</span>
-                    {DAY[i].building ? <span data-hstatus="">{t.building}</span> : null}
-                  </p>
+                  {scene.brand ? (
+                    <p data-hg="" data-hbrand="" {...sc()} data-stagger="" style={vars({ '--i': 3 })}>
+                      {scene.brand}
+                    </p>
+                  ) : null}
 
-                  <div data-hg="" data-hctas="" {...sc()} data-stagger="" style={vars({ '--i': 5 })}>
+                  <div data-hg="" data-hctas="" {...sc()} data-stagger="" style={vars({ '--i': 4 })}>
                     <Link
                       href={doorOf(i)}
                       className="sp-lift sp-sheen"
@@ -405,29 +402,33 @@ export function HeroCinema() {
               <span style={css(display(ar, ar ? '18px' : '17px', 400) + ';color:#ffffff')}>{nameOf(active)}</span>
             </p>
             <div data-htracks="">
-              {heroFrames.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  data-htrack=""
-                  aria-current={i === active ? 'true' : undefined}
-                  aria-label={t.sceneLabel + ' ' + nameOf(i)}
-                  onClick={() => go(i)}
-                >
-                  <span data-hhour="" aria-hidden="true">
-                    {DAY[i].clock}
-                  </span>
-                  <span data-hline="">
-                    <span
-                      ref={(node) => {
-                        if (node) barsRef.current[i] = node
-                      }}
-                      data-hfill=""
-                    />
-                  </span>
-                  <span data-hlabel="">{nameOf(i)}</span>
-                </button>
-              ))}
+              {heroFrames.map((_, i) => {
+                const [hour, half] = twelveOf(i, t.am, t.pm)
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    data-htrack=""
+                    aria-current={i === active ? 'true' : undefined}
+                    aria-label={t.sceneLabel + ' ' + nameOf(i)}
+                    onClick={() => go(i)}
+                  >
+                    <span data-hhour="" aria-hidden="true">
+                      {hour}
+                      {half ? <span data-hhalf="">{half}</span> : null}
+                    </span>
+                    <span data-hline="">
+                      <span
+                        ref={(node) => {
+                          if (node) barsRef.current[i] = node
+                        }}
+                        data-hfill=""
+                      />
+                    </span>
+                    <span data-hlabel="">{nameOf(i)}</span>
+                  </button>
+                )
+              })}
             </div>
           </div>
           <button

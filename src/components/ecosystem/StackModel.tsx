@@ -4,7 +4,7 @@ import { vars } from '@/lib/css'
 
 /**
  * The ecosystem as a model: a floor per platform on a podium lettered SEEM PRIME, with four
- * shared cores rising through every floor and two floors still to be built above them.
+ * shared cores rising through every floor.
  *
  * It is drawn the way an architect draws a model, in an oblique projection: fronts stay true,
  * depth runs up and toward the reading end at a fixed slant, and there is no vanishing point. A
@@ -40,7 +40,6 @@ export type StackGeo = {
   s: number
   podium: Level
   floors: Level[]
-  ghosts: Level[]
   /** Each core's x, in reading order. */
   cores: number[]
   /** From one floor to the next. */
@@ -51,8 +50,7 @@ type Box = { left: number; right: number; top: number; bottom: number }
 
 /**
  * The model's geometry, as large as fits `box` — from the back edge of the top floor to the foot
- * of the podium — for `count` floors cut from a `W × H` card. The two floors still to come sit
- * above the top one, outside the box: the stage pans up to them at the end.
+ * of the podium — for `count` floors cut from a `W × H` card.
  */
 export function stackGeometry(W: number, H: number, dir: 1 | -1, box: Box, count: number): StackGeo {
   // Vertically the stack spans a floor and a gap per platform plus the podium; across, the podium.
@@ -72,24 +70,24 @@ export function stackGeometry(W: number, H: number, dir: 1 | -1, box: Box, count
   const podium: Level = { y: box.bottom - tp - pd / 2, w: PODIUM_W * w, d: PODIUM_D * d, t: tp }
   const first = podium.y - pd / 2 - GAP * fd - fd / 2
   const floors = Array.from({ length: count }, (_, k) => ({ y: first - k * pitch, w, d, t }))
-  const ghosts = [count, count + 1].map((k) => ({ y: first - k * pitch, w, d, t }))
   const cx = (box.left + box.right) / 2
 
-  return { W, H, dir, cx, s, podium, floors, ghosts, cores: CORE_AT.map((at) => cx + dir * at * w), pitch }
+  return { W, H, dir, cx, s, podium, floors, cores: CORE_AT.map((at) => cx + dir * at * w), pitch }
 }
 
 /**
- * The model at rest, for the still figure: `count` floors cut from a 1000 × 625 card with the two
- * planned floors above them, a view box drawn around the whole of it, and each floor's picture
- * placed the way a card is laid down when the model is pinned.
+ * The model at rest, for the still figure: `count` floors cut from a 1000 × 625 card, a view box
+ * drawn around the whole of it, and each floor's picture placed the way a card is laid down when
+ * the model is pinned.
  */
 export function stillGeometry(dir: 1 | -1, count: number) {
   const W = 1000
   const H = 625
   const geo = stackGeometry(W, H, dir, { left: 0, right: W, top: -W * 4, bottom: W * 4 }, count)
-  const { podium, ghosts, cx } = geo
+  const { podium, floors, cx } = geo
   const reach = podium.w / 2 + (DX * podium.d) / 2 + 6
-  const top = ghosts[ghosts.length - 1].y - (DY * ghosts[0].d) / 2 - 6
+  const roof = floors[floors.length - 1]
+  const top = roof.y - (DY * roof.d) / 2 - 6
   const bottom = podium.y + (DY * podium.d) / 2 + podium.t + 6
   const viewBox = [cx - reach, top, 2 * reach, bottom - top].map(r).join(' ')
   const floorTransforms = geo.floors.map((_, k) => {
@@ -141,10 +139,9 @@ function collar(geo: StackGeo, level: Level, j: number) {
 }
 
 /** One stretch of a core, from the level below to the level above, drawn bottom to top. */
-function coreSpan(geo: StackGeo, j: number, i: number, from: Level, to: Level, planned = false) {
+function coreSpan(geo: StackGeo, j: number, i: number, from: Level, to: Level) {
   const x = r(geo.cores[j])
   const line = { x1: x, y1: r(from.y), x2: x, y2: r(to.y) }
-  if (planned) return <line key={`p${j}-${i}`} {...line} data-core-plan="" />
   return (
     <g key={`c${j}-${i}`}>
       <line {...line} data-core-glow="" />
@@ -210,12 +207,12 @@ function ground(geo: StackGeo, id: string) {
 /**
  * The model's drawing, split by height. Layer 0 is the ground, the podium and the cores up to the
  * first floor; layer `k + 1` is floor `k`'s thickness, its openings and the cores up to the next
- * floor; the last layer also carries the two floors still to come. Pinned, each layer is its own
- * SVG, stacked between the platform cards so every floor hides what is behind it; still, the
- * floors' pictures are drawn between the layers inside one SVG.
+ * floor. Pinned, each layer is its own SVG, stacked between the platform cards so every floor
+ * hides what is behind it; still, the floors' pictures are drawn between the layers inside one
+ * SVG.
  */
 export function modelLayers(geo: StackGeo, id: string): ReactNode[] {
-  const { podium, floors, ghosts, cores } = geo
+  const { podium, floors, cores } = geo
   const layers: ReactNode[] = []
 
   const p = faces(geo, podium)
@@ -248,23 +245,6 @@ export function modelLayers(geo: StackGeo, id: string): ReactNode[] {
           <polygon key={j} points={collar(geo, floor, j)} data-collar="" data-level={k + 1} data-core={j} />
         ))}
         {above ? cores.map((_, j) => coreSpan(geo, j, k + 1, floor, above)) : null}
-        {above ? null : (
-          <g data-room="">
-            {cores.map((_, j) => coreSpan(geo, j, floors.length, floor, ghosts[ghosts.length - 1], true))}
-            {ghosts.map((ghost, g) => {
-              const gf = faces(geo, ghost)
-              return (
-                <g key={g} data-ghost={g}>
-                  <polygon points={poly(gf.front)} data-ghost-front="" />
-                  <polygon points={poly(gf.top)} data-ghost-face="" />
-                  {cores.map((_, j) => (
-                    <polygon key={j} points={collar(geo, ghost, j)} data-ghost-collar="" />
-                  ))}
-                </g>
-              )
-            })}
-          </g>
-        )}
       </g>,
     )
   })

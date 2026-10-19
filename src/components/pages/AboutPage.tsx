@@ -19,8 +19,8 @@ import { useSite } from '@/lib/site'
  *
  *   the opening shot and its contents line  →  what we do: four windows become one square,
  *   one city  →  our name: the mark drawn as a construction  →  our values: the creed, lit as
- *   it is read  →  who we serve: five lines out of one source  →  from Jeddah: the rings the
- *   roadmap widens through, and the door
+ *   it is read  →  who we serve: five lines out of one source  →  from Jeddah: rings widening to
+ *   the Kingdom and the region, and the door
  *
  * Each chapter owns its motion (see `src/components/about/`); this file only sets the order.
  */
