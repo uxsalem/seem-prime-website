@@ -10,12 +10,11 @@ export const routes = {
 export type RouteKey = keyof typeof routes
 
 /**
- * The business model and the roadmap were pages of their own; they are chapters of the strategy
- * page now. Links to them land on the chapter, and so do the old URLs (see `next.config.ts`).
+ * The business model was a page of its own; it is a chapter of the strategy page now. Links to it
+ * land on the chapter, and so does the old URL (see `next.config.ts`).
  */
 export const chapters = {
   model: '/strategy#model',
-  roadmap: '/strategy#roadmap',
 } as const
 
 /**
@@ -32,6 +31,5 @@ export const plates = {
   whiteGreenPlanes: '/ds/img/white-green-planes.png',
 } as const
 
+/** The company's one published contact: its official email. It lists no phone number. */
 export const EMAIL = 'info@seem.sa'
-export const PHONE_HREF = 'tel:+966536800016'
-export const PHONE_DISPLAY = '+966 53 680 0016'

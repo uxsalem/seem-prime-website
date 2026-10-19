@@ -10,11 +10,12 @@ import type { Lang } from '@/lib/site'
  *
  * There are two sets. The golden-hour set was shot at one light across every sector, so a
  * refinery, a warehouse, a coast and a cinema read as one landscape rather than a stock collage.
- * The sector set is the client's own, and more realistic: a picture per sector for the reel, the
- * pictures of the platforms themselves (JAZ Chocolate's plant, Qanif's sign, the catering
- * tables), and, since October 18, a picture for each hour of the hero's day. The home page never
- * shows one photograph twice. The brand's deep green is the ground they all sit on — scrims,
- * sections, the dark between frames — never a tint laid over the pictures themselves.
+ * The sector set is the client's own, and more realistic: since October 18 a picture for each hour
+ * of the hero's day, and since October 19 the reel, the statement, the home page's closing window,
+ * the about and ecosystem mastheads and the platforms on the ecosystem page, all from the same
+ * October 18 delivery. The home page never shows one photograph twice, and the ecosystem page
+ * shows none that the home page does. The brand's deep green is the ground they all sit on —
+ * scrims, sections, the dark between frames — never a tint laid over the pictures themselves.
  */
 export type Photo = {
   /** Full-bleed cut — plates, mastheads, banners, the hero. */
@@ -58,16 +59,6 @@ export const srcSet = (photo: Photo): string | undefined =>
 export const photos = {
   // --- The golden-hour set: one picture per sector --------------------------------------------
 
-  /** Stone heritage houses above a palm-lined bay. The coast, the mountains, the sun on the sea. */
-  coast: {
-    ...set('saudi-coast-heritage', 1774),
-    lqip: 'data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADQAwCdASoUAAoAPu1iqU2ppaQiMAgBMB2JZACdMoACoGZY8zdbvwAA/j45ttSUwUavN954lYzZyzqGHHlbpBBJO9DQjQCyID5zz1IWe23UpK5tbnM/Nw+QZ3X+DlcfcUrmkhmAMaPoSkVTNfEpvCbjk0anAAAA',
-    focus: '62% 50%',
-    alt: {
-      ar: 'بيوت حجرية تراثية تطل على خليج تحفّه النخيل عند الغروب، ورجل بالشماغ يتأمل البحر',
-      en: 'Stone heritage houses above a palm-lined bay at sunset, a man in a shemagh looking out to sea',
-    },
-  },
   /** An engineer on a gantry above a processing plant, the range behind it. Industry at scale. */
   industry: {
     ...set('industrial-plant-dusk', 1774),
@@ -182,49 +173,8 @@ export const photos = {
     },
   },
 
-  // --- The client's own set: a picture per sector for the reel, and the platforms' own ------------
+  // --- The client's September and October 7 sets, now on the ecosystem page ---------------------
 
-  /** A worker lining up chocolates as they leave the enrober. The one picture shot on a real line. */
-  chocolateEnrober: {
-    ...set('chocolate-enrober', 1774),
-    xs: '/ds/img/chocolate-enrober-xs.webp',
-    lqip: 'data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBfnA222EOq7qiE11FSgAAD9mZM+PA1i6HE8b43Z2PvtXyY+jhLAK1h1+8vSNBK73xNhPshVrwZquy/5PSVQ1m158Ubvwnk4AljJbuvNsuqdDGiJEgAA',
-    focus: '40% 72%',
-    alt: {
-      ar: 'عاملة بكمامة وقفازين ترصّ قطع الشوكولاتة الخارجة من آلة التغليف',
-      en: 'A worker in a mask and gloves lining up chocolates as they leave the enrobing machine',
-    },
-  },
-  /** A modern food plant end to end: a chocolate line down the middle, packing on either side. */
-  chocolateHall: {
-    ...set('chocolate-hall', 1774),
-    lqip: 'data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAACQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZwDE2Aq9fngaEQyAAOj6a37GZHJF5Nykh3Il6iHmVcg0b3a9R4bAUy0o11oXWTKfsmG99c2pfAB5bRojYIPGEbdz6QytKG/V0IsXE9xtxqUMlnAAAA==',
-    focus: '50% 62%',
-    alt: {
-      ar: 'صالة مصنع أغذية حديثة: خط شوكولاتة في الوسط، وآلات تعبئة وعمّال بزيّهم الأبيض على الجانبين',
-      en: 'A modern food plant — a chocolate line down the middle, packing machines and staff in white on either side',
-    },
-  },
-  /** A box of dark chocolate on a table. A portrait, so it only goes where a frame can hold it. */
-  chocolateBox: {
-    ...img('chocolate-box', 1200),
-    lqip: 'data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAABQBQCdASoUABsAPu1srFEppaQiqAqpMB2JQBbZMYiLxa3ZnEG/nmPBCwjnq+Axrw6SMAAA/ux/Q0U2pffR2V9IBi+NnJb3mPCPY818CeP1FoyTXjppjAq6CdP29feKThBtQpjiLF8C2BLLYFNUZxyXPe3X+RkDyKTaGVnVN7YcSexr/Jj1365vGCV7P2nPKGCBCSWesP0NjKdn6Bs1eMbHtj7GRP4LOgaTNyxob/h51EOnQtbEtEi4BtSvM/IJPGeCjHCKM6thQAAA',
-    focus: '50% 62%',
-    alt: {
-      ar: 'علبة كرتونية من الشوكولاتة الداكنة: لوح وقطعتان دائريتان ولفائف وحبوب كاكاو، وفنجان قهوة خلفها',
-      en: 'A kraft box of dark chocolate — a bar, two medallions, curls and cocoa beans — a cup of coffee behind it',
-    },
-  },
-  /** An aisle between racks of cartons, the crew moving and checking the stock. */
-  warehouse: {
-    ...set('warehouse-aisle', 1774),
-    lqip: 'data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JZACdMoR4Lf/gIa+il+W/w4AA/qlazv1S7gqTJGF/OGC/KoA6mw5edk5ftJN5yI1wTnO/PRlHZKydlJoHsbA1llerGcEo9Nv7yPUqaosGbjzCDGglZRM3lKCQ97AAAAA=',
-    focus: '52% 56%',
-    alt: {
-      ar: 'ممر بين رفوف الطرود في مستودع، وعمّال بخوذات وسترات عاكسة ينقلون البضائع ويراجعونها',
-      en: 'An aisle between racks of cartons in a warehouse, staff in hard hats and hi-vis vests moving and checking the stock',
-    },
-  },
   /** A traveller at the bow of a boat between limestone cliffs, the sun going down ahead. */
   longtail: {
     ...set('longtail-sunset', 1774),
@@ -247,8 +197,7 @@ export const photos = {
   },
   /**
    * A card held to a handheld terminal across a marble counter, shopping bags and a laptop beside
-   * it. From the September edition: the client's sets have no picture of e-commerce, so this one
-   * stands in for it.
+   * it. From the September edition: the payment that closes eat.plus's last mile.
    */
   cardTap: {
     ...set('card-tap', 1774),
@@ -261,7 +210,7 @@ export const photos = {
   },
   /**
    * A cargo hub by day, a plane climbing over the mountains beyond the docks. From the September
-   * edition, back in service for supply: the reel's window, and SEEM Supply's card.
+   * edition: Catering & Supply's card.
    */
   cargoHub: {
     ...set('cargo-hub-day', 1774),
@@ -290,40 +239,6 @@ export const photos = {
     alt: {
       ar: 'والدان إلى طاولة على منصة خشبية بجوار شجيرات الجهنمية، وأطفالهما يلعبون على العشب تحت جبال خضراء',
       en: 'Parents at a table on a timber deck by the bougainvillea, their children playing on the grass below green mountains',
-    },
-  },
-
-  // --- Catering, from the client's set ----------------------------------------------------------
-
-  /** Two waiters serving from a buffet in a restaurant. Catering as a service, people first. */
-  cateringService: {
-    ...set('catering-service', 1774),
-    lqip: 'data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOgMXrMvlWRJIr/RAwA/gb3JgG4RFbOMI3xD8oDIHjp2UIojNhK7fQ8gC3miuts433xEBAhR2uxlvX2LfSIAGoPAbrUSEJF5+ANNU1d4i/OwxiDA3x6twnjA8Ah6vhcLx/qjfAbxX+JwiOuWKHQAAA=',
-    focus: '40% 50%',
-    alt: {
-      ar: 'نادلان بقميصين أبيضين ومريلتين يقدّمان من أطباق البوفيه في مطعم',
-      en: 'Two waiters in white shirts and aprons serving from a buffet of chafing dishes in a restaurant',
-    },
-  },
-  /** A waitress carrying two plates. Ships a 400px cut for the statement's capsules. */
-  cateringPlates: {
-    ...img('catering-plates', 1774),
-    xs: '/ds/img/catering-plates-xs.webp',
-    lqip: 'data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAABwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOja/h49T7fb4eEhJzox4dNwAD9qaiF3xfqw4u3JTFgKDAwPWLweXy4WSx/tXCpbdd9mr6quq5ITAK11F7038P6fdgedSuZxgCEQVpr67YfvkA6x39/UOLlNM3Dkcpkd0i1D1H1sE92uNC7hkphJ0duUF3EiQ14AAAA',
-    focus: '50% 46%',
-    alt: {
-      ar: 'نادلة تحمل طبقين: حلوى مزيّنة بالتوت، وسلطة',
-      en: 'A waitress carrying two plates — a dessert dressed with berries, and a salad',
-    },
-  },
-  /** Chefs finishing plates of chocolate dessert with a mint leaf. */
-  cateringPlating: {
-    ...set('catering-plating', 1774),
-    lqip: 'data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZQAAP/vb1mfQ4X2lmAD+r6ek6++WUYh1DvJxvD0omCx/C3TXPTWBWZRNwRpSStyAYgNdxioalD6U8qvQralCyu72Six8Z48tcDoC0hMX7Cgppb7e6R1x3owZKuefozKgAA==',
-    focus: '60% 62%',
-    alt: {
-      ar: 'طهاة يضعون ورقة نعناع على أطباق حلوى الشوكولاتة',
-      en: 'Chefs placing a mint leaf on plates of chocolate dessert',
     },
   },
 
@@ -430,7 +345,199 @@ export const photos = {
     },
   },
 
-  // --- Entertainment, cut from one contact sheet ------------------------------------------------
+  // --- The same October 18 set, second pass: the statement, the reel, the ecosystem page --------
+
+  /** Chocolatiers in white setting pralines in rows. Ships a 400px cut for the statement's capsules. */
+  chocolatiers: {
+    ...img('chocolatiers', 1774),
+    xs: '/ds/img/chocolatiers-xs.webp',
+    lqip: 'data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JZQDA3CFdEg9nfsOjinOvUAD+sQBvEHWRax58e92/AkOUUBcWvsQFmCxmM5Eg3FeHEjQaUI/68Szadx/Cl2I1D+f59IMIh+liy4GHQxhfPUAA',
+    focus: '62% 64%',
+    alt: {
+      ar: 'صنّاع شوكولاتة بزيّ أبيض وقفازين يرصّون قطع البرالين على طاولة من الفولاذ',
+      en: 'Chocolatiers in white and gloves setting pralines in rows on a steel bench',
+    },
+  },
+  /** A gloved waiter's silver tray of canapés over a laid table. Ships a 400px cut for the capsules. */
+  canapeTray: {
+    ...img('canape-tray', 1774),
+    xs: '/ds/img/canape-tray-xs.webp',
+    lqip: 'data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JZgCdMoMYADNvy2CpblOozwAA/F/x7xa13HUWrfQOPGFVgF6x0BDFNg1lHqRrP0h6zdb/O0IB8Bnw+QeQAOoGCmoCQVd+tNazsJL/n6b1T+Xvej4+687U75viCN3c94tVBn/A0UM2B76wvQ3IwPjhpd/UgAAA',
+    focus: '46% 62%',
+    alt: {
+      ar: 'نادل ببدلة سوداء وقفاز أبيض يحمل صينية فضية من المقبّلات فوق مائدة مُعدّة',
+      en: 'A waiter in a black suit and white gloves holding a silver tray of canapés over a laid table',
+    },
+  },
+  /** An investor at a desk of trading screens, Riyadh in the window. The home page's closing window. */
+  investorScreens: {
+    ...set('investor-screens', 1774),
+    lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOgApVFSYmSN3yWAADc/GgxNbNLTfAvVbxkQjO8yLbRtxxT7It9AJBnw0lttgR+QuqZcn9Hpg8jb24A339zhvJPJ5Nd95NM78wgTwuBxG0f+u9tj2YGswZJMnK2rF8GLAAA',
+    focus: '60% 46%',
+    alt: {
+      ar: 'رجل بالشماغ أمام شاشات تداول في مكتب يطل على أفق الرياض',
+      en: 'A man in a shemagh at a desk of trading screens, the Riyadh skyline in the window',
+    },
+  },
+  /** A chocolate plant end to end: steel lines down the hall, the staff in white. Industry's window. */
+  plantHall: {
+    ...set('plant-hall', 1774),
+    lqip: 'data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgAw64hm+s1QlO1E3uYADMJhEoosE04t7FDj8NJUwUdWqnYocf30b4FlJS3v6T6+28+eWWERWpMbyXv4Uhng7F+vREUzbA67dIG3d5SwSsnRwm6Lly0BggAA==',
+    focus: '46% 62%',
+    alt: {
+      ar: 'صالة مصنع شوكولاتة واسعة: خطوط إنتاج من الفولاذ وعمّال بزيّهم الأبيض',
+      en: 'A wide chocolate plant — steel production lines down the hall and staff in white',
+    },
+  },
+  /** Hands taping an order shut on a packing bench. E-commerce's window. */
+  orderPacking: {
+    ...set('order-packing', 1774),
+    lqip: 'data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOmUAAv3HpdX0C5I30gAM10VrBzZnWquLuzmWEyU4LKuyMl0HJUztzXXA1Lf6skbd/hndhyJmty2uspO0LnHCc8/rh9tTASYdExcutt/5FeTb+pJCDFPMLP8O2+zJ9VyUv6SUGDUVhR5BfltyIxBGTCIcfA0AA=',
+    focus: '54% 56%',
+    alt: {
+      ar: 'يدان تُغلقان طرداً بشريط لاصق على طاولة تغليف، والميزان والطرود حولها',
+      en: 'Hands taping a parcel shut on a packing bench, a scale and boxes around it',
+    },
+  },
+  /** A courier handing over two coffees and a bag at the door. Logistics' window; a 1536px original. */
+  courierHandover: {
+    ...set('courier-handover', 1536),
+    lqip: 'data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAADQAwCdASoUAA0APu1iqU2ppaOiMAgBMB2JQBdmUAS0whJfCJuKUEgA/XZK8Nn4hIeWsgBQd7y1LZRnfVQa0xwrZvhfshCMJAJrPrxMsI6fE31ZnbpVEe3Bp6hoD7vs24r79pvFsZtVy4tpToNBlxYUezyjYQJj/3rTeMD+fNvvkKU7jbd63u6elpBFpjQ8H0RRn1GV9B+BZiFIt4AAAA==',
+    focus: '50% 46%',
+    alt: {
+      ar: 'مندوب توصيل بسترة خضراء يسلّم كوبين من القهوة وكيساً ورقياً عند الباب، ودراجته خلفه',
+      en: 'A courier in a green jacket handing over two coffees and a paper bag at the door, his scooter behind him',
+    },
+  },
+  /** A hiker crossing a rocky canyon beside a green pool. Tourism's window. */
+  canyonHiker: {
+    ...set('canyon-hiker', 1774),
+    lqip: 'data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOmUGSxiXaOfaWBXSezBAAAzHHYMTB7cPS1jandt5xyY/hoR7LF9qe9qIvb1gf+IVmtyJTwR1/0nu5KIl0YBrZwmf4fG8UQe1zEZ3IjdBp7HT/cRhe1aXaF+BhYFrrW+bGAu4CiApTwAAA=',
+    focus: '38% 58%',
+    alt: {
+      ar: 'متنزّه يحمل حقيبة ظهر يعبر وادياً صخرياً بجوار بركة خضراء',
+      en: 'A hiker with a backpack crossing a rocky canyon beside a green pool',
+    },
+  },
+  /** Apartment blocks with deep balconies at sunset, a path between the lawns. Real estate's window. */
+  apartmentsSunset: {
+    ...set('apartments-sunset', 1774),
+    lqip: 'data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZAC7ACFljiDYOCCTnDzgAP4mPyGpFOQJnZCgrhnwBtyu0OwUP9GSgQDOMdR61KZ1Y34DATvXW6mjbMI8nIlN9oN1xCA+3Hdg7tiP22sdL+KgHKyus1/Pa3rJ0wJ0ofC02jYAAAA=',
+    focus: '40% 52%',
+    alt: {
+      ar: 'مبانٍ سكنية حديثة بشرفات واسعة عند الغروب، وممشى بين المساحات الخضراء',
+      en: 'Modern apartment buildings with deep balconies at sunset, a path running between the lawns',
+    },
+  },
+  /** Waiters serving a full room of guests. Catering's window. */
+  restaurantService: {
+    ...set('restaurant-service', 1774),
+    lqip: 'data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBYdgafqSyRk4xKNAAD+rOpdd5k5o4QHuTr2hcpTOsZTmreT5VbCKzQrVhslyrwhoHIX8Lv5p9wO9KQsuW0/y+nBGVLnef6fdE/7ic1ldQJVnfAexvESmGx740etlV9K7ayTDvxuI4n4+6HU+fyiqle1FjBvR/gAAA==',
+    focus: '56% 50%',
+    alt: {
+      ar: 'نادلون يقدّمون الأطباق لضيوف سعوديين في مطعم أنيق',
+      en: 'Waiters serving a table of Saudi guests in an elegant restaurant',
+    },
+  },
+  /** An aisle between high racks of cartons, a forklift carrying a pallet. Supply's window. */
+  warehouseForklift: {
+    ...set('warehouse-forklift', 1774),
+    lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwCdMoR8edDc05lFnZrhEYAA/ZvpzQrgpt9v4cg4lkKimUuzfPwGEJdubESRMg1qep96aPCg6v9qKNQzxDUnqEVc7Igu37i1JNzV5UrrDfv3RXZcJmoVuFwx6KysGeqoAAAA',
+    focus: '50% 62%',
+    alt: {
+      ar: 'ممر بين رفوف عالية من الكراتين في مستودع، ورافعة شوكية تنقل منصة بضائع',
+      en: 'An aisle between high racks of cartons in a warehouse, a forklift carrying a pallet',
+    },
+  },
+  /**
+   * Guests round a low table at a mountain lodge, string lights over them as the evening comes.
+   * Ships a 400px cut for the statement's capsules.
+   */
+  lodgeEvening: {
+    ...set('lodge-evening', 1774),
+    xs: '/ds/img/lodge-evening-xs.webp',
+    lqip: 'data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOiP/wHwOQ+99Fri3Z2xeQA/kmDHUlhL8iKpAVzdaoZ6f1b4gcjDClJG6R8BIRleJuYZenqRh66oITGP0XJnQSY//53MY7Ss2bgGVgQd2jxzaeYAA==',
+    focus: '50% 62%',
+    alt: {
+      ar: 'جلسة مسائية في نُزُل جبلي: ضيوف حول طاولة تحت حبال الإضاءة، والجبال والغيوم خلفهم',
+      en: 'An evening at a mountain lodge — guests round a low table under string lights, mountains and cloud beyond',
+    },
+  },
+  /** Dunes at sunset, four-wheel drives crossing them in a trail of dust. The about page's masthead. */
+  dunesSunset: {
+    ...set('dunes-sunset', 1774),
+    lqip: 'data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZgCdMoABDcRMjYteQADwkKxPFLgtbHeHV0BQbNoVseVW5FcrsspSH10BLX4dYHUMydWCsBdo7urSngyYXHa9z9SpK5MwHceMJ1W0uP4cMvAA',
+    focus: '62% 50%',
+    alt: {
+      ar: 'كثبان رملية عند الغروب، وسيارات دفع رباعي تعبرها وتثير الغبار',
+      en: 'Dunes at sunset, four-wheel drives crossing them in a trail of dust',
+    },
+  },
+  /** A container port from the air: a ship at the quay, the stacks and the cranes. */
+  portAerial: {
+    ...set('port-aerial', 1774),
+    lqip: 'data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOmUABpxAuMkr/s06Y7AAD3263AMUvpLsGNuDXP2zQ4a+xPnS/gi8S3pNArnauUvkMe0AV8eeu93URG68cwwjB2IEX5Z9z/yv/NXY/LiPAA',
+    focus: '44% 56%',
+    alt: {
+      ar: 'ميناء حاويات من الأعلى: سفينة عند الرصيف وصفوف الحاويات والرافعات',
+      en: 'A container port from the air — a ship at the quay, rows of containers and the cranes',
+    },
+  },
+  /** Staff in white setting chocolates along the line. JAZ Chocolate's plate. */
+  lineCrew: {
+    ...set('line-crew', 1774),
+    lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JZwDCgCBj5BpBv/m56+CAAMtLe2bWvswnLlkdQAs4mZM0BU58DHfMhp1SUjnsJt0AX8P9/b38RrJnlHaJe+x5Zu+aaZYKjc+m7RodKe5Rsi2MLrg6KJRxY6dE0TNOEt7cAAAA',
+    focus: '50% 56%',
+    alt: {
+      ar: 'عمّال بزيّ أبيض وأغطية شعر يرصّون الشوكولاتة على خط الإنتاج',
+      en: 'Staff in white coats and hairnets setting chocolates along the production line',
+    },
+  },
+  /** A chocolate shop: a server at the glass counter, shelves of boxes behind. JAZ Chocolate's detail. */
+  chocolateShop: {
+    ...set('chocolate-shop', 1774),
+    lqip: 'data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgCdABwub7P3kuFvfdkAAP5hLg3J2dgcbn65HRd4SkeD2rPmKS9dCGza2cykLH13QF2mF6b3tm4YMp5Svb8zw1pEBGumjbxnGN9hVgpJhA1wR7w9h4kPVWFtSK/vQ7xFMP8uEPCkn3lgAAA=',
+    focus: '64% 56%',
+    alt: {
+      ar: 'متجر شوكولاتة: بائع خلف واجهة زجاجية يخدم سيدتين، ورفوف العلب خلفه',
+      en: 'A chocolate shop — a server at the glass counter attending two women, shelves of boxes behind him',
+    },
+  },
+  /**
+   * A courier handing an order over at a front door. eat.plus's plate. The bag and the jacket carry
+   * «BAYT KITCHEN», a kitchen's name rather than one of the client's marks.
+   */
+  doorDelivery: {
+    ...set('door-delivery', 1774),
+    lqip: 'data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAACQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBOgAkYeoPtguBCAAP6bApjnTP8jUmB3xLjQFi3l7c454l4iH1YAX0+gNoSJyuY+DwfslaWWG9pSvuyXG0Q8/eBGIL6BraZdP/ozBsboZo+QhCN+sintxWdygAI1CXqyZY3PWkyAAkUYAAA=',
+    focus: '60% 48%',
+    alt: {
+      ar: 'مندوب توصيل يسلّم طلباً عند باب منزل لرجل بالشماغ',
+      en: 'A courier handing an order to a man in a shemagh at the door of his house',
+    },
+  },
+  /** Two visitors photographing the green mountain terraces. ZL.TOURS' detail. */
+  terraceVisitors: {
+    ...set('terrace-visitors', 1774),
+    lqip: 'data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBdmUABoR2YpH+/sYI2gAAD+W2jUsNv40I5J7i5mqqqPaLXSXsL21pkmw/xnBKE4nDrMgx7cKbbEhjbFw9LHt4jMalYCt1i5zoBWohIEAAAA',
+    focus: '40% 62%',
+    alt: {
+      ar: 'زائرتان تلتقطان صورة للمدرّجات الجبلية الخضراء من ممشى خشبي',
+      en: 'Two visitors photographing the green mountain terraces from a timber walk',
+    },
+  },
+  /** Chefs finishing plates of dessert with an edible flower. Catering & Supply's detail. */
+  dessertPlating: {
+    ...set('dessert-plating', 1774),
+    lqip: 'data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwC/OBof7Ce8KGNb/hQAAP5kzaharySrll5EWKId7tmMeHEXv3hoIDA6Gl2konmcCQ4xvewPo3TtCZX2PHJyYQpWIi5N7TLYpk1LSnIZXcQqXRQ0mzwDUp3N2q0AAAA=',
+    focus: '60% 60%',
+    alt: {
+      ar: 'طهاة يضعون اللمسة الأخيرة على أطباق الحلوى بزهرة صالحة للأكل',
+      en: 'Chefs finishing plates of dessert with an edible flower',
+    },
+  },
+
+  // --- Cut from one contact sheet ---------------------------------------------------------------
 
   dining: {
     ...tile('ent-dining'),
@@ -438,13 +545,6 @@ export const photos = {
     lqip: 'data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADQBACdASoUAA8APu1iqU2ppaOiMAgBMB2JaACdMoMYAE5N3Ge2Ku8qNONzzEKCAAD+o0pn2W0iDOMqYn489idcaNI/uUp48gk1TzdjQTipOLd8vc417un86KyvgddIJLiCNFn8E0L3Y0WGtphuS/JF6lUUkky5d+tVAMwQQthjl7SEX/yY23LrchmP1ztTQWSXoD3EvXWTIedlQAA=',
     focus: '36% 62%',
     alt: { ar: 'مائدة على الواجهة المائية عند الغروب، والشموع على الطاولة', en: 'Waterfront dining at dusk, candles on the table' },
-  },
-  promenade: {
-    ...tile('ent-promenade'),
-    xs: '/ds/img/ent-promenade-xs.webp',
-    lqip: 'data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACwAwCdASoUAA8APu1iqU2ppaOiMAgBMB2JagCdMoACcwBNoEA4uAD+0Ree5uy/RpM1u9V4H35OqylVsNDLY3cM/h8woAeMWkUTcK/Lae4CJlZ76ic4gtEDNMDzIn7jNuOzhU9vfbzjZXtiXrvfIuCkacrxYGuosqp2lzvRo/1s7J3M9dyJiFSw2kVwoxBfG8ocDODHXn5/NCDXxFxBAAAA',
-    focus: '55% 50%',
-    alt: { ar: 'عائلة تمشي في ممشى مضاء نحو عجلة دوّارة', en: 'A family walking a lit promenade toward a Ferris wheel' },
   },
 
   // --- The first set, still in service ---------------------------------------------------------
@@ -476,9 +576,10 @@ export type PhotoKey = keyof typeof photos
 /**
  * The platforms' own marks, each set on its card the way the client supplied it. Qanif's is set
  * from its logo file on white: the Arabic name over the Latin one, the lockup with no line about a
- * farm under it. SEEM Supply's is set on white from the logo the client sent with its notes: the
- * S wound round a globe over a truck and its load, the wordmark, and «سيم للتوريدات» beneath. It
- * stands in for now, because the client means SEEM to name the group rather than any one venture.
+ * farm under it. Catering & Supply's is set on white from the logo the client sent with its
+ * notes: the S wound round a globe over a truck and its load, with the old SEEM SUPPLY wordmark
+ * beneath. It stands in until the new one arrives, because the client means SEEM to name the group
+ * rather than any one venture.
  */
 export const marks = {
   jaz: {
@@ -511,13 +612,13 @@ export const marks = {
     focus: '50% 50%',
     alt: { ar: 'شعار Qanif باللون الأخضر: الاسم بالعربية وتحته QANIF', en: 'The Qanif logo in green: the Arabic name over QANIF' },
   },
-  seemSupply: {
+  cateringSupply: {
     ...mark('logo-seem-supply'),
     lqip: 'data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADQBACdASoUABkAPtFUpk2oJCOiMBgIAQAaCWMAz2QQ7/xDeFwXP0H1YdwrLpjAAAD+9gL92aUnkR1CDRXZpUbijQf9hvu1BBQ4RvKuVgJ/GeI+FXGJJXtEyJC/U3l1OjOW/Ru59gjIkWCh07sE5pc6/ilmufOmF3MacAAA',
     focus: '50% 50%',
     alt: {
-      ar: 'شعار سيم للتوريدات: حرف S يلتفّ حول كرة أرضية فوق شاحنة وصناديق، وتحته SEEM SUPPLY',
-      en: 'The SEEM Supply logo: an S wound round a globe above a truck and boxes, over SEEM SUPPLY',
+      ar: 'شعار Catering & Supply المؤقت: حرف S يلتفّ حول كرة أرضية فوق شاحنة وصناديق',
+      en: 'The stand-in Catering & Supply logo: an S wound round a globe above a truck and boxes',
     },
   },
 } as const satisfies Record<string, Photo>
@@ -540,23 +641,20 @@ export type Framed = {
 }
 
 /**
- * The nine strategic sectors, in the order the copy lists them — Industry, E-commerce,
- * Logistics, Tourism, Real estate, Entertainment, Catering, Supply, Agriculture — one picture
- * each from the sector set, so the reel repeats nothing the hero has just shown. Where a sector
- * has a platform, its picture is the platform's: JAZ Chocolate's plant, Qanif's sign, the waiters
- * at the buffet. E-commerce and supply take two pictures from the September edition, the card at
- * the counter and the cargo hub. Agriculture's is the cocoa ripening on the branch, from the
- * October 18 set, whose coffee harvest the hero shows.
+ * The eight strategic sectors, in the order the copy lists them — Industry, E-commerce,
+ * Logistics, Tourism, Real estate, Catering, Supply, Agriculture — one picture each from the
+ * client's October 18 set, and none of the ones the hero shows: the plant hall, an order taped
+ * shut, a courier at the door, a hiker in a canyon, apartment blocks at sunset, waiters at a full
+ * table, a warehouse aisle, and the cocoa ripening on the branch.
  */
 export const sectorFrames: (Framed | undefined)[] = [
-  { photo: photos.chocolateHall, focus: '50% 62%' },
-  { photo: photos.cardTap, focus: '52% 50%' },
-  { photo: photos.warehouse, focus: '52% 56%' },
-  { photo: photos.longtail, focus: '50% 54%' },
-  { photo: photos.courtyard, focus: '50% 56%' },
-  { photo: photos.qanifSign, focus: '62% 54%' },
-  { photo: photos.cateringService, focus: '40% 50%' },
-  { photo: photos.cargoHub, focus: '42% 60%' },
+  { photo: photos.plantHall, focus: '46% 62%' },
+  { photo: photos.orderPacking, focus: '54% 56%' },
+  { photo: photos.courierHandover, focus: '50% 46%' },
+  { photo: photos.canyonHiker, focus: '38% 58%' },
+  { photo: photos.apartmentsSunset, focus: '40% 52%' },
+  { photo: photos.restaurantService, focus: '56% 50%' },
+  { photo: photos.warehouseForklift, focus: '50% 62%' },
   { photo: photos.cacaoPods, focus: '56% 56%' },
 ]
 
@@ -581,14 +679,14 @@ export const heroFrames: Framed[] = [
 ]
 
 /**
- * The three verbs of the positioning line, each with a picture of the work behind it: chocolate
- * coming off the line, a table being served, a destination that draws a crowd. The capsules are a
- * word wide, so each picture ships a 400px cut for them and card-size pictures are enough.
+ * The three verbs of the positioning line, each with a picture of the work behind it: pralines
+ * being made, a tray being served, a place invested in and full of guests. The capsules are a word
+ * wide, so each picture ships a 400px cut for them.
  */
 export const verbFrames: Framed[] = [
-  { photo: photos.chocolateEnrober, focus: '40% 72%' },
-  { photo: photos.cateringPlates, focus: '50% 46%' },
-  { photo: photos.promenade, focus: '70% 36%' },
+  { photo: photos.chocolatiers, focus: '62% 64%' },
+  { photo: photos.canapeTray, focus: '46% 62%' },
+  { photo: photos.lodgeEvening, focus: '46% 70%' },
 ]
 
 /**
@@ -613,23 +711,24 @@ export const platformFrames: Framed[] = [
   { photo: marks.zlTours },
   { photo: marks.homera },
   { photo: marks.qanif },
-  { photo: marks.seemSupply },
+  { photo: marks.cateringSupply },
 ]
 
 /**
  * The ecosystem page's platforms, in the same order. Each opens on a full-bleed picture of the
- * work and carries a framed detail of what it leads to: the box on the table, the payment that
- * closes the last mile, an evening out, the resort, Qanif's sign lit for the evening, and, at the
- * far end of SEEM Supply's docks, a dessert being finished. The plates are also the floors of the
- * model the page pulls back to.
+ * work and carries a framed detail of what it leads to: the shop at the end of JAZ Chocolate's
+ * line, the payment that closes the last mile, visitors at the terraces, the resort, Qanif's sign
+ * lit for the evening, and, at the far end of Catering & Supply's docks, a dessert being finished.
+ * The plates are also the floors of the model the page pulls back to. None of them is on the home
+ * page.
  */
 export const ecosystemPlatforms: { plate: Framed; detail: Framed }[] = [
-  { plate: { photo: photos.chocolateHall, focus: '50% 60%' }, detail: { photo: photos.chocolateBox, focus: '50% 62%' } },
-  { plate: { photo: photos.logistics, focus: '62% 56%' }, detail: { photo: photos.payments, focus: '56% 44%' } },
-  { plate: { photo: photos.coast, focus: '64% 50%' }, detail: { photo: photos.promenade, focus: '52% 50%' } },
-  { plate: { photo: photos.residence, focus: '60% 50%' }, detail: { photo: photos.hospitality, focus: '30% 62%' } },
+  { plate: { photo: photos.lineCrew, focus: '50% 56%' }, detail: { photo: photos.chocolateShop, focus: '64% 56%' } },
+  { plate: { photo: photos.doorDelivery, focus: '60% 48%' }, detail: { photo: photos.cardTap, focus: '52% 50%' } },
+  { plate: { photo: photos.longtail, focus: '50% 52%' }, detail: { photo: photos.terraceVisitors, focus: '40% 62%' } },
+  { plate: { photo: photos.courtyard, focus: '50% 56%' }, detail: { photo: photos.hospitality, focus: '30% 62%' } },
   { plate: { photo: photos.qanifTerrace, focus: '40% 58%' }, detail: { photo: photos.qanifSign, focus: '68% 50%' } },
-  { plate: { photo: photos.cargoHub, focus: '46% 56%' }, detail: { photo: photos.cateringPlating, focus: '62% 62%' } },
+  { plate: { photo: photos.cargoHub, focus: '46% 56%' }, detail: { photo: photos.dessertPlating, focus: '60% 60%' } },
 ]
 
 /**
@@ -638,21 +737,21 @@ export const ecosystemPlatforms: { plate: Framed; detail: Framed }[] = [
  */
 export const pagePlates = {
   about: {
-    masthead: { photo: photos.coast, focus: '30% 50%' },
+    masthead: { photo: photos.dunesSunset, focus: '62% 50%' },
   },
   strategy: {
     masthead: { photo: photos.city, focus: '58% 44%' },
   },
   ecosystem: {
-    masthead: { photo: photos.leisure, focus: '56% 50%' },
+    masthead: { photo: photos.portAerial, focus: '44% 56%' },
   },
   contact: {
     masthead: { photo: photos.residence, focus: '56% 50%' },
   },
 } as const satisfies Record<string, { masthead: Framed }>
 
-/** The home page's last window opens onto a resort above a bay: a destination built, and running. */
-export const homeClosing: Framed = { photo: photos.hospitality, focus: '34% 58%' }
+/** The home page's last window opens onto an investor at his screens, Riyadh beyond the glass. */
+export const homeClosing: Framed = { photo: photos.investorScreens, focus: '58% 50%' }
 
 /**
  * The about page's four strands — capital, technology, operations, strategic partnerships — in
@@ -691,16 +790,4 @@ export const loopFrames: Framed[] = [
   { photo: photos.logistics, focus: '64% 56%' },
   { photo: photos.residence, focus: '62% 50%' },
   { photo: photos.payments, focus: '60% 48%' },
-]
-
-/**
- * The roadmap's four phases, in order: Jeddah's coast for the foundation, a plant in the
- * Kingdom's interior for the expansion at home, an evening destination for the region, and
- * Riyadh at first light, in the identity's own green glass, for 2030.
- */
-export const roadFrames: Framed[] = [
-  { photo: photos.coast, focus: '62% 50%' },
-  { photo: photos.industry, focus: '60% 50%' },
-  { photo: photos.leisure, focus: '58% 50%' },
-  { photo: photos.facade, focus: '34% 58%' },
 ]

@@ -5,7 +5,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Mark } from '@/components/Mark'
 import { css } from '@/lib/css'
-import { chapters, EMAIL, PHONE_DISPLAY, PHONE_HREF, routes } from '@/lib/routes'
+import { chapters, EMAIL, routes } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { capStyle } from '@/lib/typography'
 
@@ -26,7 +26,6 @@ const FT = {
       ['من نحن', routes.about],
       ['الاستراتيجية', routes.strategy],
       ['نموذج الأعمال', chapters.model],
-      ['خارطة الطريق', chapters.roadmap],
       ['منظومتنا', routes.ecosystem],
       ['تواصل معنا', routes.contact],
     ],
@@ -48,7 +47,6 @@ const FT = {
       ['About', routes.about],
       ['Strategy', routes.strategy],
       ['Business model', chapters.model],
-      ['Roadmap', chapters.roadmap],
       ['Ecosystem', routes.ecosystem],
       ['Contact us', routes.contact],
     ],
@@ -123,13 +121,6 @@ export function SiteFooter() {
             <a href={`mailto:${EMAIL}`} className="sp-op" style={css(FOOTER_LINK)}>
               {EMAIL}
             </a>
-            <a
-              href={PHONE_HREF}
-              className="sp-op"
-              style={css("font-family:'IBM Plex Mono',monospace;" + FOOTER_LINK)}
-            >
-              <span dir="ltr">{PHONE_DISPLAY}</span>
-            </a>
           </div>
 
           <div style={css('display:flex;flex-direction:column;gap:12px')}>
@@ -174,19 +165,6 @@ export function SiteFooter() {
               </span>
             ) : null}
           </div>
-        </div>
-
-        {/* The wordmark as the framework sets it — spaced caps — at the scale of the page. */}
-        <div
-          aria-hidden="true"
-          dir="ltr"
-          style={css(
-            "margin:clamp(8px,2vw,24px) 0 clamp(18px,3vw,36px);font-family:'Sora',sans-serif;font-weight:600;" +
-              'font-size:clamp(26px,8.6vw,146px);line-height:.9;letter-spacing:.34em;white-space:nowrap;' +
-              'text-align:center;margin-inline-end:-.34em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.14);user-select:none',
-          )}
-        >
-          SEEM PRIME
         </div>
 
         <div

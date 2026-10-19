@@ -32,7 +32,7 @@ const NAV = {
   },
 } as const
 
-// The business model and the roadmap are chapters of the strategy page, not stops of their own.
+// The business model is a chapter of the strategy page, not a stop of its own.
 const LINKS = ['about', 'strategy', 'ecosystem'] as const
 type NavKey = (typeof LINKS)[number]
 

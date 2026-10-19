@@ -12,7 +12,7 @@ import { CONTACT, OFFICE_ID } from '@/lib/content/contact'
 import { css, cssWith, vars } from '@/lib/css'
 import { pagePlates } from '@/lib/media'
 import { scrollRail } from '@/lib/hooks'
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from '@/lib/routes'
+import { EMAIL } from '@/lib/routes'
 import { useSite } from '@/lib/site'
 import { bodyFont, capStyle, h2Style } from '@/lib/typography'
 
@@ -100,9 +100,6 @@ export function ContactPage() {
               </div>
               <a href={`mailto:${EMAIL}`} style={css('font-size:15px')}>
                 {EMAIL}
-              </a>
-              <a href={PHONE_HREF} style={css("font-family:'IBM Plex Mono',monospace;font-size:15px")}>
-                <span dir="ltr">{PHONE_DISPLAY}</span>
               </a>
             </div>
 

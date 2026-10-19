@@ -97,7 +97,9 @@ const AR = {
   second: 'منظومتنا',
   city: 'جدة',
   address: 'حي الخالدية — جدة، المملكة العربية السعودية',
-  reachLabel: 'من جدة إلى المنطقة: مراحل التوسع حتى 2030', // draft
+  /** How far the company means to reach, ring by ring outward from Jeddah, undated. */
+  reach: ['التوسع داخل المملكة', 'التوسع الإقليمي', 'الريادة في بناء المنظومات الاقتصادية'],
+  reachLabel: 'من جدة إلى المنطقة: مراحل التوسع', // draft
 }
 
 const EN: AboutCopy = {
@@ -190,7 +192,8 @@ const EN: AboutCopy = {
   second: 'Our ecosystem',
   city: 'Jeddah',
   address: 'Al Khalidiyah District — Jeddah, Kingdom of Saudi Arabia',
-  reachLabel: 'From Jeddah to the region: the phases of expansion to 2030', // draft
+  reach: ['Saudi expansion', 'Regional expansion', 'Leading economic ecosystem platform'],
+  reachLabel: 'From Jeddah to the region: the phases of expansion', // draft
 }
 
 export const ABOUT = { ar: AR, en: EN }

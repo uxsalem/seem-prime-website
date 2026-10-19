@@ -7,8 +7,6 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { ActIndex } from '@/components/strategy/ActIndex'
 import { Colonnade } from '@/components/strategy/Colonnade'
 import { FocusPull } from '@/components/strategy/FocusPull'
-import { RoadTo2030 } from '@/components/strategy/RoadTo2030'
-import { Targets2030 } from '@/components/strategy/Targets2030'
 import { ValueLoop } from '@/components/strategy/ValueLoop'
 import { ValueSum } from '@/components/strategy/ValueSum'
 import { STRATEGY } from '@/lib/content/strategy'
@@ -36,8 +34,6 @@ export function StrategyPage() {
       <Colonnade />
       <ValueLoop />
       <ValueSum />
-      <RoadTo2030 />
-      <Targets2030 />
       <SiteFooter />
     </PageShell>
   )
