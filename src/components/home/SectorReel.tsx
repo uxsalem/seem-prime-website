@@ -22,8 +22,8 @@ const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
  * along a single line — vertical scroll becomes a lateral journey past eight windows of one size,
  * strung on the line like frames of a film, each opening as it arrives, the ember drawing itself
  * up to the middle of the screen. Everywhere else it is a plain swipe rail with the same frames
- * and captions. A sector names every platform it holds under its line — tourism has two — and a
- * sector with no picture yet shows its window's empty state.
+ * and captions. A sector names every platform it holds under its line — logistics and tourism
+ * have two each — and a sector with no picture yet shows its window's empty state.
  */
 export function SectorReel() {
   const { lang, ar, arrow } = useSite()

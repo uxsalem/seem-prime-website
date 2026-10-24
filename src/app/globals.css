@@ -1903,13 +1903,6 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 [dir='rtl'] [data-page] [data-sc='rule'] { transform-origin: right center; }
 [data-page] [data-sc='rule'][data-in] { transform: none; }
 
-/* --- Ecosystem: the contents line ------------------------------------------------
-   The strategy page's grouped contents: the six platforms, then what they make
-   together. Each stop takes the same width.
-   -------------------------------------------------------------------------- */
-
-[data-eco-acts] { grid-template-columns: minmax(0, 6fr) minmax(0, 1fr); }
-
 /* --- Ecosystem: the platforms and the model ----------------------------------------
    Laid flat by default: the title card, the platforms as full-bleed frames in turn,
    then the model at rest with its key. Where there is room the stage pins: the
@@ -2080,21 +2073,21 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
 [data-collar] { fill: #dc4b1c; stroke: #dc4b1c; stroke-width: 1; }
 
 /* Once the cores stand, light moves along them: up two, down two, a floor at a time. Each
-   floor's stretch lights for 0.92s, 15% of the cycle, and hands on to the next, so a pulse
-   crosses the six floors in 5.52s and the core rests 0.6s before the next one. A floor more
+   floor's stretch lights for 0.92s, 13% of the cycle, and hands on to the next, so a pulse
+   crosses the seven floors in 6.44s and the core rests 0.6s before the next one. A floor more
    or less means retiming both. */
 @keyframes sp-core-up {
   0% { stroke-dashoffset: 0.14; opacity: 1; }
-  15.03% { stroke-dashoffset: -1; opacity: 1; }
-  15.04%, 100% { stroke-dashoffset: -1; opacity: 0; }
+  13.06% { stroke-dashoffset: -1; opacity: 1; }
+  13.07%, 100% { stroke-dashoffset: -1; opacity: 0; }
 }
 @keyframes sp-core-down {
   0% { stroke-dashoffset: -1; opacity: 1; }
-  15.03% { stroke-dashoffset: 0.14; opacity: 1; }
-  15.04%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
+  13.06% { stroke-dashoffset: 0.14; opacity: 1; }
+  13.07%, 100% { stroke-dashoffset: 0.14; opacity: 0; }
 }
 [data-live] [data-core-pulse] {
-  animation: sp-core-up 6.12s linear infinite;
+  animation: sp-core-up 7.04s linear infinite;
   animation-delay: calc(var(--seg) * 0.92s + var(--core) * 0.7s);
 }
 [data-live] [data-core-pulse][data-dir='down'] { animation-name: sp-core-down; }
@@ -2183,6 +2176,9 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
     padding: calc(clamp(56px, 6vw, 66px) + 4vh) var(--gutter) 10vh;
     will-change: transform, opacity;
   }
+  /* The stacking ladder: card k at 10(k + 1), the model's layer for each height between them at
+     10z + 5, and the copy, the labels and the rail over the top of it, wherever that is: the pin
+     sets `--floors` from the platform count. */
   [data-card] {
     position: absolute;
     inset: 0;
@@ -2220,7 +2216,7 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-detail-win] [data-imgwrap] { transform: scale(var(--settle, 1)); }
   [data-model-copy] {
     position: absolute;
-    z-index: 60;
+    z-index: calc(10 * var(--floors) + 10);
     top: calc(clamp(56px, 6vw, 66px) + 8vh);
     inset-inline-start: var(--gutter);
     width: min(400px, 28vw);
@@ -2249,14 +2245,14 @@ html[data-theme='dark'] [data-sum-total] > [data-sum-row] { background: #0c3e3d;
   [data-floor-faces] > [data-face-edge],
   [data-floor-faces] > [data-face-back],
   [data-floor-faces] > [data-collar] { opacity: var(--faces, 1); }
-  [data-model-labels] { display: block; position: absolute; inset: 0; z-index: 60; pointer-events: none; will-change: transform; }
+  [data-model-labels] { display: block; position: absolute; inset: 0; z-index: calc(10 * var(--floors) + 10); pointer-events: none; will-change: transform; }
   [data-floor-label],
   [data-plinth],
   [data-core-label] { opacity: 0; }
   [data-stack-rail] {
     display: grid;
     position: absolute;
-    z-index: 70;
+    z-index: calc(10 * var(--floors) + 20);
     bottom: clamp(18px, 3vh, 34px);
     inset-inline: var(--gutter);
     grid-auto-flow: column;
