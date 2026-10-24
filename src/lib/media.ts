@@ -13,9 +13,10 @@ import type { Lang } from '@/lib/site'
  * The sector set is the client's own, and more realistic: since October 18 a picture for each hour
  * of the hero's day, and since October 19 the reel, the statement, the home page's closing window,
  * the about and ecosystem mastheads and the platforms on the ecosystem page, all from the same
- * October 18 delivery. The home page never shows one photograph twice, and the ecosystem page
- * shows none that the home page does. The brand's deep green is the ground they all sit on —
- * scrims, sections, the dark between frames — never a tint laid over the pictures themselves.
+ * October 18 delivery, and Nefaah's detail from the brand guideline the client sent for it. The
+ * home page never shows one photograph twice, and the ecosystem page shows none that the home
+ * page does. The brand's deep green is the ground they all sit on — scrims, sections, the dark
+ * between frames — never a tint laid over the pictures themselves.
  */
 export type Photo = {
   /** Full-bleed cut — plates, mastheads, banners, the hero. */
@@ -38,7 +39,10 @@ export type Photo = {
 const img = (name: string, w: number) => ({ src: `/ds/img/${name}.webp`, w, sm: `/ds/img/${name}-sm.webp` })
 /** The golden-hour set also ships a middle cut, for windows too large for a card cut. */
 const set = (name: string, w: number) => ({ ...img(name, w), md: `/ds/img/${name}-md.webp` })
-/** Tiles cut from a contact sheet only exist at card size, so both cuts are the same file. */
+/**
+ * A picture that only exists at card size — a tile cut from a contact sheet, or a detail that only
+ * ever fills a framed window — uses the one file for both cuts.
+ */
 const tile = (name: string, w = 585) => ({ src: `/ds/img/${name}-sm.webp`, w, sm: `/ds/img/${name}-sm.webp` })
 /**
  * A platform's mark ships as one 720 × 900 card, the shape of its thumbnail in the home page's
@@ -536,6 +540,36 @@ export const photos = {
       en: 'Chefs finishing plates of dessert with an edible flower',
     },
   },
+  /**
+   * A waiter in a dark apron carrying two plates through a restaurant. Nefaah's plate: the
+   * restaurants half of what it delivers, beside the groceries of its detail.
+   */
+  restaurantPlates: {
+    ...set('restaurant-plates', 1774),
+    lqip: 'data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAABwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwAD5Doveaq2V7qkMkej2yxXgAD+3gITNJtfswhQ1o+3rFYAmMfGUIIWvbmGEXGcFvi03DnU5l/9k6ZPiHkUcJbdXx2V4nTRm/2pzyc8VV3Y/3/SiwRO4ZIcO0ZlgrVOS1K39WylOv4ihXKsApAj0zDoiOIOUKKRO2wA',
+    focus: '54% 50%',
+    alt: {
+      ar: 'نادل بمريلة داكنة يحمل طبقين في مطعم: شريحة لحم مع خضار مشوية، وإسكالوب مع الهليون',
+      en: 'A waiter in a dark apron carrying two plates through a restaurant — a fillet steak with roast vegetables, and scallops with asparagus',
+    },
+  },
+
+  // --- Nefaah's brand guideline ----------------------------------------------------------------
+
+  /**
+   * A canvas tote of groceries printed with Nefaah's logo, from the website page of the brand
+   * guideline the client sent on October 19: cut clear of the page's interface, with the page's
+   * decorative red dot lifted off the canvas. Nefaah's detail, so it ships at that size alone.
+   */
+  nefaahBag: {
+    ...tile('nefaah-bag', 720),
+    lqip: 'data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACwBACdASoUABkAPuVgp02pJaOiMAwBIByJQBdiP/wG1198Dfq4y93JRo8m+sQAAP6b3ahZgSVcn3krLLeCblAYjInL3Yy/17w63gIEAxczGf7VlLPKmwNzUI7tZT64x+WdiTC/xdkvXeoC3L1qHajSbsAIW95Efb8kmacuxzef1m4dB69PiAAAAAA=',
+    focus: '50% 50%',
+    alt: {
+      ar: 'حقيبة قماشية عليها شعار Nefaah، وفي أعلاها خضار وأعشاب طازجة',
+      en: 'A canvas tote printed with the Nefaah logo, fresh vegetables and greens at its top',
+    },
+  },
 
   // --- Cut from one contact sheet ---------------------------------------------------------------
 
@@ -576,10 +610,11 @@ export type PhotoKey = keyof typeof photos
 /**
  * The platforms' own marks, each set on its card the way the client supplied it. Qanif's is set
  * from its logo file on white: the Arabic name over the Latin one, the lockup with no line about a
- * farm under it. Catering & Supply's is set on white from the logo the client sent with its
- * notes: the S wound round a globe over a truck and its load, with the old SEEM SUPPLY wordmark
- * beneath. It stands in until the new one arrives, because the client means SEEM to name the group
- * rather than any one venture.
+ * farm under it. Nefaah's is its full-colour lockup on white, the Arabic name running from green
+ * into blue over NEFAAH, as its brand guideline sets it. Catering & Supply's is set on white from
+ * the logo the client sent with its notes: the S wound round a globe over a truck and its load,
+ * with the old SEEM SUPPLY wordmark beneath. It stands in until the new one arrives, because the
+ * client means SEEM to name the group rather than any one venture.
  */
 export const marks = {
   jaz: {
@@ -593,6 +628,15 @@ export const marks = {
     lqip: 'data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAABQBACdASoUABkAPuFeqE2opSQiMAwBEBwJQAagDnwAHkgOCcZspWaBpgNAAP7xwmAjABaEKbFBJjEQbfCPSEHiTKTP7qACiP7veb8kD8f0pX+CCViJ4yqSvxPuonBP5c2KeXf/gCwe4t7ipB7C455KKe7zCuPzAAA=',
     focus: '50% 50%',
     alt: { ar: 'شعار eat.plus باللون البرتقالي', en: 'The eat.plus logo in orange' },
+  },
+  nefaah: {
+    ...mark('logo-nefaah'),
+    lqip: 'data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQBACdASoUABkAPtFcpk6oJSMiKAqpABoJZQDH5BEcz/MFmNHvL7hfgAD+9gFzrN+8V1eaBJ1RMxmAcfVZwizh1kyQnjJCjt6Si3nfOD6y37G0mRt4gzmchgAAAA==',
+    focus: '50% 50%',
+    alt: {
+      ar: 'شعار Nefaah: الاسم بالعربية بخط متصل تنبت منه أوراق، بتدرّج من الأخضر إلى الأزرق، وتحته NEFAAH',
+      en: 'The Nefaah logo: the Arabic name in one flowing line that sprouts leaves, green fading to blue, over NEFAAH',
+    },
   },
   zlTours: {
     ...mark('logo-zl-tours'),
@@ -708,6 +752,7 @@ export const seemFrames: Framed[] = [
 export const platformFrames: Framed[] = [
   { photo: marks.jaz },
   { photo: marks.eatPlus },
+  { photo: marks.nefaah },
   { photo: marks.zlTours },
   { photo: marks.homera },
   { photo: marks.qanif },
@@ -717,14 +762,15 @@ export const platformFrames: Framed[] = [
 /**
  * The ecosystem page's platforms, in the same order. Each opens on a full-bleed picture of the
  * work and carries a framed detail of what it leads to: the shop at the end of JAZ Chocolate's
- * line, the payment that closes the last mile, visitors at the terraces, the resort, Qanif's sign
- * lit for the evening, and, at the far end of Catering & Supply's docks, a dessert being finished.
- * The plates are also the floors of the model the page pulls back to. None of them is on the home
- * page.
+ * line, the payment that closes the last mile, the groceries Nefaah delivers beside its
+ * restaurants' plates, visitors at the terraces, the resort, Qanif's sign lit for the evening,
+ * and, at the far end of Catering & Supply's docks, a dessert being finished. The plates are also
+ * the floors of the model the page pulls back to. None of them is on the home page.
  */
 export const ecosystemPlatforms: { plate: Framed; detail: Framed }[] = [
   { plate: { photo: photos.lineCrew, focus: '50% 56%' }, detail: { photo: photos.chocolateShop, focus: '64% 56%' } },
   { plate: { photo: photos.doorDelivery, focus: '60% 48%' }, detail: { photo: photos.cardTap, focus: '52% 50%' } },
+  { plate: { photo: photos.restaurantPlates, focus: '54% 50%' }, detail: { photo: photos.nefaahBag, focus: '50% 50%' } },
   { plate: { photo: photos.longtail, focus: '50% 52%' }, detail: { photo: photos.terraceVisitors, focus: '40% 62%' } },
   { plate: { photo: photos.courtyard, focus: '50% 56%' }, detail: { photo: photos.hospitality, focus: '30% 62%' } },
   { plate: { photo: photos.qanifTerrace, focus: '40% 58%' }, detail: { photo: photos.qanifSign, focus: '68% 50%' } },

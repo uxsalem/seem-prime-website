@@ -12,16 +12,18 @@ const IDS: string[] = [...PLATFORM_IDS, ECOSYSTEM_IDS.model]
 /**
  * The opening's contents line. The page is the platforms and then what they make together, so
  * its stops are grouped that way, the way the strategy page groups its chapters under the
- * promise line's beats, and each is a jump to its place.
+ * promise line's beats, and each is a jump to its place. Every stop takes the same width, so each
+ * group is as wide as the stops it holds.
  */
 export function EcosystemIndex() {
   const { lang } = useSite()
   const t = ECOSYSTEM[lang]
 
   const starts = t.groups.map((_, g) => t.groups.slice(0, g).reduce((n, [, items]) => n + items.length, 0))
+  const widths = t.groups.map(([, items]) => 'minmax(0,' + items.length + 'fr)').join(' ')
 
   return (
-    <nav aria-label={t.contentsLabel} data-acts="" data-eco-acts="" data-sc="">
+    <nav aria-label={t.contentsLabel} data-acts="" data-sc="" style={css('grid-template-columns:' + widths)}>
       {t.groups.map(([group, items], g) => (
         <div key={group} data-act="">
           <span data-act-name="">{group}</span>

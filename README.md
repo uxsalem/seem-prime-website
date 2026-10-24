@@ -108,8 +108,10 @@ reel's agriculture window. A review of the live site on October 19 put the rest 
 in place of older pictures: the reel's other seven windows, the statement's three capsules, the home
 page's closing window (an investor at his screens over Riyadh), the about page's opening shot (dunes
 at sunset), and on the ecosystem page its opening shot (a container port from the air) and most of
-the platforms' pictures. The brand's deep green is the ground they all sit on (sections, scrims, the
-dark between frames), never a tint laid over the pictures.
+the platforms' pictures. Later that day Nefaah joined the platforms, and the set's waiter carrying
+two plates became its card, beside a tote of groceries from Nefaah's own brand guideline. The
+brand's deep green is the ground they all sit on (sections, scrims, the dark between frames), never
+a tint laid over the pictures.
 
 The home page shows no photograph twice, and the ecosystem page shows none of the home page's.
 The hero, the statement's capsules, the reel, the SEEM stages and the closing window each have
@@ -128,10 +130,11 @@ The maps at the foot of the module decide what appears where: `heroFrames`, `sec
 `aboutStrands`, `aboutWhole`, `aboutCreed`, `strategyFocus`, `loopFrames`.
 Re-shooting a subject is a one-line change. The logos live beside the photographs as `marks`.
 Qanif's card is set on white from page 1 of its logo file, قنيف over QANIF, the lockup that
-carries no line about a farm. Catering & Supply's is set on white from the logo the client sent
-with its October notes: an S wound round a globe above a truck and its load, over «SEEM SUPPLY»
-and «سيم للتوريدات». It is a stand-in until the new one arrives, because SEEM names the group
-rather than any one venture.
+carries no line about a farm. Nefaah's is its full-colour lockup on white, نفعة running from green
+into blue over NEFAAH, from the logo file and brand guideline the client sent for it on October 19.
+Catering & Supply's is set on white from the logo the client sent with its October notes: an S
+wound round a globe above a truck and its load, over «SEEM SUPPLY» and «سيم للتوريدات». It is a
+stand-in until the new one arrives, because SEEM names the group rather than any one venture.
 
 Two photographs have derived states. `techFar` and `techNear` are the desk before the Riyadh
 skyline with the focus pulled: the horizon sharp and the laptop soft, then the reverse. They are
@@ -146,8 +149,10 @@ card cut and a desktop the full one. The contact-sheet table exists at card size
 courier riding into the sunrise came as a 1717px file and the courier at the door as a 1536px one,
 so their full cuts are those sizes. The three pictures in the statement's capsules also ship a 400px
 cut (`xs`), because a capsule is a word wide. The logos ship as single 720 × 900 cards, the shape of
-the index's thumbnails on a wide screen. The payments frame is cropped to leave out the emblem that
-opens the source image.
+the index's thumbnails on a wide screen. Nefaah's tote ships as one 720 × 900 cut too, because it
+only ever fills the framed detail on its card; it is cut from the website page of Nefaah's brand
+guideline, clear of the page's interface, with the page's decorative red dot lifted off the bag. The
+payments frame is cropped to leave out the emblem that opens the source image.
 
 Two components consume them. **`Plate`** is the full-bleed photograph behind a masthead or a
 band of copy: blur-up, photograph, brand scrim, film grain. **`ImageSlot`** is a
@@ -159,10 +164,10 @@ Image weight, measured against a production build (whole page = after scrolling 
 
 | Page | 1440×900 first screen | 1440×900 whole page | 390×844 @2x whole page |
 |---|---|---|---|
-| home | 375KB | 1279KB | 743KB |
+| home | 375KB | 1287KB | 750KB |
 | about | 326KB | 593KB | 282KB |
 | strategy | 328KB | 525KB | 305KB |
-| ecosystem | 262KB | 1671KB | 668KB |
+| ecosystem | 262KB | 1824KB | 755KB |
 | contact | 202KB | 202KB | 64KB |
 
 The home page's first screen on desktop is the hero's opening frame plus the next scene, which is
@@ -179,7 +184,8 @@ a villa's terrace, a busier picture than the logistics hub before it, and the re
 window took a picture of its own (60KB), so the desktop page is heavier (it was 283KB on the first
 screen and 1131KB in all); a phone's is 9KB lighter (718KB), because the opening scenes' card cuts
 are. The October 19 review gave the reel, the capsules and the closing window new pictures of their
-own: the desktop page is 3KB lighter (1282KB) and a phone's 34KB heavier (709KB). The about page's
+own: the desktop page is 3KB lighter (1282KB) and a phone's 34KB heavier (709KB). Nefaah's logo, the
+index's seventh, adds 8KB on a desktop and 7KB on a phone (it was 1279KB and 743KB). The about page's
 first screen is its opening shot plus the four strand windows peeking under it; the city they
 assemble into is only mounted once the reader reaches that chapter. Its opening shot is the dunes
 since the review, lighter than the heritage coast before them (it was 396KB on the first screen,
@@ -188,11 +194,13 @@ It carries the business model as well as the strategy; the seal's four pictures 
 once their chapter is a screen away. The roadmap's four full-bleed pictures left with the roadmap
 (it was 1188KB and 522KB). The ecosystem page's first screen is its opening shot alone: the
 container port since the review, a busy picture that weighs more than the evening destination before
-it (173KB). The page in all is lighter (1805KB and 709KB), because the platforms' pictures are the
-client's lighter cuts and the plant's hall, the heaviest picture in the set, is no longer one of
-them. Its stage clips the platforms still to rise, which would keep the browser's lazy loading
-waiting until each card is already moving, so each platform's pictures are mounted as the card
-before it starts to rise, and load straight away; the model they become is drawn, not photographed.
+it (173KB). The review made the page lighter in all (1805KB and 709KB before it, 1671KB and 668KB
+after), because the platforms' pictures are the client's lighter cuts and the plant's hall, the
+heaviest picture in the set, is no longer one of them. Nefaah's card, the seventh, adds its waiter
+and its tote: 153KB on a desktop and 87KB on a phone. Its stage clips the platforms still to rise,
+which would keep the browser's lazy loading waiting until each card is already moving, so each
+platform's pictures are mounted as the card before it starts to rise, and load straight away; the
+model they become is drawn, not photographed.
 
 ## Motion
 
@@ -220,7 +228,9 @@ Each section in `src/components/home/` owns its motion:
   and its copy in the order the client set it: the main line, the line under it, what the sector
   does, whose scene it is where the button does not already say, and its door. The sector is named
   once, in the index; no scene names a platform twice. Supply and catering open onto Catering &
-  Supply, and e-commerce, which lists the platforms it sells, onto the ecosystem. Qanif comes in at
+  Supply, and e-commerce, which lists the platforms it sells, onto the ecosystem. Logistics holds
+  two platforms, so the line above its button names both, eat.plus · Nefaah, and the button reads
+  «اكتشف المنصتين» and opens onto eat.plus's card, with Nefaah's after it. Qanif comes in at
   9:30 ص, through its coffee and cocoa. The line that used to run above each title (the part of the
   day, its hour, the sector) and the «قيد التطوير» pill came off in the October 19 review. The
   scenes cut on a **diagonal blade** (the slant of the cut ends of the mark's letter bars) with a
@@ -241,10 +251,10 @@ Each section in `src/components/home/` owns its motion:
   journey past eight windows of one size, 3:2, strung on one line through their middles like
   the frames of a film. The ember line draws itself to the middle of the screen, the counter
   names the frame under it, and each picture slides against the travel. A sector names every
-  platform it holds under its line: ZL.TOURS and Qanif under tourism, Qanif under agriculture
-  too, Catering & Supply under catering and supply. Everywhere else it is a swipe rail of the
-  same frames.
-- **`PlatformIndex`**: the six platforms as an index, each line led by the platform's logo, so
+  platform it holds under its line: eat.plus and Nefaah under logistics, ZL.TOURS and Qanif under
+  tourism, Qanif under agriculture too, Catering & Supply under catering and supply. Everywhere
+  else it is a swipe rail of the same frames.
+- **`PlatformIndex`**: the seven platforms as an index, each line led by the platform's logo, so
   the logos stand one under another down the reading edge with the names set large beside them.
   The logos are always in sight and never move, on every screen. A window of the logo used to
   float beside a fine pointer instead, until the client asked in October 2026 for the logos to
@@ -252,7 +262,8 @@ Each section in `src/components/home/` owns its motion:
   fine pointer leans its name in and dims the other lines' copy, never their logos. Platform
   names are set by `markType` (`typography.ts`), which gives an Arabic mark the Arabic face and
   no tracking. Every name is written in Latin on both pages now: Qanif since the client asked for
-  «Qanif», and Catering & Supply since SEEM's name came off it («سيم للتوريدات»).
+  «Qanif», Catering & Supply since SEEM's name came off it («سيم للتوريدات»), and Nefaah («نفعة»)
+  the same way from the start.
 - **`SeemStages`**: four standing panels, one photograph each. Scroll (or a click) widens the
   open stage into a window and its question arrives. The panels spell the name, so they stand
   S, E, E, M from left to right in Arabic as well as English, and the scroll walks them left to
@@ -336,12 +347,12 @@ October 19 review, at the client's request.
 
 ### The ecosystem page, platform by platform
 
-The ecosystem page presents the six platforms (JAZ Chocolate in industry, eat.plus in logistics,
-ZL.TOURS in tourism, HOMERA in real estate, Qanif in tourism and agriculture, and Catering &
-Supply in catering and supply; a platform in two sectors numbers both on its card), and then
-what they make together. The opening shot carries a contents line that lists
-all seven stops, the platforms first (`EcosystemIndex`), and both chapters play out on one stage
-in `src/components/ecosystem/`:
+The ecosystem page presents the seven platforms (JAZ Chocolate in industry, eat.plus and Nefaah
+in logistics, ZL.TOURS in tourism, HOMERA in real estate, Qanif in tourism and agriculture, and
+Catering & Supply in catering and supply; a platform in two sectors numbers both on its card), and
+then what they make together. The opening shot carries a contents line that lists all eight stops,
+the platforms first, each stop as wide as the next (`EcosystemIndex`), and both chapters play out
+on one stage in `src/components/ecosystem/`:
 
 - **`PlatformStack`** (the platforms, and one ecosystem): one pinned stage. A title card lists the
   platforms the way a building lists its floors, top floor first. Then each platform rises over the
@@ -357,8 +368,9 @@ in `src/components/ecosystem/`:
   every floor hides what is behind it. Each platform has an address of its own
   (`/ecosystem#homera`), and the home page's platform index links straight to it. The stage is built
   from the platform count: a platform more is a stretch of scroll more (the pin sets its height from
-  `--travel`), a card, a floor and a rail stop. The one exception is the light on the cores, whose
-  timing in `globals.css` is tuned for six floors.
+  `--travel`), a card, a floor and a rail stop, and the model's copy, labels and rail stay on top of
+  however many cards and floors stack under them (`--floors`). The one exception is the light on the
+  cores, whose timing in `globals.css` is tuned for seven floors.
 
 The page ends on the model. It used to come out into the light for a call to action beside six
 plates for partners' logos (`EcosystemClose`); the client did not want it, and it was removed in
@@ -440,22 +452,27 @@ the reader has already started to move.
   focus states have to be regenerated with `scripts/focus-states.py` (and its near plane re-traced)
   if it is replaced.
 - **Some home page copy is draft.** The reel headline, the five new sector lines (e-commerce's,
-  catering's, supply's and agriculture's among them), the reel's closing link, and Qanif's and
-  Catering & Supply's descriptions and lines are new strings, marked `// draft` in
-  `src/lib/content/home.ts`, in both languages. The hero's day is the client's own Arabic copy,
-  with a handful of spelling slips corrected (listed beside it); its English is a drafted
-  translation, and so is the hero's name for its first scene. Everything else on the page is the
-  approved framework copy.
+  catering's, supply's and agriculture's among them), the reel's closing link, Nefaah's, Qanif's
+  and Catering & Supply's descriptions and lines, and the 7:30 scene's button («اكتشف المنصتين»)
+  are new strings, marked `// draft` in `src/lib/content/home.ts`, in both languages. The hero's
+  day is the client's own Arabic copy, with a handful of spelling slips corrected (listed beside
+  it) and Nefaah's name added beside eat.plus at 7:30 and in the list at 18:00, as the October 19
+  review asked; its English is a drafted translation, and so is the hero's name for its first
+  scene. Everything else on the page is the approved framework copy.
 - **Catering & Supply is a working name.** In the October 19 review the client took SEEM's name
   off every venture, because SEEM names the group: SEEM Catering in the hero and SEEM Supply
   («سيم للتوريدات») on the platform pages became one name, Catering & Supply, written in Latin on
   both pages, at `/ecosystem#catering-supply`. Its card still carries the stand-in logo, which
   reads SEEM SUPPLY, until the client sends the new one.
-- **A second logistics platform is waiting for its logo.** The same review added a delivery and
-  food app the company has invested in, to stand beside eat.plus in the 7:30 scene, the index,
-  the ecosystem page and the model. Its name and logo are still to come. A seventh floor also
-  means retiming the light on the cores and extending the ecosystem page's stacking ladder in
-  `globals.css`, both sized for six.
+- **Nefaah's pictures are stand-ins.** The same review added Nefaah («نفعة»), a food and grocery
+  delivery app the group has invested in, beside eat.plus: in the 7:30 scene and the 18:00 list,
+  as the third row of the index, under logistics in the reel, and as the third card and floor on
+  the ecosystem page, at `/ecosystem#nefaah`. Its logo and brand guideline came later that day, but
+  no photograph of it did. Its card opens on a waiter carrying two plates, a spare from the
+  October 18 set's catering pictures, for the restaurants it delivers from, and frames a tote of
+  groceries cut from the website page of its guideline. The app posts the client sent with them
+  (three social posts in one file, «تطبيق نفعهم») are not used: they are advertisements, with
+  headlines and store badges. Swap in photographs of Nefaah when the client has them.
 - **Some about page copy is draft.** The English values are the framework's own full
   statements; their Arabic is a drafted translation. The chapter names, the name chapter's
   headline and its three notes, the values headline and "One ecosystem" are new. All are marked
@@ -472,11 +489,14 @@ the reader has already started to move.
   Chocolate: its sector is now industry, at the client's request, and its name is spelled as its
   logo spells it, where the framework has "JAZ Choklat". The contents line's group names (its
   "One ecosystem" is the about page's), the platforms headline and lead, the sector labels, the
-  six detail captions, Qanif's and Catering & Supply's descriptions and lines, the model's
-  headline, the cores line and the model's description are new. All are marked `// draft` in
-  `src/lib/content/ecosystem.ts`. Qanif is written without «مزرعة» (farm) everywhere, because it
-  is becoming a resort, and stands in tourism and agriculture; its address is `#qanif` now, not
-  `#qanif-farm`. The sixth platform covers catering and supply, so it stands in both sectors.
+  seven detail captions, Nefaah's, Qanif's and Catering & Supply's descriptions and lines, the
+  model's headline, the cores line and the model's description are new. All are marked `// draft`
+  in `src/lib/content/ecosystem.ts`. Nefaah's are written from what the client said of it in the
+  review («توصيل وطعام وكل مطاعم») and its guideline («ONLINE SUPERMARKET»), and its name is
+  written in Latin, like Qanif's and Catering & Supply's. Qanif is written without «مزرعة» (farm)
+  everywhere, because it is becoming a resort, and stands in tourism and agriculture; its address
+  is `#qanif` now, not `#qanif-farm`. Catering & Supply covers catering and supply, so it stands in
+  both sectors.
 - **HOMERA's detail is still a generated picture.** The ecosystem page's other platforms show the
   client's pictures, but the client's sets have one real-estate picture left over, and the reel
   uses it, so HOMERA's detail is still the golden-hour resort. The client is sending more

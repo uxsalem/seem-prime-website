@@ -66,7 +66,9 @@ const AR = {
    * supplied text are corrected: «إمدادك» takes its hamza, «شركاءنا» is the object of «نمكّن»,
    * «وناسه» drops a damma the genitive cannot carry, «بمعايير عالية» gets its space, and the
    * line after «تذوّق قطعة من الفرح» loses its trailing «..». Qanif is written in Latin, as
-   * everywhere else on the Arabic pages. No venture carries SEEM's name: SEEM is the group.
+   * everywhere else on the Arabic pages. No venture carries SEEM's name: SEEM is the group. Nefaah
+   * is not in the supplied text: the October 19 review asked for its name beside eat.plus, so it
+   * stands with it at 7:30 and in the list at 18:00.
    */
   day: [
     {
@@ -87,8 +89,9 @@ const AR = {
       title: 'اطلب الحي كله',
       sub: 'من مطابخ الحي إلى بابك: شيفات مستقلون وفود ترك وبقالات الحي في مكان واحد',
       body: 'نقرّب منتجات أهل الحي من عملائهم، ونفتح للأسر والطهاة المستقلين وأصحاب العربات فرصاً أوسع للنمو والوصول',
-      brand: '',
-      cta: 'اكتشف eat.plus',
+      // Logistics holds two platforms, so the line names both and the button neither.
+      brand: 'eat.plus · Nefaah',
+      cta: 'اكتشف المنصتين', // draft
     },
     {
       title: 'اشرب ما زُرع هنا',
@@ -122,7 +125,7 @@ const AR = {
       title: 'تسوّق من كل منصاتنا',
       sub: 'منتجاتنا وخدماتنا على بُعد ضغطة',
       body: 'نجمع منتجات المنظومة وخدماتها في قنوات رقمية متكاملة تسهّل البيع والشراء، ونمكّن مشاريعنا وشركاءنا من النمو والوصول إلى عملاء أكثر',
-      brand: 'JAZ · ZL.TOURS · HOMERA · eat.plus',
+      brand: 'JAZ · ZL.TOURS · HOMERA · eat.plus · Nefaah',
       cta: 'استكشف منظومتنا',
     },
     {
@@ -177,6 +180,7 @@ const AR = {
   platforms: [
     ['تصنيع الأغذية الفاخرة', 'JAZ Chocolate', 'من اختيار المكوّن حتى اكتمال التجربة'],
     ['التجارة والتوصيل في الميل الأخير', 'eat.plus', 'أنظمة تشغيل حديثة وحلول متكاملة'],
+    ['تطبيق توصيل الطعام والبقالة', 'Nefaah', 'المطاعم والبقالة في تطبيق واحد'], // draft
     ['سوق التجارب السياحية', 'ZL.TOURS', 'تجارب داخل المملكة وإقليميًا'],
     ['منصة عقارية وضيافة', 'HOMERA', 'إدارة وتشغيل العقارات وحلول الضيافة'],
     ['منتجع ريفي', 'Qanif', 'إقامة وتجارب عائلية في قلب الطبيعة'], // draft
@@ -225,8 +229,8 @@ const EN: HomeCopy = {
       title: 'Order the whole neighborhood',
       sub: 'From the neighborhood’s kitchens to your door: independent chefs, food trucks and local grocers in one place',
       body: 'We bring the neighborhood’s products closer to its customers, and give families, independent cooks and food-truck owners more room to grow and reach people',
-      brand: '',
-      cta: 'Discover eat.plus',
+      brand: 'eat.plus · Nefaah',
+      cta: 'Discover both platforms',
     },
     {
       title: 'Drink what was grown here',
@@ -260,7 +264,7 @@ const EN: HomeCopy = {
       title: 'Shop all our platforms',
       sub: 'Our products and services, a tap away',
       body: 'We bring the ecosystem’s products and services together in integrated digital channels that make buying and selling easier, and help our ventures and partners grow and reach more customers',
-      brand: 'JAZ · ZL.TOURS · HOMERA · eat.plus',
+      brand: 'JAZ · ZL.TOURS · HOMERA · eat.plus · Nefaah',
       cta: 'Explore the ecosystem',
     },
     {
@@ -323,6 +327,7 @@ const EN: HomeCopy = {
   platforms: [
     ['Premium food manufacturing', 'JAZ Chocolate', 'From ingredient to finished experience'],
     ['Last-mile commerce', 'eat.plus', 'Modern operating systems, integrated'],
+    ['Food and grocery delivery app', 'Nefaah', 'Restaurants and groceries in one app'], // draft
     ['Tourism marketplace', 'ZL.TOURS', 'Experiences across the Kingdom and region'],
     ['Real estate & hospitality', 'HOMERA', 'Property operations and hospitality'],
     ['Countryside resort', 'Qanif', 'Family stays and experiences in the countryside'], // draft

@@ -13,9 +13,9 @@ import { useSite } from '@/lib/site'
 /**
  * The ecosystem page as the platforms, and then what they make together:
  *
- *   the opening shot and its contents line  →  six platforms, each a screen of its own, laid
- *   one on another  →  the camera pulls back: the six are the floors of one model, on one
- *   podium, with four cores through them and room above for more
+ *   the opening shot and its contents line  →  seven platforms, each a screen of its own, laid
+ *   one on another  →  the camera pulls back: the seven are the floors of one model, on one
+ *   podium, with four cores through them
  *
  * The page used to come out into the light for a call to action beside the partners' plates; the
  * client did not want it, so the model is the last thing before the footer.

@@ -39,7 +39,8 @@ const COUNT = ecosystemPlatforms.length
  * and holds, the last a little longer; then the camera pulls back and the deck is a model; the
  * floors take their thickness, the chapter's copy arrives, the cores rise through the floors, and
  * the model holds while light runs along them. A platform more is a stretch of scroll more, never
- * a faster deck: the pin is as tall as its travel (`--travel`, set on it below).
+ * a faster deck: the pin is as tall as its travel (`--travel`, set on it below), and the copy, the
+ * labels and the rail stand above however many cards and floors stack under them (`--floors`).
  */
 const TITLE = 0.3
 const PER = 0.75
@@ -302,7 +303,8 @@ export function PlatformStack() {
 
       const W = stage.clientWidth
       const H = stage.clientHeight
-      // The model takes the band between the chapter's copy and the floors' labels.
+      // The model takes the band between the chapter's copy and the floors' labels, and leaves
+      // room under the podium for the cores' names, two lines deep where a name wraps.
       const pad = Math.max(Math.min(Math.max(16, W * 0.03), 32), (W - 1400) / 2 + 32)
       const text = Math.min(400, 0.29 * (W - 2 * pad))
       const tags = Math.min(230, 0.18 * (W - 2 * pad))
@@ -312,7 +314,7 @@ export function PlatformStack() {
         left: ar ? W - end : start,
         right: ar ? W - start : end,
         top: Math.max(96, 0.12 * H),
-        bottom: H - Math.max(58, 0.08 * H),
+        bottom: H - Math.max(72, 0.08 * H),
       }
       const next = stackGeometry(W, H, dir, box, COUNT)
       geoRef.current = next
@@ -372,7 +374,7 @@ export function PlatformStack() {
       data-tone="dark"
       style={css('position:relative;background:#041815;color:#ffffff')}
     >
-      <div ref={pinRef} data-stack-pin="" style={vars({ '--travel': TRAVEL })}>
+      <div ref={pinRef} data-stack-pin="" style={vars({ '--travel': TRAVEL, '--floors': COUNT })}>
         {[...PLATFORM_IDS, ECOSYSTEM_IDS.model].map((id, i) => (
           <span
             key={id}
